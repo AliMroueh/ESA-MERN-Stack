@@ -1,0 +1,17 @@
+1- Every page should have parent element like : div
+2- const myArray = ['apple', 'banana', 'orange'];
+
+const myList = myArray.map((item) => <p>{item}</p>)   // loop through the array and print the item inside p
+
+3- Destructing Arrays:
+const vehicles = ['mustang', 'f-150', 'expedition'];
+
+const [car, truck, suv] = vehicles; // car = 'mustang' , truck = 'f-150', suv = 'expedition';
+
+4- <input type="text" />; // always close the input with />
+
+5- Attribute class = className // className is the alternative of class in jsx
+
+6- onClick={shoot} // define function inside event in jsx
+
+onClick={() => shoot("Goal!")}  // passing parameter to a function in jsx
