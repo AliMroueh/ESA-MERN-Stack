@@ -1,3 +1,10 @@
+npx create-react-app name of the project
+Delete:
+App.css
+App.test.js
+logo.svg
+setupTest.js
+
 1- Every page should have parent element like : div
 2- const myArray = ['apple', 'banana', 'orange'];
 
