@@ -1,10 +1,16 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
+import RegisterScreen from "./screens/RegisterScreen";
+import SigninScreen from "./screens/SigninScreen";
 
 function App() {
   return (
     <BrowserRouter>
-      <Route index element={<Home />} />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/signin" element = {<SigninScreen />}></Route>
+        <Route path="/register" element = {<RegisterScreen />}></Route>
+      </Routes>
     </BrowserRouter>
   );
 }

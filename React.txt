@@ -5,6 +5,8 @@ App.test.js
 logo.svg
 setupTest.js
 
+npm install axios // to install axios
+
 1- Every page should have parent element like : div
 2- const myArray = ['apple', 'banana', 'orange'];
 
