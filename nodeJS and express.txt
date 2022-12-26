@@ -1,0 +1,11 @@
+ - npm install express
+ - node backend/server.js // start the server in the named server.js in the backend folder
+ - add   "type": "module", in the package.json file to accept import and export es6 features
+ - when import file in node js do not forget to put .js at the end of the file name otherwise it will give an error.
+ - install json viewer extension // it will give a beautifull sort seen of the json data 
+ - npm install --save-dev nodemon // nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+ - "scripts":{
+"start" : "nodemon --watch backend --exec node --experimental-modules backend/server.js"
+}
+// add it to the package.json file then we can start the backend server using: npm start
+ - "proxy": "http://127.0.0.1:5000", // put it under name in the package.json file in the frontend so when we request for api it will redirect to backend based on the proxy address
