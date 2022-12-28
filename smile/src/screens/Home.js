@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import data from '../data'
 import axios from 'axios'
-
+import { useSelector } from 'react-redux';
 export default function Home() {
   const [products, setProducts] = useState([]);
+
   // const products = [];
 
   useEffect(()=>{
