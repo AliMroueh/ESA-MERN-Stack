@@ -114,19 +114,28 @@ expressAsyncHandler(async (req, res) => {
 })
 );
 
-// userRouter.put('/profile',
-// expressAsyncHandler(async(req,res) => {
-//     const user = await User.findById(req.body._id);
-//     if(user){
-//         user.name = user.body.name || user.name;
-//         user.email = user.body.email || user.email;
-//         if(user.body.password){
-//             user.password = bcrypt.hashSync(user.body.password, 8);
-//         }
-//         const updateUser = await user.save();
-//         res.send({updateUser});
-//     }else{
-//         res.status(401).send({message: "unKnown id"});
-//     }
-// }))
+userRouter.put('/profile',
+expressAsyncHandler(async(req,res) => {
+    // res.send(req.body.name)
+    const user = await User.findById(req.body.userId);
+    if(user){
+        // res.send({message: "user exists"});
+
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        if(req.body.password){
+            user.password = bcrypt.hashSync(req.body.password, 8);
+        }
+        const updatedUser = await user.save();
+        res.send({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser),
+        });
+    }else{
+        res.status(401).send({message: "unKnown id"});
+    }
+}))
 export default userRouter;
