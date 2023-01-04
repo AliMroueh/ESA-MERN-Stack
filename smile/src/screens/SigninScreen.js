@@ -42,17 +42,22 @@ export default function SigninScreen() {
                 {/* {loading && <LoadingBox></LoadingBox>}
                 {error && <MessageBox variant='danger'>{error}</MessageBox>} */}
                 <div>
-                    <label htmlFor="email">Email address</label>
-                    <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                    ></input>
+                    {/* <label htmlFor="email">Email address</label> */}
+                    <div className='icon'>
+                        <span><i className="fa-solid fa-user"></i></span>
+                        <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                        ></input>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    {/* <label htmlFor="password">Password</label> */}
+                    <div className='icon'>
+                    <span><i className="fa-solid fa-lock"></i></span>
                     <input
                     type="password"
                     id="password"
@@ -60,10 +65,11 @@ export default function SigninScreen() {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                     ></input>
+                    </div>
                 </div>
-                <div>
-                    <label/>
-                    <button className="primary" type="submit">Sign In</button>
+                <div className='signIn'>
+                    <label>Sign in</label>
+                    <button className="primary" type="submit"><i className="fa-solid fa-arrow-right-long"></i></button>
                 </div>
                 <div>
                     <label/>
