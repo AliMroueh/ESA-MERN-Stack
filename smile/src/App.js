@@ -2,10 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import RegisterScreen from "./screens/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen";
+import Header from "./common/Header/Header"; 
 
 function App() {
   return (
     <BrowserRouter>
+    <Header/>
       <Routes>
         <Route index element={<Home />} />
         <Route path="/signin" element = {<SigninScreen />}></Route>
