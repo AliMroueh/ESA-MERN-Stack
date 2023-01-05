@@ -37,7 +37,8 @@ export default function SigninScreen() {
         <div>
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>Sign In</h1>
+                    <h1>Hello</h1>
+                    <p>Sign in to your account</p>
                 </div>
                 {/* {loading && <LoadingBox></LoadingBox>}
                 {error && <MessageBox variant='danger'>{error}</MessageBox>} */}
@@ -74,8 +75,8 @@ export default function SigninScreen() {
                 <div>
                     <label/>
                     <div>
-                        New customer? {' '}
-                        <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+                        Don't have an account? {' '}
+                        <Link to={`/register?redirect=${redirect}`}>Create</Link>
                     </div>
                 </div>
             </form>

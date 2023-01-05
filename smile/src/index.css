@@ -19,6 +19,13 @@ body{
 .form{
   max-width: 60rem;
   margin: 0 auto;
+  border: 1px solid blue;
+}
+.form > div:first-child{
+  align-items: center;
+}
+.form > div:first-child p{
+  font-weight: 700;
 }
 .form > div{
   display: flex;
@@ -32,9 +39,13 @@ body{
 .form > div > h1{
   align-self: center;
   font-size: 5rem;
+  padding: 0;
+  margin: 0;
 }
 .form > div > .icon{
   position: relative;
+  align-self: center;
+  width: 80%;
 }
 .form > div > .icon > input{
   outline: none;
@@ -42,9 +53,9 @@ body{
   /* border: 1px solid #1877f2; */
   border: none;
   padding: 10px;
-  width: 100%;
+  width: 85%;
   padding-left: 38px;
-  box-shadow: 0px 5px 7px grey;
+  box-shadow: 0px 5px 7px #cac9c9;
 }
 .form > div > .icon > span{
   position: absolute;
@@ -76,3 +87,8 @@ body{
   margin-left: 20px;
   cursor: pointer;
 }
+.form > div a{
+  color: black;
+  font-weight: 800;
+}
+
