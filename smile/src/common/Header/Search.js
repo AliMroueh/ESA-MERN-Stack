@@ -23,10 +23,10 @@ const Search = ({ CartItem }) => {
           </div>
 
           <div className='icon f_flex width'>
-            <i className='fa fa-user icon-circle'></i>
+            <i className='fa fa-user icon-circle  fa-lg' ></i>
             <div className='cart'>
               <Link to='/cart'>
-                <i className='fa fa-shopping-bag icon-circle'></i>
+                <i className="fa fa-shopping-cart  fa-lg" aria-hidden="true"></i>
                 <span></span>
               </Link>
             </div>

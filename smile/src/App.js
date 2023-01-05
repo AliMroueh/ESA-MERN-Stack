@@ -3,7 +3,7 @@ import Home from "./screens/Home";
 import RegisterScreen from "./screens/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen";
 import Header from "./common/Header/Header"; 
-
+import Footer from './common/footer/Footer'
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +13,7 @@ function App() {
         <Route path="/signin" element = {<SigninScreen />}></Route>
         <Route path="/register" element = {<RegisterScreen />}></Route>
       </Routes>
+     
     </BrowserRouter>
   );
 }

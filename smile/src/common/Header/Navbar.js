@@ -7,9 +7,9 @@ const Navbar = () => {
   return (
     <>
       <header className='header'>
-        <div className='container d_flex'>
+        <div className='containerr d_flex'>
           <div className='catgrories d_flex'>
-            <span class='fa-solid fa-border-all'></span>
+            
             <h4>
               Categories <i className='fa fa-chevron-down'></i>
             </h4>
@@ -17,9 +17,8 @@ const Navbar = () => {
 
           <div className='navlink'>
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
-              {/*<ul className='link f_flex uppercase {MobileMenu ? "nav-links-MobileMenu" : "nav-links"} onClick={() => setMobileMenu(false)}'>*/}
               <li>
-                <Link to='/'>home</Link>
+                <Link to='/home'>home</Link>
               </li>
               <li>
                 <Link to='/pages'>pages</Link>
