@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { detailsUser } from '../actions/userActions';
+import { detailsUser, updateUserProfile } from '../actions/userActions';
+// import LoadingBox from '../components/LoadingBox';
+// import MessageBox from '../components/MessageBox';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 export default function ProfileScreen() {
     // jsconfig.json = auto import functionality works perfect in your react project
@@ -8,9 +11,6 @@ export default function ProfileScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [sellerName, setSellerName] = useState('');
-    const [sellerLogo, setSellerLogo] = useState('');
-    const [sellerDescription, setSellerDescription] = useState('');
 
     const userSignin = useSelector(state => state.userSignin);
     const {userInfo} = userSignin;
@@ -18,15 +18,15 @@ export default function ProfileScreen() {
     const userDetails = useSelector(state => state.userDetails);
     const {loading, error, user} = userDetails;
 
-    // const userUpdateProfile = useSelector(state => state.userUpdateProfile);
-    // const {success : successUpdate, error: errorUpdate, loading: loadingUpdate} = userUpdateProfile;
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile);
+    const {success : successUpdate, error: errorUpdate, loading: loadingUpdate} = userUpdateProfile;
 
     const dispatch = useDispatch();
 //  console.log(user.name)
   
     useEffect(() => {
         if(!user){
-        // dispatch({type: USER_UPDATE_PROFILE_RESET})
+        dispatch({type: USER_UPDATE_PROFILE_RESET})
         dispatch(detailsUser(userInfo._id));
         }else{
             setName(user.name);
@@ -41,14 +41,14 @@ export default function ProfileScreen() {
             alert('Password And Confirm Password Are Not Matched');
         }else{
         // dispatch(updateUserProfile({userId: user._id,name, email, password}))
-        // dispatch(
-          //   updateUserProfile({
-          //     userId: user._id,
-          //     name,
-          //     email,
-          //     password,
-          //   })
-          // );
+        dispatch(
+            updateUserProfile({
+              userId: user._id,
+              name,
+              email,
+              password,
+            })
+          );
         }
     }
 

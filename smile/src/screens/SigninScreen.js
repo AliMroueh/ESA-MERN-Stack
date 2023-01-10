@@ -34,25 +34,30 @@ export default function SigninScreen() {
         }
     }, [navigate, redirect, userInfo]);
     return (
-        <div>
+        <div id='signin'> 
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>Sign In</h1>
+                    <h1>Hello</h1>
+                    <p>Sign in to your account</p>
                 </div>
                 {/* {loading && <LoadingBox></LoadingBox>}
                 {error && <MessageBox variant='danger'>{error}</MessageBox>} */}
-                <div>
-                    <label htmlFor="email">Email address</label>
-                    <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                    ></input>
+                <div className='email'>
+                    {/* <label htmlFor="email">Email address</label> */}
+                    <div className='icon'>
+                        <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                        ></input>
+                        <span><i class="fa-solid fa-envelope"></i></span>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    {/* <label htmlFor="password">Password</label> */}
+                    <div className='icon'>
                     <input
                     type="password"
                     id="password"
@@ -60,16 +65,18 @@ export default function SigninScreen() {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-lock"></i></span>
+                    </div>
                 </div>
-                <div>
-                    <label/>
-                    <button className="primary" type="submit">Sign In</button>
+                <div className='signIn'>
+                    <label>Sign in</label>
+                    <button className="primary" type="submit"><i className="fa-solid fa-arrow-right-long"></i></button>
                 </div>
                 <div>
                     <label/>
                     <div>
-                        New customer? {' '}
-                        <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+                        Don't have an account? {' '}
+                        <Link to={`/register?redirect=${redirect}`}>Create</Link>
                     </div>
                 </div>
             </form>

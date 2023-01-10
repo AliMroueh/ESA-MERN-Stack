@@ -45,13 +45,13 @@ export default function RegisterScreen(props) {
         }
     }, [navigate, redirect, userInfo,error]);
     return (
-        <div>
+        <div id='register'>
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Create Account</h1>
                 </div>
                 <div>
-                    <label htmlFor="name">Name</label>
+                <div className='icon'>
                     <input
                     type="text"
                     id="name"
@@ -59,9 +59,11 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setName(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-user"></i></span>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="email">Email address</label>
+                <div className='icon'>
                     <input
                     type="email"
                     id="email"
@@ -69,9 +71,11 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                     ></input>
+                    <span><i class="fa-solid fa-envelope"></i></span>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                <div className='icon'>
                     <input
                     type="password"
                     id="password"
@@ -79,9 +83,11 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-lock"></i></span>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="confirmPassword">Confirm password</label>
+                <div className='icon'>
                     <input
                     type="password"
                     id="confirmPassword"
@@ -89,10 +95,16 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-lock"></i></span>
+                    </div>
                 </div>
-                <div>
+                {/* <div>
                     <label/>
                     <button className="primary" type="submit">Register</button>
+                </div> */}
+                <div className='signIn'>
+                    <label>Register</label>
+                    <button className="primary" type="submit"><i className="fa-solid fa-arrow-right-long"></i></button>
                 </div>
                 <div>
                     <label/>

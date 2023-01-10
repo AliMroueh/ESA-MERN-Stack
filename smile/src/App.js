@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
+import NotFoundScreen from "./screens/NotFoundScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen";
@@ -15,6 +16,7 @@ function App() {
            path="/profile"
            element={<ProfileScreen />}
          />
+         <Route path='*' element={<NotFoundScreen />}/>
       </Routes>
     </BrowserRouter>
   );
