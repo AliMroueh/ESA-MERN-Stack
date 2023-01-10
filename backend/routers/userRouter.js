@@ -9,7 +9,7 @@ import { generateToken } from '../utils.js';
 // express.Router is a function that make our code modular instead of having all routes in server.js, we can define multiple files to have our routers 
 const userRouter = express.Router();
 
-mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/smile");
+
 
 userRouter.get('/seed', expressAsyncHandler(async(req, res) => {
     await User.deleteMany({});

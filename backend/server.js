@@ -2,7 +2,8 @@ import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import data from './data.js';
 import userRouter from './routers/userRouter.js';
-
+import mongoose from 'mongoose';
+import productRouter from './routers/productRouter.js';
 // to read the content of env
 dotenv.config();
 
@@ -13,7 +14,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
+mongoose.connect('mongodb://localhost/smile',{
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
+})
+.then(db => console.log('DB is connected'))
+.catch(err => console.log(err));
+
 app.use('/api/users',userRouter);
+app.use('/api/products',productRouter);
 
 app.get('/api/products', (req, res) => {
     res.send(data.products);
