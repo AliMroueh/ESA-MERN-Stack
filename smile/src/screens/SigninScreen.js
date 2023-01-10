@@ -34,7 +34,7 @@ export default function SigninScreen() {
         }
     }, [navigate, redirect, userInfo]);
     return (
-        <div>
+        <div id='signin'> 
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Hello</h1>
@@ -42,10 +42,9 @@ export default function SigninScreen() {
                 </div>
                 {/* {loading && <LoadingBox></LoadingBox>}
                 {error && <MessageBox variant='danger'>{error}</MessageBox>} */}
-                <div>
+                <div className='email'>
                     {/* <label htmlFor="email">Email address</label> */}
                     <div className='icon'>
-                        <span><i className="fa-solid fa-user"></i></span>
                         <input
                         type="email"
                         id="email"
@@ -53,12 +52,12 @@ export default function SigninScreen() {
                         required
                         onChange={(e) => setEmail(e.target.value)}
                         ></input>
+                        <span><i class="fa-solid fa-envelope"></i></span>
                     </div>
                 </div>
                 <div>
                     {/* <label htmlFor="password">Password</label> */}
                     <div className='icon'>
-                    <span><i className="fa-solid fa-lock"></i></span>
                     <input
                     type="password"
                     id="password"
@@ -66,6 +65,7 @@ export default function SigninScreen() {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-lock"></i></span>
                     </div>
                 </div>
                 <div className='signIn'>
