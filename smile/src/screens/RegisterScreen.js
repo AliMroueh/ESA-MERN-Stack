@@ -4,9 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { register } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-// import { register } from '../actions/userAction';
-// import LoadingBox from '../components/LoadingBox';
-// import MessageBox from '../components/MessageBox';
+
 
 export default function RegisterScreen(props) {
 
@@ -75,7 +73,7 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                     ></input>
-                    <span><i class="fa-solid fa-envelope"></i></span>
+                    <span><i className="fa-solid fa-envelope"></i></span>
                     </div>
                 </div>
                 <div>
