@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+/*import React, { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import data from '../data'
 import axios from 'axios'
-
-export default function Home() {
+*/
+/*export default function Home() {
   const [products, setProducts] = useState([]);
   // const products = [];
 
@@ -21,4 +21,24 @@ export default function Home() {
         )}
     </div>
   )
+}*/
+import React from 'react'
+
+function Home() {
+  return (
+    <>
+    <div className='premiereContainer'>
+      <div  className='categories'>
+
+      </div>
+      
+      <div className='sales'>
+
+      </div>
+
+    </div>
+    </>
+  )
 }
+
+export default Home
