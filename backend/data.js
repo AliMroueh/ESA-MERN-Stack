@@ -1,4 +1,20 @@
+import bcrypt from 'bcryptjs';
+// bcrypt.hashSync is a function to transfer password to hash and second value which is 8 is to make an auto salt 
 const data = {
+    users:[
+        {
+            name: "Ali",
+            email: "admin@example.com",
+            password: bcrypt.hashSync('1234',8),
+            isAdmin: true,
+        },
+        {
+            name: "amin",
+            email: "user@example.com",
+            password: bcrypt.hashSync('1234',8),
+            isAdmin: false,
+        }
+    ],
     products: [
         {
             _id: 1,

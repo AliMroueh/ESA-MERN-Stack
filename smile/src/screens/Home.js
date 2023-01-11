@@ -3,9 +3,15 @@
 import Product from '../components/Product'
 import data from '../data'
 import axios from 'axios'
+
 */
 /*export default function Home() {
+
+import { useSelector } from 'react-redux';
+export default function Home() {
+
   const [products, setProducts] = useState([]);
+
   // const products = [];
 
   useEffect(()=>{

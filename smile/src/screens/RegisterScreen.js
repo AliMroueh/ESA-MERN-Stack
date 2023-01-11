@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-// import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import { register } from '../actions/userActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 // import { register } from '../actions/userAction';
 // import LoadingBox from '../components/LoadingBox';
 // import MessageBox from '../components/MessageBox';
@@ -8,7 +11,7 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 export default function RegisterScreen(props) {
 
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [confirmpassword, setConfirmPassword] = useState('');
     const [email,setEmail] = useState('');
@@ -22,8 +25,8 @@ export default function RegisterScreen(props) {
     // here convert it to number
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
-    // const userRegister = useSelector(state => state.userRegister);
-    // const {userInfo, loading, error} = userRegister;
+    const userRegister = useSelector(state => state.userRegister);
+    const {userInfo, loading, error} = userRegister;
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -31,22 +34,28 @@ export default function RegisterScreen(props) {
         if(password !== confirmpassword){
             alert('Password and confirm password are not match');
         }else{
-        // dispatch(register(name, email, password));
+        dispatch(register(name, email, password));
         }
     };
-    // useEffect(() => {
-    //     if(userInfo){
-    //         navigate(redirect);
-    //     }
-    // }, [navigate, redirect, userInfo]);
+
+    useEffect(() => {
+        if(userInfo){
+            navigate(redirect);
+        }
+        if(error){
+            console.log(error)
+        }
+    }, [navigate, redirect, userInfo,error]);
     return (
-        <div>
+        <div id='register'>
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>Create Account</h1>
                 </div>
+                {loading && <LoadingBox></LoadingBox>}
+                {error && <MessageBox variant='danger'>{error}</MessageBox>}
                 <div>
-                    <label htmlFor="name">Name</label>
+                <div className='icon'>
                     <input
                     type="text"
                     id="name"
@@ -54,9 +63,11 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setName(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-user"></i></span>
+                </div>
                 </div>
                 <div>
-                    <label htmlFor="email">Email address</label>
+                <div className='icon'>
                     <input
                     type="email"
                     id="email"
@@ -64,9 +75,11 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                     ></input>
+                    <span><i class="fa-solid fa-envelope"></i></span>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
+                <div className='icon'>
                     <input
                     type="password"
                     id="password"
@@ -74,9 +87,11 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-lock"></i></span>
+                    </div>
                 </div>
                 <div>
-                    <label htmlFor="confirmPassword">Confirm password</label>
+                <div className='icon'>
                     <input
                     type="password"
                     id="confirmPassword"
@@ -84,10 +99,16 @@ export default function RegisterScreen(props) {
                     required
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     ></input>
+                    <span><i className="fa-solid fa-lock"></i></span>
+                    </div>
                 </div>
-                <div>
+                {/* <div>
                     <label/>
                     <button className="primary" type="submit">Register</button>
+                </div> */}
+                <div className='signIn'>
+                    <label>Register</label>
+                    <button className="primary" type="submit"><i className="fa-solid fa-arrow-right-long"></i></button>
                 </div>
                 <div>
                     <label/>
