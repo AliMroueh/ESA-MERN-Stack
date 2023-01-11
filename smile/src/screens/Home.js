@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /*import React, { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import data from '../data'
@@ -23,20 +24,13 @@ import axios from 'axios'
   )
 }*/
 import React from 'react'
+import Bady from '../components/Bady'
 
-function Home() {
+
+const Home = () => {
   return (
     <>
-    <div className='premiereContainer'>
-      <div  className='categories'>
-
-      </div>
-      
-      <div className='sales'>
-
-      </div>
-
-    </div>
+    <Bady/>
     </>
   )
 }
