@@ -19,13 +19,13 @@ body{
   color: #0066FF;
 }
 /* Signin */
-#signin, #register{
+#signin, #register, #profile{
   width: 100%;
   height: 100%;
   overflow: auto;
   /* position: relative; */
 }
-#signin::after, #register::after{
+#signin::after, #register::after, #profile::after{
   content: '';
   position: absolute;
   z-index: -1;
@@ -160,4 +160,32 @@ body{
   border-top-right-radius: 395px;
   transform: rotate(-67deg) translate(-16px,-12px);
   z-index: 1;
+}
+
+/* Alert */
+.loading{
+  display: block !important;
+}
+.success{
+  color: #20a020;
+}
+.danger{
+  color: #a02020;
+}
+.alert{
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+.alert-info{
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+.alert-danger{
+  color: #a02020;
+  background-color: #ffe0e0e0;
+}
+.alert-success{
+  color: #20a020;
+  background-color: #eeffe0;
 }
