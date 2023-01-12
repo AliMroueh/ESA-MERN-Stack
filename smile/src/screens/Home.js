@@ -30,7 +30,7 @@ export default function Home() {
   )
 }*/
 import React from 'react'
-import Bady from '../components/Bady'
+import Bady from '../components/mainPage/Bady'
 
 
 const Home = () => {

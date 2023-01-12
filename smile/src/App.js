@@ -5,7 +5,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen";
 import Header from "./common/Header/Header"; 
-import Footer from './common/footer/Footer'
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,7 +21,7 @@ function App() {
          />
          <Route path='*' element={<NotFoundScreen />}/>
       </Routes>
-     <Footer/>
+     
     </BrowserRouter>
   );
 }
