@@ -8,9 +8,7 @@ import { signin } from '../actions/userActions';
 export default function SigninScreen() {
 
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
-
     const [email,setEmail] = useState('');
     const [password, setPassword] = useState('')
     // const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
@@ -23,7 +21,6 @@ export default function SigninScreen() {
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
     const userSignin = useSelector(state => state.userSignin);
-
     const {userInfo, loading, error} = userSignin;
 
     const submitHandler = (e) => {

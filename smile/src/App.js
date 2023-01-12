@@ -1,4 +1,4 @@
-import { BrowserRouter, redirect, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import NotFoundScreen from "./screens/NotFoundScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -8,7 +8,6 @@ import Header from "./common/Header/Header";
 import Footer from './common/footer/Footer'
 import { useEffect } from "react";
 function App() {
-      
   return (
     <BrowserRouter>
 
