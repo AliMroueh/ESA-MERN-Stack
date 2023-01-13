@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react/jsx-no-undef */
+/*import React, { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import data from '../data'
 import axios from 'axios'
+
+*/
+/*export default function Home() {
+
 import { useSelector } from 'react-redux';
 export default function Home() {
+
   const [products, setProducts] = useState([]);
 
   // const products = [];
@@ -22,4 +28,18 @@ export default function Home() {
         )}
     </div>
   )
+}*/
+import React from 'react'
+import Bady from '../components/Bady'
+
+
+const Home = () => {
+  return (
+    <>
+    {/* <img src={'images/p1.jpg'} alt=''></img> */}
+    <Bady/>
+    </>
+  )
 }
+
+export default Home

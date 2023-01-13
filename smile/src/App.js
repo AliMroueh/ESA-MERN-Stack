@@ -7,6 +7,8 @@ import SigninScreen from "./screens/SigninScreen";
 import Header from "./common/Header/Header"; 
 import Footer from './common/footer/Footer'
 import { useEffect } from "react";
+import AdminDashboard from "./screens/AdminDashboard";
+import AdminRoute from "./components/AdminRoute";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +22,13 @@ function App() {
           <Route
             path="/profile"
             element={<ProfileScreen />}
+          />
+            <Route
+            path="/dashboard"
+            element={<AdminRoute>
+            <AdminDashboard />
+            </AdminRoute>
+          }
           />
           <Route path='*' element={<NotFoundScreen />}/>
         </Routes>

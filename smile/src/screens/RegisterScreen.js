@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import { register } from '../actions/userActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 // import { register } from '../actions/userAction';
 // import LoadingBox from '../components/LoadingBox';
 // import MessageBox from '../components/MessageBox';
@@ -50,6 +52,8 @@ export default function RegisterScreen(props) {
                 <div>
                     <h1>Create Account</h1>
                 </div>
+                {loading && <LoadingBox></LoadingBox>}
+                {error && <MessageBox variant='danger'>{error}</MessageBox>}
                 <div>
                 <div className='icon'>
                     <input
