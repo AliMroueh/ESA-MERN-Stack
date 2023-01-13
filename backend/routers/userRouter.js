@@ -103,7 +103,11 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
 )
 
 userRouter.get('/:id',
+<<<<<<< HEAD
 isAuth,
+=======
+// isAuth,
+>>>>>>> 8b13fffaa0ffb305bf835b4079527280ac4e48cc
 expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if(user){
