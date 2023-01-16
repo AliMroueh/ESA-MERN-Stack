@@ -4,6 +4,7 @@ import data from './data.js';
 import userRouter from './routers/userRouter.js';
 import mongoose from 'mongoose';
 import productRouter from './routers/productRouter.js';
+// import categoryRouter from './routers/categoryRouter.js';
 // to read the content of env
 dotenv.config();
 
@@ -24,6 +25,7 @@ mongoose.connect('mongodb://localhost/smile',{
 
 app.use('/api/users',userRouter);
 app.use('/api/products',productRouter);
+// app.use('/api/categories',categoryRouter);
 
 app.get('/api/products', (req, res) => {
     res.send(data.products);
