@@ -36,7 +36,6 @@ import Bady from '../components/Bady'
 const Home = () => {
   return (
     <>
-    {/* <img src={'images/p1.jpg'} alt=''></img> */}
     <Bady/>
     </>
   )

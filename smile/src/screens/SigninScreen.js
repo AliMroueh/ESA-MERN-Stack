@@ -31,7 +31,9 @@ export default function SigninScreen() {
         dispatch(signin(email, password));
     };
     useEffect(() => {
-        if(userInfo){
+        if(userInfo.isAdmin){
+            navigate('/dashboard');
+        }else{
             navigate(redirect);
         }
     }, [navigate, redirect, userInfo]);

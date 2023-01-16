@@ -189,3 +189,34 @@ body{
   color: #20a020;
   background-color: #eeffe0;
 }
+
+/* ******************** Admin page ********************* */
+header{
+  height: 5rem;
+  background-color: #0066FF;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.row.center{
+  justify-content: center;
+}
+.row.top{
+  align-items: flex-start;
+}
+.row.start{
+  justify-content: flex-start;
+}
+.row.end{
+  justify-content: flex-end;
+}
+
+a{
+  text-decoration: none;
+}
+a:hover{
+  color: #ffffff;
+}
