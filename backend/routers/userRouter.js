@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import { generateToken } from '../utils.js';
+import { generateToken, isAuth } from '../utils.js';
 
 // express.Router is a function that make our code modular instead of having all routes in server.js, we can define multiple files to have our routers 
 const userRouter = express.Router();
@@ -103,6 +103,7 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
 )
 
 userRouter.get('/:id',
+isAuth,
 expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if(user){

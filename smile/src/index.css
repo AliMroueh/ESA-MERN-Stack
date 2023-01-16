@@ -45,7 +45,7 @@ body{
   background-repeat: no-repeat;
   max-width: 70rem;
   /* height: 55rem; */
-  margin: 0 auto;
+  margin: 0 auto 40px;
   /* border: 1px solid blue; */
   position: relative;
   border-radius: 12px;
@@ -110,8 +110,8 @@ body{
 }
 .form > div > .icon > span{
   position: absolute;
-  top: 0;
-  left: 17px;
+  top: -11px;
+  left: 26px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -188,4 +188,35 @@ body{
 .alert-success{
   color: #20a020;
   background-color: #eeffe0;
+}
+
+/* ******************** Admin page ********************* */
+header{
+  height: 5rem;
+  background-color: #0066FF;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.row.center{
+  justify-content: center;
+}
+.row.top{
+  align-items: flex-start;
+}
+.row.start{
+  justify-content: flex-start;
+}
+.row.end{
+  justify-content: flex-end;
+}
+
+a{
+  text-decoration: none;
+}
+a:hover{
+  color: #ffffff;
 }

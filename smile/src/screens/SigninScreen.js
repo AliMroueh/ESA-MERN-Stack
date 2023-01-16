@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+// import LoadingBox from '../components/LoadingBox';
+// import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen() {
 
@@ -29,7 +31,9 @@ export default function SigninScreen() {
         dispatch(signin(email, password));
     };
     useEffect(() => {
-        if(userInfo){
+        if(userInfo.isAdmin){
+            navigate('/dashboard');
+        }else{
             navigate(redirect);
         }
     }, [navigate, redirect, userInfo]);

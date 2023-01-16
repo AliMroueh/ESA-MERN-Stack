@@ -30,13 +30,14 @@ export default function Home() {
   )
 }*/
 import React from 'react'
-import Bady from '../components/mainPage/Bady'
+import Bady from '../components/Bady'
+
 
 
 const Home = () => {
   return (
     <>
-    {/* <img src={'images/p1.jpg'} alt=''></img> */}
+
     <Bady/>
     </>
   )
