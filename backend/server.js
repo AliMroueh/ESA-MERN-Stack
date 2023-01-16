@@ -24,8 +24,10 @@ mongoose.connect('mongodb://localhost/smile',{
 .catch(err => console.log(err));
 
 app.use('/api/users',userRouter);
+
 app.use('/api/products',productRouter);
 // app.use('/api/categories',categoryRouter);
+
 
 app.get('/api/products', (req, res) => {
     res.send(data.products);

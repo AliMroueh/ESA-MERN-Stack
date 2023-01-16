@@ -6,6 +6,7 @@ const Navbar = () => {
   const [MobileMenu, setMobileMenu] = useState(false)
   return (
     <>
+
       <div className='header'>
         <div className='containerr d_flex'>
           <div className='catgrories d_flex'>
@@ -43,6 +44,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
     </>
   )
 }

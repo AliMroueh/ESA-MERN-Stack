@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsUser, updateUserProfile } from '../actions/userActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 // import LoadingBox from '../components/LoadingBox';
 // import MessageBox from '../components/MessageBox';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
@@ -53,43 +55,77 @@ export default function ProfileScreen() {
     }
 
     return (
-        <div>
+        <div id='profile'>
             <form className="form" onSubmit={submitHandler}>
                 <div>
                     <h1>User Profile</h1>
                 </div>
                 {
-                    // loading ? <LoadingBox></LoadingBox>
-                    // :
-                    // error ? <MessageBox variant="danger">{error}</MessageBox>
-                    // :
+                    loading ? <LoadingBox></LoadingBox>
+                    :
+                    error ? <MessageBox variant="danger">{error}</MessageBox>
+                    :
                     <>
-                    {/* {loadingUpdate && <LoadingBox></LoadingBox>}
+                    {loadingUpdate && <LoadingBox></LoadingBox>}
                     {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
-                    {successUpdate && <MessageBox variant="success">Profile Updated Successfully</MessageBox>} */}
+                    {successUpdate && <MessageBox variant="success">Profile Updated Successfully</MessageBox>}
                     <div>
-                        <label htmlFor="name">Name</label>
+                    <div className='icon'>
+                        <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        value={name}
+                        required
+                        onChange={(e) => setName(e.target.value)}
+                        ></input>
+                        <span><i className="fa-solid fa-user"></i></span>
+                    </div>
+                    </div>
+                    {/* <div>
                         <input id="name" type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)}></input>
+                    </div> */}
+
+                    <div>
+                    <div className='icon'>
+                        <input 
+                        id="email" 
+                        type="email" 
+                        placeholder="Enter email" 
+                        value={email} 
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                        ></input>
+                        <span><i className="fa-solid fa-envelope"></i></span>
+                    </div>
                     </div>
 
                     <div>
-                        <label htmlFor="email">Email</label>
-                        <input id="email" type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                    </div>
-
-                    <div>
-                        <label htmlFor="password">Password</label>
+                    <div className='icon'>
                         <input id="password" type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}></input>
+                        <span><i className="fa-solid fa-lock"></i></span>
+                    </div>
                     </div>
 
                     <div>
-                        <label htmlFor="confirPpassword">confirm Password</label>
-                        <input id="confirmPassword" type="password" placeholder="Enter confirm password" onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                    <div className='icon'>
+                        <input 
+                        id="confirmPassword" 
+                        type="password" 
+                        placeholder="Enter confirm password" 
+                        onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                        <span><i className="fa-solid fa-lock"></i></span>
                     </div>
-                    <div>
+                    </div>
+
+                    <div className='signIn'>
+                        <label>Update</label>
+                        <button className="primary" type="submit"><i className="fa-solid fa-arrow-right-long"></i></button>
+                    </div>
+                    {/* <div>
                         <label/>
                         <button className="primary" type="submit">Update</button>
-                    </div>
+                    </div> */}
                     </>
                 }
             </form>

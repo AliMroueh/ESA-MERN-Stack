@@ -33,9 +33,11 @@ import React from 'react'
 import Bady from '../components/Bady'
 
 
+
 const Home = () => {
   return (
     <>
+
     <Bady/>
     </>
   )
