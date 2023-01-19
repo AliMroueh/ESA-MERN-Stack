@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 export default function AdminAddProduct() {
 
   const [category, setCategory] = useState('');
+  const [open, setOpen] = useState(false);
 
   const imageHandler = () => {
-    
   }
 
   return (
@@ -65,7 +65,7 @@ export default function AdminAddProduct() {
                         alt='category image'
                         accept="image/*"
                         ></input> */}
-                        <label onClick={imageHandler()}>
+                        <label onClick={() => setOpen(true)}>
                           Image/Color
                         </label>
                     </div>
@@ -73,10 +73,75 @@ export default function AdminAddProduct() {
                     <button type="submit">Add Product</button>
                     </div>
                 </div>
-                {/* <p id="num-of-files">No Files Chosen</p> */}
-                {/* <img src='./images/p1.jpg' className='catImage' alt='category img'/> */}
         </div>
       </div>
+      {open && 
+      <div className='img_color_Add'>
+        <div className='add_items'>
+            <span id='close' onClick={() => setOpen(false)}>
+              <i className="fa-solid fa-circle-xmark"></i>
+            </span>
+            <div className='choose_img'>
+              <div>
+                  <input
+                  type="file"
+                  id="file"
+                  required
+                  alt='category image'
+                  accept="image/*"
+                  multiple
+                  ></input>
+                  <label id='img' htmlFor='file'>
+                    Choose Images
+                  </label>
+              </div>
+              {/* <div>
+                <input type="color" onChange={(e) => console.log(e.target.value)}></input>
+                <p>
+                    #50f056
+                  </p>
+              </div> */}
+              <div className='imgAndcolor'>
+                <div>
+                  <p>adkjo.png</p>
+                  <p>
+                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
+                    ></input>
+                    <label htmlFor='color'>#806f69</label>
+                  </p>
+                </div>
+                <div>
+                  <p>adkjo.png</p>
+                  <p>
+                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
+                    ></input>
+                    <label htmlFor='color'>#806f69</label>
+                  </p>
+                </div>
+                <div>
+                  <p>adkjo.png</p>
+                  <p>
+                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
+                    ></input>
+                    <label htmlFor='color'>#806f69</label>
+                  </p>
+                </div>
+                <div>
+                  <p>adkjo.png</p>
+                  <p>
+                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
+                    ></input>
+                    <label htmlFor='color'>#806f69</label>
+                  </p>
+                </div>
+              </div>
+              <div>
+                <button>Save</button>
+              </div>
+            </div>
+        </div>
+      </div>
+      }
     </div>
   )
 }

@@ -203,6 +203,8 @@ body{
   background-color: var(--primary-color);
   padding: 0 54px;
   font-size: 2rem;
+  z-index: 50;
+  position: relative;
 }
 .row{
   display: flex;
@@ -333,7 +335,7 @@ a:hover{
   color: #ffffff;
   cursor: pointer;
 }
-.addCat div button{
+.addCat div button, .add_items .choose_img div button{
   background-color: var(--button-primary);
     color: #ffffff;
     border-radius: 20px;
@@ -349,4 +351,76 @@ a:hover{
 .catImage{
   width: 50%;
   height: 50%;
+}
+.img_color_Add{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgb(11 64 134 / .8);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add_items{
+  height: 50vh;
+  width: 50vw;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding-top: 20px;
+  overflow: auto;
+  padding-bottom: 10px;
+}
+.add_items #close{
+  float: right;
+  margin-top: -5px;
+  margin-right: 13px;
+  font-size: 3rem;
+  cursor: pointer;
+}
+.add_items #close i{
+  color: #a02020;
+}
+.add_items input[type="file"]{
+  display: none;
+}
+.choose_img{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  font-size: 3rem;
+  align-items: center;
+}
+.choose_img > div:first-child{
+  margin-bottom: 16px;
+}
+.choose_img #img{    
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 31px;
+  cursor: pointer;
+  overflow: auto;
+}
+.choose_img p{
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: bold;
+}
+.choose_img i{
+  color: #e20b0b;
+  cursor: pointer;
+}
+.choose_img input[type="color"]{
+  visibility: hidden;
+}
+.imgAndcolor{
+  width: 100%;
+}
+.imgAndcolor > div{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
