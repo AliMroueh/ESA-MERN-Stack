@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import {Link} from 'react-router-dom'
 // import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,9 +16,9 @@ function Product(props) {
                 <Link to= {`/product/${product._id}`}>
                     <h2>{product.name}</h2>
                 </Link>
-                {/* <Rating rating = {product.rating} numReviews = {product.numReviews}></Rating> */}
-            {/* <div className="price">${product.price}</div> */}
-            <div className="row">
+                {/* <Rating rating = {product.rating} numReviews = {product.numReviews}></Rating> }
+            /*{/* <div className="price">${product.price}</div> }*/
+            /*<div className="row">
           <div className="price">${product.price}</div>
           <div>
              <Link to={`/seller/${product._id}`}>
@@ -32,4 +32,4 @@ function Product(props) {
     )
 }
 
-export default Product
+export default Product*/

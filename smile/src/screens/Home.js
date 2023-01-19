@@ -35,6 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import Bady from '../components/Bady'
 
 
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ const Home = () => {
 }, [navigate, userInfo]);
   return (
     <>
+
     <Bady/>
     </>
   )

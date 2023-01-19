@@ -27,6 +27,7 @@ const Header = ({ CartItem }) => {
     </header>
     }
   </>
+
   )
 }
 
