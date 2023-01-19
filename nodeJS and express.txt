@@ -9,3 +9,16 @@
 }
 // add it to the package.json file then we can start the backend server using: npm start
  - "proxy": "http://127.0.0.1:5000", // put it under name in the package.json file in the frontend so when we request for api it will redirect to backend based on the proxy address
+<<<<<<< Updated upstream
+=======
+ - npm install mongoose
+ - models keep the fields or columns of our entity in our system
+ - npm install bcryptjs // function to hash the password 
+ - npm install express-async-handler // for error handling
+ - npm install jsonwebtoken // for sign in
+ - npm install dotenv
+ - npm install path // for files and images
+ - npm install shortid // id for image and files
+ - npm install multer // used for uploading files
+ - npm install url // for files and images
+>>>>>>> Stashed changes
