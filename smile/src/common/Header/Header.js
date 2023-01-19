@@ -17,7 +17,7 @@ const Header = ({ CartItem }) => {
   return (
     <>
     {
-      userInfo.isAdmin ?
+      userInfo && userInfo.isAdmin ?
       <AdminHeader />
       : 
       !(pathname.split('/')[1] === 'register' || pathname.split('/')[1] === 'signin') && 
