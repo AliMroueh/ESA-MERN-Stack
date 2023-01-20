@@ -11,7 +11,7 @@ function Footer() {
   return (
     <>
 
-        {!userInfo.isAdmin &&
+        {((userInfo && !userInfo.isAdmin) || !userInfo) &&
         !(pathname.split('/')[1] === 'register' || pathname.split('/')[1] === 'signin') && 
 
     <footer>

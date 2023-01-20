@@ -3,8 +3,10 @@ import React from 'react'
 export default function AdminDashboard() {
 
   return (
-    <div>
-        <h1>admin dashboard</h1>
+    <div className='top'>
+      <div className='row adminTop'>
+          <h1 className='adminTitle'>Dashboard</h1>
+      </div>
     </div>
   )
 }

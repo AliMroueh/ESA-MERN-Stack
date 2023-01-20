@@ -8,6 +8,12 @@ import Header from "./common/Header/Header";
 import Footer from './common/footer/Footer'
 import AdminDashboard from "./screens/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
+import AdminOrders from "./screens/AdminOrders";
+import AdminCategories from "./screens/AdminCategories";
+import AdminProducts from "./screens/AdminProducts";
+import AdminUsers from "./screens/AdminUsers";
+import AdminAddCategory from "./screens/AdminAddCategory";
+import AdminAddProduct from "./screens/AdminAddProduct";
 
 function App() {
 
@@ -27,6 +33,48 @@ function App() {
               path="/dashboard"
               element={<AdminRoute>
               <AdminDashboard />
+              </AdminRoute>
+            }
+            />
+              <Route
+              path="/users"
+              element={<AdminRoute>
+              <AdminUsers />
+              </AdminRoute>
+            }
+            />
+            <Route
+              path="/products"
+              element={<AdminRoute>
+              <AdminProducts />
+              </AdminRoute>
+            }
+            />
+            <Route
+              path="/categories"
+              element={<AdminRoute>
+              <AdminCategories />
+              </AdminRoute>
+            }
+            />
+            <Route
+              path="/addcategory"
+              element={<AdminRoute>
+              <AdminAddCategory />
+              </AdminRoute>
+            }
+            />
+            <Route
+              path="/addproduct"
+              element={<AdminRoute>
+              <AdminAddProduct />
+              </AdminRoute>
+            }
+            />
+            <Route
+              path="/orders"
+              element={<AdminRoute>
+              <AdminOrders />
               </AdminRoute>
             }
             />

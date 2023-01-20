@@ -135,11 +135,6 @@
 @media (max-width: 988px) {
  
 }
-=======
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-}
 .containerr{
     display: flex;
     justify-content: space-between;
