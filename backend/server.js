@@ -2,9 +2,16 @@ import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import data from './data.js';
 import userRouter from './routers/userRouter.js';
+import path from "path";
+import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import productRouter from './routers/productRouter.js';
-// import categoryRouter from './routers/categoryRouter.js';
+import categoryRouter from './routers/categoryRouter.js';
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
 // to read the content of env
 dotenv.config();
 
@@ -14,6 +21,7 @@ const app = express();
 // a middleware that parse json data in the body of the request
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use("/public", express.static(path.join(__dirname, "uploads")));
 
 
 mongoose.connect('mongodb://localhost/smile',{
@@ -26,7 +34,7 @@ mongoose.connect('mongodb://localhost/smile',{
 app.use('/api/users',userRouter);
 
 app.use('/api/products',productRouter);
-// app.use('/api/categories',categoryRouter);
+app.use('/api/categories',categoryRouter);
 
 
 app.get('/api/products', (req, res) => {
