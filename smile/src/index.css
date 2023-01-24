@@ -424,3 +424,35 @@ a:hover{
   justify-content: space-around;
   width: 100%;
 }
+
+/* Dashboard Screen*/
+
+.summary > li {
+  border: 0.1rem #c0c0c0 solid;
+  margin: 2rem;
+  border-radius: 0.5rem;
+  flex: 1 1 20rem;
+  list-style: none;
+}
+.summary > li i{
+  color: black;
+}
+.summary-title {
+  font-size: 2rem;
+  padding: 1rem;
+}
+.summary-body {
+  font-size: 4rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.summary-title.color1 {
+  background-color: rgb(24 119 242 / .3);
+}
+.summary-title.color2 {
+  background-color: rgb(11 64 134 / .3);
+}
+.summary-title.color3 {
+  background-color: rgb(240 192 64 / .5);
+}

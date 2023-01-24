@@ -14,6 +14,7 @@ import AdminProducts from "./screens/AdminProducts";
 import AdminUsers from "./screens/AdminUsers";
 import AdminAddCategory from "./screens/AdminAddCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
+import CartItemScreen from "./screens/CartItemScreen";
 
 function App() {
 
@@ -28,6 +29,10 @@ function App() {
             <Route
               path="/profile"
               element={<ProfileScreen />}
+            />
+            <Route
+              path="/cartItem"
+              element={<CartItemScreen />}
             />
               <Route
               path="/dashboard"

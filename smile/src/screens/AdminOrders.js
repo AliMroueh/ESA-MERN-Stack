@@ -32,7 +32,7 @@ export default function AdminOrders() {
                     type="button"
                     className="edit"
                   >
-                    Edit
+                    Details
                   </button>
                   <button
                     type="button"
@@ -54,7 +54,7 @@ export default function AdminOrders() {
                     type="button"
                     className="edit"
                   >
-                    Edit
+                    Details
                   </button>
                   <button
                     type="button"
@@ -76,7 +76,7 @@ export default function AdminOrders() {
                     type="button"
                     className="edit"
                   >
-                    Edit
+                    Details
                   </button>
                   <button
                     type="button"
