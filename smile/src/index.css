@@ -22,6 +22,9 @@ body{
 #root{
   height: 100%;
 }
+li{
+  list-style: none;
+}
 .fa-solid{
   color: #0066FF;
 }
@@ -455,4 +458,76 @@ a:hover{
 }
 .summary-title.color3 {
   background-color: rgb(240 192 64 / .5);
+}
+
+/* CartItems Screen */
+
+.cart{
+  padding: 20px;
+}
+img.small{
+  max-width: 8rem;
+  width: 100%;
+}
+select{
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.6rem;
+  outline: none;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+select:hover{
+  border: 0.1rem var(--secondary-color) solid;
+}
+p{
+  display: inline;
+}
+.cart p i{
+  cursor: pointer;
+  color: black;
+  font-size: 2rem;
+  float: right;
+}
+
+/* Card */
+.card{
+  border: 0.1rem #c0c0c0 solid;
+  background-color: #f8f8f8;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+.card-body{
+  padding: 1rem;
+}
+.card-body > *{
+  margin-bottom: 0.5rem;
+}
+.card-body ul{
+  margin-right: 30px;
+}
+.price{
+  font-size: 2rem;
+}
+
+button.primary{
+  background-color: var(--primary-color);
+  color: #ffffff;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 15px;
+  border-radius: 5px;
+}
+button.block{
+  width: 100%;
+}
+.m-t{
+  margin-top: 20px;
+}
+.color-1{
+  background-color: rgb(24 119 242 / 0.1);
+  padding: 5px;
 }
