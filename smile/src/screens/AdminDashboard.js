@@ -4,18 +4,16 @@ import { Chart } from "react-google-charts";
 export default function AdminDashboard() {
 
   const data = [
-    ["Year", "Sales", "Expenses", "Profit"],
-    ["2014", 1000, 400, 200],
-    ["2015", 1170, 460, 250],
-    ["2016", 660, 1120, 300],
-    ["2017", 1030, 540, 350],
+    ["Task", "Hours per Day"],
+    ["Work", 11],
+    ["Eat", 2],
+    ["Commute", 2],
+    ["Watch TV", 2],
+    ["Sleep", 7],
   ];
 
   const options = {
-    chart: {
-      title: "Company Performance",
-      subtitle: "Sales, Expenses, and Profit: 2014-2017",
-    },
+    title: "My Daily Activities",
   };
   
   return (
@@ -23,12 +21,45 @@ export default function AdminDashboard() {
       <div className='row adminTop'>
           <h1 className='adminTitle'>Dashboard</h1>
       </div>
-      <Chart
-      chartType="Bar"
-      width="100%"
-      height="400px"
+      <ul className="row summary">
+            <li>
+              <div className="summary-title color1">
+                <span>
+                  <i className="fa fa-users" /> Users
+                </span>
+              </div>
+              <div className="summary-body">3</div>
+            </li>
+            <li>
+              <div className="summary-title color2">
+                <span>
+                  <i className="fa fa-shopping-cart" /> Orders
+                </span>
+              </div>
+              <div className="summary-body">
+                6
+              </div>
+            </li>
+            <li>
+              <div className="summary-title color3">
+                <span>
+                <i class="fa-solid fa-sack-dollar"></i> Sales
+                </span>
+              </div>
+              <div className="summary-body">
+                $500
+              </div>
+            </li>
+          </ul>
+        <div>
+          <h2>Categories</h2>
+          </div>
+        <Chart
+      chartType="PieChart"
       data={data}
       options={options}
+      width={"100%"}
+      height={"400px"}
     />
     </div>
   )
