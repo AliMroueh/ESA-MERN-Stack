@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import Categories from "./Categories"
 
 const Navbar = () => {
   // Toogle Menu
@@ -8,11 +9,8 @@ const Navbar = () => {
     <>
       <header className='header'>
         <div className='containerr d_flex'>
-          <div className='catgrories d_flex'>
-            
-            <h4>
-              Categories <i className='fa fa-chevron-down'></i>
-            </h4>
+          <div className='catgrories'>
+           <Categories/>
           </div>
 
           <div className='navlink'>
