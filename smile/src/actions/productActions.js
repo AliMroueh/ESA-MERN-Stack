@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import {
     PRODUCT_LIST_REQUEST,
@@ -49,7 +50,9 @@ export const listProductDetails = (info) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.post(`/api/products/add`, info)
+
+        const { data } = await axios.post(`/api/products/addproduct`, info, { headers: {'Content-Type': 'multipart/form-data'}})
+
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -129,4 +132,6 @@ export const getProducts = (id) => async (dispatch) => {
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
+
 }
+

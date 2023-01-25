@@ -1,34 +1,41 @@
+
 import express from "express";
 import Product from '../models/productModel.js';
 import multer from 'multer';
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
 const router = express.Router();
 
 //image upload
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads');
-
+        cb(null, path.join(path.dirname(__dirname), "uploads"));
+        
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
     },
 });
-
 var upload = multer({
     storage: storage,
 }).array('image');
 
 
-
+const router = express.Router();
 
 // insert an product into data base
 router.post("/addproduct", upload, (req, res) => {
-    const { color } = req.body
-    console.log(typeof color)
-    // const inputColors = color.spl
+//  console.log(req.body)
+//  console.log(req.files)
+    const { color } = req.body;
+
     let imageColor = [];
-    // console.log(req.files);
+
     if (req.files.length > 0) {
         imageColor = req.files.map((file, i) => {
             return { image: file.filename, color: color[i] }
@@ -36,6 +43,7 @@ router.post("/addproduct", upload, (req, res) => {
     }
     const product = new Product({
         name: req.body.name,
+        category: req.body.category,
         brand: req.body.brand,
         price: req.body.price,
         description: req.body.description,
@@ -45,7 +53,7 @@ router.post("/addproduct", upload, (req, res) => {
     });
     product.save((err, product) => {
         if (err) {
-            res.json({ message: err.message, type: "danger" });
+            res.json({ message: err.message });
         } else {
             res.send({ product })
             // req.session.message = {
@@ -56,7 +64,6 @@ router.post("/addproduct", upload, (req, res) => {
         }
     });
 });
-
 
 // get all product route
 router.get('/', (req, res) => {
