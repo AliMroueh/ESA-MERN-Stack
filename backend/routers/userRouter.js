@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import { generateToken } from '../utils.js';
+import { generateToken, isAuth } from '../utils.js';
 
 // express.Router is a function that make our code modular instead of having all routes in server.js, we can define multiple files to have our routers 
 const userRouter = express.Router();
@@ -103,6 +103,7 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
 )
 
 userRouter.get('/:id',
+isAuth,
 expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if(user){
@@ -138,4 +139,39 @@ expressAsyncHandler(async(req,res) => {
         res.status(401).send({message: "unKnown id"});
     }
 }))
+
+userRouter.delete('/:id',expressAsyncHandler(async(req,res)=>{
+   
+    const id = req.params.id;
+
+    await User.findByIdAndDelete(id)
+        .then(data => {
+            if(!data){
+                res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
+            }else{
+                res.send({
+                    message : "User was deleted successfully!"
+                })
+            }
+        })
+        .catch(err =>{
+            res.status(500).send({
+                message: "Could not delete User with id=" + id
+            });
+        });
+}))
+
+
+
+//get data
+userRouter.get('/',expressAsyncHandler(async( req ,res)=>{
+    try{
+     const users = await User.find({'isAdmin':false});
+     res.status(200).send(users);
+    }
+    catch(err){
+     res.status(500).send(err);
+    };
+ }));
+
 export default userRouter;

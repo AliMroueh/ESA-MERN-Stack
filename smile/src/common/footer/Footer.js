@@ -1,8 +1,19 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import "./footer.css";
 function Footer() {
+  const {pathname} = useLocation();
+
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
   return (
     <>
+
+        {((userInfo && !userInfo.isAdmin) || !userInfo) &&
+        !(pathname.split('/')[1] === 'register' || pathname.split('/')[1] === 'signin') && 
+
     <footer>
       <div className='container grid2'>
         <div className='box'>
@@ -50,13 +61,12 @@ function Footer() {
         </div>
       </div>
     </footer>
+}
+
   </>
 )
 }
 
 export default Footer
-  
-  
-  
-  
+
   
