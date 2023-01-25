@@ -26,12 +26,10 @@ var upload = multer({
 }).array('image');
 
 
-const router = express.Router();
-
 // insert an product into data base
 router.post("/addproduct", upload, (req, res) => {
-//  console.log(req.body)
-//  console.log(req.files)
+ console.log(req.body)
+ console.log(req.files)
     const { color } = req.body;
 
     let imageColor = [];

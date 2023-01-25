@@ -12,10 +12,14 @@ const imageColor = new mongoose.Schema(
   );
 imageColor.plugin(uniqueArrayPlugin);
 const productSchema = new mongoose.Schema({
-
-    // rating:{type:Number,min:0,max:5},
-
-
+    name: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
     imageColor: [imageColor],
     brand: {
         type: String,
