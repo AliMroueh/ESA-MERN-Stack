@@ -7,6 +7,8 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import productRouter from './routers/productRouter.js';
 import categoryRouter from './routers/categoryRouter.js';
+import { applyPassportStrategy } from './utils.js';
+import passport from 'passport';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -22,7 +24,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/public", express.static(path.join(__dirname, "uploads")));
-
+app.use(passport.initialize());
+// Apply strategy to passport
+applyPassportStrategy(passport);
 
 mongoose.connect('mongodb://localhost/smile',{
     useNewUrlParser: true, 

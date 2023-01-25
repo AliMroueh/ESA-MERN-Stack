@@ -21,7 +21,6 @@ function App() {
   return (
       <BrowserRouter>
           <Header/>
-
           <Routes>
             <Route index element={<Home />} />
             <Route path="/signin" element = {<SigninScreen />}></Route>
