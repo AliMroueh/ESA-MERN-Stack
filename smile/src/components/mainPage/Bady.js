@@ -1,15 +1,13 @@
 import React from "react"
-import Categories from "./Categories"
 import "./Categories.css"
-import Slider from "./Slider"
+import Sliderr from "./Sliderr"
 
 const Bady = () => {
   return (
     <>
       <section className='home'>
         <div className='container d_flex'>
-          <Categories />
-          <Slider />
+          <Sliderr />
         </div>
       </section>
     </>

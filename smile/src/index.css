@@ -17,6 +17,7 @@ body{
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 #root{
@@ -242,9 +243,7 @@ a:hover{
 .top{
   padding: 0 50px;
 }
-.adminTop{
-  /* padding: 0 50px; */
-}
+
 .adminTitle{
   color: var(--secondary-color);
   font-size: 4rem;
