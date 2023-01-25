@@ -28,7 +28,9 @@ app.use(passport.initialize());
 // Apply strategy to passport
 applyPassportStrategy(passport);
 
-mongoose.connect('mongodb://localhost/smile',{
+// mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
+// mongodb://localhost/smile 
+mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority',{
     useNewUrlParser: true, 
     useUnifiedTopology: true
 })

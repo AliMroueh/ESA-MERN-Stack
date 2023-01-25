@@ -1,7 +1,77 @@
+<<<<<<< Updated upstream
 import express from 'express';
 import mongoose from 'mongoose';
 import data from '../data.js';
 import productModel from '../models/productModel.js';
+=======
+import express from "express";
+import Product from '../models/productModel.js';
+import multer from 'multer';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
+const router = express.Router();
+
+//image upload
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(path.dirname(__dirname), "uploads"));
+
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    },
+});
+
+var upload = multer({
+    storage: storage,
+}).array('image');
+
+
+
+
+// insert an product into data base
+router.post("/addproduct", upload, (req, res) => {
+//  console.log(req.body)
+//  console.log(req.files)
+    const { color } = req.body;
+
+    let imageColor = [];
+
+    if (req.files.length > 0) {
+        imageColor = req.files.map((file, i) => {
+            return { image: file.filename, color: color[i] }
+        })
+    }
+    const product = new Product({
+        name: req.body.name,
+        category: req.body.category,
+        brand: req.body.brand,
+        price: req.body.price,
+        description: req.body.description,
+        countInStock: req.body.countInStock,
+        imageColor
+
+    });
+    product.save((err, product) => {
+        if (err) {
+            res.json({ message: err.message });
+        } else {
+            res.send({ product })
+            // req.session.message = {
+            //     type: 'success',
+            //     message: 'User added successfuly'
+            // };
+            // res.redirect('/');
+        }
+    });
+});
+
+>>>>>>> Stashed changes
 
 
 
