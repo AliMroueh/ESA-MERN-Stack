@@ -13,24 +13,6 @@ const imageColor = new mongoose.Schema(
 imageColor.plugin(uniqueArrayPlugin);
 const productSchema = new mongoose.Schema({
 
-<<<<<<< Updated upstream
-    name:{type:String,require:true,unique:true},
-    category:{type: String, require:true},
-  	ImageColor:[
-                {
-                    image: {type:String,require:true}, 
-                    color: {type:String,require:true}
-                }
-               ],
-    price:{type:Number,require:true},
-    countInStock:{type:Number,require:true},
-    rating:{type:Number,min:0,max:5},
-
-})
-=======
-    name: { type: String, require: true, unique: true },
-    category: { type: String, require: true },
-
     // rating:{type:Number,min:0,max:5},
 
 
@@ -65,7 +47,6 @@ const productSchema = new mongoose.Schema({
     }
 
 )
->>>>>>> Stashed changes
 
 productSchema.plugin(uniqueArrayPlugin);
 const Product = mongoose.model("Product", productSchema);
