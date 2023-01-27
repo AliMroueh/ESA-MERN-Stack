@@ -7,19 +7,19 @@ export default function AdminAddProduct() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   const [open, setOpen] = useState(false);
 
 
   const [image, setImage] = useState();
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(["red","blue","white"]);
+  const [color, setColor] = useState(["red", "blue", "white"]);
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [countInStock, setcountInStock] = useState(1);
- 
+
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, products } = productDetails
 
@@ -28,11 +28,11 @@ export default function AdminAddProduct() {
   }, [loading])
 
   const insertHandler = () => {
-    console.log(name,category,brand,price,countInStock,description,image)
+    console.log(name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
     const formData = new FormData()
-    for(let i=0;i<image.length;i++){
+    for (let i = 0; i < image.length; i++) {
       console.log(image[i])
       formData.append("image", image[i])
     }
@@ -43,9 +43,9 @@ export default function AdminAddProduct() {
     formData.append("countInStock", countInStock);
     formData.append("description", description);
     color.map(col => formData.append("color", col));
-    
+
     console.log(formData);
-    console.log({name,category,brand,price,countInStock,description})
+    console.log({ name, category, brand, price, countInStock, description })
 
     dispatch(listProductDetails(formData))
 
@@ -149,9 +149,9 @@ export default function AdminAddProduct() {
             </div>
           </div>
 
-          </div>
         </div>
-      
+      </div>
+
       {open &&
         <div className='img_color_Add'>
           <div className='add_items'>
@@ -189,6 +189,7 @@ export default function AdminAddProduct() {
                     #50f056
                   </p>
               </div> */}
+
               <div className='imgAndcolor'>
                 <div>
                   <p>adkjo.png</p>

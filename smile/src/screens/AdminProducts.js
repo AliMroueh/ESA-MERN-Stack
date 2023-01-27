@@ -93,6 +93,7 @@ export default function AdminProducts() {
                   <button
                     type="button"
                     className="delete"
+                    onClick={() => deleteHandler(row._id)}
                   >
                     Delete
                   </button>
