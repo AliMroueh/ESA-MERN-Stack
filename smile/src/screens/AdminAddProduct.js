@@ -190,6 +190,7 @@ export default function AdminAddProduct() {
                   </p>
               </div> */}
 
+
               <div className='imgAndcolor'>
                 <div>
                   <p>adkjo.png</p>
@@ -225,6 +226,8 @@ export default function AdminAddProduct() {
                 </div>
               </div>
               <div>
+
+
                 <button type='submit' >Save</button>
               </div>
             </div>

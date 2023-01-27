@@ -9,14 +9,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function Edit() {
+    const [open, setOpen] = useState(false);
 
-
-    const [name, setName] = useState('yasso')
-    const [brand, setBrand] = useState('german/lebanese')
+    const [name, setName] = useState('')
+    const [brand, setBrand] = useState('')
+    const [color, setColor] = useState(["red", "blue", "white"]);
+    const [category, setCategory] = useState('');
     const [price, setPrice] = useState(0)
-    const [description, setDescription] = useState('new tasa')
+    const [description, setDescription] = useState('')
     const [countInStock, setcountInStock] = useState(1)
-    // const [image, setImage] = useState('')
+    const [image, setImage] = useState('')
     const dispatch = useDispatch()
     const productUpdate = useSelector((state) => state.productUpdate)
     const { loading, error, products } = productUpdate
@@ -25,19 +27,13 @@ export default function Edit() {
     const productid = useSelector((state) => state.productid)
     const { loading: loadingAll, error: errorAll, products: productsAll } = productid
 
-    // const productid = useSelector((state) => state.productid)
+
 
     const navigate = useNavigate();
 
     const params = useParams();
     const { id } = params;
     console.log(id)
-
-
-
-    // constracture
-
-    // const { loading: loadingDel, success, error: errorDel } = productid;
 
     useEffect(() => {
 
@@ -51,18 +47,35 @@ export default function Edit() {
     }
 
     const updateHandler = () => {
-        dispatch(productUpdateAction(id, { name, brand, price, description, countInStock }))
+
+        //
+
+        // navigate('/')
+        const formData = new FormData()
+        for (let i = 0; i < image.length; i++) {
+            console.log(image[i])
+            formData.append("image", image[i])
+        }
+        formData.append("id", id);
+        formData.append("name", name);
+        formData.append("category", category);
+        formData.append("brand", brand);
+        formData.append("price", price);
+        formData.append("countInStock", countInStock);
+        formData.append("description", description);
+        color.map(col => formData.append("color", col));
+
+        console.log(formData);
+        console.log({ name, category, brand, price, countInStock, description })
+
+        dispatch(productUpdateAction(formData))
+
     }
-
-
-    //get info 
-
-
 
     return (
         <div className='top'>
             <div className='row adminTop'>
-                <h1 className='adminTitle'>Add Product</h1>
+                <h1 className='adminTitle'>Update Product</h1>
             </div>
             <div className='row'>
                 <div className='avatar'>
@@ -135,7 +148,7 @@ export default function Edit() {
                             </label>
                         </div>
                         <div>
-                            <button type="submit">Add Product</button>
+                            <button onSubmit={() => updateHandler()} >Update</button>
                         </div>
                     </div>
                 </div>
@@ -196,7 +209,7 @@ export default function Edit() {
                                 </div>
                             </div>
                             <div>
-                                <button onSubmit={() => updateHandler()} >Update</button>
+                                <button type='submit' >Save</button>
                             </div>
                         </div>
                     </div>
