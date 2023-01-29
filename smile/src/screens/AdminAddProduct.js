@@ -14,17 +14,18 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(["red", "blue", "white"]);
+  const [color, setColor] = useState('');
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [countInStock, setcountInStock] = useState(1);
   const [imageName, setimageName] = useState([]);
-
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, products } = productDetails
 
   useEffect(() => {
+
+
 
     setimageName([]);
     document.getElementsByClassName("imgAndcolor").innerHTML = "";
@@ -37,7 +38,22 @@ export default function AdminAddProduct() {
       }
     }
 
-  }, [image])
+    // if (image.length > 0 || color.length > 0) {
+    //   for (let i = 0; i < image.length; i++) {
+    //     for (let j = 0; j < color.length; j++) {
+    //       const newColorArray = [];
+    //       newColorArray.push(color[i].name)
+    //       setcolorName(colorName => [...colorName, ...newColorArray])
+    //     }
+    //     const newArray = [];
+    //     newArray.push(image[i].name)
+    //     setimageName(imageName => [...imageName, ...newArray])
+    //   }
+    // }
+
+
+
+  }, [image, color])
 
 
   const insertHandler = () => {
@@ -193,14 +209,16 @@ export default function AdminAddProduct() {
                   imageName.map((row, index) =>
                     <div key={index}>
                       <p>{row}</p>
-                      <p>
-                        <input id='color' type="color"
-                        ></input>
-                        <label htmlFor='color'>#806f69</label>
-                      </p>
+                      <div>
+                        <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
+                        <h4>{color}</h4>
+                      </div>
+                      {/* <div>
+                          <label htmlFor='color'>nnnn</label>
+                        </div>  */}
                     </div>
-                  )}
 
+                  )}
               </div>
 
               <div>

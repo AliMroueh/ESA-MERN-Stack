@@ -97,10 +97,7 @@ router.get('/edit/:id', (req, res) => {
 
             } else {
                 res.send(products)
-                // res.render("edit_users", {
-                //     title: "edit product",
-                //     products: products,
-                // });
+
             }
         }
     });
@@ -110,43 +107,33 @@ router.get('/edit/:id', (req, res) => {
 
 // //update product route
 
-router.put('/update/:id', (req, res) => {
+router.put('/update/:id', upload, (req, res) => {
     let id = req.params.id;
-    // let new_image = '';
     const { color } = req.body;
 
     let imageColor = [];
 
-    // if (req.files.length > 0) {
-    //     imageColor = req.files.map((file, i) => {
-    //         return { image: file.filename, color: color[i] }
-    //     })
-    // }
-
-    if (req.files) {
-        imageColor = req.files.filename;
-        try {
-            for (i = 0; i < image.length; i++) {
-                fs.unlinkSync("../uploads/" + req.body.old_image);
-            }
-        } catch (error) {
-            console.log(err);
-        }
-
-    } else {
-        imageColor = req.body.old_image;
+    if (req.files.length > 0) {
+        imageColor = req.files.map((file, i) => {
+            return { image: file.filename, color: color[i] }
+        })
     }
 
-    // if (req.file) {
-    //     new_image = req.file.filename;
+    // if (req.files) {
+    //     imageColor = req.files.filename;
     //     try {
-    //         fs.unlinkSync("../uploads/" + req.body.old_image);
-    //     } catch (err) {
+    //         for (i = 0; i < image.length; i++) {
+    //             fs.unlinkSync("../uploads/" + req.body.old_image);
+    //         }
+    //     } catch (error) {
     //         console.log(err);
     //     }
+
     // } else {
-    //     new_image = req.body.old_image;
+    //     imageColor = req.body.old_image;
     // }
+
+
 
     Product.findByIdAndUpdate(id, {
         name: req.body.name,
@@ -167,11 +154,7 @@ router.put('/update/:id', (req, res) => {
                 countInStock: req.body.countInStock,
                 imageColor
             })
-            // req.session.message = {
-            //     type: 'success',
-            //     message: 'product updated successfuly'
-            // };
-            // res.redirect('/');
+
         }
     });
 

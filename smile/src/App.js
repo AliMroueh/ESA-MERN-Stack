@@ -78,6 +78,7 @@ function App() {
         />
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
+
         <Route
           path="/orders"
           element={<AdminRoute>

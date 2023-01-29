@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
-export default function Edit() {
+export default function AdminEditProduct() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function Edit() {
 
 
     const productid = useSelector((state) => state.productid)
-    const { loading: loadingAll, error: errorAll, products: productsAll } = productid
+    const { loading: loadingOne, error: errorOne, products: productsOne } = productid
 
 
     const params = useParams();
@@ -40,7 +40,6 @@ export default function Edit() {
     useEffect(() => {
 
         dispatch(getProducts(id))
-
 
         setimageName([]);
         document.getElementsByClassName("imgAndcolor").innerHTML = "";
@@ -53,14 +52,9 @@ export default function Edit() {
             }
         }
 
-
-        console.log(productsAll)
-
     }, [dispatch, id, image])
 
-    if (!loading) {
-        console.log(products)
-    }
+
 
     const updateHandler = () => {
         // navigate('/')
@@ -79,12 +73,15 @@ export default function Edit() {
         color.map(col => formData.append("color", col));
 
         console.log(formData);
-        console.log({ name, category, brand, price, countInStock, description })
+        // console.log({ name, category, brand, price, countInStock, description })
 
-        dispatch(productUpdateAction(formData))
+        dispatch(productUpdateAction(id, formData))
 
     }
-
+    // if (!loadingOne) {
+    //      console.log(productsOne)
+    //     setName(productsOne.name);
+    // }
     return (
         <div className='top'>
             <div className='row adminTop'>
@@ -106,7 +103,9 @@ export default function Edit() {
                     <div className='input_style'>
                         <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
                     </div>
+
                     <div className='input_style'>
+
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
                             <option value='car'>
                                 car
@@ -144,7 +143,7 @@ export default function Edit() {
                             id="description"
                             placeholder="Enter the description"
                             required
-                       
+
                             onChange={(e) => setDescription(e.target.value)}
                         ></input>
                     </div>
@@ -157,7 +156,7 @@ export default function Edit() {
                             </label>
                         </div>
                         <div>
-                            <button onSubmit={() => updateHandler()} >Update</button>
+                            <button onClick={updateHandler} >Update</button>
                         </div>
                     </div>
                 </div>
@@ -177,29 +176,31 @@ export default function Edit() {
                                     alt='category image'
                                     accept="image/*"
                                     multiple
+                                    onChange={e => setImage(e.target.files)}
                                 ></input>
                                 <label id='img' htmlFor='file'>
                                     Choose Images
                                 </label>
-                            </div>
 
+                            </div>
                             <div className='imgAndcolor'>
                                 {imageName.length > 0 &&
 
                                     imageName.map((row, index) =>
                                         <div key={index}>
                                             <p>{row}</p>
-                                            <p>
-                                                <input id='color' type="color"
-
-                                                ></input>
-                                                <label htmlFor='color'>#806f69</label>
-                                            </p>
+                                            <div>
+                                                <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
+                                                <div>
+                                                    <label htmlFor='color'>color</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     )}
                             </div>
+
                             <div>
-                                <button type='submit' >Save</button>
+                                <button type='' onClick={() => setOpen(false)} >Save</button>
                             </div>
                         </div>
                     </div>
