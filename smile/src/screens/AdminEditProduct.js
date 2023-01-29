@@ -9,6 +9,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function Edit() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
     const [open, setOpen] = useState(false);
 
     const [name, setName] = useState('')
@@ -19,7 +23,8 @@ export default function Edit() {
     const [description, setDescription] = useState('')
     const [countInStock, setcountInStock] = useState(1)
     const [image, setImage] = useState('')
-    const dispatch = useDispatch()
+    const [imageName, setimageName] = useState([]);
+
     const productUpdate = useSelector((state) => state.productUpdate)
     const { loading, error, products } = productUpdate
 
@@ -28,9 +33,6 @@ export default function Edit() {
     const { loading: loadingAll, error: errorAll, products: productsAll } = productid
 
 
-
-    const navigate = useNavigate();
-
     const params = useParams();
     const { id } = params;
     console.log(id)
@@ -38,18 +40,29 @@ export default function Edit() {
     useEffect(() => {
 
         dispatch(getProducts(id))
+
+
+        setimageName([]);
+        document.getElementsByClassName("imgAndcolor").innerHTML = "";
+
+        if (image.length > 0) {
+            for (let i = 0; i < image.length; i++) {
+                const newArray = [];
+                newArray.push(image[i].name)
+                setimageName(imageName => [...imageName, ...newArray])
+            }
+        }
+
+
         console.log(productsAll)
 
-    }, [dispatch, id])
+    }, [dispatch, id, image])
 
     if (!loading) {
         console.log(products)
     }
 
     const updateHandler = () => {
-
-        //
-
         // navigate('/')
         const formData = new FormData()
         for (let i = 0; i < image.length; i++) {
@@ -112,6 +125,7 @@ export default function Edit() {
                             id="price"
                             placeholder="Enter product price"
                             required
+
                             onChange={(e) => setPrice(e.target.value)}
                         ></input>
                     </div>
@@ -130,19 +144,14 @@ export default function Edit() {
                             id="description"
                             placeholder="Enter the description"
                             required
+                       
                             onChange={(e) => setDescription(e.target.value)}
                         ></input>
                     </div>
 
                     <div className='row'>
                         <div>
-                            {/* <input
-                        type="file"
-                        id="file"
-                        required
-                        alt='category image'
-                        accept="image/*"
-                        ></input> */}
+
                             <label onClick={() => setOpen(true)}>
                                 Image/Color
                             </label>
@@ -175,38 +184,19 @@ export default function Edit() {
                             </div>
 
                             <div className='imgAndcolor'>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
+                                {imageName.length > 0 &&
+
+                                    imageName.map((row, index) =>
+                                        <div key={index}>
+                                            <p>{row}</p>
+                                            <p>
+                                                <input id='color' type="color"
+
+                                                ></input>
+                                                <label htmlFor='color'>#806f69</label>
+                                            </p>
+                                        </div>
+                                    )}
                             </div>
                             <div>
                                 <button type='submit' >Save</button>
@@ -220,7 +210,6 @@ export default function Edit() {
 
 
 }
-
 
 
 

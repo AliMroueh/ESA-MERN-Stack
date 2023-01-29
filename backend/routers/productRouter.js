@@ -115,27 +115,27 @@ router.put('/update/:id', (req, res) => {
     // let new_image = '';
     const { color } = req.body;
 
-
-
     let imageColor = [];
 
-    if (req.files.length > 0) {
-        imageColor = req.files.map((file, i) => {
-            return { image: file.filename, color: color[i] }
-        })
-    }
-
-    // if (req.files) {
-    //     new_imageColor = req.files.filename;
-    //     try {
-    //         fs.unlinkSync("../uploads/" + req.body.old_image);
-    //     } catch (error) {
-    //         console.log(err);
-    //     }
-
-    // } else {
-    //     new_imageColor = req.body.old_image;
+    // if (req.files.length > 0) {
+    //     imageColor = req.files.map((file, i) => {
+    //         return { image: file.filename, color: color[i] }
+    //     })
     // }
+
+    if (req.files) {
+        imageColor = req.files.filename;
+        try {
+            for (i = 0; i < image.length; i++) {
+                fs.unlinkSync("../uploads/" + req.body.old_image);
+            }
+        } catch (error) {
+            console.log(err);
+        }
+
+    } else {
+        imageColor = req.body.old_image;
+    }
 
     // if (req.file) {
     //     new_image = req.file.filename;

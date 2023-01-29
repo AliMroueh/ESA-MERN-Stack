@@ -145,13 +145,6 @@ export default function AdminAddProduct() {
 
           <div className='row'>
             <div>
-              {/* <input
-                        type="file"
-                        id="file"
-                        required
-                        alt='category image'
-                        accept="image/*"
-                        ></input> */}
 
               <label onClick={() => setOpen(true)}>
                 Image/Color
@@ -185,24 +178,14 @@ export default function AdminAddProduct() {
                   onChange={e => setImage(e.target.files)}
                 ></input>
 
-                {/* <input
-                  filename={file}
-                  onChange={e => setFile(e.target.files[0])}
-                  type="file"
-                  accept="image/*"
-                ></input> */}
+
 
                 <label id='img' htmlFor='file'>
                   Choose Images
                 </label>
 
               </div>
-              {/* <div>
-                <input type="color" onChange={(e) => console.log(e.target.value)}></input>
-                <p>
-                    #50f056
-                  </p>
-              </div> */}
+
 
               <div className='imgAndcolor'>
                 {imageName.length > 0 &&
@@ -212,7 +195,6 @@ export default function AdminAddProduct() {
                       <p>{row}</p>
                       <p>
                         <input id='color' type="color"
-                        // onChange={(e) => console.log(e.target.value)}
                         ></input>
                         <label htmlFor='color'>#806f69</label>
                       </p>
