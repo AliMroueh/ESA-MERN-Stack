@@ -79,8 +79,8 @@ export default function AdminEditProduct() {
 
     }
     // if (!loadingOne) {
-    //      console.log(productsOne)
-    //     setName(productsOne.name);
+    //     console.log(productsOne)
+    //     // setName(productsOne.name);
     // }
     return (
         <div className='top'>
