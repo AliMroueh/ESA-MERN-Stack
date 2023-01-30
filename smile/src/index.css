@@ -530,3 +530,51 @@ button.block{
   background-color: rgb(24 119 242 / 0.1);
   padding: 5px;
 }
+
+
+.updateCat{
+  min-height: 30vh;
+  max-height: 100vh;
+  width: 50%;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  flex-direction: column;
+}
+.updateCat > div{
+  width: 60%;
+  margin-bottom: 50px;
+}
+.updateCat div.input_style input, .updateCat div.input_style select{
+  width: 89%;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 2px solid var(--secondary-color);
+  outline: none;
+}
+.updateCat div.input_style select{
+  width: 100%;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.updateCat div input[type="file"]{
+  display: none;
+}
+.updateCat div label{
+  width: 50%;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: #ffffff;
+  cursor: pointer;
+}
+.updateCat div button, .add_items .choose_img div button{
+  background-color: var(--button-primary);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}

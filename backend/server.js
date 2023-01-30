@@ -7,6 +7,8 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import productRouter from './routers/productRouter.js';
 import categoryRouter from './routers/categoryRouter.js';
+import { applyPassportStrategy } from './utils.js';
+import passport from 'passport';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -22,9 +24,18 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/public", express.static(path.join(__dirname, "uploads")));
+app.use(passport.initialize());
+// Apply strategy to passport
+applyPassportStrategy(passport);
 
 
-mongoose.connect('mongodb://localhost/smile',{
+mongoose.set('strictQuery', true)
+// mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
+
+// mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
+// mongodb://localhost/smile 
+mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority',{
+
     useNewUrlParser: true, 
     useUnifiedTopology: true
 })

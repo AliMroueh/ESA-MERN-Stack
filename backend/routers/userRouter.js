@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import { generateToken, isAuth } from '../utils.js';
+import { generateToken, isAdmin } from '../utils.js';
+import passport from 'passport';
 
 // express.Router is a function that make our code modular instead of having all routes in server.js, we can define multiple files to have our routers 
 const userRouter = express.Router();
@@ -103,7 +104,7 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
 )
 
 userRouter.get('/:id',
-isAuth,
+
 expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if(user){
@@ -140,7 +141,10 @@ expressAsyncHandler(async(req,res) => {
     }
 }))
 
-userRouter.delete('/:id',expressAsyncHandler(async(req,res)=>{
+userRouter.delete('/:id',
+passport.authenticate('jwt', { session: false }),
+isAdmin(),
+expressAsyncHandler(async(req,res)=>{
    
     const id = req.params.id;
 
@@ -164,7 +168,10 @@ userRouter.delete('/:id',expressAsyncHandler(async(req,res)=>{
 
 
 //get data
-userRouter.get('/',expressAsyncHandler(async( req ,res)=>{
+userRouter.get('/',
+passport.authenticate('jwt', { session: false }),
+isAdmin(),
+expressAsyncHandler(async( req ,res)=>{
     try{
      const users = await User.find({'isAdmin':false});
      res.status(200).send(users);
