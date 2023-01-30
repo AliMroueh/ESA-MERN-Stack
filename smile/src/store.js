@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import data from "./data";
 import { userDeleteReducer, userDetailsReducer, userGetAllReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from "./reducers/userReducers";
+import {getallcategoriesReducer,addcategoryReducer,updatecategoryReducer,deletecategoryReducer} from "./reducers/categoryReducers";
 
 const initialState = {
     userSignin: {
@@ -16,7 +17,12 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     userUpdateProfile : userUpdateProfileReducer,
     userGetAll : userGetAllReducer,
-    userDelete : userDeleteReducer
+    userDelete : userDeleteReducer,
+    getallCategories:getallcategoriesReducer,
+    addCategory:addcategoryReducer,
+    updateCategory:updatecategoryReducer,
+    deleteCategory:deletecategoryReducer
+    
 })
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

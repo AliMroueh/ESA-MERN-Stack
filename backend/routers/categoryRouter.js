@@ -10,7 +10,7 @@ const categoryRouter = express.Router();
 import path from "path";
 import multer from 'multer';
 import { fileURLToPath } from 'url';
-
+import fs from 'fs';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -50,13 +50,29 @@ categoryRouter.post(
   });
 
 
-  categoryRouter.put('/category/update'
+  categoryRouter.put('/category/update/:id'
   ,upload.single("categoryImage"),async(req,res) => {
       
-      const category = await Category.findById(req.body._id);
+      const category = await Category.findById(req.params.id);
       if(category){
           
           category.name = req.body.name || category.name;
+          
+
+    //       let id = req.params.id;
+    // let new_image = '';
+
+    // if (req.file) {
+    //     new_image = 'http://localhost:5000/public/' + req.file.filename;
+    //     try {
+    //         fs.unlinkSync("uploads/" + req.body.old_image);
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // } else {
+    //     new_image = req.body.old_image;
+    // }
+
           if (req.file) {
             category.categoryImage = 'http://localhost:5000/public/' + req.file.filename;
           }
@@ -88,7 +104,7 @@ categoryRouter.post(
 
 
 
- categoryRouter.get('/category/delete/:id', function (req, res, next) {
+ categoryRouter.delete('/category/delete/:id', function (req, res, next) {
   Category.findByIdAndRemove(req.params.id, (err, doc) => {
     if (!err) {
       res.status(201).json({ message:"Categories removed"})
@@ -99,3 +115,5 @@ categoryRouter.post(
 
 
 export default categoryRouter;
+
+

@@ -1,65 +1,65 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import {  useLocation,useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import {  addCategoryAction } from '../actions/categoryActions';
-export default function AdminAddCategory() {
+import {  updateCategoryAction,getcategoriesAction } from '../actions/categoryActions';
+export default function AdminUpdateCategory() {
+  
   
   const [categoryImage, setCategoryImage] = useState();
- 
+  
+  
   const [name, setName] = useState('');
   
     const dispatch = useDispatch();
-  const addCategory = useSelector((state) => state.addCategory);
-  const { loading, error, categories } = addCategory;
-  useEffect(() => {
-    console.log(categories)
-  }, [dispatch])
+  const updateCategory = useSelector((state) => state.updateCategory);
+  const { loading, error, categories } = updateCategory;
 
-  if (!loading) {
-    console.log(categories)
-  }
-  const navigate = useNavigate();
-  const insertHandler = () => {
+
+  const params = useParams();
+    const {id} = params;
+
   
     
-    const formData = new FormData();
-    
-    formData.append('categoryImage', categoryImage);
-    formData.append('name', name);
-    console.log(formData);
-    console.log(name,categoryImage);
-    dispatch(addCategoryAction(formData))
 
+    const updateHandler = () => {
 
-
+        
+       
+        const formData = new FormData();
+        formData.append('categoryImage', categoryImage);
+        formData.append('name', name);
+        console.log(formData);
+        console.log(name,categoryImage);
+        dispatch(updateCategoryAction(id,formData));
+         
+    }
+    if (!loading) {
+      console.log(categories)
+  }else{
+    console.log(error)
   }
-  const onSubmit = async event => {
-    event.preventDefault()
 
-    
    
-
-    
-  }
-
 
   return (
     <div className='top'>
       <div className='row adminTop'>
-          <h1 className='adminTitle'>Add Categories</h1>
+          <h1 className='adminTitle'>Update Categories</h1>
       </div>
       <div className='row'>
         <div className='avatar'>
           <img src="images/Product-hunt-amico.svg" alt="categories"/>
         </div>
-        <div className='addCat'>
+        <div className='updateCat'>
                   <div className='input_style'>
                         <input
                         type="text"
                         id="catName"
                         placeholder="Enter category name"
+                        value={name}
                         required onChange={(e) => setName(e.target.value)}
                         ></input>
                 </div>
@@ -75,11 +75,11 @@ export default function AdminAddCategory() {
                         onChange={e => setCategoryImage(e.target.files[0])}
                         ></input>
                         <label htmlFor="file">
-                          Choose Image
+                          Update Image
                         </label>
                     </div>
                     <div>
-                    <button onClick={ insertHandler} type="submit">Add Category</button>
+                    <button onClick={updateHandler} type="submit">Update Category</button>
                     </div>
                 </div>
                 <p id="num-of-files">No Files Chosen</p>

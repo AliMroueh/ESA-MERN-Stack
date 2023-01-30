@@ -13,6 +13,7 @@ import AdminCategories from "./screens/AdminCategories";
 import AdminProducts from "./screens/AdminProducts";
 import AdminUsers from "./screens/AdminUsers";
 import AdminAddCategory from "./screens/AdminAddCategory";
+import AdminUpdateCategory from "./screens/AdminUpdateCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
 import CartItemScreen from "./screens/CartItemScreen";
 
@@ -66,6 +67,13 @@ function App() {
               path="/addcategory"
               element={<AdminRoute>
               <AdminAddCategory />
+              </AdminRoute>
+            }
+            />
+            <Route
+              path="/updatecategory/:id"
+              element={<AdminRoute>
+              <AdminUpdateCategory />
               </AdminRoute>
             }
             />

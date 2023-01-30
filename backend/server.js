@@ -23,8 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/public", express.static(path.join(__dirname, "uploads")));
 
-
-mongoose.connect('mongodb://localhost/smile',{
+mongoose.set('strictQuery', true)
+mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
     useNewUrlParser: true, 
     useUnifiedTopology: true
 })
