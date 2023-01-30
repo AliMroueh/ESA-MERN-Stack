@@ -8,12 +8,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
+
+
+
 export default function AdminEditProduct() {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
     const [open, setOpen] = useState(false);
+
+    // const [product, getProducts] = useState(props.product)
+
 
     const [name, setName] = useState('')
     const [brand, setBrand] = useState('')
@@ -78,18 +85,24 @@ export default function AdminEditProduct() {
         dispatch(productUpdateAction(id, formData))
 
     }
-    // if (!loadingOne) {
-    //     console.log(productsOne)
-    //     // setName(productsOne.name);
-    // }
+    if (!loadingOne) {
+        console.log(productsOne);
+        // setName(productsOne.name);
+
+
+    }
+
+
     return (
-        <div className='top'>
+
+        < div className='top' >
             <div className='row adminTop'>
                 <h1 className='adminTitle'>Update Product</h1>
             </div>
             <div className='row'>
+
                 <div className='avatar'>
-                    <img src="images/product-quality-animate.svg" alt="categories" />
+                    <img src="images/product-quality-animate.svg" alt="products" />
                 </div>
                 <div className='addCat'>
                     <div className='input_style'>
@@ -97,6 +110,7 @@ export default function AdminEditProduct() {
                             type="text"
                             id="catName"
                             placeholder="Enter product name"
+                            value={name}
                             required onChange={(e) => setName(e.target.value)}
                         ></input>
                     </div>
@@ -160,8 +174,12 @@ export default function AdminEditProduct() {
                         </div>
                     </div>
                 </div>
+
             </div>
-            {open &&
+
+
+            {
+                open &&
                 <div className='img_color_Add'>
                     <div className='add_items'>
                         <span id='close' onClick={() => setOpen(false)}>
@@ -206,11 +224,21 @@ export default function AdminEditProduct() {
                     </div>
                 </div>
             }
-        </div>
+        </div >
     );
 
 
 }
+
+
+// const makeStateToProps = () => {
+//     const product = getProducts();
+//     return (state, props) => {
+//         return {
+//             product: product(state, props.match.params.id),
+//         };
+//     };
+// };
 
 
 
