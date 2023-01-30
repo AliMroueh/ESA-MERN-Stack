@@ -78,10 +78,16 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
 }
 
-export const getAllUser = () => async (dispatch) => {
+export const getAllUser = () => async (dispatch, getState) => {
     dispatch({type: USER_GET_REQUEST});
+    
     try{
-        const {data} = await Axios.get(`/api/users`);
+        const {userSignin: {userInfo}} = getState();
+        const {data} = await Axios.get(`/api/users`, {
+            headers: { 
+                Authorization: `Bearer ${userInfo?.token}` 
+            },
+        });
         dispatch({type: USER_GET_SUCCESS, payload: data});
     }catch(error){
         dispatch({type : USER_GET_FAIL, 
