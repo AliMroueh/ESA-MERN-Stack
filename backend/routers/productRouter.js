@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 import { isAdmin } from "../utils.js";
 import passport from 'passport';
 
-const router = express.Router();
+const productRouter = express.Router();
 
 //image upload
 const __filename = fileURLToPath(import.meta.url);
@@ -30,7 +30,7 @@ var upload = multer({
 
 
 // insert an product into data base
-router.post("/addproduct", upload, (req, res) => {
+productRouter.post("/addproduct", upload, (req, res) => {
 //  console.log(req.body)
 //  console.log(req.files)
     const { color } = req.body;
@@ -67,29 +67,103 @@ router.post("/addproduct", upload, (req, res) => {
 });
 
 // get all product route
-router.get('/',(req, res) => {
-    Product.find().exec((err, products) => {
-        if (err) {
-            res.json({ message: err.message });
-        } else {
+// router.get('/',(req, res) => {
+//     Product.find().exec((err, products) => {
+//         if (err) {
+//             res.json({ message: err.message });
+//         } else {
 
-            res.send(products)
-            // res.render('index', {
-            //     title: 'Home page',
-            //     products: products,
-            // })
-        }
-    })
-});
+//             res.send(products)
+//             // res.render('index', {
+//             //     title: 'Home page',
+//             //     products: products,
+//             // })
+//         }
+//     })
+// });
 
-router.get('/addproduct', (req, res) => {
+productRouter.get('/', expressAsyncHandler(async(req,res) => {
+    // const products = await Product.find({});
+    const pageSize = 3;
+    const page = Number(req.query.pageNumber) || 1;
+    const name = req.query.name || '';
+    const category = req.query.category || '';
+    const seller = req.query.seller || '';
+    const order = req.query.order || '';
+    const min =
+      req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+    const max =
+      req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+    const rating =
+      req.query.rating && Number(req.query.rating) !== 0
+        ? Number(req.query.rating)
+        : 0;
+    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+    const sellerFilter = seller ? { seller } : {};
+    const categoryFilter = category ? { category } : {};
+   const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
+    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+    const sortOrder =
+      order === 'lowest'
+        ? { price: 1 }
+        : order === 'highest'
+        ? { price: -1 }
+        : order === 'toprated'
+        ? { rating: -1 }
+        : { _id: -1 };
+        const count = await Product.count({
+          ...sellerFilter,
+          ...nameFilter,
+          ...categoryFilter,
+          ...priceFilter,
+          ...ratingFilter,
+        });
+    // const products = await Product.find({ ...sellerFilter });
+    // const products = await Product.find({ ...sellerFilter }).populate(
+    //   'seller',
+    //   'seller.name seller.logo'
+    // );
+    
+    const products = await Product.find({
+      ...sellerFilter,
+      ...nameFilter,
+      ...categoryFilter,
+    // }).populate('seller', 'seller.name seller.logo');
+    ...priceFilter,
+    ...ratingFilter,
+  })
+    .populate('seller', 'seller.name seller.logo')
+    // .sort(sortOrder);
+    // res.send(products);
+    .sort(sortOrder)
+    // In Mongoose, the skip() method is used to specify the number of documents to skip. When a query is made and the query result is returned, the skip() method will skip the first n documents specified and return the remaining.
+    // in short skip is return the remaining product in this example
+     // the number in the skip is not return it return after it
+    .skip(pageSize * (page - 1))
+    // limit is the max number of product in page
+    .limit(pageSize);
+  res.send({ products, page, pages: Math.ceil(count / pageSize) });
+})
+);
+
+productRouter.get(
+  '/categories',
+  expressAsyncHandler(async (req, res) => {
+    // Finds the distinct values for a specified field across a single collection or view and returns the results in an array.
+    // distinct : different, separate, independent, special
+    const categories = await Product.find().distinct('category');
+    res.send(categories);
+  })
+);
+
+productRouter.get('/addproduct', (req, res) => {
     res.render("add_users", { title: "Add users" });
 });
 
 
 // //edit an product route
 
-router.get('/edit/:id', (req, res) => {
+productRouter.get('/edit/:id', (req, res) => {
     let id = req.params.id;
     Product.findById(id, (err, products) => {
         if (err) {
@@ -113,7 +187,7 @@ router.get('/edit/:id', (req, res) => {
 
 // //update product route
 
-router.put('/update/:id', (req, res) => {
+productRouter.put('/update/:id', (req, res) => {
     let id = req.params.id;
     let new_image = '';
 
@@ -190,15 +264,7 @@ router.delete('/delete/:id', (req, res) => {
     });
 });
 
-
-
-
-
-
-
-
-
-export default router
+export default productRouter;
 
 
 
