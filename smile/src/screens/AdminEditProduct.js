@@ -8,65 +8,101 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
-export default function Edit() {
 
 
-    const [name, setName] = useState('yasso')
-    const [brand, setBrand] = useState('german/lebanese')
+
+export default function AdminEditProduct() {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
+    const [open, setOpen] = useState(false);
+
+    // const [product, getProducts] = useState(props.product)
+
+
+    const [name, setName] = useState('')
+    const [brand, setBrand] = useState('')
+    const [color, setColor] = useState(["red", "blue", "white"]);
+    const [category, setCategory] = useState('');
     const [price, setPrice] = useState(0)
-    const [description, setDescription] = useState('new tasa')
+    const [description, setDescription] = useState('')
     const [countInStock, setcountInStock] = useState(1)
-    // const [image, setImage] = useState('')
-    const dispatch = useDispatch()
+    const [image, setImage] = useState('')
+    const [imageName, setimageName] = useState([]);
+
     const productUpdate = useSelector((state) => state.productUpdate)
     const { loading, error, products } = productUpdate
 
 
     const productid = useSelector((state) => state.productid)
-    const { loading: loadingAll, error: errorAll, products: productsAll } = productid
+    const { loading: loadingOne, error: errorOne, products: productsOne } = productid
 
-    // const productid = useSelector((state) => state.productid)
-
-    const navigate = useNavigate();
 
     const params = useParams();
     const { id } = params;
     console.log(id)
 
-
-
-    // constracture
-
-    // const { loading: loadingDel, success, error: errorDel } = productid;
-
     useEffect(() => {
 
         dispatch(getProducts(id))
-        console.log(productsAll)
 
-    }, [dispatch, id])
+        setimageName([]);
+        document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
-    if (!loading) {
-        console.log(products)
-    }
+        if (image.length > 0) {
+            for (let i = 0; i < image.length; i++) {
+                const newArray = [];
+                newArray.push(image[i].name)
+                setimageName(imageName => [...imageName, ...newArray])
+            }
+        }
+
+    }, [dispatch, id, image])
+
+
 
     const updateHandler = () => {
-        dispatch(productUpdateAction(id, { name, brand, price, description, countInStock }))
+        // navigate('/')
+        const formData = new FormData()
+        for (let i = 0; i < image.length; i++) {
+            console.log(image[i])
+            formData.append("image", image[i])
+        }
+        formData.append("id", id);
+        formData.append("name", name);
+        formData.append("category", category);
+        formData.append("brand", brand);
+        formData.append("price", price);
+        formData.append("countInStock", countInStock);
+        formData.append("description", description);
+        color.map(col => formData.append("color", col));
+
+        console.log(formData);
+        // console.log({ name, category, brand, price, countInStock, description })
+
+        dispatch(productUpdateAction(id, formData))
+
     }
+    if (!loadingOne) {
+        console.log(productsOne);
+        // setName(productsOne.name);
 
 
-    //get info 
-
+    }
 
 
     return (
-        <div className='top'>
+
+        < div className='top' >
             <div className='row adminTop'>
-                <h1 className='adminTitle'>Add Product</h1>
+                <h1 className='adminTitle'>Update Product</h1>
             </div>
             <div className='row'>
+
                 <div className='avatar'>
-                    <img src="images/product-quality-animate.svg" alt="categories" />
+                    <img src="images/product-quality-animate.svg" alt="products" />
                 </div>
                 <div className='addCat'>
                     <div className='input_style'>
@@ -74,13 +110,16 @@ export default function Edit() {
                             type="text"
                             id="catName"
                             placeholder="Enter product name"
+                            value={name}
                             required onChange={(e) => setName(e.target.value)}
                         ></input>
                     </div>
                     <div className='input_style'>
                         <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
                     </div>
+
                     <div className='input_style'>
+
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
                             <option value='car'>
                                 car
@@ -99,6 +138,7 @@ export default function Edit() {
                             id="price"
                             placeholder="Enter product price"
                             required
+
                             onChange={(e) => setPrice(e.target.value)}
                         ></input>
                     </div>
@@ -117,30 +157,29 @@ export default function Edit() {
                             id="description"
                             placeholder="Enter the description"
                             required
+
                             onChange={(e) => setDescription(e.target.value)}
                         ></input>
                     </div>
 
                     <div className='row'>
                         <div>
-                            {/* <input
-                        type="file"
-                        id="file"
-                        required
-                        alt='category image'
-                        accept="image/*"
-                        ></input> */}
+
                             <label onClick={() => setOpen(true)}>
                                 Image/Color
                             </label>
                         </div>
                         <div>
-                            <button type="submit">Add Product</button>
+                            <button onClick={updateHandler} >Update</button>
                         </div>
                     </div>
                 </div>
+
             </div>
-            {open &&
+
+
+            {
+                open &&
                 <div className='img_color_Add'>
                     <div className='add_items'>
                         <span id='close' onClick={() => setOpen(false)}>
@@ -155,59 +194,51 @@ export default function Edit() {
                                     alt='category image'
                                     accept="image/*"
                                     multiple
+                                    onChange={e => setImage(e.target.files)}
                                 ></input>
                                 <label id='img' htmlFor='file'>
                                     Choose Images
                                 </label>
+
+                            </div>
+                            <div className='imgAndcolor'>
+                                {imageName.length > 0 &&
+
+                                    imageName.map((row, index) =>
+                                        <div key={index}>
+                                            <p>{row}</p>
+                                            <div>
+                                                <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
+                                                <div>
+                                                    <label htmlFor='color'>color</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                             </div>
 
-                            <div className='imgAndcolor'>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>adkjo.png</p>
-                                    <p>
-                                        <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                                        ></input>
-                                        <label htmlFor='color'>#806f69</label>
-                                    </p>
-                                </div>
-                            </div>
                             <div>
-                                <button onSubmit={() => updateHandler()} >Update</button>
+                                <button type='' onClick={() => setOpen(false)} >Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-        </div>
+        </div >
     );
 
 
 }
 
+
+// const makeStateToProps = () => {
+//     const product = getProducts();
+//     return (state, props) => {
+//         return {
+//             product: product(state, props.match.params.id),
+//         };
+//     };
+// };
 
 
 

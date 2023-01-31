@@ -1,41 +1,68 @@
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 export default function AdminAddProduct() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   const [open, setOpen] = useState(false);
 
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(["red","blue","white"]);
+  const [color, setColor] = useState('');
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [countInStock, setcountInStock] = useState(1);
- 
+  const [imageName, setimageName] = useState([]);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, products } = productDetails
 
   useEffect(() => {
-    console.log(products)
 
-  }, [loading])
+
+
+    setimageName([]);
+    document.getElementsByClassName("imgAndcolor").innerHTML = "";
+
+    if (image.length > 0) {
+      for (let i = 0; i < image.length; i++) {
+        const newArray = [];
+        newArray.push(image[i].name)
+        setimageName(imageName => [...imageName, ...newArray])
+      }
+    }
+
+    // if (image.length > 0 || color.length > 0) {
+    //   for (let i = 0; i < image.length; i++) {
+    //     for (let j = 0; j < color.length; j++) {
+    //       const newColorArray = [];
+    //       newColorArray.push(color[i].name)
+    //       setcolorName(colorName => [...colorName, ...newColorArray])
+    //     }
+    //     const newArray = [];
+    //     newArray.push(image[i].name)
+    //     setimageName(imageName => [...imageName, ...newArray])
+    //   }
+    // }
+
+
+
+  }, [image, color])
+
 
   const insertHandler = () => {
-    console.log(name,category,brand,price,countInStock,description,image)
 
-    // navigate('/')
+    console.log(name, category, brand, price, countInStock, description, image)
+
+    navigate('/')
     const formData = new FormData()
-    for(let i=0;i<image.length;i++){
+    for (let i = 0; i < image.length; i++) {
       console.log(image[i])
       formData.append("image", image[i])
     }
@@ -46,9 +73,9 @@ export default function AdminAddProduct() {
     formData.append("countInStock", countInStock);
     formData.append("description", description);
     color.map(col => formData.append("color", col));
-    
+
     console.log(formData);
-    console.log({name,category,brand,price,countInStock,description})
+    console.log({ name, category, brand, price, countInStock, description })
 
     dispatch(listProductDetails(formData))
 
@@ -134,13 +161,6 @@ export default function AdminAddProduct() {
 
           <div className='row'>
             <div>
-              {/* <input
-                        type="file"
-                        id="file"
-                        required
-                        alt='category image'
-                        accept="image/*"
-                        ></input> */}
 
               <label onClick={() => setOpen(true)}>
                 Image/Color
@@ -152,9 +172,8 @@ export default function AdminAddProduct() {
             </div>
           </div>
 
-          </div>
         </div>
-      
+      </div>
       {open &&
         <div className='img_color_Add'>
           <div className='add_items'>
@@ -174,62 +193,32 @@ export default function AdminAddProduct() {
                   onChange={e => setImage(e.target.files)}
                 ></input>
 
-                  <label id='img' htmlFor='file'>
-                    Choose Images
-                  </label>
-
-                {/* <input
-                  filename={file}
-                  onChange={e => setFile(e.target.files[0])}
-                  type="file"
-                  accept="image/*"
-                ></input> */}
 
                 <label id='img' htmlFor='file'>
                   Choose Images
                 </label>
 
               </div>
-              {/* <div>
-                <input type="color" onChange={(e) => console.log(e.target.value)}></input>
-                <p>
-                    #50f056
-                  </p>
-              </div> */}
+
+
               <div className='imgAndcolor'>
-                <div>
-                  <p>adkjo.png</p>
-                  <p>
-                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                    ></input>
-                    <label htmlFor='color'>#806f69</label>
-                  </p>
-                </div>
-                <div>
-                  <p>adkjo.png</p>
-                  <p>
-                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                    ></input>
-                    <label htmlFor='color'>#806f69</label>
-                  </p>
-                </div>
-                <div>
-                  <p>adkjo.png</p>
-                  <p>
-                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                    ></input>
-                    <label htmlFor='color'>#806f69</label>
-                  </p>
-                </div>
-                <div>
-                  <p>adkjo.png</p>
-                  <p>
-                    <input id='color' type="color" onChange={(e) => console.log(e.target.value)}
-                    ></input>
-                    <label htmlFor='color'>#806f69</label>
-                  </p>
-                </div>
+                {imageName.length > 0 &&
+
+                  imageName.map((row, index) =>
+                    <div key={index}>
+                      <p>{row}</p>
+                      <div>
+                        <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
+                        <h4>{color}</h4>
+                      </div>
+                      {/* <div>
+                          <label htmlFor='color'>nnnn</label>
+                        </div>  */}
+                    </div>
+
+                  )}
               </div>
+
               <div>
                 <button type='submit' >Save</button>
               </div>

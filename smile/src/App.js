@@ -1,18 +1,21 @@
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import NotFoundScreen from "./screens/NotFoundScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen";
-import Header from "./common/Header/Header"; 
+import Header from "./common/Header/Header";
 import Footer from './common/footer/Footer'
 import AdminDashboard from "./screens/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
 import AdminOrders from "./screens/AdminOrders";
 import AdminCategories from "./screens/AdminCategories";
 import AdminProducts from "./screens/AdminProducts";
+import AdminEditProduct from "./screens/AdminEditProduct";
 import AdminUsers from "./screens/AdminUsers";
 import AdminAddCategory from "./screens/AdminAddCategory";
+import AdminUpdateCategory from "./screens/AdminUpdateCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
 import CartItemScreen from "./screens/CartItemScreen";
 import { useEffect } from "react";
@@ -43,6 +46,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/signin" element = {<SigninScreen />}></Route>
         <Route path="/register" element = {<RegisterScreen />}></Route>
+
         <Route
           path="/profile"
           element={<ProfileScreen />}
@@ -51,6 +55,7 @@ function App() {
           path="/cartItem"
           element={<CartItemScreen />}
         />
+
           <Route
           path="/dashboard"
           element={<AdminRoute>
@@ -64,6 +69,7 @@ function App() {
           <AdminUsers />
           </AdminRoute>
         }
+
         />
         <Route
           path="/products"
@@ -79,6 +85,7 @@ function App() {
           </AdminRoute>
         }
         />
+        
         <Route
           path="/addcategory"
           element={<AdminRoute>
@@ -123,15 +130,29 @@ function App() {
             exact
           ></Route>
         <Route path='*' element={<NotFoundScreen />}/>
+
+        <Route
+          path="/updatecategory/:id"
+          element={<AdminRoute>
+            <AdminUpdateCategory />
+          </AdminRoute>
+          }
+        />
+
+        <Route path='/edit/:id' element={<AdminEditProduct />} exact />
+
+        <Route path='*' element={<NotFoundScreen />} />
       </Routes>
-      <Footer/>
-    
-  </BrowserRouter>
-
-
+      <Footer />
+    </BrowserRouter>
 
   );
 }
 
 
 export default App;
+
+
+
+
+
