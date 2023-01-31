@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { isAdmin } from "../utils.js";
 import passport from 'passport';
+import expressAsyncHandler from "express-async-handler";
 
 const productRouter = express.Router();
 
@@ -30,15 +31,9 @@ var upload = multer({
 
 
 // insert an product into data base
-<<<<<<< HEAD
 productRouter.post("/addproduct", upload, (req, res) => {
 //  console.log(req.body)
 //  console.log(req.files)
-=======
-router.post("/addproduct", upload, (req, res) => {
-    console.log(req.body)
-    console.log(req.files)
->>>>>>> 551703d32fbdda600784a6d9fce99b2b6a740428
     const { color } = req.body;
 
     let imageColor = [];
@@ -138,7 +133,7 @@ productRouter.get('/', expressAsyncHandler(async(req,res) => {
     ...priceFilter,
     ...ratingFilter,
   })
-    .populate('seller', 'seller.name seller.logo')
+    // .populate('seller', 'seller.name seller.logo')
     // .sort(sortOrder);
     // res.send(products);
     .sort(sortOrder)
@@ -190,11 +185,7 @@ productRouter.get('/edit/:id', (req, res) => {
 
 // //update product route
 
-<<<<<<< HEAD
 productRouter.put('/update/:id', (req, res) => {
-=======
-router.put('/update/:id', upload, (req, res) => {
->>>>>>> 551703d32fbdda600784a6d9fce99b2b6a740428
     let id = req.params.id;
     const { color } = req.body;
 
@@ -256,7 +247,7 @@ router.put('/update/:id', upload, (req, res) => {
 
 // //delete product route
 
-router.delete('/delete/:id', (req, res) => {
+productRouter.delete('/delete/:id', (req, res) => {
     let id = req.params.id;
     Product.findByIdAndRemove(id, (err, result) => {
         if (result.image != '') {

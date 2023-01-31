@@ -1,24 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import { productDeleteAction } from '../actions/productActions';
 
 export default function AdminProducts() {
-
-  // const navigate = useNavigate();
-
-  // const addHandler = () =>{
-  //   navigate('/addproduct')
-  // }
-
-
-
-  // my code
-
-
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,10 +14,27 @@ export default function AdminProducts() {
 
   const productDelete = useSelector((state) => state.productDelete)
   const { loading: loadingDel, success, error: errorDel } = productDelete;
+  const {
+    name = 'all',
+    category = 'all',
+    min = 0,
+    max = 0,
+    rating = 0,
+    order = 'newest',
+    pageNumber = 1,
+  } = useParams();
 
   useEffect(() => {
 
-    dispatch(listProducts())
+    dispatch(listProducts({
+      pageNumber,
+      name: name !== 'all' ? name : '',
+      category: category !== 'all' ? category : '',
+      min,
+      max,
+      rating,
+      order,
+    }))
     // console.log(products)
   }, [dispatch, success])
 
@@ -51,7 +54,9 @@ export default function AdminProducts() {
     dispatch(productDeleteAction(id))
   }
 
-
+if(!loading){
+  console.log(products)
+}
 
   return (
     <div className='top'>
