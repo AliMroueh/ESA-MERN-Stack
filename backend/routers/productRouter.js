@@ -18,7 +18,7 @@ const __dirname = path.dirname(__filename);
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(path.dirname(__dirname), "uploads"));
-        
+
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
@@ -30,9 +30,15 @@ var upload = multer({
 
 
 // insert an product into data base
+<<<<<<< HEAD
 productRouter.post("/addproduct", upload, (req, res) => {
 //  console.log(req.body)
 //  console.log(req.files)
+=======
+router.post("/addproduct", upload, (req, res) => {
+    console.log(req.body)
+    console.log(req.files)
+>>>>>>> 551703d32fbdda600784a6d9fce99b2b6a740428
     const { color } = req.body;
 
     let imageColor = [];
@@ -174,10 +180,7 @@ productRouter.get('/edit/:id', (req, res) => {
 
             } else {
                 res.send(products)
-                // res.render("edit_users", {
-                //     title: "edit product",
-                //     products: products,
-                // });
+
             }
         }
     });
@@ -187,20 +190,37 @@ productRouter.get('/edit/:id', (req, res) => {
 
 // //update product route
 
+<<<<<<< HEAD
 productRouter.put('/update/:id', (req, res) => {
+=======
+router.put('/update/:id', upload, (req, res) => {
+>>>>>>> 551703d32fbdda600784a6d9fce99b2b6a740428
     let id = req.params.id;
-    let new_image = '';
+    const { color } = req.body;
 
-    if (req.file) {
-        new_image = req.file.filename;
-        try {
-            fs.unlinkSync("../uploads/" + req.body.old_image);
-        } catch (err) {
-            console.log(err);
-        }
-    } else {
-        new_image = req.body.old_image;
+    let imageColor = [];
+
+    if (req.files.length > 0) {
+        imageColor = req.files.map((file, i) => {
+            return { image: file.filename, color: color[i] }
+        })
     }
+
+    // if (req.files) {
+    //     imageColor = req.files.filename;
+    //     try {
+    //         for (i = 0; i < image.length; i++) {
+    //             fs.unlinkSync("../uploads/" + req.body.old_image);
+    //         }
+    //     } catch (error) {
+    //         console.log(err);
+    //     }
+
+    // } else {
+    //     imageColor = req.body.old_image;
+    // }
+
+
 
     Product.findByIdAndUpdate(id, {
         name: req.body.name,
@@ -208,7 +228,7 @@ productRouter.put('/update/:id', (req, res) => {
         price: req.body.price,
         description: req.body.description,
         countInStock: req.body.countInStock,
-        image: new_image,
+        imageColor
     }, (err, result) => {
         if (err) {
             res.json({ message: err.message, type: 'danger' });
@@ -219,13 +239,9 @@ productRouter.put('/update/:id', (req, res) => {
                 price: req.body.price,
                 description: req.body.description,
                 countInStock: req.body.countInStock,
-                image: new_image,
+                imageColor
             })
-            // req.session.message = {
-            //     type: 'success',
-            //     message: 'product updated successfuly'
-            // };
-            // res.redirect('/');
+
         }
     });
 

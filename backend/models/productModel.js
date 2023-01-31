@@ -3,18 +3,29 @@ import uniqueArrayPlugin from 'mongoose-unique-array'
 
 const imageColor = new mongoose.Schema(
     {
-            image: { type: String, required: true, unique: true },
-            color: { type: String, required: true, unique: true }
+        image: { type: String, required: true, unique: true },
+        color: { type: String, required: true, unique: true }
     },
     {
-      timestamps: true,
+        timestamps: true,
     }
-  );
+);
 imageColor.plugin(uniqueArrayPlugin);
 const productSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    // category: {
+    //     type: String,
+    //     required: true,
 
-    // rating:{type:Number,min:0,max:5},
-
+    // },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Category'
+    },
 
     imageColor: [imageColor],
     brand: {
