@@ -6,6 +6,7 @@ import { userDeleteReducer, userDetailsReducer, userGetAllReducer, userRegisterR
 
 import { productListReducer, productDetailsReducer, productDeleteReducer, productId, productUpdateReducer, productCategoryListReducer } from "./reducers/productReducers";
 import { userRefreshReducer } from "./reducers/refreshReducers";
+import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
 
 
 
