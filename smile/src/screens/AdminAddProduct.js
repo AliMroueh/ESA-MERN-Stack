@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { addCategory, getallCategoriesAction, deleteCategoryAction } from '../actions/categoryActions';
 import { listProductDetails } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminAddProduct() {
 
+
+  // get category
+
+  const getallCategories = useSelector((state) => state.getallCategories);
+
+  const { loading: loadingGat, error: errorGat, categories } = getallCategories;
+
+
+
+
+
+
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+  const [start, setStart] = useState(false);
 
 
   const [image, setImage] = useState('');
@@ -38,18 +55,7 @@ export default function AdminAddProduct() {
       }
     }
 
-    // if (image.length > 0 || color.length > 0) {
-    //   for (let i = 0; i < image.length; i++) {
-    //     for (let j = 0; j < color.length; j++) {
-    //       const newColorArray = [];
-    //       newColorArray.push(color[i].name)
-    //       setcolorName(colorName => [...colorName, ...newColorArray])
-    //     }
-    //     const newArray = [];
-    //     newArray.push(image[i].name)
-    //     setimageName(imageName => [...imageName, ...newArray])
-    //   }
-    // }
+
 
 
 
@@ -61,41 +67,39 @@ export default function AdminAddProduct() {
     console.log(name, category, brand, price, countInStock, description, image)
 
     navigate('/')
-    const formData = new FormData()
-    for (let i = 0; i < image.length; i++) {
-      console.log(image[i])
-      formData.append("image", image[i])
+
+
+    if (name === "" || brand === "" || description === "" || price === "" || countInStock === "" || category === "") {
+
+      setStart(true)
+    } else {
+
+
+      const formData = new FormData()
+      for (let i = 0; i < image.length; i++) {
+        console.log(image[i])
+        formData.append("image", image[i])
+      }
+
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("brand", brand);
+      formData.append("price", price);
+      formData.append("countInStock", countInStock);
+      formData.append("description", description);
+      color.map(col => formData.append("color", col));
+
+      console.log(formData);
+      console.log({ name, category, brand, price, countInStock, description })
+
+      dispatch(listProductDetails(formData))
+      // navigate('/products')
+
     }
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("brand", brand);
-    formData.append("price", price);
-    formData.append("countInStock", countInStock);
-    formData.append("description", description);
-    color.map(col => formData.append("color", col));
-
-    console.log(formData);
-    console.log({ name, category, brand, price, countInStock, description })
-
-    dispatch(listProductDetails(formData))
-
   }
 
 
-  // const imageHandler = () => {
-  // }
 
-
-  // const submit = async event => {
-  //   event.preventDefault()
-
-  //   const formData = new FormData()
-  //   formData.append("image", file)
-  //   formData.append("description", description)
-
-  //   const result = await axios.post('/api/images', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-  //   console.log(result.data)
-  // }
 
   return (
     <div className='top'>
@@ -107,6 +111,9 @@ export default function AdminAddProduct() {
           <img src="images/product-quality-animate.svg" alt="categories" />
         </div>
         <div className='addCat'>
+          {start &&
+            <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A NAME and Brand and All...</div>}
+
           <div className='input_style'>
             <input
               type="text"
@@ -171,9 +178,10 @@ export default function AdminAddProduct() {
               <button onClick={insertHandler}>Add Product</button>
             </div>
           </div>
-
         </div>
+
       </div>
+
       {open &&
         <div className='img_color_Add'>
           <div className='add_items'>
@@ -226,6 +234,8 @@ export default function AdminAddProduct() {
           </div>
         </div>
       }
+
     </div>
+
   )
 }

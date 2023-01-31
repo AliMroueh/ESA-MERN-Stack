@@ -7,7 +7,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { isAdmin } from "../utils.js";
 import passport from 'passport';
-
+import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
 const router = express.Router();
 
 //image upload
@@ -30,7 +30,7 @@ var upload = multer({
 
 
 // insert an product into data base
-router.post("/addproduct", upload, (req, res) => {
+router.post("/addproduct", validateProductRequest, isRequestValidated, upload, (req, res) => {
     console.log(req.body)
     console.log(req.files)
     const { color } = req.body;
@@ -67,7 +67,7 @@ router.post("/addproduct", upload, (req, res) => {
 });
 
 // get all product route
-router.get('/',(req, res) => {
+router.get('/', (req, res) => {
     Product.find().exec((err, products) => {
         if (err) {
             res.json({ message: err.message });
