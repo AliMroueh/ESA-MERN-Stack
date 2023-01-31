@@ -14,7 +14,7 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState(['grey','blue','red']);
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
@@ -60,7 +60,7 @@ export default function AdminAddProduct() {
 
     console.log(name, category, brand, price, countInStock, description, image)
 
-    navigate('/')
+    // navigate('/')
     const formData = new FormData()
     for (let i = 0; i < image.length; i++) {
       console.log(image[i])
@@ -78,8 +78,14 @@ export default function AdminAddProduct() {
     console.log({ name, category, brand, price, countInStock, description })
 
     dispatch(listProductDetails(formData))
+    if(!loading && error){
+      console.log(error)
+    }else{
+      navigate('/products')
+    }
 
   }
+
 
 
   // const imageHandler = () => {
@@ -208,8 +214,8 @@ export default function AdminAddProduct() {
                     <div key={index}>
                       <p>{row}</p>
                       <div>
-                        <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
-                        <h4>{color}</h4>
+                        {/* <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input> */}
+                        {/* <h4>{color}</h4> */}
                       </div>
                       {/* <div>
                           <label htmlFor='color'>nnnn</label>
