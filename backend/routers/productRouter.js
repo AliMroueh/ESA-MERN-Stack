@@ -5,6 +5,9 @@ import multer from 'multer';
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
+import { isAdmin } from "../utils.js";
+import passport from 'passport';
+
 const router = express.Router();
 
 //image upload
@@ -64,7 +67,7 @@ router.post("/addproduct", upload, (req, res) => {
 });
 
 // get all product route
-router.get('/', (req, res) => {
+router.get('/',(req, res) => {
     Product.find().exec((err, products) => {
         if (err) {
             res.json({ message: err.message });

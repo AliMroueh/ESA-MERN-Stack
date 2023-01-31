@@ -174,7 +174,6 @@ export default function AdminAddProduct() {
 
         </div>
       </div>
-
       {open &&
         <div className='img_color_Add'>
           <div className='add_items'>
@@ -193,7 +192,6 @@ export default function AdminAddProduct() {
                   multiple
                   onChange={e => setImage(e.target.files)}
                 ></input>
-
 
 
                 <label id='img' htmlFor='file'>

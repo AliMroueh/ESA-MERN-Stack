@@ -18,16 +18,35 @@ import AdminAddCategory from "./screens/AdminAddCategory";
 import AdminUpdateCategory from "./screens/AdminUpdateCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
 import CartItemScreen from "./screens/CartItemScreen";
+import { useEffect } from "react";
+import { renewRefreshToken } from "./actions/refreshTokenAction";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingBox from "./components/LoadingBox";
+import SearchScreen from "./screens/SearchScreen";
 
 function App() {
 
+  const userRefresh = useSelector(state => state.userRefresh);
+  const {
+    loading,
+    refreshTheToken,
+    error
+  } = userRefresh;
+
+  const dispatch = useDispatch();
+  useEffect(()=> {
+    dispatch(renewRefreshToken())
+  },[dispatch])
+
   return (
-    <BrowserRouter>
-      <Header />
+
+      <BrowserRouter>
+      <Header/>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/signin" element={<SigninScreen />}></Route>
-        <Route path="/register" element={<RegisterScreen />}></Route>
+        <Route path="/signin" element = {<SigninScreen />}></Route>
+        <Route path="/register" element = {<RegisterScreen />}></Route>
+
         <Route
           path="/profile"
           element={<ProfileScreen />}
@@ -36,41 +55,82 @@ function App() {
           path="/cartItem"
           element={<CartItemScreen />}
         />
-        <Route
+
+          <Route
           path="/dashboard"
           element={<AdminRoute>
-            <AdminDashboard />
+          <AdminDashboard />
           </AdminRoute>
-          }
+        }
         />
-        <Route
+          <Route
           path="/users"
           element={<AdminRoute>
-            <AdminUsers />
+          <AdminUsers />
           </AdminRoute>
-          }
+        }
+
         />
         <Route
           path="/products"
           element={<AdminRoute>
-            <AdminProducts />
+          <AdminProducts />
           </AdminRoute>
-          }
+        }
         />
         <Route
           path="/categories"
           element={<AdminRoute>
-            <AdminCategories />
+          <AdminCategories />
           </AdminRoute>
-          }
+        }
         />
+        
         <Route
           path="/addcategory"
           element={<AdminRoute>
-            <AdminAddCategory />
+          <AdminAddCategory />
           </AdminRoute>
-          }
+        }
         />
+        <Route
+          path="/addproduct"
+          element={<AdminRoute>
+          <AdminAddProduct />
+          </AdminRoute>
+        }
+        />
+        <Route
+          path="/orders"
+          element={<AdminRoute>
+          <AdminOrders />
+          </AdminRoute>
+        }
+        />
+                <Route
+        // I think ? after :name has no sense
+            path="/search/name/:name"
+            element={<SearchScreen />}
+            exact
+        ></Route>
+        <Route
+            path="/search/category/:category"
+            element={<SearchScreen />}
+            exact
+        ></Route>
+        <Route
+            path="/search/category/:category/name/:name"
+            element={<SearchScreen />}
+            exact
+        ></Route>
+        <Route
+            // path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
+            element={<SearchScreen />}
+            exact
+          ></Route>
+        <Route path='*' element={<NotFoundScreen />}/>
+
         <Route
           path="/updatecategory/:id"
           element={<AdminRoute>
@@ -79,23 +139,8 @@ function App() {
           }
         />
 
-        <Route
-          path="/addproduct"
-          element={<AdminRoute>
-            <AdminAddProduct />
-          </AdminRoute>
-          }
-        />
-
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
 
-        <Route
-          path="/orders"
-          element={<AdminRoute>
-            <AdminOrders />
-          </AdminRoute>
-          }
-        />
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />

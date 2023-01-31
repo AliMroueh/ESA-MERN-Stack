@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react'
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser, getAllUser } from '../actions/userActions';
+import { useNavigate } from 'react-router-dom';
+import { refreshthetok, renewRefreshToken } from '../actions/refreshTokenAction';
+import { deleteUser, getAllUser, signout } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function AdminUsers() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [name, setName] = useState('')
 
   const userGetAll = useSelector(state => state.userGetAll);
   const {loading, user, error} = userGetAll;
@@ -18,20 +23,71 @@ export default function AdminUsers() {
     error : errorDelete
   } = userDelete;
 
+  const userRefresh = useSelector(state => state.userRefresh);
+  const {
+    loading: loadingRefresh,
+    refreshTheToken,
+    error: errorRefresh
+  } = userRefresh;
+
   useEffect(() => {
-    dispatch(getAllUser())
-    // console.log(user.length)
+    dispatch(getAllUser())    
   }, [dispatch,successDelete]);
 
+  // useEffect(() => {
+  //   const rf = setInterval(() => 
+  //     dispatch(renewRefreshToken()),1000 * 9
+  //   )
+  //   return () => clearInterval(rf)
+  // })
+
+  // if(!loadingRefresh){
+  //   console.log(refreshTheToken.token)
+  //   }
   
   const deleteHandler = (id)=>{
     if (window.confirm('Are you sure?')) {
       dispatch(deleteUser(id))
     }
   };
-
+  let item = {
+    imgColor:[{
+      img: "imaginaBluey",
+      color: 'blue'
+    },
+    {
+      img: "imaginaRedy",
+      color: 'red'
+    },
+    {
+      img: "imaginaWhity",
+      color: 'white'
+    }]
+  }
+  let the = "white"
+  const refreshtheToken = async() => {
+    // dispatch(renewRefreshToken())
+    // console.log(item.imgColor.find(it => it.color === the).img)
+    // return () => clearInterval(rf)
+  }
+  // if(error == 401){
+  //   dispatch(renewRefreshToken())
+  //   if(!loadingRefresh){
+  //     window.location.reload()
+  //   }
+  //   // dispatch(getAllUser())
+  //   // 
+  // }
+ console.log(error)
+ console.log(errorRefresh)
+//  if(errorRefresh == 'Forbidden'){
+//   dispatch(signout());
+//   navigate('/signin');
+//  }
   return (
     <div className='top'>
+      <button onClick={refreshtheToken}>refresh</button>
+      <input onChange={(e) => setName(e.target.value)} type="text"/>
       <div className='row adminTop'>
           <h1 className='adminTitle'>Users</h1>
       </div>
@@ -40,7 +96,10 @@ export default function AdminUsers() {
       {successDelete && (
         <MessageBox variant="success">User Deleted Successfully</MessageBox>
       )}
-      {loading ? <LoadingBox></LoadingBox>
+      {
+      // loadingRefresh ? <LoadingBox></LoadingBox>
+      // :
+      loading ? <LoadingBox></LoadingBox>
       : error ? <MessageBox variant="danger">{error}</MessageBox> 
     :
     user.length === 0 ? 

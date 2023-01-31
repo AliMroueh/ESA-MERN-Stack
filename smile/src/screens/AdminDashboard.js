@@ -43,7 +43,7 @@ export default function AdminDashboard() {
             <li>
               <div className="summary-title color3">
                 <span>
-                <i class="fa-solid fa-sack-dollar"></i> Sales
+                <i className="fa-solid fa-sack-dollar"></i> Sales
                 </span>
               </div>
               <div className="summary-body">
