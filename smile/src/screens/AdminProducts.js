@@ -15,25 +15,13 @@ export default function AdminProducts() {
   const productDelete = useSelector((state) => state.productDelete)
   const { loading: loadingDel, success, error: errorDel } = productDelete;
   const {
-    name = 'all',
-    category = 'all',
-    min = 0,
-    max = 0,
-    rating = 0,
-    order = 'newest',
     pageNumber = 1,
   } = useParams();
 
   useEffect(() => {
 
     dispatch(listProducts({
-      pageNumber,
-      name: name !== 'all' ? name : '',
-      category: category !== 'all' ? category : '',
-      min,
-      max,
-      rating,
-      order,
+      pageNumber
     }))
     // console.log(products)
   }, [dispatch, success])
@@ -67,7 +55,7 @@ if(!loading){
       {loading ?
         <div>loading...</div>
         :
-        products.map((row, index) =>
+      
           <table className="table">
             <thead>
               <tr>
@@ -81,6 +69,7 @@ if(!loading){
               </tr>
             </thead>
             <tbody>
+            {products.map((row, index) =>
               <tr>
                 <td>{row._id}</td>
                 <td>{row.name}</td>
@@ -100,10 +89,10 @@ if(!loading){
                   </button>
                 </td>
               </tr>
-
+              )}
             </tbody>
           </table>
-        )}
+        }
     </div>
   )
 }

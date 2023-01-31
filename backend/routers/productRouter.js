@@ -259,14 +259,14 @@ productRouter.put('/update/:id', (req, res) => {
 productRouter.delete('/delete/:id', (req, res) => {
     let id = req.params.id;
     Product.findByIdAndRemove(id, (err, result) => {
-        if (result.image != '') {
-            try {
-                fs.unlinkSync('../uploads/' + result.image);
+        // if (result.image != '') {
+        //     try {
+        //         fs.unlinkSync('../uploads/' + result.image);
 
-            } catch (err) {
-                console.log(err);
-            }
-        }
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        // }
         if (err) {
             res.json({ message: err.message });
         } else {
