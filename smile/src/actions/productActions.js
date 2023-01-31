@@ -28,7 +28,7 @@ import {
 } from '../constants/productConstants'
 
 export const listProducts = ({
-    pageNumber = '',
+    pageNumber = '1',
     seller = '',
     name = '',
     category = '',
