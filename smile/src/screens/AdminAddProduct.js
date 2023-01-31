@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import axios from 'axios';
 
 export default function AdminAddProduct() {
 
@@ -155,7 +154,7 @@ export default function AdminAddProduct() {
 
           </div>
         </div>
-      </div>
+      
       {open &&
         <div className='img_color_Add'>
           <div className='add_items'>
@@ -172,12 +171,12 @@ export default function AdminAddProduct() {
                   alt='category image'
                   accept="image/*"
                   multiple
-                  ></input>
+                  onChange={e => setImage(e.target.files)}
+                ></input>
+
                   <label id='img' htmlFor='file'>
                     Choose Images
                   </label>
-                  onChange={e => setImage(e.target.files)}
-                ></input>
 
                 {/* <input
                   filename={file}

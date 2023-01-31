@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { isAdmin } from "../utils.js";
 import passport from 'passport';
+
 const router = express.Router();
 
 //image upload
@@ -27,8 +28,6 @@ var upload = multer({
     storage: storage,
 }).array('image');
 
-
-const router = express.Router();
 
 // insert an product into data base
 router.post("/addproduct", upload, (req, res) => {
