@@ -9,6 +9,7 @@ import productRouter from './routers/productRouter.js';
 import categoryRouter from './routers/categoryRouter.js';
 import { applyPassportStrategy } from './utils.js';
 import passport from 'passport';
+import refreshTokenRouter from './routers/refreshTokenRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -30,7 +31,7 @@ applyPassportStrategy(passport);
 
 // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
 // mongodb://localhost/smile 
-mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority',{
+mongoose.connect('mongodb://localhost/smile',{
     useNewUrlParser: true, 
     useUnifiedTopology: true
 })
@@ -41,6 +42,7 @@ app.use('/api/users',userRouter);
 
 app.use('/api/products',productRouter);
 app.use('/api/categories',categoryRouter);
+app.use('/api/refresh',refreshTokenRouter);
 
 
 app.get('/api/products', (req, res) => {

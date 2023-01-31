@@ -14,11 +14,24 @@ export const generateToken = user => {
     },
     process.env.JWT_SECRET || 'somethingsecret',
     {
-        expiresIn: '30d',
+        expiresIn: '1m',
     }
     );
 }
 
+export const refreshToken = user => {
+    return jwt.sign(
+   { 
+       _id: user._id,
+       name: user.name,
+       email: user.email,
+       isAdmin: user.isAdmin, 
+   },
+   process.env.REFRESH_TOKEN_SECRET || 'secret',
+   { 
+       expiresIn: '30s'
+   }
+)}
 
 // isAuth is a middleware to authenicate user
 // export const isAuth = (req, res, next) => {
@@ -65,7 +78,9 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     // jwt_payload is the data that we create when create the token
     User.findOne({_id: jwt_payload._id}, function(err, user) {
         if (err) {
+            console.log(err)
             return done(err, false);
+            // return done.send(status)
         }
         if (user) {
             return done(null, user);

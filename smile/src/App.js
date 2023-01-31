@@ -15,77 +15,120 @@ import AdminUsers from "./screens/AdminUsers";
 import AdminAddCategory from "./screens/AdminAddCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
 import CartItemScreen from "./screens/CartItemScreen";
+import { useEffect } from "react";
+import { renewRefreshToken } from "./actions/refreshTokenAction";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingBox from "./components/LoadingBox";
+import SearchScreen from "./screens/SearchScreen";
 
 function App() {
 
+  const userRefresh = useSelector(state => state.userRefresh);
+  const {
+    loading,
+    refreshTheToken,
+    error
+  } = userRefresh;
+
+  const dispatch = useDispatch();
+  useEffect(()=> {
+    dispatch(renewRefreshToken())
+  },[dispatch])
+
   return (
+
       <BrowserRouter>
-          <Header/>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/signin" element = {<SigninScreen />}></Route>
-            <Route path="/register" element = {<RegisterScreen />}></Route>
-            <Route
-              path="/profile"
-              element={<ProfileScreen />}
-            />
-            <Route
-              path="/cartItem"
-              element={<CartItemScreen />}
-            />
-              <Route
-              path="/dashboard"
-              element={<AdminRoute>
-              <AdminDashboard />
-              </AdminRoute>
-            }
-            />
-              <Route
-              path="/users"
-              element={<AdminRoute>
-              <AdminUsers />
-              </AdminRoute>
-            }
-            />
-            <Route
-              path="/products"
-              element={<AdminRoute>
-              <AdminProducts />
-              </AdminRoute>
-            }
-            />
-            <Route
-              path="/categories"
-              element={<AdminRoute>
-              <AdminCategories />
-              </AdminRoute>
-            }
-            />
-            <Route
-              path="/addcategory"
-              element={<AdminRoute>
-              <AdminAddCategory />
-              </AdminRoute>
-            }
-            />
-            <Route
-              path="/addproduct"
-              element={<AdminRoute>
-              <AdminAddProduct />
-              </AdminRoute>
-            }
-            />
-            <Route
-              path="/orders"
-              element={<AdminRoute>
-              <AdminOrders />
-              </AdminRoute>
-            }
-            />
-            <Route path='*' element={<NotFoundScreen />}/>
-          </Routes>
-          <Footer/>
-      </BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/signin" element = {<SigninScreen />}></Route>
+        <Route path="/register" element = {<RegisterScreen />}></Route>
+        <Route
+          path="/profile"
+          element={<ProfileScreen />}
+        />
+        <Route
+          path="/cartItem"
+          element={<CartItemScreen />}
+        />
+          <Route
+          path="/dashboard"
+          element={<AdminRoute>
+          <AdminDashboard />
+          </AdminRoute>
+        }
+        />
+          <Route
+          path="/users"
+          element={<AdminRoute>
+          <AdminUsers />
+          </AdminRoute>
+        }
+        />
+        <Route
+          path="/products"
+          element={<AdminRoute>
+          <AdminProducts />
+          </AdminRoute>
+        }
+        />
+        <Route
+          path="/categories"
+          element={<AdminRoute>
+          <AdminCategories />
+          </AdminRoute>
+        }
+        />
+        <Route
+          path="/addcategory"
+          element={<AdminRoute>
+          <AdminAddCategory />
+          </AdminRoute>
+        }
+        />
+        <Route
+          path="/addproduct"
+          element={<AdminRoute>
+          <AdminAddProduct />
+          </AdminRoute>
+        }
+        />
+        <Route
+          path="/orders"
+          element={<AdminRoute>
+          <AdminOrders />
+          </AdminRoute>
+        }
+        />
+                <Route
+        // I think ? after :name has no sense
+            path="/search/name/:name"
+            element={<SearchScreen />}
+            exact
+        ></Route>
+        <Route
+            path="/search/category/:category"
+            element={<SearchScreen />}
+            exact
+        ></Route>
+        <Route
+            path="/search/category/:category/name/:name"
+            element={<SearchScreen />}
+            exact
+        ></Route>
+        <Route
+            // path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
+            element={<SearchScreen />}
+            exact
+          ></Route>
+        <Route path='*' element={<NotFoundScreen />}/>
+      </Routes>
+      <Footer/>
+    
+  </BrowserRouter>
+
+
 
   );
 }
