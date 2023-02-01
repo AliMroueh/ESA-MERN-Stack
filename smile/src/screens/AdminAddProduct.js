@@ -14,13 +14,6 @@ export default function AdminAddProduct() {
   const { loading: loadingGat, error: errorGat, categories } = getallCategories;
 
 
-
-
-
-
-
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -98,10 +91,7 @@ export default function AdminAddProduct() {
       // navigate('/products')
 
     }
-  }
-
-
-
+  
 
   return (
     <div className='top'>
