@@ -5,7 +5,10 @@ import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SigninScreen from "./screens/SigninScreen";
 import Header from "./common/Header/Header"; 
-import Footer from './common/footer/Footer'
+import Footer from './common/footer/Footer';
+import Items from "./screens/Items";
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +22,7 @@ function App() {
            path="/profile"
            element={<ProfileScreen />}
          />
+         <Route path="/Items" element = {<Items/>}></Route>
          <Route path='*' element={<NotFoundScreen />}/>
       </Routes>
      <Footer/>
