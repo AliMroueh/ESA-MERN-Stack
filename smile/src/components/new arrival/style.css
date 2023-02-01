@@ -1,0 +1,55 @@
+.TopCate {
+    position: relative;
+  }
+   .img5 {
+    width: 95%;
+    height: 50%;
+    border-radius: 5px;
+    padding-left: 40px;
+  }
+  .TopCate .nametop {
+    position: relative;
+    width: 100%;
+    margin-left: 38px;
+  }
+  .TopCate .nametop span {
+    background: #0f3460;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 50px;
+    margin: 5px;
+    position: absolute;
+    top: 10px;
+    margin-right: 110px;
+  }
+  .TopCate .nametop .tleft {
+    left: 0;
+  }
+  .TopCate .nametop .tright {
+    background-color: #0f3460;
+    color: white;
+    position: absolute;
+    font-size: 22px;
+    right: 0;
+  }
+
+  .title4{
+    font-size:40px;
+    font-weight: 500;
+    color:black;
+  
+  }
+  .title3{
+   font-size:25px;
+   font-weight: 500;
+   color:black
+  }
+  .container4{
+    padding-left: 33px;
+  }
+  .heading-left{
+    display: flex;
+    
+  }
