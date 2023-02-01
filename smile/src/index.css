@@ -623,9 +623,7 @@ a:hover{
 .top{
   padding: 0 50px;
 }
-.adminTop{
-  /* padding: 0 50px; */
-}
+
 .adminTitle{
   color: var(--secondary-color);
   font-size: 4rem;
