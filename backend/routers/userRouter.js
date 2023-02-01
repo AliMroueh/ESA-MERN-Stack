@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import { generateToken } from '../utils.js';
+import { generateToken, isAdmin, refreshToken } from '../utils.js';
+import passport from 'passport';
 
 // express.Router is a function that make our code modular instead of having all routes in server.js, we can define multiple files to have our routers 
 const userRouter = express.Router();
@@ -42,12 +43,14 @@ expressAsyncHandler(async(req,res) => {
     const user = await User.findOne({email : req.body.email});
     if(user){
         if(bcrypt.compareSync(req.body.password, user.password)){
+            const refresh = refreshToken(user);
             res.send({
                 _id : user._id,
                 name : user.name,
                 email : user.email,
                 isAdmin : user.isAdmin,
                 token : generateToken(user),
+                rToken : refresh
             });
             return;
         }
@@ -92,17 +95,20 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
     });
     const createdUser = await user.save();
 
+    const refresh = refreshToken(createdUser);
             res.send({
                 _id : createdUser._id,
                 name : createdUser.name,
                 email : createdUser.email,
                 isAdmin : createdUser.isAdmin,
                 token : generateToken(createdUser),
+                rToken : refresh
             });
         })
 )
 
 userRouter.get('/:id',
+
 expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if(user){
@@ -138,8 +144,12 @@ expressAsyncHandler(async(req,res) => {
         res.status(401).send({message: "unKnown id"});
     }
 }))
-userRouter.delete('/:id',expressAsyncHandler(async(req,res)=>{
-   
+
+userRouter.delete('/:id',
+passport.authenticate('jwt', { session: false }),
+isAdmin(),
+expressAsyncHandler(async(req,res)=>{
+
     const id = req.params.id;
 
     await User.findByIdAndDelete(id)
@@ -162,13 +172,19 @@ userRouter.delete('/:id',expressAsyncHandler(async(req,res)=>{
 
 
 //get data
-userRouter.get('/',expressAsyncHandler(async( req ,res)=>{
+
+userRouter.get('/',
+passport.authenticate('jwt', { session: false }),
+isAdmin(),
+expressAsyncHandler(async( req ,res)=>{
     try{
-     const users = await User.find();
+     const users = await User.find({'isAdmin':false});
+
      res.status(200).send(users);
     }
     catch(err){
      res.status(500).send(err);
     };
  }));
+
 export default userRouter;

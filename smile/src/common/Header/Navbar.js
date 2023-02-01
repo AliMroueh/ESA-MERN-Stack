@@ -6,7 +6,8 @@ const Navbar = () => {
   const [MobileMenu, setMobileMenu] = useState(false)
   return (
     <>
-      <header className='header'>
+
+      <div className='header'>
         <div className='containerr d_flex'>
           <div className='catgrories d_flex'>
             
@@ -18,7 +19,7 @@ const Navbar = () => {
           <div className='navlink'>
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
               <li>
-                <Link to='/home'>home</Link>
+                <Link to='/'>home</Link>
               </li>
               <li>
                 <Link to='/pages'>pages</Link>
@@ -42,7 +43,8 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </header>
+      </div>
+
     </>
   )
 }
