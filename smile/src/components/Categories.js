@@ -7,7 +7,6 @@ const Categories = () => {
             cateName:'Fashion'
         },
         {
-
             cateName:'Electronic'
         },
         {
