@@ -98,8 +98,7 @@ export default function AdminAddProduct() {
       // navigate('/products')
 
     }
-  }
-
+  
 
 
 
