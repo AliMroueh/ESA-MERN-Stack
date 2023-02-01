@@ -2,8 +2,19 @@ import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import data from './data.js';
 import userRouter from './routers/userRouter.js';
+import path from "path";
+import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import productRouter from './routers/productRouter.js';
+import categoryRouter from './routers/categoryRouter.js';
+import { applyPassportStrategy } from './utils.js';
+import passport from 'passport';
+import refreshTokenRouter from './routers/refreshTokenRouter.js';
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
 // to read the content of env
 dotenv.config();
 
@@ -12,22 +23,43 @@ const app = express();
 // these two middleware will transfer the data to req.body in the app
 // a middleware that parse json data in the body of the request
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
+app.use("/public", express.static(path.join(__dirname, "uploads")));
+app.use(passport.initialize());
+// Apply strategy to passport
+applyPassportStrategy(passport);
 
 
-mongoose.connect('mongodb://localhost/smile',{
-    useNewUrlParser: true, 
+mongoose.set('strictQuery', true)
+// mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
+
+// mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
+// mongodb://localhost/smile 
+
+// mongoose.connect('mongodb://localhost/smile',{
+//     useNewUrlParser: true, 
+//     useUnifiedTopology: true
+// })
+
+
+mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(db => console.log('DB is connected'))
-.catch(err => console.log(err));
 
-app.use('/api/users',userRouter);
-// app.use('/api/products',productRouter);
+    .then(db => console.log('DB is connected'))
+    .catch(err => console.log(err));
 
-app.get('/api/products', (req, res) => {
-    res.send(data.products);
-})
+app.use('/api/users', userRouter);
+
+app.use('/api/products', productRouter);
+app.use('/api/categories', categoryRouter);
+app.use('/api/refresh', refreshTokenRouter);
+
+
+// app.get('/api/products', (req, res) => {
+//     res.send(data.products);
+// })
 
 app.get('/', (req, res) => {
     res.send('Server is ready');

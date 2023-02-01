@@ -1,6 +1,6 @@
 
 import React from 'react';
-import categories from './categories';
+import Categories from './Categories';
 
  
  const Bady = () => {
@@ -8,7 +8,7 @@ import categories from './categories';
     <>
     <section className='home'>
         <div className='container d-flex'>
-            <categories/>
+            <Categories/>
         </div>
     </section>
     </>
