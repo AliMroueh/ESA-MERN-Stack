@@ -98,9 +98,6 @@ export default function AdminAddProduct() {
       // navigate('/products')
 
     }
-  
-
-
 
   return (
     <div className='top'>
