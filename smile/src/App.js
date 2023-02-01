@@ -27,12 +27,8 @@ import Items from './screens/Items';
 
 function App() {
 
-  const userRefresh = useSelector(state => state.userRefresh);
-  const {
-    loading,
-    refreshTheToken,
-    error
-  } = userRefresh;
+  const userSignin = useSelector((state) => state.userSignin);
+  const {loading,userInfo,error} = userSignin;
 
   const dispatch = useDispatch();
   useEffect(()=> {
@@ -42,6 +38,7 @@ function App() {
   return (
 
       <BrowserRouter>
+      
       <Header/>
       <Routes>
         <Route index element={<Home />} />
