@@ -1,4 +1,4 @@
-
+/* eslint-disable no-unused-vars */
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import NotFoundScreen from "./screens/NotFoundScreen";
@@ -23,6 +23,7 @@ import { renewRefreshToken } from "./actions/refreshTokenAction";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
+import Items from './screens/Items';
 
 function App() {
 
@@ -45,9 +46,11 @@ function App() {
         <Route path="/register" element = {<RegisterScreen />}></Route>
 
         <Route
-          path="/profile"
-          element={<ProfileScreen />}
-        />
+           path="/profile"
+           element={<ProfileScreen />}
+         />
+         <Route path="/Items" element = {<Items/>}></Route>
+    
         <Route
           path="/cartItem"
           element={<CartItemScreen />}

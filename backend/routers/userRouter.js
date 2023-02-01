@@ -149,7 +149,7 @@ userRouter.delete('/:id',
 passport.authenticate('jwt', { session: false }),
 isAdmin(),
 expressAsyncHandler(async(req,res)=>{
-   
+
     const id = req.params.id;
 
     await User.findByIdAndDelete(id)
@@ -172,12 +172,14 @@ expressAsyncHandler(async(req,res)=>{
 
 
 //get data
+
 userRouter.get('/',
 passport.authenticate('jwt', { session: false }),
 isAdmin(),
 expressAsyncHandler(async( req ,res)=>{
     try{
      const users = await User.find({'isAdmin':false});
+
      res.status(200).send(users);
     }
     catch(err){

@@ -14,13 +14,6 @@ export default function AdminAddProduct() {
   const { loading: loadingGat, error: errorGat, categories } = getallCategories;
 
 
-
-
-
-
-
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
