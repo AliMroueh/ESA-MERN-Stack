@@ -29,19 +29,28 @@ export default function Home() {
     </div>
   )
 }*/
-import React from 'react'
-import Bady from '../components/mainPage/Bady'
-import FlashDeals from '../components/flashSale/FlashDeals'
-import TopCate from '../components/new arrival/TopCat' 
-import Wrapper from '../components/final/Wrapper'
-//import Picture from '../components/custemer picture/Picture'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Bady from '../components/Bady'
+
+
+
 const Home = () => {
+  const navigate = useNavigate();
+
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
+
+  useEffect(() => {
+    if(userInfo && userInfo.isAdmin){
+        navigate('/dashboard');
+    }
+}, [navigate, userInfo]);
   return (
     <>
+
     <Bady/>
-    <FlashDeals/>
-    <TopCate/>
-    <Wrapper/>
     </>
   )
 }

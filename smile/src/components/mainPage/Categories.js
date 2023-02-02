@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Categories.css'
 const Categories = () => {
  
     const dataCat = [
@@ -21,11 +21,11 @@ const Categories = () => {
         },
         {
             cateIcons:'images/icons8-house-64.png',
-            cateName:'Home & Garden'
+            cateName:'Home '
         },
         {
             cateIcons:'images/icons8-lip-gloss-50.png',
-            cateName:'Health & Beauty'
+            cateName:'Beauty'
         },
     ]
   return (
@@ -33,8 +33,8 @@ const Categories = () => {
     <div>
         {dataCat.map((value, index)=>{
             return(
-                <div className='box f-flex' key={index}>
-                    <img src={value.cateIcons} alt=''></img>
+                <div className='box ' key={index}>
+                    <img src={value.cateIcons} alt='' className='cateIcons'></img>
                     <span>{value.cateName}</span>
                 </div>
             )
