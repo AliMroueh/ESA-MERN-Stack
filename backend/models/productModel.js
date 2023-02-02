@@ -7,7 +7,7 @@ const imageColor = new mongoose.Schema(
         color: { type: String, required: true }
     }
 );
-imageColor.plugin(uniqueArrayPlugin);
+// imageColor.plugin(uniqueArrayPlugin);
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     category: { type: String, required: true },
