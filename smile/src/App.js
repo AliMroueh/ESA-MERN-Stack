@@ -23,6 +23,7 @@ import { renewRefreshToken } from "./actions/refreshTokenAction";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
+import Items from "./screens/Items";
 
 function App() {
 
@@ -129,6 +130,7 @@ function App() {
             element={<SearchScreen />}
             exact
           ></Route>
+          <Route path='/Items' element={<Items/>}/>
         <Route path='*' element={<NotFoundScreen />}/>
 
         <Route
