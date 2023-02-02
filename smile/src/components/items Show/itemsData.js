@@ -1,7 +1,6 @@
 const items=[
     {
         colors:['blue','black'],
-        _id:'1',
         brand:'GUCCI',
         price:'200$',
         countInStock:8,

@@ -1,13 +1,29 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import React ,{ useState } from 'react'
 import items from './itemsData'
 import './show.css'
+
 
 const show = (props) => {
   
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open,setOpen] = useState(false);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+   
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const params = useParams();
+    const {id:productId} = params;
+
+    const cartHandler = () => {
+        navigate(`/cart/${productId}?quantity=${quantity}`);
+      } 
+      function likeHandler() {
+        navigate("/like");
+    } 
+
+     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [quantity,setQuantity] = useState(1);
     const [img,setImg]= useState(false);
     const [stock,setStock]= useState(false);
@@ -40,9 +56,8 @@ const show = (props) => {
             return;
           }
     }*/
-    const handelAddToCart = () =>{
 
-    }
+ 
 
     return(
         <>
@@ -81,8 +96,8 @@ const show = (props) => {
                             }
                         </div>
                         <div className='addTo'>
-                            <button className='bag' onClick={ () => handelAddToCart }>Add To Bag</button>
-                            <button className='like'><i class="fa-regular fa-heart"></i>Add To WishList</button>
+                            <button className='bag' onClick={cartHandler}>Add To Bag</button>
+                            <button className='like'  onClick={likeHandler}><i class="fa-regular fa-heart"></i>Add To WishList</button>
                         </div>
                         <div className='description'>
                             {open ? 
