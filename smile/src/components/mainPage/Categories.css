@@ -1,38 +1,46 @@
-.category{
-  padding-top: 40px;
-  margin-right: 30px;
-  width: 800px;
-}
-.box1{
-    justify-content: space-evenly;
-    box-shadow: 5px 5px 5px 0px rgba(0, 0,0, .2);
-    margin-top: 10px;
-    width: 100%;
-    padding: 1px 100px 1px 30px;
-    transition: .2s;
-}
-.box1:hover{
-  transform: translateX(23px);
-}
 .cateIcons{
-  margin-right: 20px;
+    width:40px;
+    height: 40px;
+    color: #1877f2;
 }
-.box1 span{
-    font-size: 22px;
-    margin-top: 15px;
-    text-align: justify;
-    color:#0b4086;
+.box{
+    display: flex;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0,0, .2);
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    height: 10;
 }
-
-.d-block{
-  height: 480px;
-  width:1250px;
-  padding-top: 1px;
- padding-right: 100px;
+.box span{
+    padding-top: 10px;
+    margin-left: 5px;
+    font-size: 19px;
 }
-
-.h2{
-  font-size: 22px;
-  background-color: #1877f2;
-  padding: 5px 20px 5px 20px;
-}
+.homeSlide h1 {
+    font-size: 45px;
+    line-height: 55px;
+    margin: 50px 0 20px 0;
+  }
+  .homeSlide p {
+    margin: 20px 0;
+  }
+  .homeSlide ul {
+    position: absolute;
+    bottom: 20px;
+  }
+  .homeSlide ul li {
+    border: 2px solid #b8b7b7;
+    border-radius: 50%;
+    padding: 10px;
+  }
+  .homeSlide ul li button {
+    background: transparent !important;
+    color: transparent !important;
+  }
+  .homeSlide ul li button::before {
+    font-size: 15px !important;
+    color: #0f3460;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    margin: auto;
+  }

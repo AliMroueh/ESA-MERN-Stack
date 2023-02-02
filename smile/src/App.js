@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import NotFoundScreen from "./screens/NotFoundScreen";
@@ -23,12 +23,15 @@ import { renewRefreshToken } from "./actions/refreshTokenAction";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
-import Items from './screens/Items';
 
 function App() {
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const {loading,userInfo,error} = userSignin;
+  const userRefresh = useSelector(state => state.userRefresh);
+  const {
+    loading,
+    refreshTheToken,
+    error
+  } = userRefresh;
 
   const dispatch = useDispatch();
   useEffect(()=> {
@@ -38,7 +41,6 @@ function App() {
   return (
 
       <BrowserRouter>
-      
       <Header/>
       <Routes>
         <Route index element={<Home />} />
@@ -46,11 +48,9 @@ function App() {
         <Route path="/register" element = {<RegisterScreen />}></Route>
 
         <Route
-           path="/profile"
-           element={<ProfileScreen />}
-         />
-         <Route path="/Items" element = {<Items/>}></Route>
-    
+          path="/profile"
+          element={<ProfileScreen />}
+        />
         <Route
           path="/cartItem"
           element={<CartItemScreen />}
