@@ -42,7 +42,7 @@ mongoose.set('strictQuery', true)
 // })
 
 
-mongoose.connect('mongodb://localhost/smile', {
+mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

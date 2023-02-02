@@ -14,7 +14,7 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(['grey','blue','red']);
+  const [color, setColor] = useState(['grey','yellow','red']);
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
@@ -24,9 +24,6 @@ export default function AdminAddProduct() {
   const { loading, error, products } = productDetails
 
   useEffect(() => {
-
-
-
     setimageName([]);
     document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
@@ -81,7 +78,8 @@ export default function AdminAddProduct() {
     if(!loading && error){
       console.log(error)
     }else{
-      navigate('/products')
+      // navigate('/products')
+      console.log('gooooooooooooooooooooooooood')
     }
 
   }

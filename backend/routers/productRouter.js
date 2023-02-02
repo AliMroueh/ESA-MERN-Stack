@@ -35,7 +35,9 @@ var upload = multer({
 
 // insert an product into data base
 
-productRouter.post("/addproduct", validateProductRequest, isRequestValidated, upload, (req, res) => {
+productRouter.post("/addproduct", 
+// validateProductRequest, isRequestValidated, 
+upload, (req, res) => {
     console.log(req.body)
     console.log(req.files)
 
@@ -49,7 +51,7 @@ productRouter.post("/addproduct", validateProductRequest, isRequestValidated, up
 
     if (req.files.length > 0) {
         imageColor = req.files.map((file, i) => {
-            return { image: file.filename, color: color[i] }
+            return { image: 'http://localhost:5000/public/' + file.filename, color: color[i] }
         })
     }
     const product = new Product({
