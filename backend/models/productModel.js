@@ -3,8 +3,8 @@ import uniqueArrayPlugin from 'mongoose-unique-array'
 
 const imageColor = new mongoose.Schema(
     {
-        image: { type: String, required: true},unique: true,
-        color: { type: String, required: true },unique: true
+        image: { type: String, required: true},
+        color: { type: String, required: true }
     }
 );
 // imageColor.plugin(uniqueArrayPlugin);
