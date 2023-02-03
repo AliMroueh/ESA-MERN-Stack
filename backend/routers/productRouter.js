@@ -38,14 +38,20 @@ var upload = multer({
 productRouter.post("/addproduct", 
 // validateProductRequest, isRequestValidated, 
 upload, (req, res) => {
-    console.log(req.body)
-    console.log(req.files)
+    // console.log(req.body)
+    // console.log(req.files)
 
     // productRouter.post("/addproduct", upload, (req, res) => {
     // //  console.log(req.body)
     // //  console.log(req.files)
 
     const { color } = req.body;
+        for(let i=0;i<color.length;i++){
+        if(color[i] == color[i+1]){
+            return res.status(401).send({message: "duplicate color"})
+            break;
+        }
+    }
 
     let imageColor = [];
 

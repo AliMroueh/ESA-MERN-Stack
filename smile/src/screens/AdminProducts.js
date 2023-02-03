@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import { productDeleteAction } from '../actions/productActions';
+import LoadingBox from '../components/LoadingBox';
 
 export default function AdminProducts() {
 
@@ -53,7 +54,7 @@ if(!loading){
         <button className='add' onClick={() => addHandler()}>Add Product</button>
       </div>
       {loading ?
-        <div>loading...</div>
+        <LoadingBox></LoadingBox>
         :
       
           <table className="table">
