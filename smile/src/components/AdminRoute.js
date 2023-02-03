@@ -26,7 +26,7 @@ const AdminRoute = ({children}) =>{
       let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
       if(ttt && !lod){
         const rf = setInterval(() => 
-          dispatch(renewRefreshToken(ttt)),1000 * 9
+          dispatch(renewRefreshToken(ttt)),1000 * 9 * 60
         )
         return () => clearInterval(rf)
       }

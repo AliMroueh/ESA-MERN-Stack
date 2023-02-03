@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import './Wishlist.css'
 const Wishlist = () => {
   return (
@@ -40,4 +40,4 @@ const Wishlist = () => {
   )
 }
 
-export default Wishlist
+export default Wishlist*/

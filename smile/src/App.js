@@ -131,7 +131,7 @@ function App() {
             element={<SearchScreen />}
             exact
           ></Route>
-          <Route path='/Items' element={<Items/>} exact/>
+          <Route path='/product/:id' element={<Items/>} exact/>
         <Route path='*' element={<NotFoundScreen />}/>
 
         <Route
