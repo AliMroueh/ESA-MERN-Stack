@@ -1,6 +1,7 @@
 
 import express from "express";
 import Product from '../models/productModel.js';
+import User from '../models/userModel.js'
 import multer from 'multer';
 import fs from "fs";
 import path from "path";
@@ -11,6 +12,7 @@ import passport from 'passport';
 import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
 const router = express.Router();
 import expressAsyncHandler from "express-async-handler";
+import wishlist from "../../smile/src/components/wislist/Wishlist.js";
 
 const productRouter = express.Router();
 
@@ -280,7 +282,42 @@ productRouter.delete('/delete/:id', (req, res) => {
     });
 });
 
-export default productRouter;
+ const addToWishlist = asyncHandler(async(req,res)=>{
+    const {_id} = req.user;
+    const {productId} = req.body;
+    try{
+        const user = await User.findById(_id);
+        const alreadyAded= user.wishlist.find((id)=>id.toString() === productId);
+        if(alreadyAded){
+            let user = await User.findByIdAndUpdate(_id,
+                {
+                    $pull: {wishlist:productId}
+                },
+                {
+                    new :true
+                }
+                );
+            res.json(user);
+        }else{
+            let user = await User.findByIdAndUpdate(
+                _id,
+                {
+                    $push: {wishlist:productId}
+                },
+                {
+                     new :true
+                 }
+                );
+            res.json(user);
+        }
+    }catch(error){
+        throw new Error(error);
+    }
+ })
+ productRouter.put('/wishlist')
+
+
+module.exports = {productRouter,addToWishlist};
 
 
 
