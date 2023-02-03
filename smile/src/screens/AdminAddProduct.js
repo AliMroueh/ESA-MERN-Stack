@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
+import { getallCategoriesAction } from '../actions/categoryActions';
 
 export default function AdminAddProduct() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+  const getallCategories = useSelector((state) => state.getallCategories);
+
+  const { loading: loadingGet, error: errorGet, categories } = getallCategories;
 
   const [open, setOpen] = useState(false);
 
@@ -14,7 +20,7 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(['grey','blue','red']);
+  const [color, setColor] = useState(['grey', 'yellow', 'red']);
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
@@ -25,8 +31,7 @@ export default function AdminAddProduct() {
 
   useEffect(() => {
 
-
-
+    dispatch(getallCategoriesAction())
     setimageName([]);
     document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
@@ -53,8 +58,13 @@ export default function AdminAddProduct() {
 
 
 
-  }, [image, color])
+  }, [image, color, dispatch])
 
+
+
+  if (!loading) {
+    console.log(categories)
+  }
 
   const insertHandler = () => {
 
@@ -78,10 +88,11 @@ export default function AdminAddProduct() {
     console.log({ name, category, brand, price, countInStock, description })
 
     dispatch(listProductDetails(formData))
-    if(!loading && error){
+    if (!loading && error) {
       console.log(error)
-    }else{
-      navigate('/products')
+    } else {
+      //navigate('/products')
+      console.log('gooooooooooooooooooooooooood')
     }
 
   }
@@ -125,17 +136,19 @@ export default function AdminAddProduct() {
             <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
           </div>
           <div className='input_style'>
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
-              <option value='car'>
-                car
-              </option>
-              <option value='volvo'>
-                volvo
-              </option>
-              <option value='pickup'>
-                pickup
-              </option>
-            </select>
+            {loadingGet ?
+              <div>loading...</div>
+              :
+              <div className='input_style'>
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                  {categories.map((r, index) =>
+                    <option value={r.name}>
+                      {r.name}
+                    </option>
+                  )}
+                </select>
+              </div>
+            }
           </div>
           <div className='input_style'>
             <input
@@ -235,3 +248,9 @@ export default function AdminAddProduct() {
     </div>
   )
 }
+
+
+
+
+
+
