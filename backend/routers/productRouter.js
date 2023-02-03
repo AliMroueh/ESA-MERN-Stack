@@ -282,9 +282,9 @@ productRouter.delete('/delete/:id', (req, res) => {
     });
 });
 
- const addToWishlist = asyncHandler(async(req,res)=>{
-    const {_id} = req.user;
-    const {productId} = req.body;
+  export const addToWishlist = expressAsyncHandler( async(req,res)=>{
+    
+    const {productId , _id} = req.body;
     try{
         const user = await User.findById(_id);
         const alreadyAded= user.wishlist.find((id)=>id.toString() === productId);
@@ -306,7 +306,7 @@ productRouter.delete('/delete/:id', (req, res) => {
                 },
                 {
                      new :true
-                 }
+                }
                 );
             res.json(user);
         }
@@ -317,7 +317,7 @@ productRouter.delete('/delete/:id', (req, res) => {
  productRouter.put('/wishlist')
 
 
-module.exports = {productRouter,addToWishlist};
+export default productRouter
 
 
 

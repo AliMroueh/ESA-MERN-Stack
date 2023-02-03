@@ -1,0 +1,30 @@
+.cart{
+    padding: 20px;
+  }
+  img.small{
+    max-width: 8rem;
+    width: 100%;
+  }
+  select{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 0.1rem #a4a4a4 solid;
+    font-size: 1.6rem;
+    outline: none;
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  select:hover{
+    border: 0.1rem var(--secondary-color) solid;
+  }
+  p{
+    display: inline;
+  }
+  .cart p i{
+    cursor: pointer;
+    color: #0f3460;
+    font-size: 2rem;
+    float: right;
+  }
+  
