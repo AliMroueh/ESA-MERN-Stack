@@ -354,6 +354,16 @@ productRouter.delete('/delete/:id', (req, res) => {
     }
  }))
 
+ productRouter.get('/get/Wishlist',expressAsyncHandler(async(req,res)=>{
+    const {_id} = req.body;
+    try {
+        const findUser = await User.findById(_id).populate("wishlist").select("wishlist");
+        res.send(findUser)
+    } catch (error) {
+        throw new Error(error)
+    }
+ }));
+
 
 export default productRouter
 

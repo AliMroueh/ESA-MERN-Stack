@@ -9,8 +9,8 @@ import MessageBox from '../MessageBox';
 const wishlist = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const wishlist = useSelector(state => state.wishlist);
-    const { WishlistItems, error } = wishlist;
+    const listWishlist = useSelector(state => state.listWishlist);
+    const { loading, favorites, error } = listWishlist;
 
     const params = useParams();
     const {id:productId} = params;
@@ -21,9 +21,9 @@ const wishlist = (props) => {
         }
     }, [dispatch, productId]);
 
-    const deleteWislistHandeler = (id) => {
+    const deleteWislistHandeler = (_id,productId) => {
         // delete action
-        dispatch(wishlistDeleteAction(id))
+        dispatch(addToWishlist(_id,productId))
     }
     const checkoutHandler = () => {
         navigate('/signin?redirect=/shipping');
@@ -33,40 +33,39 @@ return (
     <div className='col-2'>
         <h1>Your Wishlist Items</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        {WishlistItems.length === 0?
+        {favorites.length === 0?
         <MessageBox>Wishlist is empty. <Link to="/">Go Shopping</Link></MessageBox>
     :
     (
-        <div>test</div>
-        // <ul>
-        //     {WishlistItems.map(item => (
-        //         <li key={item.product}>
-        //             <div className="row">
-        //                 <div>
-        //                     <img src={item.image} alt='' className="small"></img>
-        //                 </div>
-        //                 <div className='min-30'>
-        //                     <Link to={`/wishlist/${item.product}`}>{item.name}</Link>
-        //                 </div>
-        //                 <div>
-        //                     <select value={item.qty} onChange={
-        //                         e => dispatch(addToWishlist(item.product,Number(e.target.value)))
-        //                     }>
-        //                         {[...Array(item.countInStock).keys()].map(x =>
-        //                             <option key={x+1} value={x+1}>
-        //                                 {x+1}
-        //                             </option>
-        //                             )}
-        //                     </select>
-        //                 </div>
-        //                 <div>${item.price}</div>
-        //                 <div>
-        //                     <button type="button" onClick={() => deleteWislistHandeler(item.product)}>Delete</button>
-        //                 </div>
-        //             </div>
-        //         </li>
-        //     ))}
-        // </ul>
+        <ul>
+            {favorites.map(item => (
+                <li key={item.product}>
+                    <div className="row">
+                        <div>
+                            <img src={item.image} alt='' className="small"></img>
+                        </div>
+                        <div className='min-30'>
+                            <Link to={`/wishlist/${item.product}`}>{item.name}</Link>
+                        </div>
+                        <div>
+                            <select value={item.qty} onChange={
+                                e => dispatch(addToWishlist(item.product,Number(e.target.value)))
+                            }>
+                                {[...Array(item.countInStock).keys()].map(x =>
+                                    <option key={x+1} value={x+1}>
+                                        {x+1}
+                                    </option>
+                                    )}
+                            </select>
+                        </div>
+                        <div>${item.price}</div>
+                        <div>
+                            <button type="button" onClick={() => deleteWislistHandeler(item.product)}>Delete</button>
+                        </div>
+                    </div>
+                </li>
+            ))}
+        </ul>
     )
     }
     </div>

@@ -5,36 +5,24 @@ import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
-
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
-
     PRODUCT_UPDATE_REQUEST,
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_FAIL,
-
     PRODUCT_DELETE_REQUEST,
     PRODUCT_DELETE_SUCCESS,
     PRODUCT_DELETE_FAIL,
-
-
-
     PRODUCT_ONE_REQUEST,
     PRODUCT_ONE_SUCCESS,
     PRODUCT_ONE_FAIL,
     PRODUCT_CATEGORY_LIST_REQUEST,
     PRODUCT_CATEGORY_LIST_SUCCESS,
     PRODUCT_CATEGORY_LIST_FAIL,
-
-
-    WISHLIST_DELETE_FAIL,
-    WISHLIST_DELETE_SUCCESS,
-    WISHLIST_DELETE_REQUEST
-
-
-
-
+    WISHLIST_ADD_REQUEST,
+    WISHLIST_ADD_SUCCESS,
+    WISHLIST_ADD_FAIL
 } from '../constants/productConstants'
 
 export const listProducts = ({
@@ -198,20 +186,20 @@ export const getProducts = (id) => async (dispatch) => {
 
 
 
-export const wishlistDeleteAction = (id) => async (dispatch) => {
+export const addToWishlist = (_id,productId) => async (dispatch) => {
     try {
-        dispatch({ type: WISHLIST_DELETE_REQUEST })
+        dispatch({ type: WISHLIST_ADD_REQUEST })
 
-        const { data } = await axios.delete(`/api/wishlist/delete/${id}`)
+        const { data } = await axios.put(`/api/products/wishlist`,{_id,productId})
 
         dispatch({
-            type: WISHLIST_DELETE_SUCCESS,
+            type: WISHLIST_ADD_SUCCESS,
             payload: data,
         })
     } catch (error) {
 
         dispatch({
-            type: WISHLIST_DELETE_FAIL,
+            type: WISHLIST_ADD_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
