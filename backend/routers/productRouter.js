@@ -12,7 +12,7 @@ import passport from 'passport';
 import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
 const router = express.Router();
 import expressAsyncHandler from "express-async-handler";
-import wishlist from "../../smile/src/components/wislist/Wishlist.js";
+import wishlist from "../../smile/src/components/wislist/Like.js";
 
 const productRouter = express.Router();
 
@@ -323,16 +323,7 @@ productRouter.delete('/delete/:id', (req, res) => {
     }
  })
  productRouter.put('/wishlist')
- productRouter.delete('/wishlist/:id', (req, res) => {
-    let productId = req.params.productId;
-    Product.findByIdAndRemove(productId, (err, result) => {
-        if (err) {
-            res.json({ message: err.message });
-        } else {
-            res.send('product is deleted from WishList')
-        }
-    });
-});
+
 
 export default productRouter
 

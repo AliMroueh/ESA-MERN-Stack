@@ -30,9 +30,9 @@ import {
 
     WISHLIST_DELETE_FAIL,
     WISHLIST_DELETE_SUCCESS,
-    WISHLIST_DELETE_REQUEST
+    WISHLIST_DELETE_REQUEST,
 
-
+    WISHLIST_ADD_ITEM
 
 
 } from '../constants/productConstants'
@@ -197,23 +197,4 @@ export const getProducts = (id) => async (dispatch) => {
 
 
 
-
-export const wishlistDeleteAction = (id) => async (dispatch) => {
-    try {
-        dispatch({ type: WISHLIST_DELETE_REQUEST })
-
-        const { data } = await axios.delete(`/api/wishlist/delete/${id}`)
-
-        dispatch({
-            type: WISHLIST_DELETE_SUCCESS,
-            payload: data,
-        })
-    } catch (error) {
-
-        dispatch({
-            type: WISHLIST_DELETE_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
-        })
-    }
-}
 

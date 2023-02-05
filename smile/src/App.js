@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
 import Items from "./screens/Items";
-import Like from "./screens/Like";
+import Likes from "./screens/Likes";
 
 function App() {
 
@@ -143,7 +143,7 @@ function App() {
         />
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
-        <Route path='/like' element={<Like/>}  />
+        <Route path='/like' element={<Likes/>}  />
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />
