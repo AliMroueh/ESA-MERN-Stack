@@ -12,7 +12,6 @@ import passport from 'passport';
 import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
 const router = express.Router();
 import expressAsyncHandler from "express-async-handler";
-import wishlist from "../../smile/src/components/wislist/Wishlist.js";
 
 const productRouter = express.Router();
 
@@ -290,7 +289,39 @@ productRouter.delete('/delete/:id', (req, res) => {
     });
 });
 
-  export const addToWishlist = expressAsyncHandler( async(req,res)=>{
+//   export const addToWishlist = expressAsyncHandler( async(req,res)=>{
+    
+//     const {productId , _id} = req.body;
+//     try{
+//         const user = await User.findById(_id);
+//         const alreadyAded= user.wishlist.find((id)=>id.toString() === productId);
+//         if(alreadyAded){
+//             let user = await User.findByIdAndUpdate(_id,
+//                 {
+//                     $pull: {wishlist:productId}
+//                 },
+//                 {
+//                     new :true
+//                 }
+//                 );
+//             res.json(user);
+//         }else{
+//             let user = await User.findByIdAndUpdate(
+//                 _id,
+//                 {
+//                     $push: {wishlist:productId}
+//                 },
+//                 {
+//                      new :true
+//                 }
+//                 );
+//             res.json(user);
+//         }
+//     }catch(error){
+//         throw new Error(error);
+//     }
+//  })
+ productRouter.put('/wishlist',expressAsyncHandler( async(req,res)=>{
     
     const {productId , _id} = req.body;
     try{
@@ -321,18 +352,8 @@ productRouter.delete('/delete/:id', (req, res) => {
     }catch(error){
         throw new Error(error);
     }
- })
- productRouter.put('/wishlist')
- productRouter.delete('/wishlist/:id', (req, res) => {
-    let productId = req.params.productId;
-    Product.findByIdAndRemove(productId, (err, result) => {
-        if (err) {
-            res.json({ message: err.message });
-        } else {
-            res.send('product is deleted from WishList')
-        }
-    });
-});
+ }))
+
 
 export default productRouter
 

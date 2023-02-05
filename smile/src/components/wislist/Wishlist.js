@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { addToWishlist ,wishlistDeleteAction} from '../../actions/productActions';
-import MessageBox from '../components/MessageBox';
+import MessageBox from '../MessageBox';
 
 const wishlist = (props) => {
     const navigate = useNavigate();
@@ -17,9 +17,9 @@ const wishlist = (props) => {
 
     useEffect( () =>{
         if(productId){
-        dispatch(addToWishlist(productId,quantity))
+        // dispatch(addToWishlist(productId))
         }
-    }, [dispatch, productId, quantity]);
+    }, [dispatch, productId]);
 
     const deleteWislistHandeler = (id) => {
         // delete action
@@ -33,39 +33,40 @@ return (
     <div className='col-2'>
         <h1>Your Wishlist Items</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        {wishlistItems.length === 0?
+        {WishlistItems.length === 0?
         <MessageBox>Wishlist is empty. <Link to="/">Go Shopping</Link></MessageBox>
     :
     (
-        <ul>
-            {wishlistItems.map(item => (
-                <li key={item.product}>
-                    <div className="row">
-                        <div>
-                            <img src={item.image} alt='' className="small"></img>
-                        </div>
-                        <div className='min-30'>
-                            <Link to={`/wishlist/${item.product}`}>{item.name}</Link>
-                        </div>
-                        <div>
-                            <select value={item.qty} onChange={
-                                e => dispatch(addToWishlist(item.product,Number(e.target.value)))
-                            }>
-                                {[...Array(item.countInStock).keys()].map(x =>
-                                    <option key={x+1} value={x+1}>
-                                        {x+1}
-                                    </option>
-                                    )}
-                            </select>
-                        </div>
-                        <div>${item.price}</div>
-                        <div>
-                            <button type="button" onClick={() => deleteWislistHandeler(item.product)}>Delete</button>
-                        </div>
-                    </div>
-                </li>
-            ))}
-        </ul>
+        <div>test</div>
+        // <ul>
+        //     {WishlistItems.map(item => (
+        //         <li key={item.product}>
+        //             <div className="row">
+        //                 <div>
+        //                     <img src={item.image} alt='' className="small"></img>
+        //                 </div>
+        //                 <div className='min-30'>
+        //                     <Link to={`/wishlist/${item.product}`}>{item.name}</Link>
+        //                 </div>
+        //                 <div>
+        //                     <select value={item.qty} onChange={
+        //                         e => dispatch(addToWishlist(item.product,Number(e.target.value)))
+        //                     }>
+        //                         {[...Array(item.countInStock).keys()].map(x =>
+        //                             <option key={x+1} value={x+1}>
+        //                                 {x+1}
+        //                             </option>
+        //                             )}
+        //                     </select>
+        //                 </div>
+        //                 <div>${item.price}</div>
+        //                 <div>
+        //                     <button type="button" onClick={() => deleteWislistHandeler(item.product)}>Delete</button>
+        //                 </div>
+        //             </div>
+        //         </li>
+        //     ))}
+        // </ul>
     )
     }
     </div>
