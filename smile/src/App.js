@@ -23,6 +23,8 @@ import { renewRefreshToken } from "./actions/refreshTokenAction";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
+import Items from "./screens/Items";
+import Like from "./screens/Like";
 
 function App() {
 
@@ -52,7 +54,7 @@ function App() {
           element={<ProfileScreen />}
         />
         <Route
-          path="/cartItem"
+          path="/cart/:id"
           element={<CartItemScreen />}
         />
 
@@ -129,6 +131,7 @@ function App() {
             element={<SearchScreen />}
             exact
           ></Route>
+          <Route path='/product/:id' element={<Items/>} exact/>
         <Route path='*' element={<NotFoundScreen />}/>
 
         <Route
@@ -140,7 +143,7 @@ function App() {
         />
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
-
+        <Route path='/like' element={<Like/>}  />
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />

@@ -5,7 +5,7 @@ import userRouter from './routers/userRouter.js';
 import path from "path";
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
-import productRouter from './routers/productRouter.js';
+import productRouter, {addToWishlist} from './routers/productRouter.js';
 import categoryRouter from './routers/categoryRouter.js';
 import { applyPassportStrategy } from './utils.js';
 import passport from 'passport';
@@ -42,7 +42,7 @@ mongoose.set('strictQuery', true)
 // })
 
 
-mongoose.connect('mongodb://localhost/smile', {
+mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -51,7 +51,7 @@ mongoose.connect('mongodb://localhost/smile', {
     .catch(err => console.log(err));
 
 app.use('/api/users', userRouter);
-
+app.use('/api/wishlist',addToWishlist);
 app.use('/api/products', productRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/refresh', refreshTokenRouter);
