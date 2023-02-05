@@ -28,11 +28,7 @@ import {
     PRODUCT_CATEGORY_LIST_FAIL,
 
 
-    WISHLIST_DELETE_FAIL,
-    WISHLIST_DELETE_SUCCESS,
-    WISHLIST_DELETE_REQUEST,
-
-    WISHLIST_ADD_ITEM
+  
 
 
 } from '../constants/productConstants'
