@@ -19,7 +19,7 @@ function Footer() {
       <div className='box2'>
         <h1>S M I L Y</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit at amet.</p>
-        <div className='icon f_flex'>
+        <div className='icon3 f_flex'>
           <div className='img1 d_flex'>
             <i class='fa-brands fa-app-store-ios'></i>
             <span>App Store</span>

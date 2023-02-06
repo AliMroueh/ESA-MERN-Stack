@@ -1,42 +1,55 @@
 import React from "react"
-import Carousel from 'react-bootstrap/Carousel';
 import './Categories.css'
-function SlideCard() {
-  return (
-    <Carousel>
-      <Carousel.Item>
-        <div>
-        <img
-          className="d-block "
-          src="images/mohammad-metri-E-0ON3VGrBc-unsplash.jpg"
-          alt="First slide"
-        /></div>
-         <Carousel.Caption>
-          <h2  className="h2">50% Off For Your First Shopping</h2>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block"
-          src="images/giorgio-trovato-8krX0HkXw8c-unsplash.jpg"
-          alt="Second slide"
-        />
-          <Carousel.Caption>
-          <h2 className="h2">50% Off For Your First Shopping</h2>
-          </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block"
-          src="images/ehimetalor-akhere-unuabona-lq19sZ5pQ-c-unsplash.jpg"
-          alt="Third slide"
-        />
+import {Swiper,SwiperSlide} from 'swiper/react'
+import {FreeMode} from 'swiper'
+import { useSwiper } from 'swiper/react';
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-        <Carousel.Caption>
-          <h2  className="h2">50% Off For Your First Shopping</h2>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+
+function SlideCard() {
+  const Sdata=[
+    {
+     img:'images/mohammad-metri-E-0ON3VGrBc-unsplash.jpg',
+     name:'50% Off For Your First Shopping'
+    },
+    {
+      img:'images/giorgio-trovato-8krX0HkXw8c-unsplash.jpg',
+      name:'50% Off For Your First Shopping'
+    },
+    {
+      img:'images/ehimetalor-akhere-unuabona-lq19sZ5pQ-c-unsplash.jpg',
+       name:'50% Off For Your First Shopping'
+    },
+
+]
+
+  return (
+    <>
+    <Swiper
+    freeMode={true}
+    grabCursor={true}
+    className='mySwiper'
+    slidesPerView={1}
+    onSlideChange={() => console.log('slide change')}
+    onSwiper={(swiper) => console.log(swiper)}
+  >
+        {Sdata.map((Sdata, index) => {
+          return (
+            <>
+            <SwiperSlide>
+              <div className='d-block'  key={index}>
+                  <img src={Sdata.img} alt='' className="picture4" />
+              </div>
+            </SwiperSlide>
+             </>
+          )
+         
+        })} 
+        </Swiper>
+    </>
   );
 }
 
