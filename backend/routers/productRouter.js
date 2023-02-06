@@ -354,11 +354,12 @@ productRouter.delete('/delete/:id', (req, res) => {
     }
  }))
 
- productRouter.get('/get/Wishlist',expressAsyncHandler(async(req,res)=>{
+ productRouter.post('/get/Wishlist',expressAsyncHandler(async(req,res)=>{
     const {_id} = req.body;
+    console.log(req.body)
     try {
         const findUser = await User.findById(_id).populate("wishlist").select("wishlist");
-        res.send(findUser)
+        res.send(findUser);
     } catch (error) {
         throw new Error(error)
     }
