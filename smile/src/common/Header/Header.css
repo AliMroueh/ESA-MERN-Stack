@@ -11,9 +11,8 @@
     padding: 2px;
 }
 .search{
-padding-top: 5px;
+padding-top: 10px;
 padding-left: 50px;
-padding-bottom: 10px;
 }
 .home{
 width: 100%;
@@ -81,7 +80,7 @@ width: 100%;
   padding: 0px 0px ;
   border-radius: 5px;
   height: 7vh;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
 }
