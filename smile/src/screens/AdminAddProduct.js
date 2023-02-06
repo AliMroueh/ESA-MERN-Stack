@@ -42,29 +42,12 @@ export default function AdminAddProduct() {
         const newArray = [];
         newArray.push(image[i].name)
         setimageName(imageName => [...imageName, ...newArray])
-        setColor(color => [...color,'red'])
+        setColor(color => [...color,'#f00'])
         // color.push('red')
       }
-      console.log(color)
     }
 
-    // if (image.length > 0 || color.length > 0) {
-    //   for (let i = 0; i < image.length; i++) {
-    //     for (let j = 0; j < color.length; j++) {
-    //       const newColorArray = [];
-    //       newColorArray.push(color[i].name)
-    //       setcolorName(colorName => [...colorName, ...newColorArray])
-    //     }
-    //     const newArray = [];
-    //     newArray.push(image[i].name)
-    //     setimageName(imageName => [...imageName, ...newArray])
-    //   }
-    // }
-
-
-
-  }, [image, dispatch])
-
+  }, [image,color, dispatch])
 
 
   if (!loading) {
@@ -102,17 +85,13 @@ export default function AdminAddProduct() {
 
   }
 
-const changeColor = (value,index) => {
-  // color.push(e.target.value)
-  // if(color.length - 1 === index){
+  const changeColor = (value,index) => {
     color[index] = value;
-    // color.push(value)
-  // }else{
-  //   color.push(value)
-  //   console.log(index)
-  // }
+    setColor(color)
   console.log(color)
 }
+
+
 
   return (
     <div className='top'>
