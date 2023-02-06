@@ -58,7 +58,6 @@ export default function AdminEditProduct() {
                 setimageName(imageName => [...imageName, ...newArray])
             }
         }
-
     }, [dispatch, id, image])
 
 
@@ -85,12 +84,16 @@ export default function AdminEditProduct() {
         dispatch(productUpdateAction(id, formData))
 
     }
-    if (!loadingOne) {
-        console.log(productsOne);
-        // setName(productsOne.name);
 
-
-    }
+    useEffect(() => {
+        if (!loadingOne) {
+            console.log(productsOne);
+            if(productsOne && productsOne.name){
+            setName(productsOne.name);
+            // console.log(productsOne.name)
+            }
+        }
+    },[loadingOne,productsOne])
 
 
     return (
