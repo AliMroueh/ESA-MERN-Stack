@@ -47,7 +47,7 @@ export default function AdminAddProduct() {
       }
     }
 
-  }, [image,color, dispatch])
+  }, [image, dispatch])
 
 
   if (!loading) {
@@ -56,7 +56,7 @@ export default function AdminAddProduct() {
 
   const insertHandler = () => {
 
-    console.log(name, category, brand, price, countInStock, description, image)
+    console.log(color,name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
     const formData = new FormData()
