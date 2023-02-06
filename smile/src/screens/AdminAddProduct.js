@@ -38,6 +38,7 @@ export default function AdminAddProduct() {
     document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
     if (image.length > 0) {
+      setColor([])
       for (let i = 0; i < image.length; i++) {
         const newArray = [];
         newArray.push(image[i].name)
@@ -90,7 +91,6 @@ export default function AdminAddProduct() {
     setColor(color)
   console.log(color)
 }
-
 
 
   return (
@@ -208,7 +208,8 @@ export default function AdminAddProduct() {
                     <div key={index}>
                       
                       <p>{row}</p>
-                        <input id='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
+                      <p>{color[index]}</p>
+                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
                         
                       </div>)
                     //    <div>
