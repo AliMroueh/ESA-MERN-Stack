@@ -20,7 +20,8 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(['grey', 'red', 'yellow']);
+  // const [color, setColor] = useState(['grey', 'red', 'yellow']);
+  // const color = []
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
@@ -28,6 +29,7 @@ export default function AdminAddProduct() {
   const [imageName, setimageName] = useState([]);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, products } = productDetails
+  const [color, setColor] = useState([]);
 
   useEffect(() => {
 
@@ -40,7 +42,10 @@ export default function AdminAddProduct() {
         const newArray = [];
         newArray.push(image[i].name)
         setimageName(imageName => [...imageName, ...newArray])
+        setColor(color => [...color,'red'])
+        // color.push('red')
       }
+      console.log(color)
     }
 
     // if (image.length > 0 || color.length > 0) {
@@ -58,7 +63,7 @@ export default function AdminAddProduct() {
 
 
 
-  }, [image, color, dispatch])
+  }, [image, dispatch])
 
 
 
@@ -97,22 +102,17 @@ export default function AdminAddProduct() {
 
   }
 
-
-
-  // const imageHandler = () => {
+const changeColor = (value,index) => {
+  // color.push(e.target.value)
+  // if(color.length - 1 === index){
+    color[index] = value;
+    // color.push(value)
+  // }else{
+  //   color.push(value)
+  //   console.log(index)
   // }
-
-
-  // const submit = async event => {
-  //   event.preventDefault()
-
-  //   const formData = new FormData()
-  //   formData.append("image", file)
-  //   formData.append("description", description)
-
-  //   const result = await axios.post('/api/images', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-  //   console.log(result.data)
-  // }
+  console.log(color)
+}
 
   return (
     <div className='top'>
@@ -224,22 +224,24 @@ export default function AdminAddProduct() {
                 {imageName.length > 0 &&
 
                   imageName.map((row, index) =>
+                  // console.log(index)
+                  { return (
                     <div key={index}>
+                      
                       <p>{row}</p>
-                      <div>
-                        {/* <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input> */}
-                        {/* <h4>{color}</h4> */}
-                      </div>
-                      {/* <div>
-                          <label htmlFor='color'>nnnn</label>
-                        </div>  */}
-                    </div>
+                        <input id='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
+                        
+                      </div>)
+                    //    <div>
+                    //       <label htmlFor='color'>nnnn</label>
+                    //     </div>  
+                    //  </div>
 
-                  )}
+                   } )}
               </div>
 
               <div>
-                <button type='submit' >Save</button>
+                <button type='button'onClick={() => setOpen(false)} >Save</button>
               </div>
             </div>
           </div>
