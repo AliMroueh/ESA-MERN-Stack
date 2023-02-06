@@ -4,7 +4,7 @@ import data from "./data";
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import { userDeleteReducer, userDetailsReducer, userGetAllReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from "./reducers/userReducers";
 
-import { productListReducer, productDetailsReducer, productDeleteReducer, productId, productUpdateReducer, productCategoryListReducer, listWishlistReducer } from "./reducers/productReducers";
+import { productListReducer, productDetailsReducer, productDeleteReducer, productId, productUpdateReducer, productCategoryListReducer, listWishlistReducer, getAllWishlistReducer } from "./reducers/productReducers";
 import { userRefreshReducer } from "./reducers/refreshReducers";
 import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
 
@@ -21,7 +21,14 @@ const initialState = {
         token: localStorage.getItem("token")
             ? JSON.parse(localStorage.getItem("token"))
             : null,
-    }
+    },
+    // cart :{
+    //     cartItems : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [] ,
+
+    //     shippingAddress : localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : [] ,
+
+    //     paymentMethod : 'PayPal',
+    // } 
 };
 const reducer = combineReducers({
     userSignin: userSigninReducer,
@@ -41,7 +48,8 @@ const reducer = combineReducers({
     productUpdate: productUpdateReducer,
     userRefresh : userRefreshReducer,
     productCategoryList: productCategoryListReducer,
-    listWishlist: listWishlistReducer
+    listWishlist: listWishlistReducer,
+    getAllWishlist: getAllWishlistReducer
 
 })
 

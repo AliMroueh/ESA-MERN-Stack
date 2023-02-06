@@ -143,7 +143,7 @@ function App() {
         />
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
-        <Route path='/like' element={<Likes/>}  />
+        <Route path='/like/:id' element={<Likes/>}  />
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />
