@@ -4,27 +4,22 @@ const Categories = () => {
  
     const dataCat = [
         {
-            cateIcons:'images/icons8-long-formal-dress-55.png',
+
             cateName:'Fashion'
         },
         {
-            cateIcons:'images/icons8-iphone-se-55.png',
             cateName:'Electronic'
         },
         {
-            cateIcons:'images/icons8-cars-55.png',
             cateName:'Cars'
         },
         {
-            cateIcons:'images/icons8-open-book-55.png',
             cateName:'Books'
         },
         {
-            cateIcons:'images/icons8-house-55.png',
-            cateName:'Home '
+           cateName:'Home '
         },
         {
-            cateIcons:'images/icons8-makeup-brush-55.png',
             cateName:'Beauty'
         },
     ]
