@@ -20,7 +20,7 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(['grey', 'yellow', 'red']);
+  const [color, setColor] = useState(['grey', 'red', 'yellow']);
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');

@@ -1,6 +1,7 @@
 
 import express from "express";
 import Product from '../models/productModel.js';
+import User from '../models/userModel.js'
 import multer from 'multer';
 import fs from "fs";
 import path from "path";
@@ -38,12 +39,18 @@ var upload = multer({
 productRouter.post("/addproduct", 
 // validateProductRequest, isRequestValidated, 
 upload, (req, res) => {
-    console.log(req.body)
-    console.log(req.files)
+    // console.log(req.body)
+    // console.log(req.files)
 
  
 
     const { color } = req.body;
+        for(let i=0;i<color.length;i++){
+        if(color[i] == color[i+1]){
+            return res.status(401).send({message: "duplicate color"})
+            break;
+        }
+    }
 
     let imageColor = [];
 
@@ -280,7 +287,84 @@ productRouter.delete('/delete/:id', (req, res) => {
     });
 });
 
-export default productRouter;
+//   export const addToWishlist = expressAsyncHandler( async(req,res)=>{
+    
+//     const {productId , _id} = req.body;
+//     try{
+//         const user = await User.findById(_id);
+//         const alreadyAded= user.wishlist.find((id)=>id.toString() === productId);
+//         if(alreadyAded){
+//             let user = await User.findByIdAndUpdate(_id,
+//                 {
+//                     $pull: {wishlist:productId}
+//                 },
+//                 {
+//                     new :true
+//                 }
+//                 );
+//             res.json(user);
+//         }else{
+//             let user = await User.findByIdAndUpdate(
+//                 _id,
+//                 {
+//                     $push: {wishlist:productId}
+//                 },
+//                 {
+//                      new :true
+//                 }
+//                 );
+//             res.json(user);
+//         }
+//     }catch(error){
+//         throw new Error(error);
+//     }
+//  })
+ productRouter.put('/wishlist',expressAsyncHandler( async(req,res)=>{
+    
+    const {productId , _id} = req.body;
+    try{
+        const user = await User.findById(_id);
+        const alreadyAded= user.wishlist.find((id)=>id.toString() === productId);
+        if(alreadyAded){
+            let user = await User.findByIdAndUpdate(_id,
+                {
+                    $pull: {wishlist:productId}
+                },
+                {
+                    new :true
+                }
+                );
+            res.json(user);
+        }else{
+            let user = await User.findByIdAndUpdate(
+                _id,
+                {
+                    $push: {wishlist:productId}
+                },
+                {
+                     new :true
+                }
+                );
+            res.json(user);
+        }
+    }catch(error){
+        throw new Error(error);
+    }
+ }))
+
+ productRouter.post('/get/Wishlist',expressAsyncHandler(async(req,res)=>{
+    const {_id} = req.body;
+    console.log(req.body)
+    try {
+        const findUser = await User.findById(_id).populate("wishlist").select("wishlist");
+        res.send(findUser);
+    } catch (error) {
+        throw new Error(error)
+    }
+ }));
+
+
+export default productRouter
 
 
 

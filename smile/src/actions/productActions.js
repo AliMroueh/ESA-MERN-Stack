@@ -5,26 +5,27 @@ import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
-
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
-
     PRODUCT_UPDATE_REQUEST,
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_FAIL,
-
     PRODUCT_DELETE_REQUEST,
     PRODUCT_DELETE_SUCCESS,
     PRODUCT_DELETE_FAIL,
-
-
     PRODUCT_ONE_REQUEST,
     PRODUCT_ONE_SUCCESS,
     PRODUCT_ONE_FAIL,
     PRODUCT_CATEGORY_LIST_REQUEST,
     PRODUCT_CATEGORY_LIST_SUCCESS,
     PRODUCT_CATEGORY_LIST_FAIL,
+    WISHLIST_ADD_REQUEST,
+    WISHLIST_ADD_SUCCESS,
+    WISHLIST_ADD_FAIL,
+    WISHLIST_GET_REQUEST,
+    WISHLIST_GET_SUCCESS,
+    WISHLIST_GET_FAIL
 } from '../constants/productConstants'
 
 export const listProducts = ({
@@ -93,7 +94,9 @@ export const listProductDetails = (info) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
 
-        const { data } = await axios.post(`/api/products/addproduct`, info, { headers: {'Content-Type': 'multipart/form-data'}})
+        const { data } = await axios.post(`/api/products/addproduct`, info,
+         { headers: {'Content-Type': 'multipart/form-data'}}
+         )
 
 
         dispatch({
@@ -113,9 +116,9 @@ export const listProductDetails = (info) => async (dispatch) => {
 
 // UPDATE 
 export const productUpdateAction = (id, info) => async (dispatch) => {
-    try {
+    
         dispatch({ type: PRODUCT_UPDATE_REQUEST })
-
+        try {
         const { data } = await axios.put(`/api/products/update/${id}`, info)
 
         dispatch({
@@ -135,9 +138,9 @@ export const productUpdateAction = (id, info) => async (dispatch) => {
 
 //DELTE
 export const productDeleteAction = (id) => async (dispatch) => {
-    try {
+   
         dispatch({ type: PRODUCT_DELETE_REQUEST })
-
+        try {
         const { data } = await axios.delete(`/api/products/delete/${id}`)
 
         dispatch({
@@ -158,9 +161,9 @@ export const productDeleteAction = (id) => async (dispatch) => {
 // GET UPDATE
 
 export const getProducts = (id) => async (dispatch) => {
-    try {
+    
         dispatch({ type: PRODUCT_ONE_REQUEST })
-
+        try {
         const { data } = await axios.get(`/api/products/edit/${id}`)
 
         dispatch({
@@ -177,3 +180,34 @@ export const getProducts = (id) => async (dispatch) => {
 
 }
 
+export const addToWishlist = (_id,productId) => async (dispatch) => {
+        dispatch({ type: WISHLIST_ADD_REQUEST })
+        try {
+        const { data } = await axios.put(`/api/products/wishlist`,{_id,productId})
+
+        dispatch({
+            type: WISHLIST_ADD_SUCCESS,
+            payload: data.wishlist,
+        })
+    } catch (error) {
+
+        dispatch({
+            type: WISHLIST_ADD_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const getWishList = (_id) => async (dispatch) => {
+
+dispatch({type: WISHLIST_GET_REQUEST})
+try {
+    const {data} = await Axios.post(`/api/products/get/Wishlist`,_id);
+    dispatch({type: WISHLIST_GET_SUCCESS, payload: data})
+} catch (error) {
+    dispatch({
+        type: WISHLIST_GET_FAIL,
+        payload: error.response && error.response.data.message ? error.response.data.message : error.message
+    })
+}
+}

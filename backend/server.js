@@ -42,16 +42,14 @@ mongoose.set('strictQuery', true)
 // })
 
 
-mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://localhost/smile', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-
     .then(db => console.log('DB is connected'))
     .catch(err => console.log(err));
 
 app.use('/api/users', userRouter);
-
 app.use('/api/products', productRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/refresh', refreshTokenRouter);

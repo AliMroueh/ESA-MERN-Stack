@@ -77,6 +77,7 @@ const Home = () => {
           </div>
           </>
 }
+<div className='both'></div>
     </div>
   )
 }

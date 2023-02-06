@@ -428,6 +428,11 @@ a{
   width: 100%;
 }
 
+/* home screen */
+.both{
+  float: both;
+}
+
 /* Dashboard Screen*/
 
 .summary > li {

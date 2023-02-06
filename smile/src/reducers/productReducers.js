@@ -22,7 +22,13 @@ import {
     PRODUCT_DELETE_FAIL,
     PRODUCT_CATEGORY_LIST_REQUEST,
     PRODUCT_CATEGORY_LIST_SUCCESS,
-    PRODUCT_CATEGORY_LIST_FAIL
+    PRODUCT_CATEGORY_LIST_FAIL,
+    WISHLIST_ADD_REQUEST,
+    WISHLIST_ADD_SUCCESS,
+    WISHLIST_ADD_FAIL,
+    WISHLIST_GET_REQUEST,
+    WISHLIST_GET_SUCCESS,
+    WISHLIST_GET_FAIL
 } from '../constants/productConstants'
 
 // export const productListReducer = (state = { products: [] }, action) => {
@@ -131,7 +137,6 @@ export const productUpdateReducer = (state = { products: [] }, action) => {
 
 
 /// delete
-
 export const productDeleteReducer = (state = {}, action) => {
     switch (action.type) {
         case PRODUCT_DELETE_REQUEST:
@@ -144,5 +149,33 @@ export const productDeleteReducer = (state = {}, action) => {
             return { loading: false, error: action.payload }
 
         default: return state
+    }
+}
+
+export const listWishlistReducer = (state={favorite:[]},action) => {
+    switch(action.type){
+        case WISHLIST_ADD_REQUEST:
+            return {loading: true, ...state}
+
+        case WISHLIST_ADD_SUCCESS:
+            return {loading: false, favorite:action.payload}
+
+        case WISHLIST_ADD_FAIL:
+            return {loading: false, error:action.payload}
+        default: return state;
+    }
+}
+
+export const getAllWishlistReducer = (state={},action) => {
+    switch(action.type){
+        case WISHLIST_GET_REQUEST:
+            return {loading: true, ...state}
+
+        case WISHLIST_GET_SUCCESS:
+            return {loading: false, favorites:action.payload}
+
+        case WISHLIST_GET_FAIL:
+            return {loading: false, error:action.payload}
+        default: return state;
     }
 }
