@@ -4,26 +4,26 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { addToWishlist ,wishlistDeleteAction} from '../../actions/productActions';
-import MessageBox from '../components/MessageBox';
+import MessageBox from '../MessageBox';
 
 const wishlist = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const wishlist = useSelector(state => state.wishlist);
-    const { WishlistItems, error } = wishlist;
+    const listWishlist = useSelector(state => state.listWishlist);
+    const { loading, favorites, error } = listWishlist;
 
     const params = useParams();
     const {id:productId} = params;
 
     useEffect( () =>{
         if(productId){
-        dispatch(addToWishlist(productId,quantity))
+        // dispatch(addToWishlist(productId))
         }
-    }, [dispatch, productId, quantity]);
+    }, [dispatch, productId]);
 
-    const deleteWislistHandeler = (id) => {
+    const deleteWislistHandeler = (_id,productId) => {
         // delete action
-        dispatch(wishlistDeleteAction(id))
+        dispatch(addToWishlist(_id,productId))
     }
     const checkoutHandler = () => {
         navigate('/signin?redirect=/shipping');
@@ -33,12 +33,12 @@ return (
     <div className='col-2'>
         <h1>Your Wishlist Items</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        {wishlistItems.length === 0?
+        {favorites.length === 0?
         <MessageBox>Wishlist is empty. <Link to="/">Go Shopping</Link></MessageBox>
     :
     (
         <ul>
-            {wishlistItems.map(item => (
+            {favorites.map(item => (
                 <li key={item.product}>
                     <div className="row">
                         <div>
