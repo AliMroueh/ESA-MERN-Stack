@@ -20,7 +20,8 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState(['grey', 'red', 'yellow']);
+  // const [color, setColor] = useState(['grey', 'red', 'yellow']);
+  // const color = []
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
@@ -28,6 +29,7 @@ export default function AdminAddProduct() {
   const [imageName, setimageName] = useState([]);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, products } = productDetails
+  const [color, setColor] = useState([]);
 
   useEffect(() => {
 
@@ -36,30 +38,17 @@ export default function AdminAddProduct() {
     document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
     if (image.length > 0) {
+      setColor([])
       for (let i = 0; i < image.length; i++) {
         const newArray = [];
         newArray.push(image[i].name)
         setimageName(imageName => [...imageName, ...newArray])
+        setColor(color => [...color,'#f00'])
+        // color.push('red')
       }
     }
 
-    // if (image.length > 0 || color.length > 0) {
-    //   for (let i = 0; i < image.length; i++) {
-    //     for (let j = 0; j < color.length; j++) {
-    //       const newColorArray = [];
-    //       newColorArray.push(color[i].name)
-    //       setcolorName(colorName => [...colorName, ...newColorArray])
-    //     }
-    //     const newArray = [];
-    //     newArray.push(image[i].name)
-    //     setimageName(imageName => [...imageName, ...newArray])
-    //   }
-    // }
-
-
-
-  }, [image, color, dispatch])
-
+  }, [image, dispatch])
 
 
   if (!loading) {
@@ -68,7 +57,7 @@ export default function AdminAddProduct() {
 
   const insertHandler = () => {
 
-    console.log(name, category, brand, price, countInStock, description, image)
+    console.log(color,name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
     const formData = new FormData()
@@ -97,22 +86,12 @@ export default function AdminAddProduct() {
 
   }
 
+  const changeColor = (value,index) => {
+    color[index] = value;
+    setColor(color)
+  console.log(color)
+}
 
-
-  // const imageHandler = () => {
-  // }
-
-
-  // const submit = async event => {
-  //   event.preventDefault()
-
-  //   const formData = new FormData()
-  //   formData.append("image", file)
-  //   formData.append("description", description)
-
-  //   const result = await axios.post('/api/images', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-  //   console.log(result.data)
-  // }
 
   return (
     <div className='top'>
@@ -224,22 +203,25 @@ export default function AdminAddProduct() {
                 {imageName.length > 0 &&
 
                   imageName.map((row, index) =>
+                  // console.log(index)
+                  { return (
                     <div key={index}>
+                      
                       <p>{row}</p>
-                      <div>
-                        {/* <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input> */}
-                        {/* <h4>{color}</h4> */}
-                      </div>
-                      {/* <div>
-                          <label htmlFor='color'>nnnn</label>
-                        </div>  */}
-                    </div>
+                      <p>{color[index]}</p>
+                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
+                        
+                      </div>)
+                    //    <div>
+                    //       <label htmlFor='color'>nnnn</label>
+                    //     </div>  
+                    //  </div>
 
-                  )}
+                   } )}
               </div>
 
               <div>
-                <button type='submit' >Save</button>
+                <button type='button'onClick={() => setOpen(false)} >Save</button>
               </div>
             </div>
           </div>

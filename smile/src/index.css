@@ -233,15 +233,15 @@ li{
 .homeAdmin{
   color: #ffffff;
 }
-a{
+.admin a{
   text-decoration: none;
-  /* color:#ffffff; */
+  color:#ffffff;
   transition: .5s;
 }
-/* a:hover{
+.admin a:hover{
   color: var(--secondary-color);
   font-size: 2.2rem;
-} */
+}
 .top{
   padding: 0 50px;
 }
@@ -416,9 +416,9 @@ a{
   color: #e20b0b;
   cursor: pointer;
 }
-.choose_img input[type="color"]{
+/* .choose_img input[type="color"]{
   visibility: hidden;
-}
+} */
 .imgAndcolor{
   width: 100%;
 }

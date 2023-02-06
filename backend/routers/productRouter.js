@@ -42,9 +42,7 @@ upload, (req, res) => {
     // console.log(req.body)
     // console.log(req.files)
 
-    // productRouter.post("/addproduct", upload, (req, res) => {
-    // //  console.log(req.body)
-    // //  console.log(req.files)
+ 
 
     const { color } = req.body;
         for(let i=0;i<color.length;i++){
