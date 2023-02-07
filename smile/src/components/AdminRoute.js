@@ -1,9 +1,8 @@
-
-/*import React, { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 // import { Redirect, Route } from 'react-router'
 import { Navigate, useNavigate } from 'react-router-dom';
-import { renewRefreshToken } from './actions/refreshTokenAction';
+import { renewRefreshToken } from '../actions/refreshTokenAction';
 import { signout } from '../actions/userActions';
 
 
@@ -27,7 +26,7 @@ const AdminRoute = ({children}) =>{
       let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
       if(ttt && !lod){
         const rf = setInterval(() => 
-          dispatch(renewRefreshToken(ttt)),1000 * 9
+          dispatch(renewRefreshToken(ttt)),1000 * 9 * 60
         )
         return () => clearInterval(rf)
       }
@@ -57,4 +56,4 @@ const AdminRoute = ({children}) =>{
     return userInfo && userInfo.isAdmin ? children : <Navigate to="/signin" />
 }
 
-export default AdminRoute;*/
+export default AdminRoute;

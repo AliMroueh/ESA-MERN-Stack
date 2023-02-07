@@ -234,12 +234,12 @@ li{
 .homeAdmin{
   color: #ffffff;
 }
-a{
+.admin a{
   text-decoration: none;
   color:#ffffff;
   transition: .5s;
 }
-a:hover{
+.admin a:hover{
   color: var(--secondary-color);
   font-size: 2.2rem;
 }
@@ -415,9 +415,9 @@ a:hover{
   color: #e20b0b;
   cursor: pointer;
 }
-.choose_img input[type="color"]{
+/* .choose_img input[type="color"]{
   visibility: hidden;
-}
+} */
 .imgAndcolor{
   width: 100%;
 }
@@ -425,6 +425,11 @@ a:hover{
   display: flex;
   justify-content: space-around;
   width: 100%;
+}
+
+/* home screen */
+.both{
+  float: both;
 }
 
 /* Dashboard Screen*/
@@ -510,7 +515,56 @@ p{
 .price{
   font-size: 2rem;
 }
-
+/* Rating */
+.rating span{
+  color: #f0c040;
+  margin: 0.1rem;
+}
+.rating span:last-child{
+  color: #404040;
+}
+/* Alert */
+.loading{
+  display: block !important;
+}
+.success{
+  color: #20a020;
+}
+.danger{
+  color: #a02020;
+}
+.alert{
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+.alert-info{
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+.alert-danger{
+  color: #a02020;
+  background-color: #ffe0e0e0;
+}
+.alert-success{
+  color: #20a020;
+  background-color: #eeffe0;
+}
+/* Image */
+img{
+  border-radius: 0.5rem;
+}
+img.small{
+  max-width: 5rem;
+  width: 100%;
+}
+img.medium{
+  max-width: 29rem;
+  width: 100%;
+}
+img.large{
+  width: 100%;
+}
 button.primary{
   background-color: var(--primary-color);
   color: #ffffff;

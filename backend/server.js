@@ -9,6 +9,7 @@ import productRouter from './routers/productRouter.js';
 import categoryRouter from './routers/categoryRouter.js';
 import { applyPassportStrategy } from './utils.js';
 import passport from 'passport';
+import refreshTokenRouter from './routers/refreshTokenRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -22,7 +23,7 @@ const app = express();
 // these two middleware will transfer the data to req.body in the app
 // a middleware that parse json data in the body of the request
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "uploads")));
 app.use(passport.initialize());
 // Apply strategy to passport
@@ -34,23 +35,29 @@ mongoose.set('strictQuery', true)
 
 // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
 // mongodb://localhost/smile 
-mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority',{
 
-    useNewUrlParser: true, 
+// mongoose.connect('mongodb://localhost/smile',{
+//     useNewUrlParser: true, 
+//     useUnifiedTopology: true
+// })
+
+
+mongoose.connect('mongodb://localhost/smile', {
+    useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(db => console.log('DB is connected'))
-.catch(err => console.log(err));
+    .then(db => console.log('DB is connected'))
+    .catch(err => console.log(err));
 
-app.use('/api/users',userRouter);
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/categories', categoryRouter);
+app.use('/api/refresh', refreshTokenRouter);
 
-app.use('/api/products',productRouter);
-app.use('/api/categories',categoryRouter);
 
-
-app.get('/api/products', (req, res) => {
-    res.send(data.products);
-})
+// app.get('/api/products', (req, res) => {
+//     res.send(data.products);
+// })
 
 app.get('/', (req, res) => {
     res.send('Server is ready');

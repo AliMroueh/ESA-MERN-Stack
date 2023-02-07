@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import { generateToken, isAdmin } from '../utils.js';
+import { generateToken, isAdmin, refreshToken } from '../utils.js';
 import passport from 'passport';
 
 // express.Router is a function that make our code modular instead of having all routes in server.js, we can define multiple files to have our routers 
@@ -43,12 +43,14 @@ expressAsyncHandler(async(req,res) => {
     const user = await User.findOne({email : req.body.email});
     if(user){
         if(bcrypt.compareSync(req.body.password, user.password)){
+            const refresh = refreshToken(user);
             res.send({
                 _id : user._id,
                 name : user.name,
                 email : user.email,
                 isAdmin : user.isAdmin,
                 token : generateToken(user),
+                rToken : refresh
             });
             return;
         }
@@ -93,12 +95,14 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
     });
     const createdUser = await user.save();
 
+    const refresh = refreshToken(createdUser);
             res.send({
                 _id : createdUser._id,
                 name : createdUser.name,
                 email : createdUser.email,
                 isAdmin : createdUser.isAdmin,
                 token : generateToken(createdUser),
+                rToken : refresh
             });
         })
 )
@@ -145,7 +149,7 @@ userRouter.delete('/:id',
 passport.authenticate('jwt', { session: false }),
 isAdmin(),
 expressAsyncHandler(async(req,res)=>{
-   
+
     const id = req.params.id;
 
     await User.findByIdAndDelete(id)
@@ -168,12 +172,14 @@ expressAsyncHandler(async(req,res)=>{
 
 
 //get data
+
 userRouter.get('/',
 passport.authenticate('jwt', { session: false }),
 isAdmin(),
 expressAsyncHandler(async( req ,res)=>{
     try{
      const users = await User.find({'isAdmin':false});
+
      res.status(200).send(users);
     }
     catch(err){

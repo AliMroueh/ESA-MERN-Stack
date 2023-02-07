@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
+import { getallCategoriesAction } from '../actions/categoryActions';
 
 export default function AdminAddProduct() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+  const getallCategories = useSelector((state) => state.getallCategories);
+
+  const { loading: loadingGet, error: errorGet, categories } = getallCategories;
 
   const [open, setOpen] = useState(false);
 
@@ -14,7 +20,8 @@ export default function AdminAddProduct() {
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [color, setColor] = useState('');
+  // const [color, setColor] = useState(['grey', 'red', 'yellow']);
+  // const color = []
   const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
@@ -22,45 +29,37 @@ export default function AdminAddProduct() {
   const [imageName, setimageName] = useState([]);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, products } = productDetails
+  const [color, setColor] = useState([]);
 
   useEffect(() => {
 
-
-
+    dispatch(getallCategoriesAction())
     setimageName([]);
     document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
     if (image.length > 0) {
+      setColor([])
       for (let i = 0; i < image.length; i++) {
         const newArray = [];
         newArray.push(image[i].name)
         setimageName(imageName => [...imageName, ...newArray])
+        setColor(color => [...color,'#f00'])
+        // color.push('red')
       }
     }
 
-    // if (image.length > 0 || color.length > 0) {
-    //   for (let i = 0; i < image.length; i++) {
-    //     for (let j = 0; j < color.length; j++) {
-    //       const newColorArray = [];
-    //       newColorArray.push(color[i].name)
-    //       setcolorName(colorName => [...colorName, ...newColorArray])
-    //     }
-    //     const newArray = [];
-    //     newArray.push(image[i].name)
-    //     setimageName(imageName => [...imageName, ...newArray])
-    //   }
-    // }
+  }, [image, dispatch])
 
 
-
-  }, [image, color])
-
+  if (!loading) {
+    console.log(categories)
+  }
 
   const insertHandler = () => {
 
-    console.log(name, category, brand, price, countInStock, description, image)
+    console.log(color,name, category, brand, price, countInStock, description, image)
 
-    navigate('/')
+    // navigate('/')
     const formData = new FormData()
     for (let i = 0; i < image.length; i++) {
       console.log(image[i])
@@ -78,24 +77,21 @@ export default function AdminAddProduct() {
     console.log({ name, category, brand, price, countInStock, description })
 
     dispatch(listProductDetails(formData))
+    if (!loading && error) {
+      console.log(error)
+    } else {
+      //navigate('/products')
+      console.log('gooooooooooooooooooooooooood')
+    }
 
   }
 
+  const changeColor = (value,index) => {
+    color[index] = value;
+    setColor(color)
+  console.log(color)
+}
 
-  // const imageHandler = () => {
-  // }
-
-
-  // const submit = async event => {
-  //   event.preventDefault()
-
-  //   const formData = new FormData()
-  //   formData.append("image", file)
-  //   formData.append("description", description)
-
-  //   const result = await axios.post('/api/images', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-  //   console.log(result.data)
-  // }
 
   return (
     <div className='top'>
@@ -119,17 +115,19 @@ export default function AdminAddProduct() {
             <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
           </div>
           <div className='input_style'>
-            <select value={category} onChange={(e) => setCategory(e.target.value)}>
-              <option value='car'>
-                car
-              </option>
-              <option value='volvo'>
-                volvo
-              </option>
-              <option value='pickup'>
-                pickup
-              </option>
-            </select>
+            {loadingGet ?
+              <div>loading...</div>
+              :
+              <div className='input_style'>
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                  {categories.map((r, index) =>
+                    <option value={r.name}>
+                      {r.name}
+                    </option>
+                  )}
+                </select>
+              </div>
+            }
           </div>
           <div className='input_style'>
             <input
@@ -174,7 +172,6 @@ export default function AdminAddProduct() {
 
         </div>
       </div>
-
       {open &&
         <div className='img_color_Add'>
           <div className='add_items'>
@@ -195,7 +192,6 @@ export default function AdminAddProduct() {
                 ></input>
 
 
-
                 <label id='img' htmlFor='file'>
                   Choose Images
                 </label>
@@ -207,22 +203,25 @@ export default function AdminAddProduct() {
                 {imageName.length > 0 &&
 
                   imageName.map((row, index) =>
+                  // console.log(index)
+                  { return (
                     <div key={index}>
+                      
                       <p>{row}</p>
-                      <div>
-                        <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
-                        <h4>{color}</h4>
-                      </div>
-                      {/* <div>
-                          <label htmlFor='color'>nnnn</label>
-                        </div>  */}
-                    </div>
+                      <p>{color[index]}</p>
+                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
+                        
+                      </div>)
+                    //    <div>
+                    //       <label htmlFor='color'>nnnn</label>
+                    //     </div>  
+                    //  </div>
 
-                  )}
+                   } )}
               </div>
 
               <div>
-                <button type='submit' >Save</button>
+                <button type='button'onClick={() => setOpen(false)} >Save</button>
               </div>
             </div>
           </div>
@@ -231,3 +230,9 @@ export default function AdminAddProduct() {
     </div>
   )
 }
+
+
+
+
+
+

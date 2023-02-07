@@ -1,24 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import { productDeleteAction } from '../actions/productActions';
+import LoadingBox from '../components/LoadingBox';
 
 export default function AdminProducts() {
-
-  // const navigate = useNavigate();
-
-  // const addHandler = () =>{
-  //   navigate('/addproduct')
-  // }
-
-
-
-  // my code
-
-
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,10 +15,15 @@ export default function AdminProducts() {
 
   const productDelete = useSelector((state) => state.productDelete)
   const { loading: loadingDel, success, error: errorDel } = productDelete;
+  const {
+    pageNumber = 1,
+  } = useParams();
 
   useEffect(() => {
 
-    dispatch(listProducts())
+    dispatch(listProducts({
+      pageNumber
+    }))
     // console.log(products)
   }, [dispatch, success])
 
@@ -51,7 +43,9 @@ export default function AdminProducts() {
     dispatch(productDeleteAction(id))
   }
 
-
+if(!loading){
+  console.log(products)
+}
 
   return (
     <div className='top'>
@@ -60,9 +54,9 @@ export default function AdminProducts() {
         <button className='add' onClick={() => addHandler()}>Add Product</button>
       </div>
       {loading ?
-        <div>loading...</div>
+        <LoadingBox></LoadingBox>
         :
-        products.map((row, index) =>
+      
           <table className="table">
             <thead>
               <tr>
@@ -76,6 +70,7 @@ export default function AdminProducts() {
               </tr>
             </thead>
             <tbody>
+            {products.map((row, index) =>
               <tr>
                 <td>{row._id}</td>
                 <td>{row.name}</td>
@@ -95,10 +90,10 @@ export default function AdminProducts() {
                   </button>
                 </td>
               </tr>
-
+              )}
             </tbody>
           </table>
-        )}
+        }
     </div>
   )
 }
