@@ -66,7 +66,7 @@ const getFilterUrl = (filter) => {
 };
   return (
     <div>
-      <div className="row">
+      <div className="row1">
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -89,7 +89,7 @@ const getFilterUrl = (filter) => {
           </select>
         </div>
       </div>
-      <div className="row top">
+      <div className="row1 top">
         <div className="col-1">
           <h3>Department</h3>
           {/* <ul>
@@ -176,12 +176,12 @@ const getFilterUrl = (filter) => {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div className="row center">
+              <div className="row1 center">
                 {products.map((product) => (
                   <Product key={product._id} product={product}></Product>
                 ))}
               </div>
-              <div className="row center pagination">
+              <div className="row1 center pagination">
                 {[...Array(pages).keys()].map((x) => (
                   <Link
                     className={x + 1 === page ? 'active' : ''}

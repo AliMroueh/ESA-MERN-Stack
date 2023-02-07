@@ -4,7 +4,7 @@ export default function CartItemScreen() {
   return (
     <div className='cart'>
         <h1>Shopping Cart</h1>
-        <div className='row color-1'>
+        <div className='row1 color-1'>
             <div>
                 <img src="./images/p1.jpg" alt="hello"             className="small"></img>
             </div>
@@ -36,7 +36,7 @@ export default function CartItemScreen() {
                 <p><i className="fa-solid fa-trash"></i></p>
             </div>
         </div>
-        <div className='row end m-t'>
+        <div className='row1 end m-t'>
         <div className="card card-body">
             <ul>
                 <li>
