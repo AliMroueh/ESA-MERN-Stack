@@ -1,40 +1,34 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import Categories from "./Categories"
 
 const Navbar = () => {
   // Toogle Menu
   const [MobileMenu, setMobileMenu] = useState(false)
   return (
     <>
-
-      <div className='header'>
+      <header className='header'>
         <div className='containerr d_flex'>
-          <div className='catgrories d_flex'>
-            
-            <h4>
-              Categories <i className='fa fa-chevron-down'></i>
-            </h4>
+          <div className='catgrories'>
+           <Categories/>
           </div>
 
           <div className='navlink'>
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
               <li>
-                <Link to='/'>home</Link>
+                <Link to='/home'>Home</Link>
               </li>
               <li>
-                <Link to='/pages'>pages</Link>
+                <Link to='/pages'>About Us</Link>
               </li>
               <li>
-                <Link to='/user'>user account</Link>
+                <Link to='/user'>Sale</Link>
               </li>
               <li>
-                <Link to='/vendor'>vendor account</Link>
+                <Link to='/track'>Track My Order</Link>
               </li>
               <li>
-                <Link to='/track'>track my order</Link>
-              </li>
-              <li>
-                <Link to='/contact'>contact</Link>
+                <Link to='/contact'>Contact</Link>
               </li>
             </ul>
 
@@ -43,8 +37,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
-
+      </header>
     </>
   )
 }

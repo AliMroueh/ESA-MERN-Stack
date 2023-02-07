@@ -1,5 +1,4 @@
 import React from "react"
-import Categories from "./Categories"
 import "./Categories.css"
 import Slider from "./Slider"
 
@@ -8,7 +7,6 @@ const Bady = () => {
     <>
       <section className='home'>
         <div className='container d_flex'>
-          <Categories />
           <Slider />
         </div>
       </section>

@@ -3,17 +3,30 @@
 .container{
   display: flex;
   justify-content: space-between;
-  padding-left: 20px;
+  padding-left: 0px;
+  width: 100%;
+
+}
+.cart {
+    padding: 2px;
+}
+.search{
+padding-top: 10px;
+padding-left: 50px;
+}
+.home{
+width: 100%;
 }
 .containerr{
   display: flex;
   justify-content: space-between;
-  padding-left: 20px;
 }
 
 .logo h3{
   color: #0b4086;
   font-size: 25px;
+  padding-top: 25px;
+  font-weight: bolder;
 }
 .search .width {
   width: 10%;
@@ -24,34 +37,37 @@
   border-radius: 50px;
   margin-top: 10px;
   height:1%;
+
 }
 .search-box i {
-  width: 5%;
+  width: 6%;
   text-align: center;
   font-size: 20px;
   opacity: 0.5;
-  padding: 15px 10px;
+  padding: 15px 15px;
   font-size: 17px;
 }
 .search-box input {
   width: 70%;
   padding: 10px;
   border: none;
+  outline: none;
 }
 ::placeholder {
-  font-size: 15px;
+  font-size: 19px;
 }
 .search-box span {
   width:10%;
   opacity: 0.5;
   border-left: 2px solid rgba(0, 0, 0, 0.1);
-  padding: 5px;
+  padding: 9px;
+  font-size: 19px;
 }
 .icon{
   display: flex;
-  justify-content: space-around;
-  padding: 17px 0px;
-  margin-right:50px;
+  justify-content: space-between;
+  
+  margin-right:52px;
 } 
 .icon i{
   padding-top: 20px;
@@ -64,7 +80,7 @@
   padding: 0px 0px ;
   border-radius: 5px;
   height: 7vh;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
 }
@@ -75,41 +91,51 @@
   opacity: 0.5;
   color: rgb(9, 9, 9);
 }*/
+.navlink{
+  padding-right: 12px;
+  margin-bottom: 20px;
+}
 .catgrories h4 {
   /*margin-bottom: 20px;*/
-  margin: 0%;
+  font-size: 20px;
   color: #1877f2;
   height: 100%;
-  font-weight: 500;
-  margin-top: 3px;
-  padding: 0px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-left: 90px;
+}
+.catgrories{
+  padding-top: 20px;
 }
 .catgrories h4 i {
   margin-left: 8px;
 }
-.header {
-  /* height: 8vh; */
+/*header {
+  height: 9vh;
   box-shadow: -1px 15px 17px -8px rgba(0, 0, 0, 0.1);
-}
-.header ul {
+}*/
+header ul {
   line-height: 0vh;
 }
-.header ul li {
+header ul li {
   margin-left: 30px;
   list-style-type:none;
 }
-.header ul li a {
+header ul li a {
   transition: 0.5s;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 600;
   text-decoration: none;
   padding-right: 10px;
+  color: #1877f2;
+}
+header ul li a:hover {
   color: #0b4086;
+  font-size: 21px;
 }
-.header ul li a:hover {
-  color: black;
+.toggle{
+  display: none;
 }
-
 .search.active {
   height: 12vh;
   position: fixed;
@@ -126,66 +152,188 @@
   text-decoration: none;
   
 } 
-.navlink{
-  margin-bottom: 20px;
-} 
-.toggle{
+
+
+.open {
   display: none;
 }
-@media (max-width: 988px) {
- 
+
+/*------------------------------------------------------*/
+.btn1{
+
+border: none;
+color: #1877f2;
+font-weight: 600;
+font-size: 25px;
+background-color: white;
+padding-left: 40px;
+padding-top: 12px;
 }
-.containerr{
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
+.fa-sharp{
+  display: none;
 }
 
-.logo h3{
-    color: #0b4086;
-    font-size: 25px;
+
+.dropdown {
+position: relative;
 
 }
-.search .width {
-    width: 10%;
+
+.menu {
+position: absolute;
+list-style-type: none;
+margin: 5px 0;
+
+background:  #0b4086;
+z-index: 5;
+left: -189px;
+top:58px;
+overflow: auto;
+max-height: calc(100vh - 420px);
+}
+
+.menu > li {
+margin: 0;
+background-color: #0b4086;
+padding: 15px 50px;
+color: #fff;
+font-size: 20px;
+font-weight: 500;
+}
+
+.menu > li:hover {
+background-color: #1876f28d;
+border-radius: 20px;
+}
+
+.menu > li > button {
+border-radius: 20px 0px 20px 0px ;
+width: 100%;
+height: 100%;
+text-align: left;
+color: inherit;
+border: none;
+background: none;
+padding: 5px;
+margin: 0;
+font: inherit;
+cursor: pointer;
+}
+@media (max-width: 884px) {
+  header ul {
+    padding-top: 0px;
   }
-.search-box{
+  .nav-links-mobile {
+    position: absolute;
+    display: block;
+    list-style: none;
+    left: 0;
+    top: 100;
+    transition: all 0.5s ease-in-out;
     width: 60%;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
-    margin-top: 10px;
-    height:1%;
+    height: 100vh;
+    background-color: white;
+    z-index: 888;
+  }
+  header ul li {
+    width: 90%;
+    transition: all 0.5s ease-in-out;
+    text-transform: uppercase;
+    line-height: 30px;
+  }
+  header .link {
+    display: none;
+  }
+  .toggle{
+    display: block;
+  }
+  .close{
+    position: absolute;
+    top: 115px;
+    right: 0px;
+    color: #0b4086;
+    display: block;
+    font-size: 25px;
+    z-index: 999;
+  }
+  .open {
+    position: absolute;
+    top: 112px;
+    right: 30px;
+    color: #0b4086;
+    display: block;
+    font-size: 25px;
+    z-index: 999;
+  }
+  .close {
+    right: 4%;
+  }
+  .close.home-btn {
+    background: linear-gradient(145deg, #e2e8ec, #ffffff);
+    color: #0b4086;
+    border-radius: 50%;
+    padding:0px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .header.active {
+    height: 10vh;
+  }
+  .header ul li a{
+    font-size: 14px;
+  } 
+  .btn1{
+    font-size: 16px;
+  }
+
 }
-.search-box i {
-    width: 5%;
-    text-align: center;
-    font-size: 20px;
-    opacity: 0.5;
-    padding: 15px 10px;
-    font-size: 17px;
+@media (max-width: 880px) {
+  .open {
+    position: absolute;
+    top: 116px;
+    right: 30px;
+    color: #0b4086;
+    display: block;
+    font-size: 25px;
+    z-index: 999;
   }
-  .search-box input {
-    width: 70%;
-    padding: 10px;
-    border: none;
+}
+@media (max-width: 700px) {
+  .open {
+    position: absolute;
+    top: 99px;
+    right: 30px;
+    color: #0b4086;
+    display: block;
+    font-size: 25px;
+    z-index: 999;
   }
-  ::placeholder {
-    font-size: 15px;
+}
+@media (max-width:999px) {
+  .search-box{
+    display: none;
   }
-  .search-box span {
-    width:10%;
-    opacity: 0.5;
-    border-left: 2px solid rgba(0, 0, 0, 0.1);
-    padding: 5px;
+  .logo h3{
+    width: 159%;
+  }
+  .fa-sharp{
+    display: block;
+    padding-right: 30px;
+  }
+  .fa{
+    padding-right: 30px;
   }
   .icon{
-    display: flex;
     justify-content: space-around;
-    padding: 17px 0px;
-    margin-right:50px;
-  } 
-  .icon i{
-    padding-top: 20px;
-    color: #1877f2;
   }
-
+}
+@media (max-width:500px) {
+  .logo h3{
+    width: 440%;
+    margin-right: 10px;
+  }
+  .search{
+    padding-left: 0%;
+  }
+}

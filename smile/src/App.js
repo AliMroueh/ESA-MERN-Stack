@@ -9,6 +9,7 @@ import Header from "./common/Header/Header";
 import Footer from './common/footer/Footer'
 import AdminDashboard from "./screens/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
+import PrivateRoute from "./components/PrivateRoute";
 import AdminOrders from "./screens/AdminOrders";
 import AdminCategories from "./screens/AdminCategories";
 import AdminProducts from "./screens/AdminProducts";
@@ -51,7 +52,9 @@ function App() {
 
         <Route
           path="/profile"
-          element={<ProfileScreen />}
+          element={<PrivateRoute>
+          <ProfileScreen />
+          </PrivateRoute>}
         />
         <Route
           path="/cart/:id"

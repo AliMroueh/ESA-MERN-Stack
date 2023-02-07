@@ -1,74 +1,57 @@
-import React from "react";
-import Sdata from "./Sdata";
-import Slider from "./Slider";
-//import Slider from "react-slick"
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React from "react"
+import './Categories.css'
+import {Swiper,SwiperSlide} from 'swiper/react'
+import SwiperCore, { Autoplay } from 'swiper';
+import {FreeMode} from 'swiper'
+import { useSwiper } from 'swiper/react';
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 
- 
- const SlideCard = () => {
-   
+function SlideCard() {
+  const Sdata=[
+    {
+     img:'images/sale4.webp'
+    },
+    {
+      img:'images/mohammad-metri-E-0ON3VGrBc-unsplash.jpg',
+    },
+    {
+      img:'images/iphone.jpg',
+    },
 
-    var settings = {
-      dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 3,
-      initialSlide: 0,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    };
+]
+SwiperCore.use([Autoplay])
   return (
     <>
-   
-      <Slider {...settings} className="slider">
-        {Sdata.map((value, index) => {
+    <Swiper
+    freeMode={true}
+    grabCursor={true}
+    className='mySwiper'
+    slidesPerView={1}
+    loop={true}
+    autoplay={{
+        delay: 1000,
+        disableOnInteraction: true
+    }}
+  >
+        {Sdata.map((Sdata, index) => {
           return (
             <>
-              <div className='box d_flex top' key={index}>
-                <div className='left'>
-                  <h1>{value.title}</h1>
-                  <p>{value.desc}</p>
-                  <button className='btn-primary'>Visit Collections</button>
-                </div>
-                <div className='right'>
-                  <img src={value.cover} alt='' />
-                </div>
+            <SwiperSlide>
+              <div className='d-block'  key={index}>
+                  <img src={Sdata.img} alt='' className="picture4" />
               </div>
-            </>
+            </SwiperSlide>
+             </>
           )
-        })}
-      </Slider>
+         
+        })} 
+        </Swiper>
     </>
   );
 }
 
-
-
-export default SlideCard
+export default SlideCard;

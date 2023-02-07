@@ -1,41 +1,72 @@
 footer {
   background-color: #0f3460;
+  padding: 50px 0;
   color: #fff;
+
 }
 footer h1 {
   margin-bottom: 30px;
   color: #ffffff;
   font-weight: 800;
   font-style: italic;
+
 }
 
-footer .img {
+footer .img1 {
   background-color: #0c2a4d;
-  /* padding: 15px 20px; */
+  padding: 15px 20px;
   border-radius: 5px;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  width: 55%;
 }
-footer .img i {
+footer .img1 i {
   font-size: 20px;
   margin: 5px;
+  color: #1877f2;
 }
-footer .img span {
+footer .img1 span {
   margin-top: 5px;
 }
 footer p {
   font-size: 14px;
   font-weight: 300;
-  opacity: 0.5;
+  opacity: 0.8;
   margin-bottom: 20px;
 }
 footer h2 {
-  margin-bottom: 20px;
+  margin-bottom: -29px;
 }
 footer li {
   margin-bottom: 10px;
-  opacity: 0.5;
+  opacity: 0.8;
 }
-.box{
+.box2{
   width: 40%;
+  padding-left:20px;
+  padding-right:20px;
 }
-    
+.box2 h2{
+   font-size: 30px;
+}
+.icon3{
+  padding-top: 20px;
+}
+dl, ol, ul {
+  margin-top: 50px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width:1000px){
+  .container18{
+    display: flex;
+    flex-direction: column;
+  }
+  .box2{
+    width: 100%;
+    padding-top: 10px;
+  }
+  .img1{
+    padding-top: 0;
+  }
+}
