@@ -231,6 +231,15 @@ li{
 .row.links{
   width: 50%;
 }
+.col-1{
+  flex : 1 1 25rem;
+}
+.col-2{
+  flex : 2 1 50rem;
+}
+.col-3 {
+  flex: 32 1 75rem;
+}
 .homeAdmin{
   color: #ffffff;
 }
@@ -267,6 +276,24 @@ li{
 .add:hover{
   border: 0.1rem #404040 solid;
 }
+.active {
+  font-weight: bold;
+}
+/* Pagination */
+.pagination a {
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.pagination a.active {
+  font-weight: bold;
+}
+
 
 /* Table */
 .table{
