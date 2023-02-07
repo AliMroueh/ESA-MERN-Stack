@@ -89,7 +89,7 @@ export default function AdminAddProduct() {
   const changeColor = (value,index) => {
     color[index] = value;
     setColor(color)
-  console.log(color)
+    console.log(color)
 }
 
 
