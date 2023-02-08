@@ -1,4 +1,3 @@
-// const { check, validationResult } = require('express-validator');
 import { check, validationResult } from 'express-validator';
 
 const validateProductRequest = [
