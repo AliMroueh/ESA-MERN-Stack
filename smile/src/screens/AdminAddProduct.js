@@ -15,6 +15,7 @@ export default function AdminAddProduct() {
   const { loading: loadingGet, error: errorGet, categories } = getallCategories;
 
   const [open, setOpen] = useState(false);
+  const [start, setStart] = useState(false);
 
 
   const [image, setImage] = useState('');
@@ -43,7 +44,7 @@ export default function AdminAddProduct() {
         const newArray = [];
         newArray.push(image[i].name)
         setimageName(imageName => [...imageName, ...newArray])
-        setColor(color => [...color,'#f00'])
+        setColor(color => [...color, '#f00'])
         // color.push('red')
       }
     }
@@ -57,9 +58,14 @@ export default function AdminAddProduct() {
 
   const insertHandler = () => {
 
-    console.log(color,name, category, brand, price, countInStock, description, image)
+    console.log(color, name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
+
+    if(name === "" || brand === ""  || price === "" || countInStock ==="" || description === "" || category === ""){
+     
+    setStart(true)
+    }else{
     const formData = new FormData()
     for (let i = 0; i < image.length; i++) {
       console.log(image[i])
@@ -83,18 +89,21 @@ export default function AdminAddProduct() {
       //navigate('/products')
       console.log('gooooooooooooooooooooooooood')
     }
-
+    }
   }
 
-  const changeColor = (value,index) => {
+  const changeColor = (value, index) => {
     color[index] = value;
     setColor(color)
     console.log(color)
-}
+  }
 
 
   return (
     <div className='top'>
+      {start &&
+    <div style={{color:"red",fontWeight:"bold"}}>YOU HAVE TO ADD A NAME</div>}
+      <div></div>
       <div className='row adminTop'>
         <h1 className='adminTitle'>Add Product</h1>
       </div>
@@ -169,7 +178,7 @@ export default function AdminAddProduct() {
               <button onClick={insertHandler}>Add Product</button>
             </div>
           </div>
-
+ 
         </div>
       </div>
       {open &&
@@ -204,24 +213,25 @@ export default function AdminAddProduct() {
 
                   imageName.map((row, index) =>
                   // console.log(index)
-                  { return (
-                    <div key={index}>
-                      
-                      <p>{row}</p>
-                      <p>{color[index]}</p>
-                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
-                        
+                  {
+                    return (
+                      <div key={index}>
+
+                        <p>{row}</p>
+                        <p>{color[index]}</p>
+                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value, index)} />
+
                       </div>)
                     //    <div>
                     //       <label htmlFor='color'>nnnn</label>
                     //     </div>  
                     //  </div>
 
-                   } )}
+                  })}
               </div>
 
               <div>
-                <button type='button'onClick={() => setOpen(false)} >Save</button>
+                <button type='button' onClick={() => setOpen(false)} >Save</button>
               </div>
             </div>
           </div>
@@ -234,5 +244,119 @@ export default function AdminAddProduct() {
 
 
 
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import {  addCategoryAction } from '../actions/categoryActions';
+// export default function AdminAddCategory() {
+  
+//   const [open,setOpen]=useState(false);
+//   const [categoryImage, setCategoryImage] = useState();
+ 
+//   const [name, setName] = useState('');
+  
+//     const dispatch = useDispatch();
+//   const addCategory = useSelector((state) => state.addCategory);
+//   const { loading, error, categories } = addCategory;
+//   useEffect(() => {
+//     console.log(categories)
+//   }, [dispatch])
+
+// //   useEffect(() => {
+
+// //     if (insertHandler() && input.text="") {
+// //         setShow(false);
+// //     }
+
+// // }, [category.loading]);
+
+//   if (!loading) {
+//     console.log(categories)
+//   }
+//   const navigate = useNavigate();
+//   const insertHandler = () => {
+  
+//     if(name == "" || categoryImage == ""){
+     
+//       setOpen(true)
+//     }else{
+//     const formData = new FormData();
+    
+//     formData.append('categoryImage', categoryImage);
+//     formData.append('name', name);
+//     console.log(formData);
+//     console.log(name,categoryImage);
+  
+//     dispatch(addCategoryAction(formData))
+//   navigate("/categories")
+  
+//   }
+
+
+
+//   }
+//   const onSubmit = async event => {
+//     event.preventDefault()
+
+    
+   
+
+    
+//   }
+
+
+//   return (
+//     <div className='top'>
+//       <div className='row adminTop'>
+//           <h1 className='adminTitle'>Add Categories</h1>
+//       </div>
+//       <div className='row'>
+//         <div className='avatar'>
+//           <img src="images/Product-hunt-amico.svg" alt="categories"/>
+//         </div>
+//         <div className='addCat'>
+//           {open &&
+//           <div style={{color:"red",fontWeight:"bold"}}>YOU HAVE TO ADD A NAME OR IMAGE</div>}
+//                   <div className='input_style'>
+//                         <input
+//                         type="text"
+//                         id="catName"
+//                         placeholder="Enter category name"
+//                         required onChange={(e) => setName(e.target.value)}
+//                         ></input>
+//                 </div>
+
+//                 <div className='row'>
+//                   <div>
+//                         <input
+//                         type="file"
+//                         id="file"
+//                         required
+//                         alt='categoryImage'
+//                         accept="image/*"
+//                         onChange={e => setCategoryImage(e.target.files[0])}
+//                         ></input>
+//                         <label htmlFor="file">
+//                           Choose Image
+//                         </label>
+//                     </div>
+//                     <div>
+//                     <button onClick={ insertHandler} type="submit">Add Category</button>
+//                     </div>
+//                 </div>
+//                 <p id="num-of-files">No Files Chosen</p>
+//                 {/* <img src='./images/p1.jpg' className='catImage' alt='category img'/> */}
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
 
 
