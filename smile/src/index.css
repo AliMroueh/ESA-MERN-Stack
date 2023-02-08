@@ -689,6 +689,9 @@ button.block{
 .row1.links{
   width: 50%;
 }
+.adminTop{
+  margin: 10px 0;
+}
 .homeAdmin{
   color: #ffffff;
 }

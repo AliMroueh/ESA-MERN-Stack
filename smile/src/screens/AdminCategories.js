@@ -39,7 +39,7 @@ export default function AdminCategories() {
 
   return (
     <div className='top'>
-      <div className='row adminTop'>
+      <div className='row1 adminTop'>
           <h1 className='adminTitle'>Categories</h1>
           <button className='add' onClick={() => addHandler()}>Add Category</button>
       </div>

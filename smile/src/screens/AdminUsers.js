@@ -88,7 +88,7 @@ export default function AdminUsers() {
     <div className='top'>
       <button onClick={refreshtheToken}>refresh</button>
       <input onChange={(e) => setName(e.target.value)} type="text"/>
-      <div className='row adminTop'>
+      <div className='row1 adminTop'>
           <h1 className='adminTitle'>Users</h1>
       </div>
       {loadingDelete && <LoadingBox></LoadingBox>}

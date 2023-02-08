@@ -47,7 +47,7 @@ export default function AdminAddCategory() {
 
   return (
     <div className='top'>
-      <div className='row adminTop'>
+      <div className='row1 adminTop'>
           <h1 className='adminTitle'>Add Categories</h1>
       </div>
       <div className='row'>

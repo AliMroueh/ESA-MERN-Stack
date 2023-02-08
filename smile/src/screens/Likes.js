@@ -27,7 +27,7 @@ const Likes = () => {
     // console.log(Axios.post('/api/products/get/Wishlist',{name}))
   }
   return (
-    <div className="row top">
+    <div className="row1 top">
       {loading&& <LoadingBox></LoadingBox>} 
       { error && <MessageBox variant="danger">{error}</MessageBox> } 
       

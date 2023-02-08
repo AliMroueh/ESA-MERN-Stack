@@ -18,7 +18,7 @@
     
 
 //   return (
-//     <div className="row top">
+//     <div className="row1 top">
 //     <div className='col-2'>
 //         <h1>Your Wishlist Items</h1>
 //       {error && <MessageBox variant="danger">{error}</MessageBox>}
