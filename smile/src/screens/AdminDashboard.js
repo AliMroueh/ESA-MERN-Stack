@@ -18,10 +18,10 @@ export default function AdminDashboard() {
   
   return (
     <div className='top'>
-      <div className='row adminTop'>
+      <div className='row1 adminTop'>
           <h1 className='adminTitle'>Dashboard</h1>
       </div>
-      <ul className="row summary">
+      <ul className="row1 summary">
             <li>
               <div className="summary-title color1">
                 <span>

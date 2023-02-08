@@ -56,7 +56,8 @@ export default function SigninScreen() {
                         required
                         onChange={(e) => setEmail(e.target.value)}
                         ></input>
-                        <span><i className="fa-solid fa-envelope"></i></span>
+                        <span><i className="fa-solid fa-envelope"></i>
+                        </span>
                     </div>
                 </div>
                 <div>

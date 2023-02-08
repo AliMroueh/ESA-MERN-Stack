@@ -4,7 +4,7 @@ export default function AdminOrders() {
 
   return (
     <div className='top'>
-      <div className='row adminTop'>
+      <div className='row1 adminTop'>
           <h1 className='adminTitle'>Orders</h1>
       </div>
       <table className="table">

@@ -12,7 +12,7 @@ const TopCate = () => {
               <i className='fa-solid fa-border-all fa-2x'></i>
               <h1  className='title4'>Top Categories</h1>
             </div>
-            <div className='heading-right row '>
+            <div className='heading-right row1 '>
               <span className='title3'>View all<i className='fa-solid fa-caret-right'></i></span>
             </div>
           </div>
