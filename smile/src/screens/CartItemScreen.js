@@ -33,7 +33,7 @@ import MessageBox from '../components/MessageBox';
         navigate('/signin?redirect=/shipping');
     }
     return (
-        <div className="row top">
+        <div className="row1 top">
             <div className='col-2'>
                 <h1>Shopping Cart</h1>
                 {error && <MessageBox variant="danger">{error}</MessageBox>}
@@ -44,7 +44,7 @@ import MessageBox from '../components/MessageBox';
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.product}>
-                            <div className="row">
+                            <div className="row1">
                                 <div>
                                     <img src={item.image} alt={item.name}
                                     className="small"></img>
@@ -74,7 +74,7 @@ import MessageBox from '../components/MessageBox';
             )
             }
             </div>
-        <div className='col-1'>
+     {/*  <div className='col-1'>
             <div className="card card-body">
             <ul>
                 <li>
@@ -89,7 +89,7 @@ import MessageBox from '../components/MessageBox';
                 </li>
             </ul>
             </div>
-        </div>    
+        </div>   */} 
         </div>
     )
 }

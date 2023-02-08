@@ -7,6 +7,7 @@ import { userDeleteReducer, userDetailsReducer, userGetAllReducer, userRegisterR
 import { productListReducer, productDetailsReducer, productDeleteReducer, productId, productUpdateReducer, productCategoryListReducer, listWishlistReducer, getAllWishlistReducer } from "./reducers/productReducers";
 import { userRefreshReducer } from "./reducers/refreshReducers";
 import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
+import { cartReducer } from "./reducers/cartReducers";
 
 
 
@@ -22,13 +23,13 @@ const initialState = {
             ? JSON.parse(localStorage.getItem("token"))
             : null,
     },
-    // cart :{
-    //     cartItems : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [] ,
+     cart :{
+        cartItems : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [] ,
 
-    //     shippingAddress : localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : [] ,
+        shippingAddress : localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : [] ,
 
-    //     paymentMethod : 'PayPal',
-    // } 
+         paymentMethod : 'PayPal',
+    } 
 };
 const reducer = combineReducers({
     userSignin: userSigninReducer,
@@ -49,8 +50,8 @@ const reducer = combineReducers({
     userRefresh : userRefreshReducer,
     productCategoryList: productCategoryListReducer,
     listWishlist: listWishlistReducer,
-    getAllWishlist: getAllWishlistReducer
-
+    getAllWishlist: getAllWishlistReducer,
+    cart :cartReducer
 })
 
 

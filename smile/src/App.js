@@ -56,10 +56,15 @@ function App() {
           <ProfileScreen />
           </PrivateRoute>}
         />
-        <Route
+       <Route
           path="/cart/:id"
           element={<CartItemScreen />}
+          />
+        <Route
+          path="/cart"
+          element={<CartItemScreen />}
         />
+
 
           <Route
           path="/dashboard"
