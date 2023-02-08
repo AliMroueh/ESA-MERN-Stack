@@ -1,4 +1,3 @@
-
 import express from "express";
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js'
@@ -36,52 +35,49 @@ var upload = multer({
 
 // insert an product into data base
 
-productRouter.post("/addproduct", 
-// validateProductRequest, isRequestValidated, 
-upload, (req, res) => {
-    // console.log(req.body)
-    // console.log(req.files)
-
- 
-
-    const { color } = req.body;
-        for(let i=0;i<color.length;i++){
-        if(color[i] == color[i+1]){
-            return res.status(401).send({message: "duplicate color"})
-            break;
+productRouter.post("/addproduct",
+    validateProductRequest, isRequestValidated,
+    upload, (req, res) => {
+        // console.log(req.body)
+        // console.log(req.files)
+        const { color } = req.body;
+        for (let i = 0; i < color.length; i++) {
+            if (color[i] == color[i + 1]) {
+                return res.status(401).send({ message: "duplicate color" })
+                break;
+            }
         }
-    }
 
-    let imageColor = [];
+        let imageColor = [];
 
-    if (req.files.length > 0) {
-        imageColor = req.files.map((file, i) => {
-            return { image: 'http://localhost:5000/public/' + file.filename, color: color[i] }
-        })
-    }
-    const product = new Product({
-        name: req.body.name,
-        category: req.body.category,
-        brand: req.body.brand,
-        price: req.body.price,
-        description: req.body.description,
-        countInStock: req.body.countInStock,
-        imageColor
-
-    });
-    product.save((err, product) => {
-        if (err) {
-            res.json({ message: err.message });
-        } else {
-            res.send({ product })
-            // req.session.message = {
-            //     type: 'success',
-            //     message: 'User added successfuly'
-            // };
-            // res.redirect('/');
+        if (req.files.length > 0) {
+            imageColor = req.files.map((file, i) => {
+                return { image: 'http://localhost:5000/public/' + file.filename, color: color[i] }
+            })
         }
+        const product = new Product({
+            name: req.body.name,
+            category: req.body.category,
+            brand: req.body.brand,
+            price: req.body.price,
+            description: req.body.description,
+            countInStock: req.body.countInStock,
+            imageColor
+
+        });
+        product.save((err, product) => {
+            if (err) {
+                res.json({ message: err.message });
+            } else {
+                res.send({ product })
+                // req.session.message = {
+                //     type: 'success',
+                //     message: 'User added successfuly'
+                // };
+                // res.redirect('/');
+            }
+        });
     });
-});
 
 // get all product route
 // router.get('/',(req, res) => {
@@ -288,7 +284,7 @@ productRouter.delete('/delete/:id', (req, res) => {
 });
 
 //   export const addToWishlist = expressAsyncHandler( async(req,res)=>{
-    
+
 //     const {productId , _id} = req.body;
 //     try{
 //         const user = await User.findById(_id);
@@ -319,41 +315,41 @@ productRouter.delete('/delete/:id', (req, res) => {
 //         throw new Error(error);
 //     }
 //  })
- productRouter.put('/wishlist',expressAsyncHandler( async(req,res)=>{
-    
-    const {productId , _id} = req.body;
-    try{
+productRouter.put('/wishlist', expressAsyncHandler(async (req, res) => {
+
+    const { productId, _id } = req.body;
+    try {
         const user = await User.findById(_id);
-        const alreadyAded= user.wishlist.find((id)=>id.toString() === productId);
-        if(alreadyAded){
+        const alreadyAded = user.wishlist.find((id) => id.toString() === productId);
+        if (alreadyAded) {
             let user = await User.findByIdAndUpdate(_id,
                 {
-                    $pull: {wishlist:productId}
+                    $pull: { wishlist: productId }
                 },
                 {
-                    new :true
+                    new: true
                 }
-                );
+            );
             res.json(user);
-        }else{
+        } else {
             let user = await User.findByIdAndUpdate(
                 _id,
                 {
-                    $push: {wishlist:productId}
+                    $push: { wishlist: productId }
                 },
                 {
-                     new :true
+                    new: true
                 }
-                );
+            );
             res.json(user);
         }
-    }catch(error){
+    } catch (error) {
         throw new Error(error);
     }
- }))
+}))
 
- productRouter.post('/get/Wishlist',expressAsyncHandler(async(req,res)=>{
-    const {_id} = req.body;
+productRouter.post('/get/Wishlist', expressAsyncHandler(async (req, res) => {
+    const { _id } = req.body;
     console.log(req.body)
     try {
         const findUser = await User.findById(_id).populate("wishlist").select("wishlist");
@@ -361,7 +357,7 @@ productRouter.delete('/delete/:id', (req, res) => {
     } catch (error) {
         throw new Error(error)
     }
- }));
+}));
 
 
 export default productRouter
