@@ -1,38 +1,46 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React ,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import React ,{ useState } from 'react'
-import items from './itemsData'
-import './show.css'
+import {useNavigate, useParams } from 'react-router-dom';
+import { addToCart } from '../../actions/cartAction';
+import items from './itemsData';
+import './show.css';
+
+
 
 
 const show = (props) => {
   
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open,setOpen] = useState(false);
-   
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const params = useParams();
-    const {id:productId} = params;
-
-    const cartHandler = () => {
-        navigate(`/cart/${productId}?quantity=${quantity}`);
-      } 
-      function likeHandler() {
-        navigate("/like");
-    } 
-
-     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [quantity,setQuantity] = useState(1);
+    const [qty,setQuantity] = useState(1);
     const [img,setImg]= useState(false);
     const [stock,setStock]= useState(false);
+
+
+    const params = useParams();
+    const {id:productId} = params;
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    const {product} = props;
+
+    // eslint-disable-next-line no-unused-vars
+    const Product = useSelector(state => state.product);
+
+    const addToCartHandler = async() =>{
+        navigate(`/cart/${productId}?qty=${qty}`);
+    };
+
+   //description open and close
     const handleOpen = () => {
                 setOpen(!open);
                 };
+
+   //quantity increment and decrement
     const handleIncrement = () =>{
 
-        if( quantity < 8 )
+        if( qty < 8)
         {
          setQuantity(prevCount => prevCount + 1)
         }else{
@@ -41,23 +49,13 @@ const show = (props) => {
 
     }
     const handleDecrement = () =>{
-        if( quantity > 1)
+        if( qty > 1)
         {
          setStock(false)
          setQuantity(prevCount => prevCount - 1)
         }
     }
-    /*const addToCartHandler =  async (items) =>{
-        const existItem = cartItems.find((x) => x._id === items._id);
-        const quantity = existItem ? existItem.quantity + 1 : 1;
-        const { data } = await axios.get(`/api/products/${items._id}`);
-        if (data.countInStock < quantity) {
-            window.alert('Sorry. Product is out of stock');
-            return;
-          }
-    }*/
 
- 
 
     return(
         <>
@@ -66,7 +64,6 @@ const show = (props) => {
                     <>
                     <div className='content'>
                         <div className='Carousel'>
-                      
                         </div>
                         <div className='imgItem1'>
                             {img ?<img src='images/jump2.webp' alt='' className='img1'/>: <img src='images/jump2.webp' alt=''  className='img1'/>}
@@ -85,7 +82,7 @@ const show = (props) => {
                             <h1 className='titre'>Quantity</h1>
                             <div className='IncAndDecBtn'>
                                 <span className='minus' onClick={handleDecrement}>-</span>
-                                <span className='num'>{quantity}</span>
+                                <span className='num'>{qty}</span>
                                 <span className='plus' onClick={handleIncrement} >+</span>
                             </div>
                             { stock &&
@@ -96,8 +93,8 @@ const show = (props) => {
                             }
                         </div>
                         <div className='addTo'>
-                            <button className='bag' onClick={cartHandler}>Add To Bag</button>
-                            <button className='like'  onClick={likeHandler}><i class="fa-regular fa-heart"></i>Add To WishList</button>
+                            <button className='bag' onClick={addToCartHandler}>Add To Bag</button>
+                            <button className='like'  ><i class="fa-regular fa-heart"></i>Add To WishList</button>
                         </div>
                         <div className='description'>
                             {open ? 

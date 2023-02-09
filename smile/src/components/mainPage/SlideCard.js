@@ -33,7 +33,7 @@ SwiperCore.use([Autoplay])
     slidesPerView={1}
     loop={true}
     autoplay={{
-        delay: 1000,
+        delay: 5000,
         disableOnInteraction: true
     }}
   >
