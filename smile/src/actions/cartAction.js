@@ -6,17 +6,13 @@ export const addToCart = (productId, qty) => async (dispatch, getState)=>{
         const {
                 cart: { cartItems },
               } = getState();
-              if (cartItems.length > 0) {
-                dispatch({
-                  type: CART_ADD_ITEM_FAIL,
-                  payload: `Can't Add To Cart`,
-                });
-              } else {
+               
                 dispatch({
                   type: CART_ADD_ITEM,
                   payload: {
                     name: data.name,
                     price: data.price,
+                    image:data.imageColor[0].image,
                     countInStock: data.countInStock,
                     product: data._id,
                     qty,
@@ -27,7 +23,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState)=>{
                   JSON.stringify(getState().cart.cartItems)
                 );
               }
-};
+
 
 export const removeFromCart = (productId) => async (dispatch, getState) =>{
         dispatch({type : CART_REMOVE_ITEM, payload : productId});

@@ -74,7 +74,7 @@ import MessageBox from '../components/MessageBox';
             )
             }
             </div>
-     {/*  <div className='col-1'>
+          <div className='col-1'>
             <div className="card card-body">
             <ul>
                 <li>
@@ -89,7 +89,7 @@ import MessageBox from '../components/MessageBox';
                 </li>
             </ul>
             </div>
-        </div>   */} 
+        </div>  
         </div>
     )
 }

@@ -3,8 +3,8 @@ import React ,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
 import { addToCart } from '../../actions/cartAction';
-import items from './itemsData'
-import './show.css'
+import items from './itemsData';
+import './show.css';
 
 
 
@@ -22,10 +22,6 @@ const show = (props) => {
     const {id:productId} = params;
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
-    useEffect( () =>{
-        dispatch(addToCart(productId,qty))
-    }, [dispatch, productId,qty]);
 
     const {product} = props;
 
