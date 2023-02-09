@@ -26,6 +26,7 @@ import LoadingBox from "./components/LoadingBox";
 import SearchScreen from "./screens/SearchScreen";
 import Items from "./screens/Items";
 import Likes from "./screens/Likes";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 
 function App() {
 
@@ -152,6 +153,7 @@ function App() {
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
         <Route path='/like/:id' element={<Likes/>}  />
+        {/* <Route path="/shipping" element = {<ShippingAddressScreen />}></Route> */}
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />
