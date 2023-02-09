@@ -12,8 +12,8 @@ const validateProductRequest = [
         .notEmpty()
         .withMessage('category is required'),
     check('price')
-        .isLength({ min: 6 })
-        .withMessage('Password must be at least 6 character long'),
+        .isLength({ min: 2 })
+        .withMessage(' must be at least 6 character long'),
     check('description')
         .isLength({ min: 10 })
         .withMessage('description must be at least 6 character long'),

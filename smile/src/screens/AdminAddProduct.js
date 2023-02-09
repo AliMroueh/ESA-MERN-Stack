@@ -16,6 +16,10 @@ export default function AdminAddProduct() {
 
   const [open, setOpen] = useState(false);
 
+  const [start, setStart] = useState(false);
+  const [startone, setStartone] = useState(false);
+  const [starttwo, setStarttwo] = useState(false);
+
 
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
@@ -43,7 +47,7 @@ export default function AdminAddProduct() {
         const newArray = [];
         newArray.push(image[i].name)
         setimageName(imageName => [...imageName, ...newArray])
-        setColor(color => [...color,'#f00'])
+        setColor(color => [...color, '#f00'])
         // color.push('red')
       }
     }
@@ -57,40 +61,45 @@ export default function AdminAddProduct() {
 
   const insertHandler = () => {
 
-    console.log(color,name, category, brand, price, countInStock, description, image)
+    console.log(color, name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
-    const formData = new FormData()
-    for (let i = 0; i < image.length; i++) {
-      console.log(image[i])
-      formData.append("image", image[i])
-    }
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("brand", brand);
-    formData.append("price", price);
-    formData.append("countInStock", countInStock);
-    formData.append("description", description);
-    color.map(col => formData.append("color", col));
+    if (name === "" || brand === "" || price === "") {
 
-    console.log(formData);
-    console.log({ name, category, brand, price, countInStock, description })
+      setStart(true)
 
-    dispatch(listProductDetails(formData))
-    if (!loading && error) {
-      console.log(error)
     } else {
-      //navigate('/products')
-      console.log('gooooooooooooooooooooooooood')
-    }
+      const formData = new FormData()
+      for (let i = 0; i < image.length; i++) {
+        console.log(image[i])
+        formData.append("image", image[i])
+      }
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("brand", brand);
+      formData.append("price", price);
+      formData.append("countInStock", countInStock);
+      formData.append("description", description);
+      color.map(col => formData.append("color", col));
 
+      console.log(formData);
+      console.log({ name, category, brand, price, countInStock, description })
+
+      dispatch(listProductDetails(formData))
+      if (!loading && error) {
+        console.log(error)
+      } else {
+        //navigate('/products')
+        console.log('gooooooooooooooooooooooooood')
+      }
+    }
   }
 
-  const changeColor = (value,index) => {
+  const changeColor = (value, index) => {
     color[index] = value;
     setColor(color)
     console.log(color)
-}
+  }
 
 
   return (
@@ -103,7 +112,10 @@ export default function AdminAddProduct() {
           <img src="images/product-quality-animate.svg" alt="categories" />
         </div>
         <div className='addCat'>
+          {start &&
+            <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A NAME OR IMAGE</div>}
           <div className='input_style'>
+
             <input
               type="text"
               id="catName"
@@ -114,6 +126,7 @@ export default function AdminAddProduct() {
           <div className='input_style'>
             <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
           </div>
+
           <div className='input_style'>
             {loadingGet ?
               <div>loading...</div>
@@ -130,6 +143,8 @@ export default function AdminAddProduct() {
             }
           </div>
           <div className='input_style'>
+            {/* {start &&
+              <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A PRICE</div>} */}
             <input
               type="number"
               id="price"
@@ -139,6 +154,8 @@ export default function AdminAddProduct() {
             ></input>
           </div>
           <div className='input_style'>
+            {/* {start &&
+              <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A countInStock</div>} */}
             <input
               type="number"
               id="countInStock"
@@ -148,6 +165,8 @@ export default function AdminAddProduct() {
             ></input>
           </div>
           <div className='input_style'>
+            {/* {start &&
+              <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A DESCRIPTION</div>} */}
             <input
               type="text"
               id="description"
@@ -204,24 +223,25 @@ export default function AdminAddProduct() {
 
                   imageName.map((row, index) =>
                   // console.log(index)
-                  { return (
-                    <div key={index}>
-                      
-                      <p>{row}</p>
-                      <p>{color[index]}</p>
-                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value,index)}/>
-                        
+                  {
+                    return (
+                      <div key={index}>
+
+                        <p>{row}</p>
+                        <p>{color[index]}</p>
+                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value, index)} />
+
                       </div>)
                     //    <div>
                     //       <label htmlFor='color'>nnnn</label>
                     //     </div>  
                     //  </div>
 
-                   } )}
+                  })}
               </div>
 
               <div>
-                <button type='button'onClick={() => setOpen(false)} >Save</button>
+                <button type='button' onClick={() => setOpen(false)} >Save</button>
               </div>
             </div>
           </div>
