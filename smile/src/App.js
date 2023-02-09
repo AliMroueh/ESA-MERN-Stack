@@ -67,7 +67,7 @@ function App() {
           element={<CartItemScreen />}
         />
         <Route
-          path="/product/:id"
+          path="/products/:id"
           element={<ProductScreen />}
         />
 

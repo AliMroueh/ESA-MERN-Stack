@@ -44,13 +44,14 @@ import MessageBox from '../components/MessageBox';
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.product}>
-                            <div className="row1">
+                            <div className="row1 color-1">
                                 <div>
                                     <img src={item.image} alt={item.name}
                                     className="small"></img>
                                 </div>
                                 <div className='min-30'>
-                                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                    <h3>{item.name}</h3>
+                                    <p>color:{item.color}</p>
                                 </div>
                                 <div>
                                     <select value={item.qty} onChange={
@@ -65,7 +66,7 @@ import MessageBox from '../components/MessageBox';
                                 </div>
                                 <div>${item.price}</div>
                                 <div>
-                                    <button type="button" onClick={() => removeFromCartHandler(item.product)}>Delete</button>
+                                    <i className="fa-solid fa-trash fa-3x" onClick={() => removeFromCartHandler(item.product)}></i>
                                 </div>
                             </div>
                         </li>
@@ -74,7 +75,7 @@ import MessageBox from '../components/MessageBox';
             )
             }
             </div>
-          <div className='col-1'>
+          <div className='row1 end m-t'>
             <div className="card card-body">
             <ul>
                 <li>

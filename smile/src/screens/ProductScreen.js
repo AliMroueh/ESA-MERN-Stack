@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import detailsProduct from '../actions/productActions';
 
-function ProductScreen(props) {
+function ProductScreen( props) {
     const navigate = useNavigate();
+    const dispatch=useDispatch();
     const params = useParams();
     const {id:productId} = params;
     // const productId = props.match.params.id;
@@ -14,12 +16,12 @@ function ProductScreen(props) {
     // const product = data.products.find((x) => x._id === props.match.params.id); // we don't need it anymore because we are going to fetch the id from redux store
     const productDetails = useSelector(state => state.productDetails);
     const {loading, error, product} = productDetails;
-  
-  
-
-    const addToCartHandler = () =>
-    navigate(`/cart/${productId}?qty=${qty}`);
     
+
+
+    const addToCartHandler = () =>{
+    navigate(`/cart/${productId}?qty=${qty}`);
+    }    
 
     return (
         <div>
@@ -31,9 +33,6 @@ function ProductScreen(props) {
          <div>
             <Link to="/">Back to result</Link>
             <div className="row top">
-                <div className="col-2">
-                    <img className = "large" src = {product.image} alt={product.name}></img>
-                </div>
                 <div className="col-1">
                     <ul>
                         <li>
@@ -46,6 +45,7 @@ function ProductScreen(props) {
                             Description : <p>{product.description}</p>
                         </li>
                     </ul>
+                    
                 </div>
                 <div className="col-1">
                     <div className="card card-body">
