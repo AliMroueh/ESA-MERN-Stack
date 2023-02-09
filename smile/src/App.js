@@ -27,6 +27,7 @@ import SearchScreen from "./screens/SearchScreen";
 import Items from "./screens/Items";
 import Likes from "./screens/Likes";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import ProductScreen from "./screens/ProductScreen";
 
 function App() {
 
@@ -64,6 +65,10 @@ function App() {
         <Route
           path="/cart"
           element={<CartItemScreen />}
+        />
+        <Route
+          path="/product/:id"
+          element={<ProductScreen />}
         />
 
 
