@@ -50,6 +50,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/signin" element = {<SigninScreen />}></Route>
         <Route path="/register" element = {<RegisterScreen />}></Route>
+        <Route path="/shipping" element = {<ShippingAddressScreen />}></Route>
 
         <Route
           path="/profile"
@@ -153,7 +154,6 @@ function App() {
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
         <Route path='/like/:id' element={<Likes/>}  />
-        {/* <Route path="/shipping" element = {<ShippingAddressScreen />}></Route> */}
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />
