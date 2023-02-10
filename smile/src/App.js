@@ -30,6 +30,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 
 function App() {
 
@@ -118,13 +119,21 @@ function App() {
           </AdminRoute>
         }
         />
-        <Route
+        {/* <Route
           path="/orders"
           element={<AdminRoute>
           <AdminOrders />
           </AdminRoute>
         }
-        />
+        /> */}
+        <Route
+           path="/orders"
+           element={
+            <AdminRoute>
+              <OrderListScreen />
+              </AdminRoute>
+           }
+         />
                 <Route
         // I think ? after :name has no sense
             path="/search/name/:name"
