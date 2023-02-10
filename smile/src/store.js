@@ -8,6 +8,7 @@ import { productListReducer, productDetailsReducer, productDeleteReducer, produc
 import { userRefreshReducer } from "./reducers/refreshReducers";
 import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
 import { cartReducer } from "./reducers/cartReducers";
+import { orderCreateReducer, orderDeliverReducer, orderDetailsReducer, orderPayReducer } from "./reducers/orderReducers";
 
 
 
@@ -51,7 +52,11 @@ const reducer = combineReducers({
     productCategoryList: productCategoryListReducer,
     listWishlist: listWishlistReducer,
     getAllWishlist: getAllWishlistReducer,
-    cart :cartReducer
+    cart :cartReducer,
+    orderCreate : orderCreateReducer,
+    orderDetails : orderDetailsReducer,
+    orderPay : orderPayReducer,
+    orderDeliver: orderDeliverReducer,
 })
 
 

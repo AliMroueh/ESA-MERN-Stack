@@ -27,7 +27,9 @@ import SearchScreen from "./screens/SearchScreen";
 import Items from "./screens/Items";
 import Likes from "./screens/Likes";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
-import ProductScreen from "./screens/ProductScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
 
 function App() {
 
@@ -51,6 +53,10 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/signin" element = {<SigninScreen />}></Route>
         <Route path="/register" element = {<RegisterScreen />}></Route>
+        <Route path="/shipping" element = {<ShippingAddressScreen />}></Route>
+        <Route path="/payment" element = {<PaymentMethodScreen />}></Route>
+        <Route path="/placeorder" element = {<PlaceOrderScreen />}></Route>
+        <Route path="/order/:id" element = {<OrderScreen />}></Route>
 
         <Route
           path="/profile"
@@ -158,7 +164,6 @@ function App() {
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
         <Route path='/like/:id' element={<Likes/>}  />
-        {/* <Route path="/shipping" element = {<ShippingAddressScreen />}></Route> */}
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />

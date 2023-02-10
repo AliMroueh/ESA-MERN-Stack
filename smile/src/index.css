@@ -36,6 +36,10 @@ li{
   overflow: auto;
   /* position: relative; */
 }
+#profile{
+  overflow: hidden;
+  position: relative;
+}
 #signin::after, #register::after, #profile::after{
   content: '';
   position: absolute;
@@ -729,6 +733,20 @@ a:hover{
   border: 0.1rem #404040 solid;
 }
 
+/* Checkout Steps */
+.checkout-steps > div{
+  border-top: 0.3rem #c0c0c0 solid;
+  color: #c0c0c0;
+  flex: 1;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.checkout-steps > div.active{
+  border-top-color: #f08000;
+  color: #f08000;
+}
+
 /* Table */
 .table{
   width: 100%;
@@ -1038,4 +1056,10 @@ button.block{
     border: none;
     cursor: pointer;
     outline: none;
+}
+
+/* arrow in the user profile */
+.primary i{
+  position: relative;
+  top: -14px;
 }
