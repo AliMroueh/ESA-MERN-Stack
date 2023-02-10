@@ -2,7 +2,7 @@
 import React ,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
-import { addToWishlist, detailsProduct } from '../../actions/productActions';
+import { addToWishlist, detailsProduct, getWishList } from '../../actions/productActions';
 import LoadingBox from '../LoadingBox';
 import MessageBox from '../MessageBox';
 //import items from './itemsData';
@@ -34,7 +34,8 @@ const show = (props) => {
     /*useEffect( () =>{
         dispatch(productDetails(productId))
     }, [dispatch, productId]);*/
-
+    const userSignin = useSelector(state => state.userSignin)
+    const {userInfo} = userSignin;
 
     const addToCartHandler = async() =>{
         navigate(`/cart/${productId}?qty=${qty}`);
@@ -67,6 +68,11 @@ const show = (props) => {
    useEffect(()=>{
          dispatch(detailsProduct(productId))
       },[])
+
+  const likeHandler = () =>{
+        dispatch(addToWishlist(userInfo._id,productId))
+        navigate(`/like/${userInfo._id}`)
+  }
 
 
        const changeImage = (index) => {
@@ -125,7 +131,7 @@ const show = (props) => {
                         </div>
                         <div className='addTo'>
                             <button className='bag' onClick={addToCartHandler}>Add To Bag</button>
-                            <button className='like' onClick={addToWishlist_id} ><i className="fa-regular fa-heart"></i>Add To WishList</button>
+                            <button className='like' onClick={ likeHandler } ><i className="fa-regular fa-heart"></i>Add To WishList</button>
                         </div>
                         <div className='description'>
                             {open ? 

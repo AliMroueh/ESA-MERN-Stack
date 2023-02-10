@@ -21,26 +21,6 @@ import { getProducts } from "../../actions/productActions";
 
 const FlashCard= () => {
    
-   
-
-
-  const params = useParams();
-  const {id:productId} = params;
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const  productList = useSelector(state => state.productList);
- 
-  useEffect( () =>{
-
-    dispatch( productListReducer(productId))
-}, [dispatch, productId]);
-
-
-  const showItem = async() =>{
-      navigate(`/product/${productId}`);
-  };
-
-  
     return (
         <>
         <Swiper
@@ -68,7 +48,7 @@ const FlashCard= () => {
                       <h1>{products.name}</h1>
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
-                        <button className="btn" onClick={showItem}>
+                        <button className="btn">
                           View Item
                         </button>
                       </div>
