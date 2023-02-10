@@ -10,6 +10,7 @@ import categoryRouter from './routers/categoryRouter.js';
 import { applyPassportStrategy } from './utils.js';
 import passport from 'passport';
 import refreshTokenRouter from './routers/refreshTokenRouter.js';
+import orderRouter from './routers/orderRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -53,6 +54,7 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/refresh', refreshTokenRouter);
+app.use('/api/orders', orderRouter);
 
 
 // app.get('/api/products', (req, res) => {

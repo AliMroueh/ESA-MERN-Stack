@@ -3,12 +3,14 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
+import passport from 'passport';
 
-
-const orderRouter = expressAsyncHandler.Router();
+const orderRouter = express.Router();
 
   // find my orders
-  orderRouter.get('/mine', isAuth, expressAsyncHandler(async(req, res) => {
+  orderRouter.get('/mine', 
+//   isAuth, 
+  expressAsyncHandler(async(req, res) => {
     const orders = await Order.find({user : req.user._id});
     res.send(orders)
 })
@@ -17,8 +19,9 @@ const orderRouter = expressAsyncHandler.Router();
 // create new order
 orderRouter.post(
     '/',
+    passport.authenticate('jwt', { session: false }),
     // isAuth is a middleware by calling next in it req.user will be filled by user information
-    isAuth,
+    // isAuth,
     expressAsyncHandler(async(req, res) => {
         if(req.body.orderItems.length === 0){
             res.status(400).send({message: 'Cart is empty' });
@@ -30,7 +33,7 @@ orderRouter.post(
                 paymentMethod: req.body.paymentMethod,
                 shippingPrice: req.body.shippingPrice,
                 totalPrice: req.body.totalPrice,
-                user: req.body._id,
+                user: req.user._id,
             });
             // save the order
             const createdOrder = await order.save();
@@ -41,7 +44,9 @@ orderRouter.post(
 );
 
 // get the orders for each user to admin
-orderRouter.get('/:id',isAuth, expressAsyncHandler(async(req,res) => {
+orderRouter.get('/:id',
+// isAuth,
+ expressAsyncHandler(async(req,res) => {
     const order = await Order.findById(req.params.id);
     if(order){
         res.send(order);
@@ -51,7 +56,8 @@ orderRouter.get('/:id',isAuth, expressAsyncHandler(async(req,res) => {
 }));
 
 // admin delete order
-orderRouter.delete('/:id', isAuth, isAdmin,
+orderRouter.delete('/:id',
+//  isAuth, isAdmin,
  expressAsyncHandler(async(req,res) => {
      const order = await Order.findById(req.params.id);
      if(order){
@@ -64,8 +70,8 @@ orderRouter.delete('/:id', isAuth, isAdmin,
 
  orderRouter.put(
     '/:id/deliver',
-    isAuth,
-    isAdmin,
+    // isAuth,
+    // isAdmin,
     expressAsyncHandler(async(req,res)=> {
         const order = await Order.findById(req.params.id);
         if(order){
