@@ -64,7 +64,7 @@ export default function AdminAddProduct() {
     console.log(color, name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
-    if (name === "" || brand === "" || price === "") {
+    if (name === "" || brand === "" || price === "" || category === "" || countInStock === "" || description === "") {
 
       setStart(true)
 

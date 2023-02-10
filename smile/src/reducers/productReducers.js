@@ -46,20 +46,20 @@ import {
 //     }
 // }
 
-export const productListReducer = (state = {loading: true,products: []}, action) => {
-    switch(action.type){
+export const productListReducer = (state = { loading: true, products: [] }, action) => {
+    switch (action.type) {
         case PRODUCT_LIST_REQUEST:
-            return {loading: true};
+            return { loading: true };
         case PRODUCT_LIST_SUCCESS:
             // return {loading: false, products : action.payload}
             return {
-              loading: false,
-              products: action.payload.products,
-              pages: action.payload.pages,
-              page: action.payload.page,
+                loading: false,
+                products: action.payload.products,
+                pages: action.payload.pages,
+                page: action.payload.page,
             };
         case PRODUCT_LIST_FAIL:
-            return { loading:false, error : action.payload}
+            return { loading: false, error: action.payload }
         default:
             return state;
     }
@@ -68,18 +68,18 @@ export const productListReducer = (state = {loading: true,products: []}, action)
 export const productCategoryListReducer = (
     state = { loading: true, products: [] },
     action
-  ) => {
+) => {
     switch (action.type) {
-      case PRODUCT_CATEGORY_LIST_REQUEST:
-        return { loading: true };
-      case PRODUCT_CATEGORY_LIST_SUCCESS:
-        return { loading: false, categories: action.payload };
-      case PRODUCT_CATEGORY_LIST_FAIL:
-        return { loading: false, error: action.payload };
-      default:
-        return state;
+        case PRODUCT_CATEGORY_LIST_REQUEST:
+            return { loading: true };
+        case PRODUCT_CATEGORY_LIST_SUCCESS:
+            return { loading: false, categories: action.payload };
+        case PRODUCT_CATEGORY_LIST_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
     }
-  };
+};
 
 
 //get update
@@ -152,30 +152,30 @@ export const productDeleteReducer = (state = {}, action) => {
     }
 }
 
-export const listWishlistReducer = (state={favorite:[]},action) => {
-    switch(action.type){
+export const listWishlistReducer = (state = { favorite: [] }, action) => {
+    switch (action.type) {
         case WISHLIST_ADD_REQUEST:
-            return {loading: true, ...state}
+            return { loading: true, ...state }
 
         case WISHLIST_ADD_SUCCESS:
-            return {loading: false, favorite:action.payload}
+            return { loading: false, favorite: action.payload }
 
         case WISHLIST_ADD_FAIL:
-            return {loading: false, error:action.payload}
+            return { loading: false, error: action.payload }
         default: return state;
     }
 }
 
-export const getAllWishlistReducer = (state={},action) => {
-    switch(action.type){
+export const getAllWishlistReducer = (state = {}, action) => {
+    switch (action.type) {
         case WISHLIST_GET_REQUEST:
-            return {loading: true, ...state}
+            return { loading: true, ...state }
 
         case WISHLIST_GET_SUCCESS:
-            return {loading: false, favorites:action.payload}
+            return { loading: false, favorites: action.payload }
 
         case WISHLIST_GET_FAIL:
-            return {loading: false, error:action.payload}
+            return { loading: false, error: action.payload }
         default: return state;
     }
 }
