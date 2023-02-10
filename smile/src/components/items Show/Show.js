@@ -2,8 +2,10 @@
 import React ,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
-import { addToCart } from '../../actions/cartAction';
-import items from './itemsData';
+import { detailsProduct } from '../../actions/productActions';
+import LoadingBox from '../LoadingBox';
+import MessageBox from '../MessageBox';
+//import items from './itemsData';
 import './show.css';
 
 
@@ -22,11 +24,16 @@ const show = (props) => {
     const {id:productId} = params;
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
-    const {product} = props;
+    const productDetails = useSelector(state => state.productDetails);
+    const {loading, error, products} = productDetails;
+    console.log(products)
 
     // eslint-disable-next-line no-unused-vars
     const Product = useSelector(state => state.product);
+    useEffect( () =>{
+        dispatch(productDetails(productId))
+    }, [dispatch, productId]);
+
 
     const addToCartHandler = async() =>{
         navigate(`/cart/${productId}?qty=${qty}`);
@@ -39,8 +46,7 @@ const show = (props) => {
 
    //quantity increment and decrement
     const handleIncrement = () =>{
-
-        if( qty < 8)
+        if(qty < products.countInStock)
         {
          setQuantity(prevCount => prevCount + 1)
         }else{
@@ -57,11 +63,17 @@ const show = (props) => {
     }
 
 
+    useEffect(()=>{
+         dispatch(detailsProduct(productId))
+      },[dispatch,productId])
+
     return(
-        <>
-        {items.map((items, index) => {
-                return (
                     <>
+                        { loading ? (
+                            <LoadingBox></LoadingBox> 
+                        ) : error ? (
+                        <MessageBox variant='danger'>{error}</MessageBox> 
+                        ) : (
                     <div className='content'>
                         <div className='Carousel'>
                         </div>
@@ -69,10 +81,10 @@ const show = (props) => {
                             {img ?<img src='images/jump2.webp' alt='' className='img1'/>: <img src='images/jump2.webp' alt=''  className='img1'/>}
                         </div>
                         <div className='all'>
-                        <h1 className='brand'>{items.brand}</h1>
-                        <div className='title'>{items.name}</div>
+                        <h1 className='brand'>{products.brand}</h1>
+                        <div className='title'>{products.name}</div>
                         <h1 className='price1'>Price</h1>
-                        <h1 className='price2'>{items.price}</h1>
+                        <h1 className='price2'>{products.price}</h1>
                         <h1 className='titre'>choose Color</h1>
                         <div className='sizeBtn'>
                             <button className='bleu'></button>
@@ -82,15 +94,19 @@ const show = (props) => {
                             <h1 className='titre'>Quantity</h1>
                             <div className='IncAndDecBtn'>
                                 <span className='minus' onClick={handleDecrement}>-</span>
-                                <span className='num'>{qty}</span>
+                                <span className='num' onChange={e=>setQuantity(e.target.value)}>{qty}</span>
                                 <span className='plus' onClick={handleIncrement} >+</span>
+        
                             </div>
-                            { stock &&
-                            <div>
-                                <div className='stock'>8 ITEM(S) IN STOCK</div>
-                                <div className='stock2'>THE REMAINING ITEMS ARE CURRENTLY NOT AVAILABLE.</div>
-                            </div>
-                            }
+                                    <div>
+                                        {stock &&
+                                        (
+                                            <>
+                                            <div className='stock'>{products.countInStock} ITEM(S) IN STOCK</div>
+                                            <div className="danger">THE REMAINING ITEMS ARE CURRENTLY NOT AVAILABLE.</div>
+                                            </>
+                                        )}    
+                                    </div>
                         </div>
                         <div className='addTo'>
                             <button className='bag' onClick={addToCartHandler}>Add To Bag</button>
@@ -103,7 +119,7 @@ const show = (props) => {
                             <button onClick={handleOpen}>Description</button>
                             <i className='fa fa-chevron-up'></i>
                             </div>
-                            <div className='desc'>{items.description}</div>
+                            <div className='desc'>{products.description}</div>
                             </div>
                             :
                             <div className='desctransition'>
@@ -114,8 +130,7 @@ const show = (props) => {
                         </div>
                         </div>
                     </div>
+                    )}
                     </>
-                    )
-                })}
-                    </>)}
+                    )}
 export default show

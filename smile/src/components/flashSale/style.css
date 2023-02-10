@@ -6,6 +6,12 @@
 .heading{
     padding-top: 20px;
 }
+
+.img12 {
+    padding-top: 15px;
+   
+}
+
 .heading h1{
     font-size: 30px;
     font-weight: 500;
@@ -32,8 +38,9 @@
 }
 .sales{
     justify-content: space-between;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 10px;
+    padding-bottom: 11px;
 }
 .btn{
    font-size: 20px;
@@ -55,7 +62,7 @@
 }
 .price{
     padding-left:90px;
-    padding-bottom:20px
+    padding-bottom:15px
 }
 .price h1{
     padding-left:10px
@@ -154,4 +161,7 @@
     .btn{
         width: 50%;
     }
+}
+.btn:hover{
+    background-color: #1876f2;
 }

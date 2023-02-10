@@ -66,7 +66,7 @@ import MessageBox from '../components/MessageBox';
                                 </div>
                                 <div>${item.price}</div>
                                 <div>
-                                    <i className="fa-solid fa-trash fa-3x" onClick={() => removeFromCartHandler(item.product)}></i>
+                                    <i className="fa-solid fa-trash" onClick={() => removeFromCartHandler(item.product)}></i>
                                 </div>
                             </div>
                         </li>

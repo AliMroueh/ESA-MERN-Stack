@@ -11,7 +11,7 @@ const FlashDeals = ({products}) => {
         <div className='container'>
           <div className='heading f_flex'>
           </div>
-          <FlashCard products={products}  />
+          <FlashCard products={products}/>
         </div>
       </section>
     </>
