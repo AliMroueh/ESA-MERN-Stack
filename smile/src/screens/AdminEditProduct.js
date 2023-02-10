@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { getallCategoriesAction } from '../actions/categoryActions';
 import { Link, useParams } from 'react-router-dom';
 import { productUpdateAction, getProducts } from '../actions/productActions';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,7 +18,9 @@ export default function AdminEditProduct() {
 
 
     const [open, setOpen] = useState(false);
+    const getallCategories = useSelector((state) => state.getallCategories);
 
+    const { loading: loadingGet, error: errorGet, categories } = getallCategories;
     // const [product, getProducts] = useState(props.product)
 
 
@@ -45,17 +47,20 @@ export default function AdminEditProduct() {
     console.log(id)
 
     useEffect(() => {
-
+        dispatch(getallCategoriesAction())
         dispatch(getProducts(id))
 
         setimageName([]);
         document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
         if (image.length > 0) {
+            setColor([])
             for (let i = 0; i < image.length; i++) {
                 const newArray = [];
                 newArray.push(image[i].name)
                 setimageName(imageName => [...imageName, ...newArray])
+                setColor(color => [...color, '#f00'])
+                // color.push('red')
             }
         }
     }, [dispatch, id, image])
@@ -88,12 +93,19 @@ export default function AdminEditProduct() {
     useEffect(() => {
         if (!loadingOne) {
             console.log(productsOne);
-            if(productsOne && productsOne.name){
-            setName(productsOne.name);
-            // console.log(productsOne.name)
+            if (productsOne && productsOne.name) {
+                setName(productsOne.name);
+                // console.log(productsOne.name)
             }
         }
-    },[loadingOne,productsOne])
+    }, [loadingOne, productsOne])
+
+
+    const changeColor = (value, index) => {
+        color[index] = value;
+        setColor(color)
+        console.log(color)
+    }
 
 
     return (
@@ -124,15 +136,11 @@ export default function AdminEditProduct() {
                     <div className='input_style'>
 
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            <option value='car'>
-                                car
-                            </option>
-                            <option value='volvo'>
-                                volvo
-                            </option>
-                            <option value='pickup'>
-                                pickup
-                            </option>
+                            {categories.map((r, index) =>
+                                <option value={r.name}>
+                                    {r.name}
+                                </option>
+                            )}
                         </select>
                     </div>
                     <div className='input_style'>
@@ -208,16 +216,19 @@ export default function AdminEditProduct() {
                                 {imageName.length > 0 &&
 
                                     imageName.map((row, index) =>
-                                        <div key={index}>
-                                            <p>{row}</p>
-                                            <div>
-                                                <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
-                                                <div>
-                                                    <label htmlFor='color'>color</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
+                                    // console.log(index)
+                                    {
+                                        return (
+                                            <div key={index}>
+
+                                                <p>{row}</p>
+                                                <p>{color[index]}</p>
+                                                <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value, index)} />
+
+                                            </div>)
+
+
+                                    })}
                             </div>
 
                             <div>
@@ -234,14 +245,7 @@ export default function AdminEditProduct() {
 }
 
 
-// const makeStateToProps = () => {
-//     const product = getProducts();
-//     return (state, props) => {
-//         return {
-//             product: product(state, props.match.params.id),
-//         };
-//     };
-// };
+
 
 
 
