@@ -2,7 +2,7 @@
 import React ,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
-import { detailsProduct } from '../../actions/productActions';
+import { addToWishlist, detailsProduct } from '../../actions/productActions';
 import LoadingBox from '../LoadingBox';
 import MessageBox from '../MessageBox';
 //import items from './itemsData';
@@ -16,7 +16,7 @@ const show = (props) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open,setOpen] = useState(false);
     const [qty,setQuantity] = useState(1);
-    const [img,setImg]= useState(false);
+    const [img,setImg]= useState('');
     const [stock,setStock]= useState(false);
 
 
@@ -26,13 +26,14 @@ const show = (props) => {
     const navigate = useNavigate()
     const productDetails = useSelector(state => state.productDetails);
     const {loading, error, products} = productDetails;
-    console.log(products)
+
+    //console.log(products)
 
     // eslint-disable-next-line no-unused-vars
     const Product = useSelector(state => state.product);
-    useEffect( () =>{
+    /*useEffect( () =>{
         dispatch(productDetails(productId))
-    }, [dispatch, productId]);
+    }, [dispatch, productId]);*/
 
 
     const addToCartHandler = async() =>{
@@ -63,9 +64,15 @@ const show = (props) => {
     }
 
 
-    useEffect(()=>{
+   useEffect(()=>{
          dispatch(detailsProduct(productId))
-      },[dispatch,productId])
+      },[])
+
+
+       const changeImage = (index) => {
+        setImg(products.imageColor[index].image)
+      }
+
 
     return(
                     <>
@@ -75,10 +82,15 @@ const show = (props) => {
                         <MessageBox variant='danger'>{error}</MessageBox> 
                         ) : (
                     <div className='content'>
-                        <div className='Carousel'>
-                        </div>
                         <div className='imgItem1'>
-                            {img ?<img src='images/jump2.webp' alt='' className='img1'/>: <img src='images/jump2.webp' alt=''  className='img1'/>}
+
+                            <img src={
+                                img.length === 0 ? 
+                                products.imageColor && products.imageColor[0].image : img
+                                } 
+                                alt='' className='img1'>
+                                </img>
+
                         </div>
                         <div className='all'>
                         <h1 className='brand'>{products.brand}</h1>
@@ -87,8 +99,11 @@ const show = (props) => {
                         <h1 className='price2'>{products.price}</h1>
                         <h1 className='titre'>choose Color</h1>
                         <div className='sizeBtn'>
-                            <button className='bleu'></button>
-                            <button className='black'></button>
+                            {products.imageColor && products.imageColor.map((data,index) =>
+                            
+                           <button  className='bleu' style={{backgroundColor:  data.color }} onClick={()=>changeImage(index)} key={index}></button>
+                            //<button className='black'></button>
+                            )}
                         </div>
                         <div>
                             <h1 className='titre'>Quantity</h1>
@@ -110,7 +125,7 @@ const show = (props) => {
                         </div>
                         <div className='addTo'>
                             <button className='bag' onClick={addToCartHandler}>Add To Bag</button>
-                            <button className='like'  ><i class="fa-regular fa-heart"></i>Add To WishList</button>
+                            <button className='like' onClick={addToWishlist_id} ><i className="fa-regular fa-heart"></i>Add To WishList</button>
                         </div>
                         <div className='description'>
                             {open ? 
