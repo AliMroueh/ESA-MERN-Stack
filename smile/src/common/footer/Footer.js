@@ -21,11 +21,11 @@ function Footer() {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit at amet.</p>
         <div className='icon3 f_flex'>
           <div className='img1 d_flex'>
-            <i class='fa-brands fa-app-store-ios'></i>
+            <i className='fa-brands fa-app-store-ios'></i>
             <span>App Store</span>
           </div>
           <div className='img1 d_flex'>
-            <i class='fa-brands fa-google-play'></i>
+            <i className='fa-brands fa-google-play'></i>
             <span>Google Play</span>
           </div>
     </div>
