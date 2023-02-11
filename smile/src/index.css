@@ -214,7 +214,7 @@ li{
   z-index: 50;
   position: relative;
 }
-.row1{
+/* .row1{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -234,7 +234,7 @@ li{
 }
 .row1.links{
   width: 50%;
-}
+}*/
 .col-1{
   flex : 1 1 25rem;
 }
@@ -243,7 +243,7 @@ li{
 }
 .col-3 {
   flex: 32 1 75rem;
-}
+} 
 .homeAdmin{
   color: #ffffff;
 }
@@ -1063,3 +1063,5 @@ button.block{
   position: relative;
   top: -14px;
 }
+
+/* color */
