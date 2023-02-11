@@ -107,7 +107,7 @@ export default function AdminAddProduct() {
       <div className='row1 adminTop'>
         <h1 className='adminTitle'>Add Product</h1>
       </div>
-      <div className='row'>
+      <div className='row1'>
         <div className='avatar'>
           <img src="images/product-quality-animate.svg" alt="categories" />
         </div>
@@ -176,7 +176,7 @@ export default function AdminAddProduct() {
             ></input>
           </div>
 
-          <div className='row'>
+          <div className='row1'>
             <div>
 
               <label onClick={() => setOpen(true)}>
