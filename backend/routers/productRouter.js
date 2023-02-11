@@ -8,7 +8,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { isAdmin } from "../utils.js";
 import passport from 'passport';
-
+import { generateToken, isAdmin, refreshToken } from '../utils.js';
 import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
 const router = express.Router();
 import expressAsyncHandler from "express-async-handler";
@@ -51,6 +51,11 @@ productRouter.post("/addproduct",
                 break;
             }
         }
+
+
+
+
+
 
         let imageColor = [];
 
