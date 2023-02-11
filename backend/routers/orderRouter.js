@@ -16,6 +16,25 @@ const orderRouter = express.Router();
 })
 );
 
+orderRouter.get('/',
+// isAuth, 
+// isAdmin
+// isSellerOrAdmin
+expressAsyncHandler(async (req,res)=> {
+    // populate bring the name of the user (user is id) since it is not exist in the Order.find({})
+    // const orders = await Order.find({}).populate('user', 'name');
+    // req.query get the result after ? in url
+    const seller = req.query.seller || '';
+    const sellerFilter = seller ? { seller } : {};
+
+    const orders = await Order.find({ ...sellerFilter }).populate(
+      'user',
+      'name'
+    );
+    res.send(orders);
+})
+);
+
 // create new order
 orderRouter.post(
     '/',
