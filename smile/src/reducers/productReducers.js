@@ -49,7 +49,7 @@ import {
 export const productListReducer = (state = { loading: true, products: [] }, action) => {
     switch (action.type) {
         case PRODUCT_LIST_REQUEST:
-            return { loading: true };
+            return { loading: true, success: false };
         case PRODUCT_LIST_SUCCESS:
             // return {loading: false, products : action.payload}
             return {
@@ -57,9 +57,10 @@ export const productListReducer = (state = { loading: true, products: [] }, acti
                 products: action.payload.products,
                 pages: action.payload.pages,
                 page: action.payload.page,
+                success: true,
             };
         case PRODUCT_LIST_FAIL:
-            return { loading: false, error: action.payload }
+            return { loading: false, error: action.payload, success: false }
         default:
             return state;
     }
@@ -104,13 +105,13 @@ export const productId = (state = { products: [] }, action) => {
 export const productDetailsReducer = (state = { products: [] }, action) => {
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
-            return { loading: true, ...state }
+            return { loading: true, ...state, success: false }
 
         case PRODUCT_DETAILS_SUCCESS:
-            return { loading: false, products: action.payload }
+            return { loading: false, products: action.payload, success: true }
 
         case PRODUCT_DETAILS_FAIL:
-            return { loading: false, error: action.payload }
+            return { loading: false, error: action.payload, success: false }
 
         default: return state
     }
@@ -121,13 +122,13 @@ export const productDetailsReducer = (state = { products: [] }, action) => {
 export const productUpdateReducer = (state = { products: [] }, action) => {
     switch (action.type) {
         case PRODUCT_UPDATE_REQUEST:
-            return { loading: true, ...state }
+            return { loading: true, ...state, success: false }
 
         case PRODUCT_UPDATE_SUCCESS:
-            return { loading: false, products: action.payload }
+            return { loading: false, products: action.payload, success: true }
 
         case PRODUCT_UPDATE_FAIL:
-            return { loading: false, error: action.payload }
+            return { loading: false, error: action.payload, success: false }
 
         default: return state
     }

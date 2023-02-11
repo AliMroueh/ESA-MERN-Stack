@@ -5,12 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 import { productUpdateAction, getProducts } from '../actions/productActions';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-
-
-
-
-
-
 export default function AdminEditProduct() {
 
     const dispatch = useDispatch();
@@ -35,7 +29,7 @@ export default function AdminEditProduct() {
     const [imageName, setimageName] = useState([]);
 
     const productUpdate = useSelector((state) => state.productUpdate)
-    const { loading, error, products } = productUpdate
+    const { loading, error, products, success } = productUpdate
 
 
     const productid = useSelector((state) => state.productid)
@@ -88,15 +82,33 @@ export default function AdminEditProduct() {
 
         dispatch(productUpdateAction(id, formData))
 
+
+
+        dispatch(productUpdate(formData))
+        if (!loading && error) {
+            console.log(error)
+        } else if (!loading && !error && success) {
+            navigate('/products')
+            console.log('gooooooooooooooooooooooooood')
+        }
     }
+    // &&  && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description)
 
     useEffect(() => {
         if (!loadingOne) {
             console.log(productsOne);
-            if (productsOne && productsOne.name) {
-                setName(productsOne.name);
+            if (productsOne && productsOne.brand) {
+                setName(productsOne.brand);
+                // 
+                // setName(productsOne.category);
+                // setName(productsOne.price);
+                // setName(productsOne.countInStock);
+                // setName(productsOne.description);
                 // console.log(productsOne.name)
             }
+            // } else if (productsOne && productsOne.brand) {
+            //     setName(productsOne.brand);
+            // }
         }
     }, [loadingOne, productsOne])
 
@@ -111,6 +123,7 @@ export default function AdminEditProduct() {
     return (
 
         < div className='top' >
+
             <div className='row1 adminTop'>
                 <h1 className='adminTitle'>Update Product</h1>
             </div>
@@ -149,7 +162,7 @@ export default function AdminEditProduct() {
                             id="price"
                             placeholder="Enter product price"
                             required
-
+                            value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         ></input>
                     </div>
@@ -159,6 +172,7 @@ export default function AdminEditProduct() {
                             id="countInStock"
                             placeholder="Enter Count In Stock"
                             required
+                            value={countInStock}
                             onChange={(e) => setcountInStock(e.target.value)}
                         ></input>
                     </div>
@@ -168,7 +182,7 @@ export default function AdminEditProduct() {
                             id="description"
                             placeholder="Enter the description"
                             required
-
+                            value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         ></input>
                     </div>

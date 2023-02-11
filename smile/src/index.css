@@ -894,9 +894,9 @@ a:hover{
   color: #e20b0b;
   cursor: pointer;
 }
-.choose_img input[type="color"]{
+/* .choose_img input[type="color"]{
   visibility: hidden;
-}
+} */
 .imgAndcolor{
   width: 100%;
 }

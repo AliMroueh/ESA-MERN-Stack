@@ -89,19 +89,23 @@ export const listProductCategories = () => async (dispatch) => {
     }
 };
 
-export const listProductDetails = (info) => async (dispatch) => {
+export const listProductDetails = (info) => async (dispatch, getState) => {
+    const { userSignin: { token } } = getState();
+
     try {
+
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
 
         const { data } = await axios.post(`/api/products/addproduct`, info,
-            { headers: { 'Content-Type': 'multipart/form-data' } }
+            { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } }
         )
 
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
             payload: data,
+
 
         })
     } catch (error) {
@@ -116,12 +120,15 @@ export const listProductDetails = (info) => async (dispatch) => {
 
 
 // UPDATE 
-export const productUpdateAction = (id, info) => async (dispatch) => {
+export const productUpdateAction = (id, info) => async (dispatch, getState) => {
+    const { userSignin: { token } } = getState();
 
     dispatch({ type: PRODUCT_UPDATE_REQUEST })
     try {
-        const { data } = await axios.put(`/api/products/update/${id}`, info)
-
+        const { data } = await axios.put(`/api/products/update/${id}`, info,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            });
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,
             payload: data,
