@@ -596,18 +596,6 @@ img.medium{
 img.large{
   width: 100%;
 }
-button.primary{
-  background-color: var(--primary-color);
-  color: #ffffff;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 15px;
-  border-radius: 5px;
-}
-button.block{
-  width: 100%;
-}
 .m-t{
   margin-top: 20px;
 }
@@ -1000,6 +988,7 @@ button.primary{
   border-radius: 5px;
 }
 button.block{
+  margin-top: 10px;
   width: 100%;
 }
 .m-t{

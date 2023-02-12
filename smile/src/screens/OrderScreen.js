@@ -81,7 +81,7 @@ export default function OrderScreen(props) {
                                 <h2>Shipping</h2>
                                 <p>
                                     <strong>Name : </strong>{order.shippingAddress.fullName} <br />
-                                    <strong>Address : </strong>{order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.postalCode}, {order.shippingAddress.country}
+                                    <strong>Address : </strong>{order.shippingAddress.address}, {order.shippingAddress.city}
                                 </p>
                                 {
                                     order.isDelivered ?
@@ -179,7 +179,7 @@ export default function OrderScreen(props) {
                                 )}
                             </li>
                         )} */}
-                        {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                        {userInfo.isAdmin && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (
@@ -191,6 +191,22 @@ export default function OrderScreen(props) {
                     onClick={deliverHandler}
                   >
                     Deliver Order
+                  </button>
+                </li>
+              )}
+              
+                {userInfo.isAdmin && !order.isPaid && (
+                <li>
+                  {loadingPay && <LoadingBox></LoadingBox>}
+                  {errorPay && (
+                    <MessageBox variant="danger">{errorPay}</MessageBox>
+                  )}
+                  <button
+                    type="button"
+                    className="primary block"
+                    onClick={successPaymentHandler}
+                  >
+                    Pay Order
                   </button>
                 </li>
               )}
