@@ -21,7 +21,7 @@ const __dirname = path.dirname(__filename);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(path.dirname(`http://localhost:5000/public/${__dirname}`), "uploads"));
+        cb(null, path.join(path.dirname(__dirname), "uploads"));
 
     },
     filename: function (req, file, cb) {
@@ -232,7 +232,7 @@ productRouter.put('/update/:id', upload, passport.authenticate('jwt', { session:
                     if (images) {
                         try {
                             for (let i = 0; i < images.length; i++) {
-                                fs.unlinkSync("../uploads/" + images[i]);
+                                fs.unlinkSync(path.join(path.dirname(__dirname), "uploads/") + images[i].slice("public/"));
                             }
                             console.log('deleted successfully')
                         } catch (error) {

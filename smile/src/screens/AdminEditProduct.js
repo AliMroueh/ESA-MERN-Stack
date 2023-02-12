@@ -84,13 +84,13 @@ export default function AdminEditProduct() {
 
 
 
-        dispatch(productUpdate(formData))
-        if (!loading && error) {
-            console.log(error)
-        } else if (!loading && !error && success) {
-            navigate('/products')
-            console.log('gooooooooooooooooooooooooood')
-        }
+        // dispatch(productUpdate(formData))
+        // if (!loading && error) {
+        //     console.log(error)
+        // } else if (!loading && !error && success) {
+        //     navigate('/products')
+        //     console.log('gooooooooooooooooooooooooood')
+        // }
     }
     // &&  && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description)
 
