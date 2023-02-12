@@ -97,18 +97,16 @@ export default function AdminEditProduct() {
     useEffect(() => {
         if (!loadingOne) {
             console.log(productsOne);
-            if (productsOne && productsOne.brand) {
+            if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description) {
+                setName(productsOne.name);
                 setName(productsOne.brand);
-                // 
-                // setName(productsOne.category);
-                // setName(productsOne.price);
-                // setName(productsOne.countInStock);
-                // setName(productsOne.description);
-                // console.log(productsOne.name)
+                setName(productsOne.category);
+                setName(productsOne.price);
+                setName(productsOne.countInStock);
+                setName(productsOne.description);
+                console.log(productsOne.name)
             }
-            // } else if (productsOne && productsOne.brand) {
-            //     setName(productsOne.brand);
-            // }
+
         }
     }, [loadingOne, productsOne])
 
@@ -143,7 +141,7 @@ export default function AdminEditProduct() {
                         ></input>
                     </div>
                     <div className='input_style'>
-                        <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
+                        <input type={'text'} required placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
                     </div>
 
                     <div className='input_style'>
