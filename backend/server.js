@@ -43,7 +43,7 @@ mongoose.set('strictQuery', true)
 // })
 
 
-mongoose.connect('mongodb://localhost/smile', {
+mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

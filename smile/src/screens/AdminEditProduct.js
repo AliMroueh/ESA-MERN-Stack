@@ -99,11 +99,11 @@ export default function AdminEditProduct() {
             console.log(productsOne);
             if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description) {
                 setName(productsOne.name);
-                setName(productsOne.brand);
-                setName(productsOne.category);
-                setName(productsOne.price);
-                setName(productsOne.countInStock);
-                setName(productsOne.description);
+                setBrand(productsOne.brand);
+                setCategory(productsOne.category);
+                setPrice(productsOne.price);
+                setcountInStock(productsOne.countInStock);
+                setDescription(productsOne.description);
                 console.log(productsOne.name)
             }
 
@@ -125,7 +125,7 @@ export default function AdminEditProduct() {
             <div className='row1 adminTop'>
                 <h1 className='adminTitle'>Update Product</h1>
             </div>
-            <div className='row'>
+            <div className='row1'>
 
                 <div className='avatar'>
                     <img src="images/product-quality-animate.svg" alt="products" />
@@ -185,7 +185,7 @@ export default function AdminEditProduct() {
                         ></input>
                     </div>
 
-                    <div className='row'>
+                    <div className='row1'>
                         <div>
 
                             <label onClick={() => setOpen(true)}>
