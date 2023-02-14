@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import { isAdmin } from '../utils.js';
 import passport from 'passport';
 import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
-const router = express.Router();
+
 import expressAsyncHandler from "express-async-handler";
 
 const productRouter = express.Router();
