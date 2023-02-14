@@ -12,7 +12,7 @@ const storeItems = new Map([
     [2, { priceInCents: 20000, name: "Learn CSS Today" }],
 ])
 
-visaRouter.post("/", async (req, res) => {
+visaRouter.post("/create-checkout-session", async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
