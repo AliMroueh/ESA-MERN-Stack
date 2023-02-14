@@ -28,7 +28,14 @@ import {
     WISHLIST_ADD_FAIL,
     WISHLIST_GET_REQUEST,
     WISHLIST_GET_SUCCESS,
-    WISHLIST_GET_FAIL
+    WISHLIST_GET_FAIL,
+
+
+
+    PRODUCT_REVIEW_CREATE_REQUEST,
+    PRODUCT_REVIEW_CREATE_SUCCESS,
+    PRODUCT_REVIEW_CREATE_FAIL,
+    PRODUCT_REVIEW_CREATE_RESET
 } from '../constants/productConstants'
 
 // export const productListReducer = (state = { products: [] }, action) => {
@@ -179,3 +186,21 @@ export const getAllWishlistReducer = (state={},action) => {
         default: return state;
     }
 }
+
+
+
+
+export const productReviewCreateReducer = (state = {}, action) => {
+    switch (action.type) {
+      case PRODUCT_REVIEW_CREATE_REQUEST:
+        return { loading: true };
+      case PRODUCT_REVIEW_CREATE_SUCCESS:
+        return { loading: false, success: true, review: action.payload };
+      case PRODUCT_REVIEW_CREATE_FAIL:
+        return { loading: false, error: action.payload };
+      case PRODUCT_REVIEW_CREATE_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };

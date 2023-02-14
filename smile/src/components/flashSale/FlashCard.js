@@ -12,19 +12,23 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import  data from '../../data';
 import { productId, productListReducer } from "../../reducers/productReducers";
 import LoadingBox from '../LoadingBox';
-import { getProducts } from "../../actions/productActions";
-
-
-
-
-
+import { addToWishlist} from "../../actions/productActions";
+import axios from "axios";
 
 
 
 const FlashCard= () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userSignin = useSelector(state => state.userSignin)
+  const {userInfo} = userSignin;
+
+  const likeHandler = () =>{
+    dispatch(addToWishlist(userInfo._id,productId))
+    navigate(`/like/${userInfo._id}`)
+}
 
 
-   
     return (
         <>
         <Swiper
@@ -45,7 +49,8 @@ const FlashCard= () => {
                     <div className='img12'>
                      <div className="sales f-flex">
                       <span className='discount '>{products.discount}% Off</span>
-                      <i className='fa-regular fa-heart fa-2x'></i></div>
+                       <button onClick={ likeHandler } ><i className='fa-regular fa-heart fa-2x' ></i></button>
+                      </div>
                       <img src={products.image} alt='' className="img" />
                     </div>
                     <div className='product-details'>

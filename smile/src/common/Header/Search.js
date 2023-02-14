@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-const Search = ({cartItems}) => {
+const Search = () => {
   // fixed Header
   window.addEventListener("scroll", function () {
     const search = document.querySelector(".search")
@@ -28,7 +28,7 @@ const Search = ({cartItems}) => {
 
               <Link to='/cart'>
                 <i className='fa fa-shopping-bag icon-circle fa-2x'></i>
-                <span>{cartItems === 0 ? "" : cartItems}</span>
+                <span>0</span>
               </Link>
             </div>
           </div>

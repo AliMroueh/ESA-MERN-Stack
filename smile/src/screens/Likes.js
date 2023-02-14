@@ -1,18 +1,22 @@
-import Axios from 'axios';
+
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { addToWishlist, getWishList } from '../actions/productActions';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import {getWishList} from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 const Likes = () => {
   const [name, setName] = useState('');
+  const[qty,setQuantity] = useState(1)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const getAllWishlist = useSelector(state => state.getAllWishlist);
   const { loading, favorites, error } = getAllWishlist;
   const params = useParams();
-  const {id} = params;
+  const {id:productId} = params;
+  const {id} = params
+
   
 // console.log(_id)
   useEffect(() => {
@@ -23,9 +27,11 @@ const Likes = () => {
     if(favorites){
       console.log(console.log(favorites.wishlist))
     }
-    
-    // console.log(Axios.post('/api/products/get/Wishlist',{name}))
   }
+  const addToCartHandler = async() =>{
+    navigate(`/cart/${productId}?qty=${qty}`);
+};
+
   return (
     <div className="row1 top">
       {loading&& <LoadingBox></LoadingBox>} 
@@ -41,16 +47,18 @@ const Likes = () => {
         <ul>
             {favorites && favorites.wishlist.map(item => (
                 <li key={item.product}>
-                    <div className="row">
+                    <div className="row1 color-1">
                         <div>
-                            <img src={item.image} alt=''
+                            <img src={
+                                item.imageColor && item.imageColor[0].image 
+                                } alt=''
                             className="small"></img>
                         </div>
                         <div className='min-30'>
                             <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </div>
                         <div>
-                            <select value={item.qty} >
+                            <select value={item.qty} className='select' onChange={e=>setQuantity(e.target.value)}>
                                 {[...Array(item.countInStock).keys()].map(x =>
                                     <option key={x+1} value={x+1}>
                                         {x+1}
@@ -60,10 +68,8 @@ const Likes = () => {
                         </div>
                         <div>${item.price}</div>
                         <div>
-                            <button type="button" 
-                            onClick={()=>addToWishlist(id,item._id)}
-                            >Delete</button>
-                            <button>Add To Cart</button>
+                           <i className="fa-solid fa-trash" ></i>
+                           <span className='add1' onClick={addToCartHandler}><i className="fa-solid fa-plus" style={{padding:"10px 4px"}}></i></span>
                         </div>
                     </div>
                 </li>

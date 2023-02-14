@@ -1063,3 +1063,14 @@ button.block{
   position: relative;
   top: -14px;
 }
+.add1{
+  border: 2px solid var(--primary-color);
+  margin-left: 20px;
+}
+.select{
+  border:1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.select:hover{
+  border:2px solid var(--primary-color);
+}

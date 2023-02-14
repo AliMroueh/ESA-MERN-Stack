@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import axios from "axios";
 import Axios from "axios";
@@ -16,6 +17,9 @@ import {
     PRODUCT_DELETE_FAIL,
     PRODUCT_ONE_REQUEST,
     PRODUCT_ONE_SUCCESS,
+    PRODUCT_REVIEW_CREATE_REQUEST,
+    PRODUCT_REVIEW_CREATE_SUCCESS ,
+    PRODUCT_REVIEW_CREATE_FAIL,
     PRODUCT_ONE_FAIL,
     PRODUCT_CATEGORY_LIST_REQUEST,
     PRODUCT_CATEGORY_LIST_SUCCESS,
@@ -25,7 +29,8 @@ import {
     WISHLIST_ADD_FAIL,
     WISHLIST_GET_REQUEST,
     WISHLIST_GET_SUCCESS,
-    WISHLIST_GET_FAIL
+    WISHLIST_GET_FAIL,
+    WICHLIST_REMOVE_ITEM
 } from '../constants/productConstants'
 
 export const listProducts = ({
@@ -220,6 +225,7 @@ export const addToWishlist = (_id,productId) => async (dispatch) => {
     }
 }
 
+
 export const getWishList = (_id) => async (dispatch) => {
 
 dispatch({type: WISHLIST_GET_REQUEST})
@@ -233,3 +239,33 @@ try {
     })
 }
 }
+
+
+export const createReview = (productId, review) => async (
+    dispatch,
+    getState
+  ) => {
+    dispatch({ type: PRODUCT_REVIEW_CREATE_REQUEST });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    try {
+      const { data } = await Axios.post(
+        `/api/products/${productId}/reviews`,
+        review,
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({
+        type: PRODUCT_REVIEW_CREATE_SUCCESS,
+        payload: data.review,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({ type: PRODUCT_REVIEW_CREATE_FAIL, payload: message });
+    }
+  };
