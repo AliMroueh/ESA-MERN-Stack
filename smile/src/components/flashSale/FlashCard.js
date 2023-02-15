@@ -8,8 +8,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import  data from '../../data';
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../actions/cartAction";
+
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { param } from "express-validator";
 import products from "./products";
@@ -20,9 +19,9 @@ const FlashCard= ({product}) => {
 
   const navigate = useNavigate()
  
-  console.log(product)
-  const addToCartHandler = (productId) =>{
-   navigate(`/product/${productId}`)
+  //console.log(product)
+  const addToCartHandler = (products) =>{
+   navigate(`/product/${products._id}`)
   }
 
     return (
@@ -36,7 +35,7 @@ const FlashCard= ({product}) => {
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
       > 
-            {products.map((products) => {
+            {data.products.map((products) => {
 
               return (
                 <>
