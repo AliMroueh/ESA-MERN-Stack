@@ -52,6 +52,7 @@ mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retr
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+//app.use("/api/allProducts",productRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/refresh', refreshTokenRouter);
 app.use('/api/orders', orderRouter);

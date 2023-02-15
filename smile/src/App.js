@@ -19,7 +19,7 @@ import AdminAddCategory from "./screens/AdminAddCategory";
 import AdminUpdateCategory from "./screens/AdminUpdateCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
 import CartItemScreen from "./screens/CartItemScreen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { renewRefreshToken } from "./actions/refreshTokenAction";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingBox from "./components/LoadingBox";
@@ -30,6 +30,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import data from "./data";
 
 function App() {
 
@@ -44,6 +45,10 @@ function App() {
   useEffect(()=> {
     dispatch(renewRefreshToken())
   },[dispatch])
+
+
+
+
 
   return (
 

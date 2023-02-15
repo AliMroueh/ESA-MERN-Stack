@@ -4,7 +4,7 @@ import data from "./data";
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import { userDeleteReducer, userDetailsReducer, userGetAllReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from "./reducers/userReducers";
 
-import { productListReducer, productDetailsReducer, productDeleteReducer, productId, productUpdateReducer, productCategoryListReducer, listWishlistReducer, getAllWishlistReducer , productReviewCreateReducer, wishlistDeleteReducer,} from "./reducers/productReducers";
+import { getAllProductsReducer,productListReducer, productDetailsReducer, productDeleteReducer, productId, productUpdateReducer, productCategoryListReducer, listWishlistReducer, getAllWishlistReducer , productReviewCreateReducer} from "./reducers/productReducers";
 import { userRefreshReducer } from "./reducers/refreshReducers";
 import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
 import { cartReducer } from "./reducers/cartReducers";
@@ -47,6 +47,7 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     productDelete: productDeleteReducer,
     productid: productId,
+    getAllProducts : getAllProductsReducer,
     productUpdate: productUpdateReducer,
     productReviewCreate: productReviewCreateReducer,
     userRefresh : userRefreshReducer,

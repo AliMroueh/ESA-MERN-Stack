@@ -6,6 +6,9 @@ import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
+    GET_PRODUCTS_REQUEST,
+    GET_PRODUCTS_FAIL,
+    GET_PRODUCTS_SUCCESS,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -24,6 +27,7 @@ import {
     PRODUCT_CATEGORY_LIST_REQUEST,
     PRODUCT_CATEGORY_LIST_SUCCESS,
     PRODUCT_CATEGORY_LIST_FAIL,
+
     WISHLIST_ADD_REQUEST,
     WISHLIST_ADD_SUCCESS,
     WISHLIST_ADD_FAIL,
@@ -32,6 +36,7 @@ import {
     WISHLIST_GET_FAIL,
     WICHLIST_REMOVE_ITEM
 } from '../constants/productConstants'
+import { productId } from "../reducers/productReducers";
 
 export const listProducts = ({
     pageNumber = '',
@@ -206,6 +211,17 @@ export const getProducts = (id) => async (dispatch) => {
     }
 
 }
+
+export const getAllProductss = (data) => async (dispatch) => {
+    dispatch({ type: "GET_PRODUCTS_REQUEST" });
+    try {
+      const response = await axios.get(`/api/products`);
+      // console.log(response.data);
+      dispatch({ type: "GET_PRODUCTS_SUCCESS", payload: data });
+    } catch (err) {
+      dispatch({ type: "GET_PRODUCTS_FAIL", payload: err });
+    }
+  };
 
 export const addToWishlist = (_id,productId) => async (dispatch) => {
         dispatch({ type: WISHLIST_ADD_REQUEST })

@@ -7,26 +7,23 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { addToCart } from "../../actions/cartAction";
 import  data from '../../data';
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../actions/cartAction";
+import { useNavigate, useParams } from "react-router-dom";
+import { param } from "express-validator";
+import products from "./products";
 
 
 
 const FlashCard= () => {
-  //const [cartItems ,setCart] = useState([]);
-  //console.log(cartItems)
   const dispatch = useDispatch();
-  const params = useParams();
-    const {id:productId} = params;
+  const [qty,setQuantity] = useState(1)
+  const {id:productId} = useParams();
 
-  const handelAddToCart = (productId)=>{
-   console.log(productI)
-    dispatch(addToCart(productId))
+  const addToCartHandler = () =>{
+    dispatch(addToCart(productId,qty))
   }
-
 
     return (
         <>
@@ -39,16 +36,16 @@ const FlashCard= () => {
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
       > 
-            {data.products.map((products) => {
+            {products.map((products) => {
               return (
                 <>
                 <SwiperSlide>
-                  <div className=' box2 d-flex'  key={products._id}>
+                  <div className=' box2 d-flex'  key={products.index}>
                   <div className='picture mtop'>
                     <div className='img12'>
                      <div className="sales f-flex">
                       <span className='discount '>{products.discount}% Off</span>
-                       <i className='fa-regular fa-heart fa-2x' ></i>
+                       <i className='fa-regular fa-heart fa-2x'></i>
                       </div>
                       <img src={products.image} alt='' className="img" />
                     </div>
@@ -56,7 +53,7 @@ const FlashCard= () => {
                       <h1>{products.name}</h1>
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
-                        <button className="btn" onClick={()=>handelAddToCart(productId)}>
+                        <button className="btn" onClick={addToCartHandler}>
                           Add To Cart
                         </button>
                       </div>

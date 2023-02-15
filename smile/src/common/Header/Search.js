@@ -1,12 +1,17 @@
 import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
-const Search = ({cartItems}) => {
+const Search = () => {
   // fixed Header
   window.addEventListener("scroll", function () {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
+
+  const dispatch = useDispatch();
+  const cartState = useSelector(state => state.cart)
+
 
   return (
     <>
@@ -27,7 +32,7 @@ const Search = ({cartItems}) => {
             <div className='cart'>
               <Link to='/cart'>
                 <i className='fa fa-shopping-bag icon-circle fa-2x'></i>
-                <span> 0 </span>
+                <span>{cartState.cartItems.length}</span>
               </Link>
             </div>
           </div>

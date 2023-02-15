@@ -36,7 +36,9 @@ import TopCate from '../components/new arrival/TopCat'
 import Wrapper from '../components/final/Wrapper'
 
 const Home = () => {
+  
   return (
+    
     <>
     <Bady/>
     <FlashDeals/>

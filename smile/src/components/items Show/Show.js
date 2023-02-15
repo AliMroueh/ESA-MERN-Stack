@@ -2,13 +2,13 @@
 import React ,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate, useParams } from 'react-router-dom';
-import { PRODUCT_REVIEW_CREATE_RESET } from '../../constants/productConstants';
+//import { PRODUCT_REVIEW_CREATE_RESET } from '../../constants/productConstants';
 import { createReview, addToWishlist, detailsProduct} from '../../actions/productActions';
 import LoadingBox from '../LoadingBox';
 import MessageBox from '../MessageBox';
 //import items from './itemsData';
 import './show.css';
-import Rating from '../Rating';
+//import Rating from '../Rating';
 
 
 
@@ -20,8 +20,10 @@ const show = (props) => {
     const [qty,setQuantity] = useState(1);
     const [img,setImg]= useState('');
     const [stock,setStock]= useState(false);
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('');
+
+    //Rating and Comment
+    /*const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');*/
 
 
     const params = useParams();
@@ -31,30 +33,11 @@ const show = (props) => {
     const productDetails = useSelector(state => state.productDetails);
     const {loading, error, products} = productDetails;
 
-    const productReviewCreate = useSelector((state) => state.productReviewCreate);
-    const {
-      loading: loadingReviewCreate,
-      error: errorReviewCreate,
-      success: successReviewCreate,
-    } = productReviewCreate;
-  
-    useEffect( () =>{
-        if (successReviewCreate) {
-            window.alert('Review Submitted Successfully');
-            setRating('');
-            setComment('');
-            dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
-          }
-        dispatch(detailsProduct(productId))
-}, [dispatch, productId, successReviewCreate]);
+
     // eslint-disable-next-line no-unused-vars
     const Product = useSelector(state => state.product);
-    /*useEffect( () =>{
-        dispatch(productDetails(productId))
-    }, [dispatch, productId]);*/
     const userSignin = useSelector(state => state.userSignin)
     const {userInfo} = userSignin;
-
     const addToCartHandler = async() =>{
         navigate(`/cart/${productId}?qty=${qty}`);
     };
@@ -82,32 +65,21 @@ const show = (props) => {
         }
     }
 
-
+//Details product
    useEffect(()=>{
          dispatch(detailsProduct(productId))
       },[])
 
+ //Add to wishlist
   const likeHandler = () =>{
         dispatch(addToWishlist(userInfo._id,productId))
         navigate(`/like/${userInfo._id}`)
   }
 
-
-       const changeImage = (index) => {
-        setImg(products.imageColor[index].image)
-      }
-
-
-      const submitHandler = (e) => {
-        e.preventDefault();
-        if (comment && rating) {
-          dispatch(
-            createReview(productId, { rating, comment, name: userInfo.name })
-          );
-        } else {
-          alert('Please enter comment and rating');
-        }
-      };
+//images with color
+  const changeImage = (index) => {
+  setImg(products.imageColor[index].image)
+}
 
     return(
                     <>
@@ -181,72 +153,7 @@ const show = (props) => {
                         </div>
                     </div>
                     )}
-            <div>
-            <h2 id="reviews">Reviews</h2>
-            {products.reviews.length === 0 && (
-              <MessageBox>There is no review</MessageBox>
-            )}
-            <ul>
-              {products.reviews.map((review) => (
-                <li key={review._id}>
-                  <strong>{review.name}</strong>
-                  <Rating rating={review.rating} caption=" "></Rating>
-                  <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
-                </li>
-              ))}
-              <li>
-                {userInfo ? (
-                  <form className="form" onSubmit={submitHandler}>
-                    <div>
-                      <h2>Write a customer review</h2>
-                    </div>
-                    <div>
-                      <label htmlFor="rating">Rating</label>
-                      <select
-                        id="rating"
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                      >
-                        <option value="">Select...</option>
-                        <option value="1">1- Poor</option>
-                        <option value="2">2- Fair</option>
-                        <option value="3">3- Good</option>
-                        <option value="4">4- Very good</option>
-                        <option value="5">5- Excelent</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="comment">Comment</label>
-                      <textarea
-                        id="comment"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                      ></textarea>
-                    </div>
-                    <div>
-                      <label />
-                      <button className="primary" type="submit">
-                        Submit
-                      </button>
-                    </div>
-                    <div>
-                      {loadingReviewCreate && <LoadingBox></LoadingBox>}
-                      {errorReviewCreate && (
-                        <MessageBox variant="danger">
-                          {errorReviewCreate}
-                        </MessageBox>
-                      )}
-                    </div>
-                  </form>
-                ) : (
-                  <MessageBox>
-                    Please <Link to="/signin">Sign In</Link> to write a review
-                  </MessageBox>
-                )}
-              </li>
-            </ul>
-          </div>
+            
         </>
         )}
 export default show
