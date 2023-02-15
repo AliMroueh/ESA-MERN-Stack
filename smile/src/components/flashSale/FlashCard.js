@@ -7,13 +7,26 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { addToCart } from "../../actions/cartAction";
 import  data from '../../data';
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 
 
 
 const FlashCard= () => {
-  
+  //const [cartItems ,setCart] = useState([]);
+  //console.log(cartItems)
+  const dispatch = useDispatch();
+  const params = useParams();
+    const {id:productId} = params;
+
+  const handelAddToCart = (productId)=>{
+   console.log(productI)
+    dispatch(addToCart(productId))
+  }
+
 
     return (
         <>
@@ -35,7 +48,7 @@ const FlashCard= () => {
                     <div className='img12'>
                      <div className="sales f-flex">
                       <span className='discount '>{products.discount}% Off</span>
-                       <button ><i className='fa-regular fa-heart fa-2x' ></i></button>
+                       <i className='fa-regular fa-heart fa-2x' ></i>
                       </div>
                       <img src={products.image} alt='' className="img" />
                     </div>
@@ -43,8 +56,8 @@ const FlashCard= () => {
                       <h1>{products.name}</h1>
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
-                        <button className="btn">
-                          View Item
+                        <button className="btn" onClick={()=>handelAddToCart(productId)}>
+                          Add To Cart
                         </button>
                       </div>
                       <div className='rate'>
