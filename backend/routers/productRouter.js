@@ -79,22 +79,6 @@ productRouter.post("/addproduct",
         });
     });
 
-// get all product route
-// router.get('/',(req, res) => {
-//     Product.find().exec((err, products) => {
-//         if (err) {
-//             res.json({ message: err.message });
-//         } else {
-
-//             res.send(products)
-//             // res.render('index', {
-//             //     title: 'Home page',
-//             //     products: products,
-//             // })
-//         }
-//     })
-// });
-
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
     // const products = await Product.find({});
     const pageSize = 3;

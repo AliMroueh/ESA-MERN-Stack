@@ -26,7 +26,10 @@ export const signout = () => (dispatch) => {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('token');
     localStorage.removeItem('refToken');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('shippingAddress');
     dispatch({type: USER_SIGNOUT});
+    document.location.href = '/signin';
 }
 
 export const register = (name, email, password) => async (dispatch) => {
