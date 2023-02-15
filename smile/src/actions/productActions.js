@@ -215,8 +215,7 @@ export const getProducts = (id) => async (dispatch) => {
 export const getAllProductss = (data) => async (dispatch) => {
     dispatch({ type: "GET_PRODUCTS_REQUEST" });
     try {
-      const response = await axios.get(`/api/products`);
-      // console.log(response.data);
+      const {data} = await axios.get(`/api/products/getAllProducts`);
       dispatch({ type: "GET_PRODUCTS_SUCCESS", payload: data });
     } catch (err) {
       dispatch({ type: "GET_PRODUCTS_FAIL", payload: err });

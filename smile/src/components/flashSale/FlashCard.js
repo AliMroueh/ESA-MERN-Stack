@@ -10,19 +10,19 @@ import 'swiper/css/pagination';
 import  data from '../../data';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../actions/cartAction";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { param } from "express-validator";
 import products from "./products";
 
 
 
-const FlashCard= () => {
-  const dispatch = useDispatch();
-  const [qty,setQuantity] = useState(1)
-  const {id:productId} = useParams();
+const FlashCard= ({product}) => {
 
-  const addToCartHandler = () =>{
-    dispatch(addToCart(productId,qty))
+  const navigate = useNavigate()
+ 
+  console.log(product)
+  const addToCartHandler = (productId) =>{
+   navigate(`/product/${productId}`)
   }
 
     return (
@@ -37,6 +37,7 @@ const FlashCard= () => {
         onSwiper={(swiper) => console.log(swiper)}
       > 
             {products.map((products) => {
+
               return (
                 <>
                 <SwiperSlide>
@@ -53,7 +54,7 @@ const FlashCard= () => {
                       <h1>{products.name}</h1>
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
-                        <button className="btn" onClick={addToCartHandler}>
+                        <button className="btn" onClick={addToCartHandler(products._id)}>
                           Add To Cart
                         </button>
                       </div>

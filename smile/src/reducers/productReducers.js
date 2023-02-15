@@ -48,7 +48,7 @@ export const getAllProductsReducer = (state = { products: [] }, action) => {
         };
       case "GET_PRODUCTS_SUCCESS":
         return {
-          pizzas: action.payload,
+          products: action.payload,
           loading: false,
         };
       case "GET_PRODUCTS_FAIL":
