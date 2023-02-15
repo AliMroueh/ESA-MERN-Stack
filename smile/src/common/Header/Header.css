@@ -73,6 +73,22 @@ width: 100%;
   padding-top: 20px;
   color: #1877f2;
 }
+.cart {
+  position: relative;
+}
+.search .cart span {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #e94560;
+  font-size: 13px;
+  color: #fff;
+  padding-top: 1px;
+}
 
 /*================================================================================*/
 

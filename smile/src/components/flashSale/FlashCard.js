@@ -7,27 +7,13 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
 import  data from '../../data';
-import { productId, productListReducer } from "../../reducers/productReducers";
-import LoadingBox from '../LoadingBox';
-import { addToWishlist} from "../../actions/productActions";
-import axios from "axios";
+
 
 
 
 const FlashCard= () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userSignin = useSelector(state => state.userSignin)
-  const {userInfo} = userSignin;
-
-  const likeHandler = () =>{
-    dispatch(addToWishlist(userInfo._id,productId))
-    navigate(`/like/${userInfo._id}`)
-}
-
+  
 
     return (
         <>
@@ -44,12 +30,12 @@ const FlashCard= () => {
               return (
                 <>
                 <SwiperSlide>
-                  <div className=' box2 d-flex'  key={products.index}>
+                  <div className=' box2 d-flex'  key={products._id}>
                   <div className='picture mtop'>
                     <div className='img12'>
                      <div className="sales f-flex">
                       <span className='discount '>{products.discount}% Off</span>
-                       <button onClick={ likeHandler } ><i className='fa-regular fa-heart fa-2x' ></i></button>
+                       <button ><i className='fa-regular fa-heart fa-2x' ></i></button>
                       </div>
                       <img src={products.image} alt='' className="img" />
                     </div>
