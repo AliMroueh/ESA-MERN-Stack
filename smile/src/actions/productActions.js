@@ -122,7 +122,10 @@ export const listProductDetails = (info) => async (dispatch, getState) => {
 
 
         const { data } = await axios.post(`/api/products/addproduct`, info,
-            { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } }
+            {
+                headers: {Authorization: `Bearer ${token}`},
+                // headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } 
+            }
         )
 
 

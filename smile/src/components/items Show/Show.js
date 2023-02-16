@@ -20,6 +20,7 @@ const show = (props) => {
     const [qty,setQuantity] = useState(1);
     const [img,setImg]= useState('');
     const [stock,setStock]= useState(false);
+    const [color, setColor] = useState('');
 
     //Rating and Comment
     /*const [rating, setRating] = useState(0);
@@ -38,8 +39,13 @@ const show = (props) => {
     const Product = useSelector(state => state.product);
     const userSignin = useSelector(state => state.userSignin)
     const {userInfo} = userSignin;
+    // if(!loading){
+    //     products.imageColor &&  setColor(products.imageColor[0].color)
+    // }
     const addToCartHandler = async() =>{
-        navigate(`/cart/${productId}?qty=${qty}`);
+        // encodeURIComponent() is a function to encode the # symbol in color to be able to set and get in the url using navigate and useLocation
+        const newColor = encodeURIComponent(color)
+        navigate(`/cart/${productId}?qty=${qty}&color=${newColor}`);
     };
 
    //description open and close
@@ -79,6 +85,7 @@ const show = (props) => {
 //images with color
   const changeImage = (index) => {
   setImg(products.imageColor[index].image)
+  setColor(products.imageColor[index].color)
 }
 
     return(

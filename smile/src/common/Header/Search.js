@@ -32,7 +32,11 @@ const Search = () => {
             <div className='cart'>
               <Link to='/cart'>
                 <i className='fa fa-shopping-bag icon-circle fa-2x'></i>
+                {cartState.cartItems.length > 0
+                && 
                 <span>{cartState.cartItems.length}</span>
+                }
+                
               </Link>
             </div>
           </div>
