@@ -31,6 +31,7 @@ import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderListScreen from "./screens/OrderListScreen";
+import CheckoutSuccess from "./components/CheckoutSuccess";
 
 function App() {
 
@@ -42,82 +43,82 @@ function App() {
   } = userRefresh;
 
   const dispatch = useDispatch();
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(renewRefreshToken())
-  },[dispatch])
+  }, [dispatch])
 
   return (
 
-      <BrowserRouter>
-      <Header/>
+    <BrowserRouter>
+      <Header />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/signin" element = {<SigninScreen />}></Route>
-        <Route path="/register" element = {<RegisterScreen />}></Route>
-        <Route path="/shipping" element = {<ShippingAddressScreen />}></Route>
-        <Route path="/payment" element = {<PaymentMethodScreen />}></Route>
-        <Route path="/placeorder" element = {<PlaceOrderScreen />}></Route>
-        <Route path="/order/:id" element = {<OrderScreen />}></Route>
+        <Route path="/signin" element={<SigninScreen />}></Route>
+        <Route path="/register" element={<RegisterScreen />}></Route>
+        <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
+        <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+        <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
+        <Route path="/order/:id" element={<OrderScreen />}></Route>
 
         <Route
           path="/profile"
           element={<PrivateRoute>
-          <ProfileScreen />
+            <ProfileScreen />
           </PrivateRoute>}
         />
-       <Route
+        <Route
           path="/cart/:id"
           element={<CartItemScreen />}
-          />
+        />
         <Route
           path="/cart"
           element={<CartItemScreen />}
         />
 
 
-          <Route
+        <Route
           path="/dashboard"
           element={<AdminRoute>
-          <AdminDashboard />
+            <AdminDashboard />
           </AdminRoute>
-        }
+          }
         />
-          <Route
+        <Route
           path="/users"
           element={<AdminRoute>
-          <AdminUsers />
+            <AdminUsers />
           </AdminRoute>
-        }
+          }
 
         />
         <Route
           path="/products"
           element={<AdminRoute>
-          <AdminProducts />
+            <AdminProducts />
           </AdminRoute>
-        }
+          }
         />
         <Route
           path="/categories"
           element={<AdminRoute>
-          <AdminCategories />
+            <AdminCategories />
           </AdminRoute>
-        }
+          }
         />
-        
+
         <Route
           path="/addcategory"
           element={<AdminRoute>
-          <AdminAddCategory />
+            <AdminAddCategory />
           </AdminRoute>
-        }
+          }
         />
         <Route
           path="/addproduct"
           element={<AdminRoute>
-          <AdminAddProduct />
+            <AdminAddProduct />
           </AdminRoute>
-        }
+          }
         />
         {/* <Route
           path="/orders"
@@ -127,37 +128,37 @@ function App() {
         }
         /> */}
         <Route
-           path="/orders"
-           element={
+          path="/orders"
+          element={
             <AdminRoute>
               <OrderListScreen />
-              </AdminRoute>
-           }
-         />
-                <Route
-        // I think ? after :name has no sense
-            path="/search/name/:name"
-            element={<SearchScreen />}
-            exact
+            </AdminRoute>
+          }
+        />
+        <Route
+          // I think ? after :name has no sense
+          path="/search/name/:name"
+          element={<SearchScreen />}
+          exact
         ></Route>
         <Route
-            path="/search/category/:category"
-            element={<SearchScreen />}
-            exact
+          path="/search/category/:category"
+          element={<SearchScreen />}
+          exact
         ></Route>
         <Route
-            path="/search/category/:category/name/:name"
-            element={<SearchScreen />}
-            exact
+          path="/search/category/:category/name/:name"
+          element={<SearchScreen />}
+          exact
         ></Route>
         <Route
-            // path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
-            element={<SearchScreen />}
-            exact
-          ></Route>
-          <Route path='/product/:id' element={<Items/>} exact/>
-        <Route path='*' element={<NotFoundScreen />}/>
+          // path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+          path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
+          element={<SearchScreen />}
+          exact
+        ></Route>
+        <Route path='/product/:id' element={<Items />} exact />
+        <Route path='*' element={<NotFoundScreen />} />
 
         <Route
           path="/updatecategory/:id"
@@ -168,7 +169,13 @@ function App() {
         />
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
-        <Route path='/like/:id' element={<Likes/>}  />
+        <Route path='/like/:id' element={<Likes />} />
+
+        <Route
+          path="/checkout-success"
+          element={<CheckoutSuccess />}
+        />
+
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
       <Footer />

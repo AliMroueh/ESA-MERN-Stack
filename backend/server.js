@@ -13,7 +13,7 @@ import refreshTokenRouter from './routers/refreshTokenRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import cors from 'cors';
 import Stripe from 'stripe';
-import visaRouter from './routers/visaRouter.js';
+import visaRouter from './routers/stripe.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
