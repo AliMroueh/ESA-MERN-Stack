@@ -42,10 +42,10 @@ function App() {
     error
   } = userRefresh;
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(renewRefreshToken())
-  }, [dispatch])
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(renewRefreshToken())
+  // }, [dispatch])
 
   return (
 
@@ -171,10 +171,10 @@ function App() {
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
         <Route path='/like/:id' element={<Likes />} />
 
-        <Route
+        {/* <Route
           path="/checkout-success"
           element={<CheckoutSuccess />}
-        />
+        /> */}
 
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>
