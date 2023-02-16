@@ -20,7 +20,8 @@ const show = (props) => {
     const [qty,setQuantity] = useState(1);
     const [img,setImg]= useState('');
     const [stock,setStock]= useState(false);
-    const [color, setColor] = useState('');
+    // const [color, setColor] = useState('');
+    let color = '';
 
     //Rating and Comment
     /*const [rating, setRating] = useState(0);
@@ -43,9 +44,22 @@ const show = (props) => {
     //     products.imageColor &&  setColor(products.imageColor[0].color)
     // }
     const addToCartHandler = async() =>{
+        // console.log(color)
+        
+        // if(color.length === 0){
+        //     setColor(products.imageColor[0].color)          
+        // }else{
+        //     console.log(color)
+        // }
+        
         // encodeURIComponent() is a function to encode the # symbol in color to be able to set and get in the url using navigate and useLocation
+        if(color.length !== 0){
         const newColor = encodeURIComponent(color)
         navigate(`/cart/${productId}?qty=${qty}&color=${newColor}`);
+        }else{
+            const newColor = encodeURIComponent(products.imageColor[0].color)
+            navigate(`/cart/${productId}?qty=${qty}&color=${newColor}`);
+        }
     };
 
    //description open and close
@@ -74,6 +88,7 @@ const show = (props) => {
 //Details product
    useEffect(()=>{
          dispatch(detailsProduct(productId))
+         color = '';
       },[])
 
  //Add to wishlist
@@ -82,11 +97,21 @@ const show = (props) => {
         navigate(`/like/${userInfo._id}`)
   }
 
+  if(!loading){
+    console.log(products)
+    // color = products.imageColor[0].color
+    // if(products && color.length === 0){
+    //     color = products.imageColor[0].color
+    // } 
+}
+
 //images with color
   const changeImage = (index) => {
   setImg(products.imageColor[index].image)
-  setColor(products.imageColor[index].color)
+  color = products.imageColor[index].color
 }
+
+
 
     return(
                     <>

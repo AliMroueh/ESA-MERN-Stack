@@ -19,14 +19,14 @@ import MessageBox from '../components/MessageBox';
     const qty = qtyInUrl ? Number(qtyInUrl) : 1;
 
     const color = new URLSearchParams(search).get('color');
-    console.log(color)
-    console.log(search)
+    // console.log(color.length)
+    // console.log(search)
     
     useEffect( () =>{
         if(productId){
         dispatch(addToCart(productId, qty, color))
         }
-    }, [dispatch, productId, qty]);
+    }, [dispatch, productId, qty, color]);
 
     const removeFromCartHandler = (id) => {
         // delete action
@@ -54,11 +54,11 @@ import MessageBox from '../components/MessageBox';
                                 </div>
                                 <div className='min-30'>
                                     <h3>{item.name}</h3>
-                                    <p>color:{color}</p>
+                                    <p>color:{item.color}</p>
                                 </div>
                                 <div>
                                     <select value={item.qty} onChange={
-                                        e => dispatch(addToCart(item.product,Number(e.target.value)))
+                                        e => dispatch(addToCart(item.product,Number(e.target.value),item.color))
                                     }>
                                         {[...Array(item.countInStock).keys()].map(x =>
                                             <option key={x+1} value={x+1}>

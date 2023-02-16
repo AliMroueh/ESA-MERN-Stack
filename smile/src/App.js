@@ -32,6 +32,7 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import CheckoutSuccess from "./components/CheckoutSuccess";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 
 function App() {
 
@@ -124,13 +125,7 @@ function App() {
           </AdminRoute>
           }
         />
-        {/* <Route
-          path="/orders"
-          element={<AdminRoute>
-          <AdminOrders />
-          </AdminRoute>
-        }
-        /> */}
+        <Route path="/orderhistory" element = {<OrderHistoryScreen />}></Route>
         <Route
           path="/orders"
           element={
@@ -174,6 +169,7 @@ function App() {
 
         <Route path='/edit/:id' element={<AdminEditProduct />} exact />
         <Route path='/like/:id' element={<Likes />} />
+        <Route path='/likes' element={<Likes />} />
 
         {/* <Route
           path="/checkout-success"
