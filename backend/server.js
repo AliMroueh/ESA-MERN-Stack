@@ -11,6 +11,9 @@ import { applyPassportStrategy } from './utils.js';
 import passport from 'passport';
 import refreshTokenRouter from './routers/refreshTokenRouter.js';
 import orderRouter from './routers/orderRouter.js';
+import cors from 'cors';
+import Stripe from 'stripe';
+import visaRouter from './routers/stripe.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -20,6 +23,13 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
+// const cors = require("cors")
+
+
+
+const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
+
+
 
 // these two middleware will transfer the data to req.body in the app
 // a middleware that parse json data in the body of the request
@@ -56,6 +66,19 @@ app.use('/api/products', productRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/refresh', refreshTokenRouter);
 app.use('/api/orders', orderRouter);
+
+// for visa 
+// start visa code
+
+
+app.use('/api/visa', visaRouter);
+
+
+
+// end visa
+
+
+
 
 
 // app.get('/api/products', (req, res) => {

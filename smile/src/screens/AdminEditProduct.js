@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { getallCategoriesAction } from '../actions/categoryActions';
 import { Link, useParams } from 'react-router-dom';
 import { productUpdateAction, getProducts } from '../actions/productActions';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-
-
-
-
-
 
 export default function AdminEditProduct() {
 
@@ -18,7 +12,9 @@ export default function AdminEditProduct() {
 
 
     const [open, setOpen] = useState(false);
+    const getallCategories = useSelector((state) => state.getallCategories);
 
+    const { loading: loadingGet, error: errorGet, categories } = getallCategories;
     // const [product, getProducts] = useState(props.product)
 
 
@@ -33,7 +29,7 @@ export default function AdminEditProduct() {
     const [imageName, setimageName] = useState([]);
 
     const productUpdate = useSelector((state) => state.productUpdate)
-    const { loading, error, products } = productUpdate
+    const { loading, error, products, success } = productUpdate
 
 
     const productid = useSelector((state) => state.productid)
@@ -45,17 +41,20 @@ export default function AdminEditProduct() {
     console.log(id)
 
     useEffect(() => {
-
+        dispatch(getallCategoriesAction())
         dispatch(getProducts(id))
 
         setimageName([]);
         document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
         if (image.length > 0) {
+            setColor([])
             for (let i = 0; i < image.length; i++) {
                 const newArray = [];
                 newArray.push(image[i].name)
                 setimageName(imageName => [...imageName, ...newArray])
+                setColor(color => [...color, '#f00'])
+                // color.push('red')
             }
         }
     }, [dispatch, id, image])
@@ -83,26 +82,50 @@ export default function AdminEditProduct() {
 
         dispatch(productUpdateAction(id, formData))
 
+
+
+        // dispatch(productUpdate(formData))
+        // if (!loading && error) {
+        //     console.log(error)
+        // } else if (!loading && !error && success) {
+        //     navigate('/products')
+        //     console.log('gooooooooooooooooooooooooood')
+        // }
     }
+    // &&  && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description)
 
     useEffect(() => {
         if (!loadingOne) {
             console.log(productsOne);
-            if(productsOne && productsOne.name){
-            setName(productsOne.name);
-            // console.log(productsOne.name)
+            if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description) {
+                setName(productsOne.name);
+                setBrand(productsOne.brand);
+                setCategory(productsOne.category);
+                setPrice(productsOne.price);
+                setcountInStock(productsOne.countInStock);
+                setDescription(productsOne.description);
+                console.log(productsOne.name)
             }
+
         }
-    },[loadingOne,productsOne])
+    }, [loadingOne, productsOne])
+
+
+    const changeColor = (value, index) => {
+        color[index] = value;
+        setColor(color)
+        console.log(color)
+    }
 
 
     return (
 
         < div className='top' >
+
             <div className='row1 adminTop'>
                 <h1 className='adminTitle'>Update Product</h1>
             </div>
-            <div className='row'>
+            <div className='row1'>
 
                 <div className='avatar'>
                     <img src="images/product-quality-animate.svg" alt="products" />
@@ -118,21 +141,17 @@ export default function AdminEditProduct() {
                         ></input>
                     </div>
                     <div className='input_style'>
-                        <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
+                        <input type={'text'} required placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
                     </div>
 
                     <div className='input_style'>
 
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            <option value='car'>
-                                car
-                            </option>
-                            <option value='volvo'>
-                                volvo
-                            </option>
-                            <option value='pickup'>
-                                pickup
-                            </option>
+                            {categories.map((r, index) =>
+                                <option value={r.name}>
+                                    {r.name}
+                                </option>
+                            )}
                         </select>
                     </div>
                     <div className='input_style'>
@@ -141,7 +160,7 @@ export default function AdminEditProduct() {
                             id="price"
                             placeholder="Enter product price"
                             required
-
+                            value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         ></input>
                     </div>
@@ -151,6 +170,7 @@ export default function AdminEditProduct() {
                             id="countInStock"
                             placeholder="Enter Count In Stock"
                             required
+                            value={countInStock}
                             onChange={(e) => setcountInStock(e.target.value)}
                         ></input>
                     </div>
@@ -160,12 +180,12 @@ export default function AdminEditProduct() {
                             id="description"
                             placeholder="Enter the description"
                             required
-
+                            value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         ></input>
                     </div>
 
-                    <div className='row'>
+                    <div className='row1'>
                         <div>
 
                             <label onClick={() => setOpen(true)}>
@@ -208,16 +228,19 @@ export default function AdminEditProduct() {
                                 {imageName.length > 0 &&
 
                                     imageName.map((row, index) =>
-                                        <div key={index}>
-                                            <p>{row}</p>
-                                            <div>
-                                                <input id='color' type="color" value="red" onChange={(e) => setColor(e.target.value)}></input>
-                                                <div>
-                                                    <label htmlFor='color'>color</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
+                                    // console.log(index)
+                                    {
+                                        return (
+                                            <div key={index}>
+
+                                                <p>{row}</p>
+                                                <p>{color[index]}</p>
+                                                <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value, index)} />
+
+                                            </div>)
+
+
+                                    })}
                             </div>
 
                             <div>
@@ -234,14 +257,7 @@ export default function AdminEditProduct() {
 }
 
 
-// const makeStateToProps = () => {
-//     const product = getProducts();
-//     return (state, props) => {
-//         return {
-//             product: product(state, props.match.params.id),
-//         };
-//     };
-// };
+
 
 
 

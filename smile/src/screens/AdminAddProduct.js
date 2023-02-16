@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../actions/productActions';
 import { useNavigate } from 'react-router-dom';
 import { getallCategoriesAction } from '../actions/categoryActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function AdminAddProduct() {
 
@@ -13,6 +15,16 @@ export default function AdminAddProduct() {
   const getallCategories = useSelector((state) => state.getallCategories);
 
   const { loading: loadingGet, error: errorGet, categories } = getallCategories;
+
+
+
+
+
+  // const productList = useSelector((state) => state.productList);
+
+  // const { loading, error, success } = getallCategories;
+
+
 
   const [open, setOpen] = useState(false);
 
@@ -32,7 +44,7 @@ export default function AdminAddProduct() {
   const [countInStock, setcountInStock] = useState(1);
   const [imageName, setimageName] = useState([]);
   const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, products } = productDetails
+  const { loading, error, products, success } = productDetails
   const [color, setColor] = useState([]);
 
   useEffect(() => {
@@ -64,7 +76,7 @@ export default function AdminAddProduct() {
     console.log(color, name, category, brand, price, countInStock, description, image)
 
     // navigate('/')
-    if (name === "" || brand === "" || price === "") {
+    if (name === "" || brand === "" || price === "" || category === "" || countInStock === "" || description === "") {
 
       setStart(true)
 
@@ -88,8 +100,8 @@ export default function AdminAddProduct() {
       dispatch(listProductDetails(formData))
       if (!loading && error) {
         console.log(error)
-      } else {
-        //navigate('/products')
+      } else if (!loading && !error && success) {
+        navigate('/products')
         console.log('gooooooooooooooooooooooooood')
       }
     }
@@ -102,12 +114,16 @@ export default function AdminAddProduct() {
   }
 
 
+
+
+
+
   return (
     <div className='top'>
       <div className='row1 adminTop'>
         <h1 className='adminTitle'>Add Product</h1>
       </div>
-      <div className='row'>
+      <div className='row1'>
         <div className='avatar'>
           <img src="images/product-quality-animate.svg" alt="categories" />
         </div>
@@ -115,49 +131,47 @@ export default function AdminAddProduct() {
           {start &&
             <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A NAME OR IMAGE</div>}
           <div className='input_style'>
-
             <input
               type="text"
               id="catName"
+              value={name}
               placeholder="Enter product name"
               required onChange={(e) => setName(e.target.value)}
             ></input>
           </div>
           <div className='input_style'>
-            <input type={'text'} required placeholder='brand' onChange={(e) => setBrand(e.target.value)} />
+            <input type={'text'} required placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
           </div>
 
           <div className='input_style'>
-            {loadingGet ?
-              <div>loading...</div>
-              :
-              <div className='input_style'>
-                <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                  {categories.map((r, index) =>
-                    <option value={r.name}>
-                      {r.name}
-                    </option>
-                  )}
-                </select>
-              </div>
-            }
+            {loadingGet && <LoadingBox></LoadingBox>}
+            {errorGet && <MessageBox>{errorGet}</MessageBox>}
+
+            <div className='input_style'>
+              <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                {categories.map((r, index) =>
+                  <option value={r.name}>
+                    {r.name}
+                  </option>
+                )}
+              </select>
+            </div>
+
           </div>
           <div className='input_style'>
-            {/* {start &&
-              <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A PRICE</div>} */}
             <input
               type="number"
               id="price"
+              value={price}
               placeholder="Enter product price"
               required
               onChange={(e) => setPrice(e.target.value)}
             ></input>
           </div>
           <div className='input_style'>
-            {/* {start &&
-              <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A countInStock</div>} */}
             <input
               type="number"
+              value={countInStock}
               id="countInStock"
               placeholder="Enter Count In Stock"
               required
@@ -165,18 +179,17 @@ export default function AdminAddProduct() {
             ></input>
           </div>
           <div className='input_style'>
-            {/* {start &&
-              <div style={{ color: "red", fontWeight: "bold" }}>YOU HAVE TO ADD A DESCRIPTION</div>} */}
             <input
               type="text"
               id="description"
+              value={description}
               placeholder="Enter the description"
               required
               onChange={(e) => setDescription(e.target.value)}
             ></input>
           </div>
 
-          <div className='row'>
+          <div className='row1'>
             <div>
 
               <label onClick={() => setOpen(true)}>

@@ -6,11 +6,10 @@ import multer from 'multer';
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
-import { isAdmin } from "../utils.js";
+import { isAdmin } from '../utils.js';
 import passport from 'passport';
-
 import { validateProductRequest, isRequestValidated } from "../validators/authentication.js";
-const router = express.Router();
+
 import expressAsyncHandler from "express-async-handler";
 
 const productRouter = express.Router();
@@ -37,13 +36,11 @@ var upload = multer({
 // insert an product into data base
 
 productRouter.post("/addproduct",
-    validateProductRequest, isRequestValidated,
-    upload, (req, res) => {
+    // validateProductRequest, isRequestValidated,
+    upload, passport.authenticate('jwt', { session: false }),
+    isAdmin(), (req, res) => {
         // console.log(req.body)
         // console.log(req.files)
-
-
-
         const { color } = req.body;
         for (let i = 0; i < color.length; i++) {
             if (color[i] == color[i + 1]) {
@@ -51,7 +48,6 @@ productRouter.post("/addproduct",
                 break;
             }
         }
-
         let imageColor = [];
 
         if (req.files.length > 0) {
@@ -82,22 +78,6 @@ productRouter.post("/addproduct",
             }
         });
     });
-
-// get all product route
-// router.get('/',(req, res) => {
-//     Product.find().exec((err, products) => {
-//         if (err) {
-//             res.json({ message: err.message });
-//         } else {
-
-//             res.send(products)
-//             // res.render('index', {
-//             //     title: 'Home page',
-//             //     products: products,
-//             // })
-//         }
-//     })
-// });
 
 productRouter.get('/', expressAsyncHandler(async (req, res) => {
     // const products = await Product.find({});
@@ -201,59 +181,80 @@ productRouter.get('/edit/:id', (req, res) => {
 
 // //update product route
 
-productRouter.put('/update/:id', (req, res) => {
-    let id = req.params.id;
-    const { color } = req.body;
+productRouter.put('/update/:id', upload, passport.authenticate('jwt', { session: false }),
+    isAdmin(), (req, res) => {
+        let id = req.params.id;
+        const { color } = req.body;
 
-    let imageColor = [];
+        let images = []
+        let imageColor = [];
+        Product.findById(id, (err, products) => {
+            if (err) {
+                res.send(err);
+            } else {
+                if (products == null) {
+                    // res.redirect('/');
 
-    if (req.files.length > 0) {
-        imageColor = req.files.map((file, i) => {
-            return { image: file.filename, color: color[i] }
-        })
-    }
-
-    // if (req.files) {
-    //     imageColor = req.files.filename;
-    //     try {
-    //         for (i = 0; i < image.length; i++) {
-    //             fs.unlinkSync("../uploads/" + req.body.old_image);
-    //         }
-    //     } catch (error) {
-    //         console.log(err);
-    //     }
-
-    // } else {
-    //     imageColor = req.body.old_image;
-    // }
+                } else {
+                    // res.send(products)
+                    products.imageColor.map(prod => images.push(prod.image))
+                    // console.log(products)
+                    console.log(images)
 
 
 
-    Product.findByIdAndUpdate(id, {
-        name: req.body.name,
-        brand: req.body.brand,
-        price: req.body.price,
-        description: req.body.description,
-        countInStock: req.body.countInStock,
-        imageColor
-    }, (err, result) => {
-        if (err) {
-            res.json({ message: err.message, type: 'danger' });
-        } else {
-            res.send({
-                name: req.body.name,
-                brand: req.body.brand,
-                price: req.body.price,
-                description: req.body.description,
-                countInStock: req.body.countInStock,
-                imageColor
-            })
+                    if (req.files.length > 0) {
+                        imageColor = req.files.map((file, i) => {
+                            return { image: file.filename, color: color[i] }
+                        })
+                        // if (imageColor) {
+                        //     cloudinary.upload.destroy(imageColor);
+                        // }
 
-        }
+                    }
+
+                    if (images) {
+                        try {
+                            for (let i = 0; i < images.length; i++) {
+                                fs.unlinkSync(path.join(path.dirname(__dirname), "uploads/") + images[i].slice("public/"));
+                            }
+                            console.log('deleted successfully')
+                        } catch (error) {
+                            console.log(error);
+                        }
+
+                    }
+
+
+
+                    Product.findByIdAndUpdate(id, {
+                        name: req.body.name,
+                        brand: req.body.brand,
+                        price: req.body.price,
+                        description: req.body.description,
+                        countInStock: req.body.countInStock,
+                        imageColor
+                    }, (err, result) => {
+                        if (err) {
+                            res.json({ message: err.message, type: 'danger' });
+                        } else {
+                            res.send({
+                                name: req.body.name,
+                                brand: req.body.brand,
+                                price: req.body.price,
+                                description: req.body.description,
+                                countInStock: req.body.countInStock,
+                                imageColor
+                            })
+
+                        }
+                    });
+                }
+            }
+        });
+        console.log(images)
+
     });
-
-
-});
 
 
 
@@ -263,29 +264,30 @@ productRouter.put('/update/:id', (req, res) => {
 
 // //delete product route
 
-productRouter.delete('/delete/:id', (req, res) => {
-    let id = req.params.id;
-    Product.findByIdAndRemove(id, (err, result) => {
-        // if (result.image != '') {
-        //     try {
-        //         fs.unlinkSync('../uploads/' + result.image);
+productRouter.delete('/delete/:id', passport.authenticate('jwt', { session: false }),
+    isAdmin(), (req, res) => {
+        let id = req.params.id;
+        Product.findByIdAndRemove(id, (err, result) => {
+            // if (result.image != '') {
+            //     try {
+            //         fs.unlinkSync('../uploads/' + result.image);
 
-        //     } catch (err) {
-        //         console.log(err);
-        //     }
-        // }
-        if (err) {
-            res.json({ message: err.message });
-        } else {
-            res.send('product is deleted')
-            // req.session.message = {
-            //     type: 'success',
-            //     message: 'product deleted successfully'
-            // };
-            // res.redirect("/");
-        }
+            //     } catch (err) {
+            //         console.log(err);
+            //     }
+            // }
+            if (err) {
+                res.json({ message: err.message });
+            } else {
+                res.send('product is deleted')
+                // req.session.message = {
+                //     type: 'success',
+                //     message: 'product deleted successfully'
+                // };
+                // res.redirect("/");
+            }
+        });
     });
-});
 
 //   export const addToWishlist = expressAsyncHandler( async(req,res)=>{
 
@@ -385,6 +387,21 @@ export default productRouter
 
 
 
+
+
+        // if (req.files) {
+        //     imageColor = req.files.filename;
+        //     try {
+        //         for (i = 0; i < image.length; i++) {
+        //             fs.unlinkSync("../uploads/" + req.body.old_image);
+        //         }
+        //     } catch (error) {
+        //         console.log(err);
+        //     }
+
+        // } else {
+        //     imageColor = req.body.old_image;
+        // }
 
 
 

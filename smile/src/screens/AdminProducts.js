@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
 import { productDeleteAction } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
+import PayButton from '../components/PayButton';
 
 export default function AdminProducts() {
 
@@ -43,9 +44,9 @@ export default function AdminProducts() {
     dispatch(productDeleteAction(id))
   }
 
-if(!loading){
-  console.log(products)
-}
+  if (!loading) {
+    console.log(products)
+  }
 
   return (
     <div className='top'>
@@ -56,20 +57,21 @@ if(!loading){
       {loading ?
         <LoadingBox></LoadingBox>
         :
-      
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Count In Stock</th>
-                <th>Rating</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
+
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Count In Stock</th>
+              <th>Rating</th>
+              <th>Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
             {products.map((row, index) =>
               <tr>
                 <td>{row._id}</td>
@@ -90,10 +92,10 @@ if(!loading){
                   </button>
                 </td>
               </tr>
-              )}
-            </tbody>
-          </table>
-        }
+            )}
+          </tbody>
+        </table>
+      }
     </div>
   )
 }

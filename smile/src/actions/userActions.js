@@ -26,7 +26,10 @@ export const signout = () => (dispatch) => {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('token');
     localStorage.removeItem('refToken');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('shippingAddress');
     dispatch({type: USER_SIGNOUT});
+    document.location.href = '/signin';
 }
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -122,10 +125,10 @@ export const getAllUser = () => async (dispatch, getState) => {
 
 export const deleteUser = (userId) => async (dispatch,getState) => {
     dispatch({type: USER_DELETE_REQUEST});
-    const {userSignin: {userInfo}} = getState();
+    const {userSignin: {token}} = getState();
     try{
         const {data} = await Axios.delete(`/api/users/${userId}`,{
-            headers: {Authorization: `Bearer ${userInfo.token}`},
+            headers: {Authorization: `Bearer ${token}`},
         });
         dispatch({type: USER_DELETE_SUCCESS, payload: data});
     }catch(error){
