@@ -24,9 +24,10 @@ GET_ONE_CATEGORIES_FAILURE
 
 
 export const getallCategoriesAction = () => async (dispatch) => {
-    try {
-        dispatch({ type: GET_ALL_CATEGORIES_REQUEST })
+    dispatch({ type: GET_ALL_CATEGORIES_REQUEST })
 
+    try {
+        
         const { data } = await axios.get('/api/categories/get')
 
         dispatch({
@@ -44,11 +45,16 @@ export const getallCategoriesAction = () => async (dispatch) => {
 
 //insert category
 
-export const addCategoryAction = (info) => async (dispatch) => {
-    try {
-        dispatch({ type: ADD_NEW_CATEGORY_REQUEST })
+export const addCategoryAction = (info) => async (dispatch ,getState) => {
+    dispatch({ type: ADD_NEW_CATEGORY_REQUEST })
 
-        const { data } = await axios.post(`/api/categories/create`, info, { headers: {'Content-Type': 'multipart/form-data'}})
+    const { userSignin: { token } } = getState();
+    try {
+        
+        const { data } = await axios.post(`/api/categories/create`, info, { 
+            headers: { Authorization: `Bearer ${token}` },
+            // headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } 
+        })
 
 
         dispatch({
@@ -67,11 +73,15 @@ export const addCategoryAction = (info) => async (dispatch) => {
 
 
 // UPDATE 
-export const updateCategoryAction = ( id,info) => async (dispatch) => {
+export const updateCategoryAction = ( id,info) => async (dispatch ,getState) => {
+    
+    dispatch({ type: UPDATE_CATEGORIES_REQUEST })
+    const { userSignin: { token } } = getState();
     try {
-        dispatch({ type: UPDATE_CATEGORIES_REQUEST })
+       
 
-        const { data } = await axios.put(`/api/categories/category/update/${id}`, info)
+        const { data } = await axios.put(`/api/categories/category/update/${id}`, info,{headers: { Authorization: `Bearer ${token}` },})
+        
 
         dispatch({
             type: UPDATE_CATEGORIES_SUCCESS,
@@ -89,11 +99,15 @@ export const updateCategoryAction = ( id,info) => async (dispatch) => {
 
 
 //DELTE
-export const deleteCategoryAction = (id) => async (dispatch) => {
+export const deleteCategoryAction = (id) => async (dispatch,getState) => {
+    dispatch({ type: DELETE_CATEGORIES_REQUEST })
+    const { userSignin: { token } } = getState();
     try {
-        dispatch({ type: DELETE_CATEGORIES_REQUEST })
+        
 
-        const { data } = await axios.delete(`/api/categories/category/delete/${id}`)
+        const { data } = await axios.delete(`/api/categories/category/delete/${id}`,{headers: { Authorization: `Bearer ${token}` },})
+        
+        
 
         dispatch({
             type: DELETE_CATEGORIES_SUCCESS,

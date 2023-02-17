@@ -1029,7 +1029,7 @@ button.block{
   display: none;
 }
 .updateCat div label{
-  width: 50%;
+  width: 100%;
   border-radius: 20px;
   padding: 10px 20px;
   background-color: var(--secondary-color);
@@ -1075,4 +1075,145 @@ button.block{
   font-size: bold;
   font-weight: bold;
   color: #fff;
+}
+
+.chat-app {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 400px;
+  background-color: var(--primary-color);
+  color:white;
+  border: 1px solid gray;
+  border-radius: .93rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.chat-app .chat-history{
+  overflow-y: auto;
+  border: 1px solid rgb(79, 224, 243);
+  width: 500px;
+  height: 70vh;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(11, 64, 71) ;
+}
+
+.chat-app input{
+  border-radius: .90rem;
+  height: 25px ;
+  margin-top: 10px;
+}
+
+.chat-app button{
+  border-radius: .90rem;
+  height: 35px ;
+  width:75px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.chat-app button:hover{
+  background-color: brown;
+ 
+}
+
+.ChatTitle{
+  font-size: 18px;
+  text-align: center;
+}
+
+.Adminchat-app{
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  margin:0;
+  padding:0;
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  background-color: rgb(168, 166, 166);
+  color:white;
+  border: 1px solid rgb(51, 17, 145);
+  border-radius: .93rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  transform: translate(-50%, -50%);
+  align-items: center;
+}
+
+.Adminchat-history{
+  overflow-y: auto;
+  border: 1px solid rgb(79, 224, 243);
+  width: 500px;
+  height: 70vh;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(11, 64, 71) ;
+}
+
+.Adminchat-app input{
+  border-radius: .90rem;
+  height: 25px ;
+  
+
+}
+
+.Adminchat-app button{
+  border-radius: .90rem;
+  height: 35px ;
+  width:75px;
+ 
+  cursor: pointer;
+}
+
+.Adminchat-app button:hover{
+  background-color: brown;
+ 
+}
+
+
+
+
+.contact-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid rgb(156, 149, 149);
+}
+
+.ClientImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.ClientName {
+  font-weight: bold;
+}
+
+.message-preview {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.Lista{
+box-sizing: border-box;
+width: 300px;
+border: 2px solid rgb(156, 149, 149);
+border-radius: .93rem;
+background-color: #84df90;
 }
