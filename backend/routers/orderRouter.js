@@ -9,7 +9,7 @@ const orderRouter = express.Router();
 
   // find my orders
   orderRouter.get('/mine', 
-//   isAuth, 
+  passport.authenticate('jwt', { session: false }),
   expressAsyncHandler(async(req, res) => {
     const orders = await Order.find({user : req.user._id});
     res.send(orders)
@@ -145,5 +145,12 @@ orderRouter.put('/:id/pay',
         res.status(404).send({message: 'Order not found'});
     }
 }))
+
+//   // find my orders
+//   orderRouter.get('/mine', isAuth, expressAsyncHandler(async(req, res) => {
+//     const orders = await Order.find({user : req.user._id});
+//     res.send(orders)
+// })
+// );
 
 export default orderRouter;

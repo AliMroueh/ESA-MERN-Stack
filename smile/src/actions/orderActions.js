@@ -60,11 +60,11 @@ export const payOrder = (order, paymentResult) => async(dispatch, getState) =>{
 
 export const listOrderMine = () => async(dispatch, getState) => {
     dispatch({type: ORDER_MINE_LIST_REQUEST});
-    const {userSignin: {userInfo}} = getState();
+    const {userSignin: {token}} = getState();
     try{
         const {data} = await Axios.get('/api/orders/mine',{
         headers: {
-            Authorization: `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     dispatch({type: ORDER_MINE_LIST_SUCCESS, payload: data});

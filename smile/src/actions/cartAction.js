@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_ADD_ITEM_FAIL, CART_SAVE_SHIPPING_ADDRESS, CART_SAVE_PAYMENT_METHOD } from "../constants/cartConstants"
+import { detailsProduct } from "./productActions";
 //  getState is to get access to redux store
 export const addToCart = (productId, qty, color) => async (dispatch, getState)=>{
         const {data} = await Axios.get(`/api/products/edit/${productId}`);
