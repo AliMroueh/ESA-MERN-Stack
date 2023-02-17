@@ -45,7 +45,7 @@ export default function AdminDashboard() {
                   <i className="fa fa-users" /> Users
                 </span>
               </div>
-              <div className="summary-body">3</div>
+              <div className="summary-body">{summary.users[0].numUsers}</div>
             </li>
             <li>
               <div className="summary-title color2">
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
                 </span>
               </div>
               <div className="summary-body">
-                6
+              {summary.orders[0] ? summary.orders[0].numOrders : 0}
               </div>
             </li>
             <li>
@@ -64,7 +64,10 @@ export default function AdminDashboard() {
                 </span>
               </div>
               <div className="summary-body">
-                $500
+                $
+                {summary.orders[0]
+                  ? summary.orders[0].totalSales.toFixed(2)
+                  : 0}
               </div>
             </li>
           </ul>
@@ -73,10 +76,15 @@ export default function AdminDashboard() {
           </div>
         <Chart
       chartType="PieChart"
-      data={data}
+      // data={data}
       options={options}
       width={"100%"}
       height={"400px"}
+      loader={<div>Loading Chart</div>}
+      data={[
+        ['Category', 'Products'],
+        ...summary.productCategories.map((x) => [x._id, x.count]),
+      ]}
     />
       </>
       )}

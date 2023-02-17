@@ -101,6 +101,7 @@ useEffect(()=>{
                 setPrice(productsOne.price);
                 setcountInStock(productsOne.countInStock);
                 setDescription(productsOne.description);
+                
                 console.log(productsOne.name)
             }
 

@@ -1,8 +1,11 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Search = () => {
+
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate()
   // fixed Header
   window.addEventListener("scroll", function () {
     const search = document.querySelector(".search")
@@ -10,7 +13,11 @@ const Search = () => {
   })
 
   const dispatch = useDispatch();
-  const cartState = useSelector(state => state.cart)
+  const cartState = useSelector(state => state.cart);
+
+  const clickHandler = () => {
+    navigate(`/search/name/${search}`)
+  }
 
 
   return (
@@ -23,8 +30,9 @@ const Search = () => {
 
           <div className='search-box f_flex'>
             <i className='fa fa-search '></i>
-            <input type='text' placeholder='Search and hit enter...' />
-            <span>All Category</span>
+            <input type='text' placeholder='Search and hit enter...' onChange={(e) => setSearch(e.target.value)}/>
+            {/* <span>All Category</span> */}
+            <button onClick={clickHandler}>All Category</button>
           </div>
 
           <div className='icon f_flex width'>

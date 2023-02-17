@@ -358,6 +358,7 @@ productRouter.post('/get/Wishlist', expressAsyncHandler(async (req, res) => {
     const { _id } = req.body;
     console.log(req.body)
     try {
+        // select: means get only the wishlist
         const findUser = await User.findById(_id).populate("wishlist").select("wishlist");
         res.send(findUser);
     } catch (error) {
