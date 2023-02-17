@@ -82,7 +82,13 @@ export default function AdminProducts() {
                 <td>{row.countInStock}</td>
                 <td>
 
-                  <Link to={`/edit/${row._id}`} className="edit">edit</Link>
+                  <Link to={`/edit/${row._id}`} className="edit"> <button
+                    type="button"
+                    className="edit"
+
+                  >
+                    Edit
+                  </button></Link>
                   <button
                     type="button"
                     className="delete"

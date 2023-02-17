@@ -17,20 +17,10 @@ export default function AdminAddProduct() {
   const { loading: loadingGet, error: errorGet, categories } = getallCategories;
 
 
-
-
-
-  // const productList = useSelector((state) => state.productList);
-
-  // const { loading, error, success } = getallCategories;
-
-
-
   const [open, setOpen] = useState(false);
 
   const [start, setStart] = useState(false);
-  const [startone, setStartone] = useState(false);
-  const [starttwo, setStarttwo] = useState(false);
+
 
 
   const [image, setImage] = useState('');

@@ -369,12 +369,12 @@ productRouter.post('/get/Wishlist', expressAsyncHandler(async (req, res) => {
 //GET ALL PRODUCT
 productRouter.get("/getAllProducts", async (req, res) => {
     try {
-      const products = await Product.find({});
-      res.send(products);
+        const products = await Product.find({});
+        res.send(products);
     } catch (error) {
-      res.json({ message: error });
+        res.json({ message: error });
     }
-  });
+});
 
 
 export default productRouter

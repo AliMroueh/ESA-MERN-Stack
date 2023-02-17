@@ -29,7 +29,7 @@ export default function AdminEditProduct() {
     const [imageName, setimageName] = useState([]);
 
     const productUpdate = useSelector((state) => state.productUpdate)
-    const { loading, error, products, success } = productUpdate
+    const { loading, error, success } = productUpdate
 
 
     const productid = useSelector((state) => state.productid)
@@ -81,18 +81,13 @@ export default function AdminEditProduct() {
         // console.log({ name, category, brand, price, countInStock, description })
 
         dispatch(productUpdateAction(id, formData))
-
-
-
-        // dispatch(productUpdate(formData))
-        // if (!loading && error) {
-        //     console.log(error)
-        // } else if (!loading && !error && success) {
-        //     navigate('/products')
-        //     console.log('gooooooooooooooooooooooooood')
-        // }
+        if (!loading && error) {
+            console.log(error)
+        } else if (!loading && !error && success) {
+            navigate('/products')
+        }
     }
-    // &&  && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description)
+
 
     useEffect(() => {
         if (!loadingOne) {
@@ -224,6 +219,7 @@ export default function AdminEditProduct() {
                                 </label>
 
                             </div>
+
                             <div className='imgAndcolor'>
                                 {imageName.length > 0 &&
 
