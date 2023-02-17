@@ -205,7 +205,7 @@ productRouter.put('/update/:id', upload, passport.authenticate('jwt', { session:
 
                     if (req.files.length > 0) {
                         imageColor = req.files.map((file, i) => {
-                            return { image: file.filename, color: color[i] }
+                            return { image: 'http://localhost:5000/public/' + file.filename, color: color[i] }
                         })
                         // if (imageColor) {
                         //     cloudinary.upload.destroy(imageColor);

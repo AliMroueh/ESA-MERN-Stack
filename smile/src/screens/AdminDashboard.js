@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Chart } from "react-google-charts";
+import { useDispatch, useSelector } from 'react-redux';
+import { summaryOrder } from '../actions/orderActions';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function AdminDashboard() {
+
+  const orderSummary = useSelector((state) => state.orderSummary);
+  const { loading, summary, error } = orderSummary;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(summaryOrder());
+  }, [dispatch]);
 
   const data = [
     ["Task", "Hours per Day"],
@@ -21,6 +32,12 @@ export default function AdminDashboard() {
       <div className='row1 adminTop'>
           <h1 className='adminTitle'>Dashboard</h1>
       </div>
+      {loading ? (
+        <LoadingBox />
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <>
       <ul className="row1 summary">
             <li>
               <div className="summary-title color1">
@@ -61,6 +78,8 @@ export default function AdminDashboard() {
       width={"100%"}
       height={"400px"}
     />
-    </div>
+      </>
+      )}
+      </div>
   )
 }
