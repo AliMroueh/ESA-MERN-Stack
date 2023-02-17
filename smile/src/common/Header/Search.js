@@ -32,7 +32,7 @@ const Search = () => {
             <i className='fa fa-search '></i>
             <input type='text' placeholder='Search and hit enter...' onChange={(e) => setSearch(e.target.value)}/>
             {/* <span>All Category</span> */}
-            <button onClick={clickHandler}>All Category</button>
+            <button className="searchBtn" onClick={clickHandler}>All Category</button>
           </div>
 
           <div className='icon f_flex width'>
