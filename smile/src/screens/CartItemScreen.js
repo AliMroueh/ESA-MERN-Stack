@@ -18,10 +18,13 @@ import MessageBox from '../components/MessageBox';
 
     const qty = qtyInUrl ? Number(qtyInUrl) : 1;
 
+    const color = new URLSearchParams(search).get('color');
+    console.log(color)
+    console.log(search)
     
     useEffect( () =>{
         if(productId){
-        dispatch(addToCart(productId, qty))
+        dispatch(addToCart(productId, qty, color))
         }
     }, [dispatch, productId, qty]);
 
@@ -51,7 +54,7 @@ import MessageBox from '../components/MessageBox';
                                 </div>
                                 <div className='min-30'>
                                     <h3>{item.name}</h3>
-                                    <p>color:{item.color}</p>
+                                    <p>color:{color}</p>
                                 </div>
                                 <div>
                                     <select value={item.qty} onChange={

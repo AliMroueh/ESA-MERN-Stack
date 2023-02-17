@@ -15,7 +15,7 @@ import products from "./products";
 
 
 
-const FlashCard= ({product}) => {
+const FlashCard= ({key,product}) => {
 
   const navigate = useNavigate()
  
@@ -35,25 +35,27 @@ const FlashCard= ({product}) => {
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
       > 
-            {data.products.map((products) => {
+            {product.map((products) => {
 
               return (
                 <>
                 <SwiperSlide>
-                  <div className=' box2 d-flex'  key={products.index}>
+                  <div className=' box2 d-flex'  key={products._id}>
                   <div className='picture mtop'>
                     <div className='img12'>
                      <div className="sales f-flex">
-                      <span className='discount '>{products.discount}% Off</span>
+                      <span className='discount '>
+                        {/* {products.discount} */}
+                        % Off</span>
                        <i className='fa-regular fa-heart fa-2x'></i>
                       </div>
-                      <img src={products.image} alt='' className="img" />
+                      <img src={products.imageColor[0].image} alt='' className="img" />
                     </div>
                     <div className='product-details'>
                       <h1>{products.name}</h1>
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
-                        <button className="btn" onClick={addToCartHandler(products._id)}>
+                        <button className="btn" onClick={() => navigate(`/product/${products._id}`)}>
                           Add To Cart
                         </button>
                       </div>
