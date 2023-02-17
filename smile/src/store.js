@@ -8,7 +8,7 @@ import { getAllProductsReducer,productListReducer, productDetailsReducer, produc
 import { userRefreshReducer } from "./reducers/refreshReducers";
 import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer, orderPayReducer } from "./reducers/orderReducers";
+import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer, orderPayReducer, orderSummaryReducer } from "./reducers/orderReducers";
 
 
 
@@ -62,6 +62,7 @@ const reducer = combineReducers({
     orderList: orderListReducer,
     orderDelete: orderDeleteReducer,
     orderMineList : orderMineListReducer,
+    orderSummary: orderSummaryReducer,
 })
 
 

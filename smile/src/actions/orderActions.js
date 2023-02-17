@@ -141,11 +141,11 @@ export const listOrderMine = () => async(dispatch, getState) => {
   export const summaryOrder = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_SUMMARY_REQUEST });
     const {
-      userSignin: { userInfo },
+      userSignin: { token },
     } = getState();
     try {
       const { data } = await Axios.get('/api/orders/summary', {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
       dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
     } catch (error) {
