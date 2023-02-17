@@ -80,10 +80,10 @@ export default function AdminEditProduct() {
         console.log(formData);
         // console.log({ name, category, brand, price, countInStock, description })
 
-        dispatch(productUpdateAction(id, formData))
+        dispatch(productUpdate(id, formData))
         if (!loading && error) {
             console.log(error)
-        } else if (!loading && !error && success) {
+        } else if (success) {
             navigate('/products')
         }
     }
@@ -92,13 +92,15 @@ export default function AdminEditProduct() {
     useEffect(() => {
         if (!loadingOne) {
             console.log(productsOne);
-            if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description) {
+            if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description && productsOne.image && productsOne.color) {
                 setName(productsOne.name);
                 setBrand(productsOne.brand);
                 setCategory(productsOne.category);
                 setPrice(productsOne.price);
                 setcountInStock(productsOne.countInStock);
                 setDescription(productsOne.description);
+                setImage(productsOne.image);
+                setColor(productsOne.color);
                 console.log(productsOne.name)
             }
 
