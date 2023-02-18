@@ -2,16 +2,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useLocation,useNavigate } from 'react-router-dom';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import axios from 'axios';
+
 import {  updateCategoryAction,getcategoriesAction } from '../actions/categoryActions';
+
 export default function AdminUpdateCategory() {
   
+  const location = useLocation();
+  const categoryName = new URLSearchParams(location.search).get('name');
   
+
   const [categoryImage, setCategoryImage] = useState();
   
   
-  const [name, setName] = useState('');
+  const [name, setName] = useState(categoryName);
   
     const dispatch = useDispatch();
   const updateCategory = useSelector((state) => state.updateCategory);
@@ -21,7 +26,7 @@ export default function AdminUpdateCategory() {
   const params = useParams();
     const {id} = params;
 
-  
+    const navigate = useNavigate();
     
 
     const updateHandler = () => {
@@ -34,7 +39,7 @@ export default function AdminUpdateCategory() {
         console.log(formData);
         console.log(name,categoryImage);
         dispatch(updateCategoryAction(id,formData));
-         
+        navigate("/categories");
     }
     if (!loading) {
       console.log(categories)
@@ -49,9 +54,9 @@ export default function AdminUpdateCategory() {
       <div className='row1 adminTop'>
           <h1 className='adminTitle'>Update Categories</h1>
       </div>
-      <div className='row'>
+      <div className='row1'>
         <div className='avatar'>
-          <img src="images/Product-hunt-amico.svg" alt="categories"/>
+          <img src="../images/Product-hunt-amico.svg" alt="categories"/>
         </div>
         <div className='updateCat'>
                   <div className='input_style'>
@@ -64,7 +69,7 @@ export default function AdminUpdateCategory() {
                         ></input>
                 </div>
 
-                <div className='row'>
+                <div className='row1'>
                   <div>
                         <input
                         type="file"
