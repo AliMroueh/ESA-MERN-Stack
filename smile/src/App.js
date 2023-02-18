@@ -33,6 +33,8 @@ import OrderScreen from "./screens/OrderScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import CheckoutSuccess from "./components/CheckoutSuccess";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+import ChatApp from "./screens/Chat";
+import AdminChatPage from "./screens/AdminChat";
 
 function App() {
 
@@ -107,6 +109,23 @@ function App() {
           path="/categories"
           element={<AdminRoute>
             <AdminCategories />
+          </AdminRoute>
+          }
+        />
+
+
+       <Route
+          path="/chat"
+          element={<AdminRoute>
+            <ChatApp />
+          </AdminRoute>
+          }
+        />
+
+       <Route
+          path="/adminchat"
+          element={<AdminRoute>
+            <AdminChatPage />
           </AdminRoute>
           }
         />

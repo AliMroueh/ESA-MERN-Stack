@@ -33,9 +33,15 @@ export default function AdminCategories() {
     navigate('/addcategory')
   }
 
-  const deleteHandler = (id) => {
-    dispatch(deleteCategoryAction(id))
+  const deleteHandler = (event, id) => {
+    
+    dispatch(deleteCategoryAction(id));
+    event.preventDefault();
   }
+  
+
+  
+
 
   return (
     <div className='top'>
@@ -61,7 +67,9 @@ export default function AdminCategories() {
                   <td>{row._id}</td>
                   <td>{row.name}</td>
                   <td>
-                    <Link to={`/updatecategory/${row._id}`}>
+                  <Link to={`/updatecategory/${row._id}?name=${row.name}`}>
+
+                    {/* <Link to={`/updatecategory/${row._id}`}> */}
                   <button
                       type="button"
                       className="edit"
@@ -73,7 +81,7 @@ export default function AdminCategories() {
                     <button
                       type="button"
                       className="delete"
-                      onClick={() => deleteHandler(row._id)}
+                      onClick={(event) =>deleteHandler(event,row._id)}
                     >
                       Delete
                     </button>

@@ -39,10 +39,12 @@ export default function AdminEditProduct() {
     const params = useParams();
     const { id } = params;
     console.log(id)
-
+    useEffect(() => {
+        dispatch(getProducts(id))
+    }, [dispatch, id])
     useEffect(() => {
         dispatch(getallCategoriesAction())
-        dispatch(getProducts(id))
+
 
         setimageName([]);
         document.getElementsByClassName("imgAndcolor").innerHTML = "";
@@ -57,7 +59,7 @@ export default function AdminEditProduct() {
                 // color.push('red')
             }
         }
-    }, [dispatch, id, image])
+    }, [dispatch, image])
 
 
 
@@ -99,8 +101,7 @@ export default function AdminEditProduct() {
                 setPrice(productsOne.price);
                 setcountInStock(productsOne.countInStock);
                 setDescription(productsOne.description);
-                setImage(productsOne.image);
-                setColor(productsOne.color);
+
                 console.log(productsOne.name)
             }
 

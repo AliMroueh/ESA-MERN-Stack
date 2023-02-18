@@ -14,7 +14,8 @@ import orderRouter from './routers/orderRouter.js';
 import cors from 'cors';
 import Stripe from 'stripe';
 import visaRouter from './routers/stripe.js';
-
+import { createServer } from "http";
+import { Server } from "socket.io";
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
@@ -29,6 +30,45 @@ const app = express();
 
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 
+const server = createServer(app);
+const io = new Server(server, {
+  // ...
+});
+
+
+io.on('connection', (socket) => {
+    console.log('User connected');
+  
+    socket.on('join room', (roomId) => {
+      socket.join(roomId);
+    });
+  
+    socket.on('chat message', (msg) => {
+      // Send the message to all sockets in the same room as the sender
+      io.to(msg.roomId).emit('chat message', msg);
+    });
+  
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+    });
+  });
+  
+  
+  
+  
+  
+  
+  // Listen for messages from the terminal
+  process.stdin.on('data',(data)=>{
+  const message=data.toString().trim();
+  io.emit('chat message',{ sender: "Server", message });
+  
+  });
+
+
+
+
+
 
 
 // these two middleware will transfer the data to req.body in the app
@@ -42,7 +82,7 @@ applyPassportStrategy(passport);
 
 
 mongoose.set('strictQuery', true)
-// mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
 
 // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
 // mongodb://localhost/smile 
@@ -53,7 +93,7 @@ mongoose.set('strictQuery', true)
 // })
 
 
-mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
+// mongoose.connect('mongodb://localhost/smile', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -96,6 +136,6 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 
-app.listen(5000, () => {
+server.listen(5000, () => {
     console.log(`Serve at http://localhost:${port}`);
 })

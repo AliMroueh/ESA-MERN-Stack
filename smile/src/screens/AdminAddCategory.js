@@ -6,6 +6,7 @@ import axios from 'axios';
 import {  addCategoryAction } from '../actions/categoryActions';
 export default function AdminAddCategory() {
   
+  const [open,setOpen]=useState(false);
   const [categoryImage, setCategoryImage] = useState();
  
   const [name, setName] = useState('');
@@ -17,20 +18,35 @@ export default function AdminAddCategory() {
     console.log(categories)
   }, [dispatch])
 
+//   useEffect(() => {
+
+//     if (insertHandler() && input.text="") {
+//         setShow(false);
+//     }
+
+// }, [category.loading]);
+
   if (!loading) {
     console.log(categories)
   }
   const navigate = useNavigate();
   const insertHandler = () => {
   
-    
+    if(name == "" || categoryImage == ""){
+     
+      setOpen(true)
+    }else{
     const formData = new FormData();
     
     formData.append('categoryImage', categoryImage);
     formData.append('name', name);
     console.log(formData);
     console.log(name,categoryImage);
+  
     dispatch(addCategoryAction(formData))
+  navigate("/categories")
+  
+  }
 
 
 
@@ -50,11 +66,13 @@ export default function AdminAddCategory() {
       <div className='row1 adminTop'>
           <h1 className='adminTitle'>Add Categories</h1>
       </div>
-      <div className='row'>
+      <div className='row1'>
         <div className='avatar'>
           <img src="images/Product-hunt-amico.svg" alt="categories"/>
         </div>
         <div className='addCat'>
+          {open &&
+          <div style={{color:"red",fontWeight:"bold"}}>YOU HAVE TO ADD A NAME OR IMAGE</div>}
                   <div className='input_style'>
                         <input
                         type="text"
@@ -64,7 +82,7 @@ export default function AdminAddCategory() {
                         ></input>
                 </div>
 
-                <div className='row'>
+                <div className='row1'>
                   <div>
                         <input
                         type="file"
