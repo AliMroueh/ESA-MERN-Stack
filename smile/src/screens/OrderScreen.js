@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstants'
 import { deliverOrder, detailsOrder, payOrder } from '../actions/orderActions'
+import axios from 'axios'
 
 
 export default function OrderScreen(props) {
@@ -58,9 +59,20 @@ export default function OrderScreen(props) {
     //    }
       
    }, [dispatch, orderId, order, successPay, successDeliver]);
-   const successPaymentHandler = (paymentResult) => {
+   const successPaymentHandler = () => {
     //    dispatch pay order
-    dispatch(payOrder(order, paymentResult));
+    // dispatch(payOrder(order, paymentResult));
+    axios.post(`/api/stripe/create-checkout-session`,{
+        orderId: orderId
+      })
+      .then((res) => {
+        if(res.data.url){
+          window.location.href = res.data.url;
+        console.log(res.data.isPay)
+
+        }
+      })
+      .catch((err) => alert(err.message));
    };
    const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
@@ -195,7 +207,7 @@ export default function OrderScreen(props) {
                 </li>
               )}
               
-                {userInfo.isAdmin && !order.isPaid && (
+                {userInfo && !order.isPaid && (
                 <li>
                   {loadingPay && <LoadingBox></LoadingBox>}
                   {errorPay && (
