@@ -23,6 +23,10 @@ export default function AdminHeader() {
                 <div>
                   <Link to="/orders">Orders</Link>
                 </div>
+                <div>
+                  <Link to="/adminchat">Chat</Link>
+                </div>
+                
             </div>
         </header>
     )
