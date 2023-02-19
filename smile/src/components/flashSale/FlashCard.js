@@ -39,7 +39,7 @@ const FlashCard= ({key,product}) => {
 
               return (
                 <>
-                <SwiperSlide>
+                <SwiperSlide key={products._id}>
                   <div className=' box2 d-flex'  key={products._id}>
                   <div className='picture mtop'>
                     <div className='img12'>

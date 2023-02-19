@@ -16,6 +16,7 @@ import Stripe from 'stripe';
 import visaRouter from './routers/stripe.js';
 import { createServer } from "http";
 import { Server } from "socket.io";
+import stripeRouter from './routers/stripeRouter.js';
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
@@ -37,10 +38,27 @@ const io = new Server(server, {
 
 
 io.on('connection', (socket) => {
+
   console.log('User connected');
 
   socket.on('join room', (roomId) => {
     socket.join(roomId);
+
+    // console.log('User connected');
+
+    socket.on('join room', (roomId) => {
+      socket.join(roomId);
+    });
+
+    socket.on('chat message', (msg) => {
+      // Send the message to all sockets in the same room as the sender
+      io.to(msg.roomId).emit('chat message', msg);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+    });
+
   });
 
   socket.on('chat message', (msg) => {
@@ -106,6 +124,7 @@ app.use('/api/products', productRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/refresh', refreshTokenRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/stripe', stripeRouter);
 
 // for visa 
 // start visa code

@@ -25,7 +25,7 @@ const Search = () => {
      <section className='search'>
         <div className='container c_flex'>
           <div className='logo width '>
-            <h3>S M I L Y</h3>
+            <h3>S M I L E</h3>
           </div>
 
           <div className='search-box f_flex'>

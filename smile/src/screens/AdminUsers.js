@@ -1,8 +1,10 @@
+import axios from 'axios';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { refreshthetok, renewRefreshToken } from '../actions/refreshTokenAction';
+import { payStripe } from '../actions/stripeAction';
 import { deleteUser, getAllUser, signout } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -12,6 +14,8 @@ export default function AdminUsers() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [name, setName] = useState('')
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
 
   const userGetAll = useSelector(state => state.userGetAll);
   const {loading, user, error} = userGetAll;
@@ -33,17 +37,6 @@ export default function AdminUsers() {
   useEffect(() => {
     dispatch(getAllUser())    
   }, [dispatch,successDelete]);
-
-  // useEffect(() => {
-  //   const rf = setInterval(() => 
-  //     dispatch(renewRefreshToken()),1000 * 9
-  //   )
-  //   return () => clearInterval(rf)
-  // })
-
-  // if(!loadingRefresh){
-  //   console.log(refreshTheToken.token)
-  //   }
   
   const deleteHandler = (id)=>{
     if (window.confirm('Are you sure?')) {
@@ -66,27 +59,21 @@ export default function AdminUsers() {
   }
   let the = "white"
   const refreshtheToken = async() => {
-    // dispatch(renewRefreshToken())
-    // console.log(item.imgColor.find(it => it.color === the).img)
-    // return () => clearInterval(rf)
-  }
-  // if(error == 401){
-  //   dispatch(renewRefreshToken())
-  //   if(!loadingRefresh){
-  //     window.location.reload()
-  //   }
-  //   // dispatch(getAllUser())
-  //   // 
-  // }
- console.log(error)
- console.log(errorRefresh)
-//  if(errorRefresh == 'Forbidden'){
-//   dispatch(signout());
-//   navigate('/signin');
-//  }
+    // console.log(userInfo._id)
+    // dispatch(payStripe())
+    axios.post(`/api/stripe/create-checkout-session`,{
+      userId: userInfo._id
+    })
+    .then((res) => {
+      if(res.data.url){
+        window.location.href = res.data.url;
+      }
+    })
+    .catch((err) => console.log(err.message));
+  };
   return (
     <div className='top'>
-      <button onClick={refreshtheToken}>refresh</button>
+      <button onClick={() => refreshtheToken()}>refresh</button>
       <input onChange={(e) => setName(e.target.value)} type="text"/>
       <div className='row1 adminTop'>
           <h1 className='adminTitle'>Users</h1>
