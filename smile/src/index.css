@@ -1053,9 +1053,19 @@ button.block{
   top: -14px;
 }
 .add1{
-  border: 2px solid var(--primary-color);
+ background-color: var(--primary-color);
   margin-left: 20px;
+  border: none;
+  color: white;
 }
+.add2{
+   background-color: rgb(235, 10, 10);
+   margin-left: 20px;
+   border: none;
+   outline: none;
+   color: white;
+
+ }
 .select{
   border:1px solid var(--primary-color);
   color: var(--primary-color);

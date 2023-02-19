@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {getWishList} from '../actions/productActions';
+import {detailsProduct, getWishList} from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -13,11 +13,15 @@ const Likes = () => {
   const navigate = useNavigate();
   const getAllWishlist = useSelector(state => state.getAllWishlist);
   const { loading, favorites, error } = getAllWishlist;
+
+  const productDetails = useSelector(state => state.productDetails);
+  const {products} = productDetails;
+
   const params = useParams();
   const {id:productId} = params;
   const {id} = params
 
-  
+
 // console.log(_id)
   useEffect(() => {
       dispatch(getWishList({_id:id}))
@@ -28,8 +32,16 @@ const Likes = () => {
       console.log(console.log(favorites.wishlist))
     }
   }
+let color=''
   const addToCartHandler = async() =>{
-    navigate(`/cart/${productId}?qty=${qty}`);
+    dispatch(detailsProduct(productId))
+    if(color.length !== 0){
+      const newColor = encodeURIComponent(color)
+      navigate(`/cart/${productId}?qty=${qty}&color=${newColor}`);
+      }else{
+          const newColor = encodeURIComponent(products.imageColor[0].color)
+          navigate(`/cart/${productId}?qty=${qty}&color=${newColor}`);
+      }
 };
 
   return (
@@ -68,8 +80,7 @@ const Likes = () => {
                         </div>
                         <div>${item.price}</div>
                         <div>
-                           <i className="fa-solid fa-trash" ></i>
-                           <span className='add1' onClick={addToCartHandler}><i className="fa-solid fa-plus" style={{padding:"10px 4px"}}></i></span>
+                           <button className='add1' onClick={addToCartHandler}>Add Cart</button>
                         </div>
                     </div>
                 </li>
