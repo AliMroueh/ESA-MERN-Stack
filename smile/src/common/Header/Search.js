@@ -12,6 +12,7 @@ const Search = () => {
     search.classList.toggle("active", window.scrollY > 100)
   })
   const cartState = useSelector(state => state.cart);
+ 
 
   const clickHandler = () => {
     navigate(`/search/name/${search}`)
@@ -47,9 +48,6 @@ const Search = () => {
                 
               </Link>
             </div>
-            <Link to='/Likes'>
-            <i className="fa-solid fa-heart fa-2x"></i>
-            </Link>
           </div>
         </div>
       </section>

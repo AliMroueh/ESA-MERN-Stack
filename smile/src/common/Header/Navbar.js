@@ -10,6 +10,8 @@ const Navbar = () => {
   const [MobileMenu, setMobileMenu] = useState(false)
   const userSignin = useSelector(state => state.userSignin);
   const {userInfo} = userSignin;
+ 
+  
   const logOut = () =>{
     dispatch(signout())
   }
@@ -37,6 +39,11 @@ const Navbar = () => {
               <Link>SignOut</Link>
             </li>
               }
+               <li>
+              <Link to='/Likes'>
+              WishList
+              </Link>
+            </li>
             </ul>
 
             <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>

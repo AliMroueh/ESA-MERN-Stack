@@ -53,12 +53,6 @@ const FlashCard= ({key,product}) => {
                   <div className=' box2 d-flex'  key={products._id}>
                   <div className='picture mtop'>
                     <div className='img12'>
-                     <div className="sales f-flex">
-                      <span className='discount '>
-                        {/* {products.discount} */}
-                        % Off</span>
-                       <i className='fa-regular fa-heart fa-2x' onClick={likeHandler}></i>
-                      </div>
                       <img src={products.imageColor[0].image} alt='' className="img" />
                     </div>
                     <div className='product-details'>
@@ -66,7 +60,7 @@ const FlashCard= ({key,product}) => {
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
                         <button className="btn" onClick={() => navigate(`/product/${products._id}`)}>
-                          Add To Cart
+                          View Item
                         </button>
                       </div>
                       <div className='rate'>
