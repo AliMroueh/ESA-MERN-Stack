@@ -95,7 +95,7 @@ export default function AdminEditProduct() {
     useEffect(() => {
         if (!loadingOne) {
             console.log(productsOne);
-            if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description && productsOne.image && productsOne.color) {
+            if (productsOne && productsOne.name && productsOne.brand && productsOne.category && productsOne.price && productsOne.countInStock && productsOne.description) {
                 setName(productsOne.name);
                 setBrand(productsOne.brand);
                 setCategory(productsOne.category);
@@ -113,11 +113,7 @@ export default function AdminEditProduct() {
         setColor(color)
         console.log(color)
     }
-    // if (!loading) {
-    //     console.log(products)
-    // } else {
-    //     console.log(error)
-    // }
+
 
     return (
 
