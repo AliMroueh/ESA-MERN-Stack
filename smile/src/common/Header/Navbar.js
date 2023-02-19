@@ -1,10 +1,20 @@
 import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { signout } from "../../actions/userActions"
 import Categories from "./Categories"
 
 const Navbar = () => {
   // Toogle Menu
+  const dispatch = useDispatch()
   const [MobileMenu, setMobileMenu] = useState(false)
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
+ 
+  
+  const logOut = () =>{
+    dispatch(signout())
+  }
   return (
     <>
       <header className='header'>
@@ -24,6 +34,16 @@ const Navbar = () => {
               <li>
                 <Link to='/chat'>Chat</Link>
               </li>
+              {userInfo &&
+              <li onClick={logOut}>
+              <Link>SignOut</Link>
+            </li>
+              }
+               <li>
+              <Link to={`/Like/${userInfo._id}`}>
+              WishList
+              </Link>
+            </li>
             </ul>
 
             <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>

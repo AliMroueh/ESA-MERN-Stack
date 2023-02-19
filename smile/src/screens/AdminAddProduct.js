@@ -139,6 +139,7 @@ export default function AdminAddProduct() {
 
             <div className='input_style'>
               <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                <option value='choose category'>choose categories </option>
                 {categories.map((r, index) =>
                   <option value={r.name}>
                     {r.name}

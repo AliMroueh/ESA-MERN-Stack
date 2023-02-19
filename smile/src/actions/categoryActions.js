@@ -48,11 +48,11 @@ export const getallCategoriesAction = () => async (dispatch) => {
 export const addCategoryAction = (info) => async (dispatch ,getState) => {
     dispatch({ type: ADD_NEW_CATEGORY_REQUEST })
 
-    const { userSignin: { token } } = getState();
+    const { userSignin: { userInfo } } = getState();
     try {
         
         const { data } = await axios.post(`/api/categories/create`, info, { 
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${userInfo.token}` },
             // headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } 
         })
 
@@ -76,11 +76,11 @@ export const addCategoryAction = (info) => async (dispatch ,getState) => {
 export const updateCategoryAction = ( id,info) => async (dispatch ,getState) => {
     
     dispatch({ type: UPDATE_CATEGORIES_REQUEST })
-    const { userSignin: { token } } = getState();
+    const { userSignin: { userInfo } } = getState();
     try {
        
 
-        const { data } = await axios.put(`/api/categories/category/update/${id}`, info,{headers: { Authorization: `Bearer ${token}` },})
+        const { data } = await axios.put(`/api/categories/category/update/${id}`, info,{headers: { Authorization: `Bearer ${userInfo.token}` },})
         
 
         dispatch({
@@ -101,11 +101,11 @@ export const updateCategoryAction = ( id,info) => async (dispatch ,getState) => 
 //DELTE
 export const deleteCategoryAction = (id) => async (dispatch,getState) => {
     dispatch({ type: DELETE_CATEGORIES_REQUEST })
-    const { userSignin: { token } } = getState();
+    const { userSignin: { userInfo } } = getState();
     try {
         
 
-        const { data } = await axios.delete(`/api/categories/category/delete/${id}`,{headers: { Authorization: `Bearer ${token}` },})
+        const { data } = await axios.delete(`/api/categories/category/delete/${id}`,{headers: { Authorization: `Bearer ${userInfo.token}` },})
         
         
 

@@ -12,17 +12,27 @@ import  data from '../../data';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { param } from "express-validator";
 import products from "./products";
+import { addToWishlist } from "../../actions/productActions";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 const FlashCard= ({key,product}) => {
 
   const navigate = useNavigate()
- 
+  const dispatch = useDispatch()
+  const params = useParams();
+  const {id:productId} = params;
+  const userSignin = useSelector(state => state.userSignin)
+    const {userInfo} = userSignin;
   //console.log(product)
   const addToCartHandler = (products) =>{
    navigate(`/product/${products._id}`)
   }
+  const likeHandler = () =>{
+    dispatch(addToWishlist(userInfo._id,productId))
+    navigate(`/like/${userInfo._id}`)
+}
 
     return (
         <>
@@ -39,16 +49,10 @@ const FlashCard= ({key,product}) => {
 
               return (
                 <>
-                <SwiperSlide>
+                <SwiperSlide key={products._id}>
                   <div className=' box2 d-flex'  key={products._id}>
                   <div className='picture mtop'>
                     <div className='img12'>
-                     <div className="sales f-flex">
-                      <span className='discount '>
-                        {/* {products.discount} */}
-                        % Off</span>
-                       <i className='fa-regular fa-heart fa-2x'></i>
-                      </div>
                       <img src={products.imageColor[0].image} alt='' className="img" />
                     </div>
                     <div className='product-details'>
@@ -56,7 +60,7 @@ const FlashCard= ({key,product}) => {
                       <div className='price'>
                         <h1>${products.price}.00 </h1>
                         <button className="btn" onClick={() => navigate(`/product/${products._id}`)}>
-                          Add To Cart
+                          View Item
                         </button>
                       </div>
                       <div className='rate'>

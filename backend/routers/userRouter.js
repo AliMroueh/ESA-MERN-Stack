@@ -116,7 +116,7 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) => {
     )
 
 userRouter.get('/:id',
-
+passport.authenticate('jwt', { session: false }),
 expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if(user){

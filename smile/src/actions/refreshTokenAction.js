@@ -6,11 +6,14 @@ import { USER_REFRESH_FAIL, USER_REFRESH_REQUEST, USER_REFRESH_SUCCESS } from '.
         try{
             // const refToken = localStorage.getItem("refToken")
             // && JSON.parse(localStorage.getItem("refToken"));
-            // const {userSignin: {refToken}} = getState();
+            const {userSignin: {userInfo}} = getState();
             // const ref = refToken.slice(1,refToken.length-1)
             const {data} = await axios.get(`/api/refresh/${refToken}`);
             dispatch({type: USER_REFRESH_SUCCESS, payload: data});
-            localStorage.setItem("token", JSON.stringify(data.token))
+            let token = data.token;
+            localStorage.setItem('userInfo',JSON.stringify({...userInfo,token}))
+            
+            // localStorage.setItem("userInfo", JSON.stringify(userInfo))
         }catch(error){
             dispatch({type : USER_REFRESH_FAIL, 
             payload: 

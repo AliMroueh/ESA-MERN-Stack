@@ -9,6 +9,7 @@ import { userRefreshReducer } from "./reducers/refreshReducers";
 import { addcategoryReducer, deletecategoryReducer, getallcategoriesReducer, updatecategoryReducer } from "./reducers/categoryReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer, orderPayReducer, orderSummaryReducer } from "./reducers/orderReducers";
+import { stripePayReducer } from "./reducers/stripeReducers";
 
 
 
@@ -29,7 +30,7 @@ const initialState = {
 
         shippingAddress : localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : [] ,
 
-         paymentMethod : 'PayPal',
+         paymentMethod : 'CashOnDelivery',
     } 
 };
 const reducer = combineReducers({
@@ -63,6 +64,7 @@ const reducer = combineReducers({
     orderDelete: orderDeleteReducer,
     orderMineList : orderMineListReducer,
     orderSummary: orderSummaryReducer,
+    stripePay: stripePayReducer
 })
 
 

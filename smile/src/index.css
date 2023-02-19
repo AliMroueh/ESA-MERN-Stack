@@ -1053,9 +1053,19 @@ button.block{
   top: -14px;
 }
 .add1{
-  border: 2px solid var(--primary-color);
+ background-color: var(--primary-color);
   margin-left: 20px;
+  border: none;
+  color: white;
 }
+.add2{
+   background-color: rgb(235, 10, 10);
+   margin-left: 20px;
+   border: none;
+   outline: none;
+   color: white;
+
+ }
 .select{
   border:1px solid var(--primary-color);
   color: var(--primary-color);
@@ -1068,13 +1078,14 @@ button.block{
 .searchBtn{
   outline: none;
   border: none;
-  padding: 10px 20px;
-  background-color: #6868de;
-  border-radius: 23px;
+  /*adding: 10px 20px;*/
+  background-color: white;
+  opacity: 0.5;
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 9px;
+  font-size: 19px;
+  /*border-radius: 23px;*/
   /* color: white; */
-  font-size: bold;
-  font-weight: bold;
-  color: #fff;
 }
 
 .chat-app {

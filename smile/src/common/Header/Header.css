@@ -24,7 +24,7 @@ width: 100%;
 
 .logo h3{
   color: #0b4086;
-  font-size: 25px;
+  font-size: 23px;
   padding-top: 25px;
   font-weight: bolder;
 }
@@ -66,8 +66,8 @@ width: 100%;
 .icon{
   display: flex;
   justify-content: space-between;
-  
-  margin-right:52px;
+  margin-left: 10px;
+  margin-right:-23px;
 } 
 .icon i{
   padding-top: 20px;

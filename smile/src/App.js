@@ -19,10 +19,7 @@ import AdminAddCategory from "./screens/AdminAddCategory";
 import AdminUpdateCategory from "./screens/AdminUpdateCategory";
 import AdminAddProduct from "./screens/AdminAddProduct";
 import CartItemScreen from "./screens/CartItemScreen";
-import { useEffect, useState } from "react";
-import { renewRefreshToken } from "./actions/refreshTokenAction";
-import { useDispatch, useSelector } from "react-redux";
-import LoadingBox from "./components/LoadingBox";
+import { useSelector } from "react-redux";
 import SearchScreen from "./screens/SearchScreen";
 import Items from "./screens/Items";
 import Likes from "./screens/Likes";
@@ -30,8 +27,6 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
-import OrderListScreen from "./screens/OrderListScreen";
-import CheckoutSuccess from "./components/CheckoutSuccess";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import ChatApp from "./screens/Chat";
 import AdminChatPage from "./screens/AdminChat";
@@ -62,10 +57,26 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/signin" element={<SigninScreen />}></Route>
         <Route path="/register" element={<RegisterScreen />}></Route>
-        <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
-        <Route path="/payment" element={<PaymentMethodScreen />}></Route>
-        <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
-        <Route path="/order/:id" element={<OrderScreen />}></Route>
+        <Route path="/shipping" element={
+        <PrivateRoute>
+          <ShippingAddressScreen />
+        </PrivateRoute>
+        }></Route>
+        <Route path="/payment" element={
+        <PrivateRoute>
+          <PaymentMethodScreen />
+        </PrivateRoute>
+        }></Route>
+        <Route path="/placeorder" element={
+        <PrivateRoute>
+          <PlaceOrderScreen />
+        </PrivateRoute>
+        }></Route>
+        <Route path="/order/:id" element={
+        <PrivateRoute>
+          <OrderScreen />
+        </PrivateRoute>
+        }></Route>
 
         <Route
           path="/profile"
@@ -144,12 +155,16 @@ function App() {
           </AdminRoute>
           }
         />
-        <Route path="/orderhistory" element = {<OrderHistoryScreen />}></Route>
+        <Route path="/orderhistory" element = {
+        <PrivateRoute>
+        <OrderHistoryScreen />
+        </PrivateRoute>
+        }></Route>
         <Route
           path="/orders"
           element={
             <AdminRoute>
-              <OrderListScreen />
+              <AdminOrders />
             </AdminRoute>
           }
         />
@@ -176,7 +191,6 @@ function App() {
           exact
         ></Route>
         <Route path='/product/:id' element={<Items />} exact />
-        <Route path='*' element={<NotFoundScreen />} />
 
         <Route
           path="/updatecategory/:id"
@@ -186,9 +200,19 @@ function App() {
           }
         />
 
-        <Route path='/edit/:id' element={<AdminEditProduct />} exact />
-        <Route path='/like/:id' element={<Likes />} />
-        <Route path='/likes' element={<Likes />} />
+        <Route path='/edit/:id' element={
+        <AdminRoute>
+        <AdminEditProduct />
+        </AdminRoute>} exact />
+        <Route path='/like/:id' element={
+        <PrivateRoute>
+        <Likes />
+        </PrivateRoute>} />
+        <Route path='/likes' element={
+          <PrivateRoute>
+        <Likes />
+        </PrivateRoute>
+        } />
 
         {/* <Route
           path="/checkout-success"

@@ -11,9 +11,8 @@ const Search = () => {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
-
-  const dispatch = useDispatch();
   const cartState = useSelector(state => state.cart);
+ 
 
   const clickHandler = () => {
     navigate(`/search/name/${search}`)
@@ -25,7 +24,7 @@ const Search = () => {
      <section className='search'>
         <div className='container c_flex'>
           <div className='logo width '>
-            <h3>S M I L Y</h3>
+            <h3>S M I L E</h3>
           </div>
 
           <div className='search-box f_flex'>
@@ -53,7 +52,7 @@ const Search = () => {
         </div>
       </section>
     </>
-  )
+      )
 }
 
 export default Search

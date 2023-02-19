@@ -3,12 +3,39 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { Redirect, Route } from 'react-router';
 import { Navigate } from 'react-router-dom';
 import { renewRefreshToken } from '../actions/refreshTokenAction';
+import { signout } from '../actions/userActions';
 
 const AdminRoute = ({children}) =>{
 
     const dispatch = useDispatch()
     const userSignin = useSelector((state) => state.userSignin);
-    const {userInfo, refToken,token} = userSignin;
+    const {userInfo} = userSignin;
+
+    // const userRefresh = useSelector(state => state.userRefresh);
+    // const {
+    //   loading: loadingRefresh,
+    //   refreshTheToken,
+    //   error: errorRefresh
+    // } = userRefresh;
+    // useEffect(() => {
+    //   let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
+    //   if(!loadingRefresh){
+    //     const rf = setInterval(() => 
+    //       dispatch(renewRefreshToken(ttt)),1000 * 9
+    //     )
+    //     return () => clearInterval(rf)
+    //   }
+    //   },[dispatch,loadingRefresh])
+
+    //   if(!loadingRefresh && errorRefresh){
+    //     console.log(errorRefresh)
+    //     if(errorRefresh === 'Forbidden'){
+    //       dispatch(signout())
+    //     }
+        
+    //   }else if(!loadingRefresh){
+    //     console.log(refreshTheToken)
+    //   }
 
     const userRefresh = useSelector(state => state.userRefresh);
     const {
@@ -16,26 +43,25 @@ const AdminRoute = ({children}) =>{
       refreshTheToken,
       error: errorRefresh
     } = userRefresh;
-
-    let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
-    let lod = loadingRefresh;
     useEffect(() => {
-      let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
+      let ttt = localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo"))
+      console.log(ttt.rToken)
       if(!loadingRefresh){
+        
         const rf = setInterval(() => 
-          dispatch(renewRefreshToken(ttt)),1000 * 9
+          dispatch(renewRefreshToken(ttt.rToken)),1000 * 9 * 60
         )
         return () => clearInterval(rf)
       }
       },[dispatch,loadingRefresh])
 
-      // if(!loadingRefresh && errorRefresh === "Forbidden"){
-      //   dispatch(signout())
-      //   navigate('/signin')
-      // }
-      console.log(refToken)
-      if(!loadingRefresh){
+      if(!loadingRefresh && errorRefresh){
         console.log(errorRefresh)
+        if(errorRefresh === 'Forbidden'){
+          dispatch(signout())
+        }
+        
+      }else if(!loadingRefresh){
         console.log(refreshTheToken)
       }
 
