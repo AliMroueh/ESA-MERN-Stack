@@ -4,6 +4,7 @@ import { getallCategoriesAction } from '../actions/categoryActions';
 import { Link, useParams } from 'react-router-dom';
 import { productUpdateAction, getProducts } from '../actions/productActions';
 import { useLocation, useNavigate } from 'react-router-dom';
+import LoadingBox from '../components/LoadingBox';
 
 export default function AdminEditProduct() {
 
@@ -29,7 +30,7 @@ export default function AdminEditProduct() {
     const [imageName, setimageName] = useState([]);
 
     const productUpdate = useSelector((state) => state.productUpdate)
-    const { loading, error, success } = productUpdate
+    const { loading, error, products, success } = productUpdate
 
 
     const productid = useSelector((state) => state.productid)
@@ -112,141 +113,151 @@ export default function AdminEditProduct() {
         setColor(color)
         console.log(color)
     }
-
+    // if (!loading) {
+    //     console.log(products)
+    // } else {
+    //     console.log(error)
+    // }
 
     return (
 
         < div className='top' >
-
-            <div className='row1 adminTop'>
-                <h1 className='adminTitle'>Update Product</h1>
-            </div>
-            <div className='row1'>
-
-                <div className='avatar'>
-                    <img src="../images/Product-hunt-amico.svg" alt="products" />
-                </div>
-                <div className='addCat'>
-                    <div className='input_style'>
-                        <input
-                            type="text"
-                            id="catName"
-                            placeholder="Enter product name"
-                            value={name}
-                            required onChange={(e) => setName(e.target.value)}
-                        ></input>
+            {loading ?
+                <LoadingBox></LoadingBox>
+                :
+                <>
+                    <div className='row1 adminTop'>
+                        <h1 className='adminTitle'>Update Product</h1>
                     </div>
-                    <div className='input_style'>
-                        <input type={'text'} required placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
-                    </div>
-
-                    <div className='input_style'>
-
-                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            {categories.map((r, index) =>
-                                <option value={r.name}>
-                                    {r.name}
-                                </option>
-                            )}
-                        </select>
-                    </div>
-                    <div className='input_style'>
-                        <input
-                            type="number"
-                            id="price"
-                            placeholder="Enter product price"
-                            required
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                        ></input>
-                    </div>
-                    <div className='input_style'>
-                        <input
-                            type="number"
-                            id="countInStock"
-                            placeholder="Enter Count In Stock"
-                            required
-                            value={countInStock}
-                            onChange={(e) => setcountInStock(e.target.value)}
-                        ></input>
-                    </div>
-                    <div className='input_style'>
-                        <input
-                            type="text"
-                            id="description"
-                            placeholder="Enter the description"
-                            required
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        ></input>
-                    </div>
-
                     <div className='row1'>
-                        <div>
 
-                            <label onClick={() => setOpen(true)}>
-                                Image/Color
-                            </label>
+                        <div className='avatar'>
+                            <img src="../images/Product-hunt-amico.svg" alt="products" />
                         </div>
-                        <div>
-                            <button onClick={updateHandler} >Update</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            {
-                open &&
-                <div className='img_color_Add'>
-                    <div className='add_items'>
-                        <span id='close' onClick={() => setOpen(false)}>
-                            <i className="fa-solid fa-circle-xmark"></i>
-                        </span>
-                        <div className='choose_img'>
-                            <div>
+                        <div className='addCat'>
+                            <div className='input_style'>
                                 <input
-                                    type="file"
-                                    id="file"
-                                    required
-                                    alt='category image'
-                                    accept="image/*"
-                                    multiple
-                                    onChange={e => setImage(e.target.files)}
+                                    type="text"
+                                    id="catName"
+                                    placeholder="Enter product name"
+                                    value={name}
+                                    required onChange={(e) => setName(e.target.value)}
                                 ></input>
-                                <label id='img' htmlFor='file'>
-                                    Choose Images
-                                </label>
-
+                            </div>
+                            <div className='input_style'>
+                                <input type={'text'} required placeholder='brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
                             </div>
 
-                            <div className='imgAndcolor'>
-                                {imageName.length > 0 &&
+                            <div className='input_style'>
 
-                                    imageName.map((row, index) =>
-                                    // console.log(index)
-                                    {
-                                        return (
-                                            <div key={index}>
-
-                                                <p>{row}</p>
-                                                <p>{color[index]}</p>
-                                                <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value, index)} />
-
-                                            </div>)
-
-
-                                    })}
+                                <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                                    {categories.map((r, index) =>
+                                        <option value={r.name}>
+                                            {r.name}
+                                        </option>
+                                    )}
+                                </select>
+                            </div>
+                            <div className='input_style'>
+                                <input
+                                    type="number"
+                                    id="price"
+                                    placeholder="Enter product price"
+                                    required
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                ></input>
+                            </div>
+                            <div className='input_style'>
+                                <input
+                                    type="number"
+                                    id="countInStock"
+                                    placeholder="Enter Count In Stock"
+                                    required
+                                    value={countInStock}
+                                    onChange={(e) => setcountInStock(e.target.value)}
+                                ></input>
+                            </div>
+                            <div className='input_style'>
+                                <input
+                                    type="text"
+                                    id="description"
+                                    placeholder="Enter the description"
+                                    required
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                ></input>
                             </div>
 
-                            <div>
-                                <button type='' onClick={() => setOpen(false)} >Save</button>
+                            <div className='row1'>
+                                <div>
+
+                                    <label onClick={() => setOpen(true)}>
+                                        Image/Color
+                                    </label>
+                                </div>
+                                <div>
+                                    <button onClick={updateHandler} >Update</button>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                </div>
+
+
+                    {open &&
+                        <div className='img_color_Add'>
+                            <div className='add_items'>
+                                <span id='close' onClick={() => setOpen(false)}>
+                                    <i className="fa-solid fa-circle-xmark"></i>
+                                </span>
+                                <div className='choose_img'>
+                                    <div>
+                                        <input
+                                            type="file"
+                                            id="file"
+                                            required
+                                            alt='category image'
+                                            accept="image/*"
+                                            multiple
+                                            onChange={e => setImage(e.target.files)}
+                                        ></input>
+                                        <label id='img' htmlFor='file'>
+                                            Choose Images
+                                        </label>
+
+                                    </div>
+
+                                    <div className='imgAndcolor'>
+                                        {imageName.length > 0 &&
+
+                                            imageName.map((row, index) =>
+                                            // console.log(index)
+                                            {
+                                                return (
+                                                    <div key={index}>
+
+                                                        <p>{row}</p>
+                                                        <p>{color[index]}</p>
+                                                        <input className='color' type="color" value={color[index]} onChange={(e) => changeColor(e.target.value, index)} />
+
+                                                    </div>)
+
+
+                                            })}
+                                    </div>
+
+                                    <div>
+                                        <button type='' onClick={() => setOpen(false)} >Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </>
             }
+
         </div >
     );
 
