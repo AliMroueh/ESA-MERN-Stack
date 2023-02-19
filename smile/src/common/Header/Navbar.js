@@ -40,7 +40,7 @@ const Navbar = () => {
             </li>
               }
                <li>
-              <Link to='/Likes'>
+              <Link to={`/Like/${userInfo._id}`}>
               WishList
               </Link>
             </li>

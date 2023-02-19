@@ -100,7 +100,7 @@ applyPassportStrategy(passport);
 
 
 mongoose.set('strictQuery', true)
-mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
+// mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
 
   // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
   // mongodb://localhost/smile 
@@ -111,7 +111,7 @@ mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/all
   // })
 
 
-  // mongoose.connect('mongodb://localhost/smile', {
+  mongoose.connect('mongodb://localhost/smile', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
