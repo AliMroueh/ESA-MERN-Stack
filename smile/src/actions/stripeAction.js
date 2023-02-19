@@ -3,7 +3,7 @@ import { USER_STRIPE_FAIL, USER_STRIPE_REQUEST, USER_STRIPE_SUCCESS } from "../c
 
 export const payStripe = () => async (dispatch,getState) => {
     dispatch({type: USER_STRIPE_REQUEST});
-    // const {userSignin: {token}} = getState();
+    // const {userSignin: {userInfo}} = getState();
     try{
         const {data} = await Axios.post(`/api/stripe/create-checkout-session`
         // ,{

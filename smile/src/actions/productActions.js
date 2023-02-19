@@ -115,7 +115,7 @@ export const listProductCategories = () => async (dispatch) => {
 };
 
 export const listProductDetails = (info) => async (dispatch, getState) => {
-    const { userSignin: { token } } = getState();
+    const { userSignin: { userInfo } } = getState();
 
     try {
 
@@ -124,7 +124,7 @@ export const listProductDetails = (info) => async (dispatch, getState) => {
 
         const { data } = await axios.post(`/api/products/addproduct`, info,
             {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { Authorization: `Bearer ${userInfo.token}` },
                 // headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } 
             }
         )
@@ -149,13 +149,13 @@ export const listProductDetails = (info) => async (dispatch, getState) => {
 
 // UPDATE 
 export const productUpdateAction = (id, info) => async (dispatch, getState) => {
-    const { userSignin: { token } } = getState();
+    const { userSignin: { userInfo } } = getState();
 
     dispatch({ type: PRODUCT_UPDATE_REQUEST })
     try {
         const { data } = await axios.put(`/api/products/update/${id}`, info,
             {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { Authorization: `Bearer ${userInfo.token}` },
             });
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,

@@ -60,13 +60,14 @@ export const payOrder = (order, paymentResult) => async(dispatch, getState) =>{
 
 export const listOrderMine = () => async(dispatch, getState) => {
     dispatch({type: ORDER_MINE_LIST_REQUEST});
-    const {userSignin: {token}} = getState();
+    const {userSignin: {userInfo}} = getState();
     try{
         const {data} = await Axios.get('/api/orders/mine',{
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${userInfo.token}`,
         },
     });
+  
     dispatch({type: ORDER_MINE_LIST_SUCCESS, payload: data});
     }catch(error){
         const message = error.response && error.response.data.message
@@ -121,11 +122,11 @@ export const listOrderMine = () => async(dispatch, getState) => {
   export const deliverOrder = (orderId) => async (dispatch, getState) => {
     dispatch({ type: ORDER_DELIVER_REQUEST, payload: orderId });
     const {
-      userSignin: { token },
+      userSignin: { userInfo },
     } = getState();
     try {
       const { data } =  Axios.put(`/api/orders/${orderId}/deliver`, {},{
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       // console.log(data);
       dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });
@@ -141,11 +142,11 @@ export const listOrderMine = () => async(dispatch, getState) => {
   export const summaryOrder = () => async (dispatch, getState) => {
     dispatch({ type: ORDER_SUMMARY_REQUEST });
     const {
-      userSignin: { token },
+      userSignin: { userInfo },
     } = getState();
     try {
       const { data } = await Axios.get('/api/orders/summary', {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
     } catch (error) {

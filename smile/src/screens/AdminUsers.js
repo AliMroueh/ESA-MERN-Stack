@@ -3,9 +3,7 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { refreshthetok, renewRefreshToken } from '../actions/refreshTokenAction';
-import { payStripe } from '../actions/stripeAction';
-import { deleteUser, getAllUser, signout } from '../actions/userActions';
+import { deleteUser, getAllUser } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
