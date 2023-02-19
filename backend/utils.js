@@ -29,7 +29,7 @@ export const refreshToken = user => {
    },
    process.env.REFRESH_TOKEN_SECRET || 'secret',
    { 
-       expiresIn: '30d'
+       expiresIn: '30s'
    }
 )}
 

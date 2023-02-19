@@ -62,10 +62,26 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/signin" element={<SigninScreen />}></Route>
         <Route path="/register" element={<RegisterScreen />}></Route>
-        <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
-        <Route path="/payment" element={<PaymentMethodScreen />}></Route>
-        <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
-        <Route path="/order/:id" element={<OrderScreen />}></Route>
+        <Route path="/shipping" element={
+        <PrivateRoute>
+          <ShippingAddressScreen />
+        </PrivateRoute>
+        }></Route>
+        <Route path="/payment" element={
+        <PrivateRoute>
+          <PaymentMethodScreen />
+        </PrivateRoute>
+        }></Route>
+        <Route path="/placeorder" element={
+        <PrivateRoute>
+          <PlaceOrderScreen />
+        </PrivateRoute>
+        }></Route>
+        <Route path="/order/:id" element={
+        <PrivateRoute>
+          <OrderScreen />
+        </PrivateRoute>
+        }></Route>
 
         <Route
           path="/profile"
@@ -144,7 +160,11 @@ function App() {
           </AdminRoute>
           }
         />
-        <Route path="/orderhistory" element = {<OrderHistoryScreen />}></Route>
+        <Route path="/orderhistory" element = {
+        <PrivateRoute>
+        <OrderHistoryScreen />
+        </PrivateRoute>
+        }></Route>
         <Route
           path="/orders"
           element={
@@ -176,7 +196,6 @@ function App() {
           exact
         ></Route>
         <Route path='/product/:id' element={<Items />} exact />
-        <Route path='*' element={<NotFoundScreen />} />
 
         <Route
           path="/updatecategory/:id"
@@ -186,9 +205,19 @@ function App() {
           }
         />
 
-        <Route path='/edit/:id' element={<AdminEditProduct />} exact />
-        <Route path='/like/:id' element={<Likes />} />
-        <Route path='/likes' element={<Likes />} />
+        <Route path='/edit/:id' element={
+        <AdminRoute>
+        <AdminEditProduct />
+        </AdminRoute>} exact />
+        <Route path='/like/:id' element={
+        <PrivateRoute>
+        <Likes />
+        </PrivateRoute>} />
+        <Route path='/likes' element={
+          <PrivateRoute>
+        <Likes />
+        </PrivateRoute>
+        } />
 
         {/* <Route
           path="/checkout-success"

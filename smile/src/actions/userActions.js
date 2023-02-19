@@ -7,11 +7,11 @@ export const signin = (email, password) => async (dispatch) => {
     try{
         const {data} = await Axios.post('/api/users/signin', {email, password});
         dispatch({type: USER_SIGNIN_SUCCESS, payload: data});
-        const {_id,name,isAdmin} = data;
-        localStorage.setItem('userInfo', JSON.stringify({_id,name,email,isAdmin}));
-        localStorage.setItem("token", JSON.stringify(data.token))
-        localStorage.setItem('refToken', JSON.stringify(data.rToken))
-        // localStorage.setItem('userInfo', JSON.stringify(data));
+        // const {_id,name,isAdmin} = data;
+        // localStorage.setItem('userInfo', JSON.stringify({_id,name,email,isAdmin}));
+        // localStorage.setItem("token", JSON.stringify(data.token))
+        // localStorage.setItem('refToken', JSON.stringify(data.rToken))
+        localStorage.setItem('userInfo', JSON.stringify(data));
     }catch(error){
         dispatch({type: USER_SIGNIN_FAIL,
         payload: 
@@ -55,12 +55,12 @@ export const register = (name, email, password) => async (dispatch) => {
 
 export const detailsUser = (userId) => async (dispatch, getState) => {
     dispatch({type: USER_DETAILS_REQUEST, payload: userId});
-    const {userSignin: {token}} = getState();
+    const {userSignin: {userInfo}} = getState();
     try{
         const {data} = await Axios.get(`/api/users/${userId}`
         , {
             // headers: {Authorization: `Bearer ${userInfo.token}`},
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${userInfo.token}` },
         }
         );
         dispatch({type: USER_DETAILS_SUCCESS, payload: data});
@@ -75,10 +75,10 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
     dispatch({type: USER_UPDATE_PROFILE_REQUEST, payload: user});
-    const {userSignin: {token}} = getState();
+    const {userSignin: {userInfo}} = getState();
     try{
         const {data} = await Axios.put(`/api/users/profile`,user ,{
-            headers: {Authorization: `Bearer ${token}`},
+            headers: {Authorization: `Bearer ${userInfo.token}`},
         });
         dispatch({type: USER_UPDATE_PROFILE_SUCCESS, payload: data});
         dispatch({type: USER_SIGNIN_SUCCESS, payload: data});
@@ -96,7 +96,7 @@ export const getAllUser = () => async (dispatch, getState) => {
     dispatch({type: USER_GET_REQUEST});
     
     try{
-        // const {userSignin: {token}} = getState();
+        // const {userSignin: {userInfo}} = getState();
         const token = localStorage.getItem("token")
         && JSON.parse(localStorage.getItem("token"));
         // let token = localStorage.getItem("token");
@@ -107,17 +107,8 @@ export const getAllUser = () => async (dispatch, getState) => {
         });
         dispatch({type: USER_GET_SUCCESS, payload: data});
     }catch(error){
-        // console.log(error.response.data)
-        // console.log(error.response.status)
-        // if(error.response.status == 401){
-        //     dispatch(renewRefreshToken())
-        //     // dispatch(getAllUser())
-        //     console.log(error.response.data)
-        // }
         dispatch({type : USER_GET_FAIL, 
-        payload: error.response.status
-        // error.response && error.response.data.message
-        // ? error.response.data.message : error.message, 
+        payload: error.response.status 
         });
     }
 }
@@ -125,10 +116,10 @@ export const getAllUser = () => async (dispatch, getState) => {
 
 export const deleteUser = (userId) => async (dispatch,getState) => {
     dispatch({type: USER_DELETE_REQUEST});
-    const {userSignin: {token}} = getState();
+    const {userSignin: {userInfo}} = getState();
     try{
         const {data} = await Axios.delete(`/api/users/${userId}`,{
-            headers: {Authorization: `Bearer ${token}`},
+            headers: {Authorization: `Bearer ${userInfo.token}`},
         });
         dispatch({type: USER_DELETE_SUCCESS, payload: data});
     }catch(error){
