@@ -11,9 +11,8 @@ const Search = () => {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
-
-  const dispatch = useDispatch();
   const cartState = useSelector(state => state.cart);
+ 
 
   const clickHandler = () => {
     navigate(`/search/name/${search}`)
@@ -53,7 +52,7 @@ const Search = () => {
         </div>
       </section>
     </>
-  )
+      )
 }
 
 export default Search
