@@ -44,7 +44,7 @@ export default function AdminAddCategory() {
     console.log(name,categoryImage);
   
     dispatch(addCategoryAction(formData));
-    setOpen(false);
+    
   navigate("/categories");
   
   }

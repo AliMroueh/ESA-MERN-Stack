@@ -36,24 +36,25 @@ const io = new Server(server, {
 });
 
 
+
+
 io.on('connection', (socket) => {
-    console.log('User connected');
-  
-    socket.on('join room', (roomId) => {
-      socket.join(roomId);
-    });
-  
-    socket.on('chat message', (msg) => {
-      // Send the message to all sockets in the same room as the sender
-      io.to(msg.roomId).emit('chat message', msg);
-    });
-  
-    socket.on('disconnect', () => {
-      console.log('User disconnected');
-    });
+  console.log('User connected');
+
+  socket.on('join room', (roomId) => {
+    socket.join(roomId);
   });
-  
-  
+
+  socket.on('chat message', (msg) => {
+    // Send the message to all sockets in the same room as the sender
+    io.to(msg.roomId).emit('chat message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
+
   
   
   
@@ -82,7 +83,7 @@ applyPassportStrategy(passport);
 
 
 mongoose.set('strictQuery', true)
-// mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
 
 // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
 // mongodb://localhost/smile 
@@ -93,7 +94,7 @@ mongoose.set('strictQuery', true)
 // })
 
 
-mongoose.connect('mongodb://localhost/smile', {
+// mongoose.connect('mongodb://localhost/smile', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
