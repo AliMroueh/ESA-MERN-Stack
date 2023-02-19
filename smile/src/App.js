@@ -116,9 +116,9 @@ function App() {
 
        <Route
           path="/chat"
-          element={<AdminRoute>
+          element={<PrivateRoute>
             <ChatApp />
-          </AdminRoute>
+          </PrivateRoute>
           }
         />
 
