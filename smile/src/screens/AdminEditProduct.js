@@ -42,10 +42,10 @@ export default function AdminEditProduct() {
     useEffect(() => {
         dispatch(getProducts(id))
     }, [dispatch, id])
+
+
     useEffect(() => {
         dispatch(getallCategoriesAction())
-
-
         setimageName([]);
         document.getElementsByClassName("imgAndcolor").innerHTML = "";
 
@@ -101,8 +101,6 @@ export default function AdminEditProduct() {
                 setPrice(productsOne.price);
                 setcountInStock(productsOne.countInStock);
                 setDescription(productsOne.description);
-
-                console.log(productsOne.name)
             }
 
         }
@@ -126,7 +124,7 @@ export default function AdminEditProduct() {
             <div className='row1'>
 
                 <div className='avatar'>
-                    <img src="images/product-quality-animate.svg" alt="products" />
+                    <img src="../images/Product-hunt-amico.svg" alt="products" />
                 </div>
                 <div className='addCat'>
                     <div className='input_style'>
