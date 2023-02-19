@@ -11,6 +11,32 @@ const AdminRoute = ({children}) =>{
     const userSignin = useSelector((state) => state.userSignin);
     const {userInfo} = userSignin;
 
+    // const userRefresh = useSelector(state => state.userRefresh);
+    // const {
+    //   loading: loadingRefresh,
+    //   refreshTheToken,
+    //   error: errorRefresh
+    // } = userRefresh;
+    // useEffect(() => {
+    //   let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
+    //   if(!loadingRefresh){
+    //     const rf = setInterval(() => 
+    //       dispatch(renewRefreshToken(ttt)),1000 * 9
+    //     )
+    //     return () => clearInterval(rf)
+    //   }
+    //   },[dispatch,loadingRefresh])
+
+    //   if(!loadingRefresh && errorRefresh){
+    //     console.log(errorRefresh)
+    //     if(errorRefresh === 'Forbidden'){
+    //       dispatch(signout())
+    //     }
+        
+    //   }else if(!loadingRefresh){
+    //     console.log(refreshTheToken)
+    //   }
+
     const userRefresh = useSelector(state => state.userRefresh);
     const {
       loading: loadingRefresh,
@@ -18,10 +44,12 @@ const AdminRoute = ({children}) =>{
       error: errorRefresh
     } = userRefresh;
     useEffect(() => {
-      let ttt = localStorage.getItem("refToken") && JSON.parse(localStorage.getItem("refToken"))
+      let ttt = localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo"))
+      console.log(ttt.rToken)
       if(!loadingRefresh){
+        
         const rf = setInterval(() => 
-          dispatch(renewRefreshToken(ttt)),1000 * 9
+          dispatch(renewRefreshToken(ttt.rToken)),1000 * 9
         )
         return () => clearInterval(rf)
       }

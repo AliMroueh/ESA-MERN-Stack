@@ -9,7 +9,7 @@ const PrivateRoute = ({children}) =>{
 
     const dispatch = useDispatch()
     const userSignin = useSelector((state) => state.userSignin);
-    const {userInfo,token} = userSignin;
+    const {userInfo} = userSignin;
     // let ttt = localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo"))
     // console.log(ttt)
     // if(ttt){
