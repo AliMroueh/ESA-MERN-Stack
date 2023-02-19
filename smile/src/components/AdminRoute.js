@@ -37,33 +37,33 @@ const AdminRoute = ({children}) =>{
     //     console.log(refreshTheToken)
     //   }
 
-    const userRefresh = useSelector(state => state.userRefresh);
-    const {
-      loading: loadingRefresh,
-      refreshTheToken,
-      error: errorRefresh
-    } = userRefresh;
-    useEffect(() => {
-      let ttt = localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo"))
-      console.log(ttt.rToken)
-      if(!loadingRefresh){
+    // const userRefresh = useSelector(state => state.userRefresh);
+    // const {
+    //   loading: loadingRefresh,
+    //   refreshTheToken,
+    //   error: errorRefresh
+    // } = userRefresh;
+    // useEffect(() => {
+    //   let ttt = localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo"))
+    //   console.log(ttt.rToken)
+    //   if(!loadingRefresh){
         
-        const rf = setInterval(() => 
-          dispatch(renewRefreshToken(ttt.rToken)),1000 * 9
-        )
-        return () => clearInterval(rf)
-      }
-      },[dispatch,loadingRefresh])
+    //     const rf = setInterval(() => 
+    //       dispatch(renewRefreshToken(ttt.rToken)),1000 * 9
+    //     )
+    //     return () => clearInterval(rf)
+    //   }
+    //   },[dispatch,loadingRefresh])
 
-      if(!loadingRefresh && errorRefresh){
-        console.log(errorRefresh)
-        if(errorRefresh === 'Forbidden'){
-          dispatch(signout())
-        }
+    //   if(!loadingRefresh && errorRefresh){
+    //     console.log(errorRefresh)
+    //     if(errorRefresh === 'Forbidden'){
+    //       dispatch(signout())
+    //     }
         
-      }else if(!loadingRefresh){
-        console.log(refreshTheToken)
-      }
+    //   }else if(!loadingRefresh){
+    //     console.log(refreshTheToken)
+    //   }
 
     return userInfo && userInfo.isAdmin ? children : <Navigate to="/signin" />
 }
