@@ -32,7 +32,7 @@ const PrivateRoute = ({children}) =>{
       if(!loadingRefresh){
         
         const rf = setInterval(() => 
-          dispatch(renewRefreshToken(ttt.rToken)),1000 * 9
+          dispatch(renewRefreshToken(ttt.rToken)),1000 * 9 * 60
         )
         return () => clearInterval(rf)
       }

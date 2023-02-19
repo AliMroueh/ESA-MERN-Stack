@@ -3,7 +3,6 @@ import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-// import { deliverOrder, detailsOrder, payOrder } from '../actions/orderAction'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../constants/orderConstants'
@@ -77,8 +76,11 @@ export default function OrderScreen(props) {
    const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
   };
-   console.log(order)
-   console.log(!window.paypal?true:false)
+  const successAdPayHandler = () => {
+    dispatch(payOrder(order._id))
+  }
+
+
     return loading ? <LoadingBox></LoadingBox>
     :
     error ? 
@@ -171,26 +173,6 @@ export default function OrderScreen(props) {
                             <div><strong>${order.totalPrice.toFixed(2)}</strong></div>
                         </div>
                         </li>
-                        {/* {!order.isPaid && 
-                        (
-                            <li>
-                                {!sdkready ? (
-                                    <LoadingBox></LoadingBox>
-                                ) : (
-                                    <>
-                                    {errorPay && (
-                                        <MessageBox variant='danger'>{errorPay}</MessageBox>
-                                    )}
-                                    {loadingPay &&                            <LoadingBox></LoadingBox>
-                                    }
-                                    <PayPalButton
-                                    amount={order.totalPrice}
-                                    onSuccess={successPaymentHandler}
-                                    ></PayPalButton> 
-                                    </>
-                                )}
-                            </li>
-                        )} */}
                         {userInfo.isAdmin && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
@@ -207,7 +189,24 @@ export default function OrderScreen(props) {
                 </li>
               )}
               
-                {userInfo && !order.isPaid && (
+
+                {userInfo && userInfo.isAdmin && !order.isPaid && (
+                    <li>
+                   {loadingPay && <LoadingBox></LoadingBox>}
+                  {errorPay && (
+                    <MessageBox variant="danger">{errorPay}</MessageBox>
+                  )}
+                    <button
+                    type="button"
+                    className="primary block"
+                    onClick={successAdPayHandler}
+                  >
+                    Paid
+                  </button>
+                    </li>
+                )}
+                
+                {userInfo && !userInfo.isAdmin && !order.isPaid && (
                 <li>
                   {loadingPay && <LoadingBox></LoadingBox>}
                   {errorPay && (

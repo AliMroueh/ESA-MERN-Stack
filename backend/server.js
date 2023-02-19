@@ -84,11 +84,6 @@ process.stdin.on('data', (data) => {
 });
 
 
-
-
-
-
-
 // these two middleware will transfer the data to req.body in the app
 // a middleware that parse json data in the body of the request
 app.use(express.json());

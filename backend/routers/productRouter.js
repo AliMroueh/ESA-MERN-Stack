@@ -115,23 +115,14 @@ productRouter.get('/', expressAsyncHandler(async (req, res) => {
         ...priceFilter,
         ...ratingFilter,
     });
-    // const products = await Product.find({ ...sellerFilter });
-    // const products = await Product.find({ ...sellerFilter }).populate(
-    //   'seller',
-    //   'seller.name seller.logo'
-    // );
 
     const products = await Product.find({
         ...sellerFilter,
         ...nameFilter,
         ...categoryFilter,
-        // }).populate('seller', 'seller.name seller.logo');
         ...priceFilter,
         ...ratingFilter,
     })
-        // .populate('seller', 'seller.name seller.logo')
-        // .sort(sortOrder);
-        // res.send(products);
         .sort(sortOrder)
         // In Mongoose, the skip() method is used to specify the number of documents to skip. When a query is made and the query result is returned, the skip() method will skip the first n documents specified and return the remaining.
         // in short skip is return the remaining product in this example
