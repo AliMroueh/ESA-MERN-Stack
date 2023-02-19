@@ -11,8 +11,6 @@ const Search = () => {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
-
-  const dispatch = useDispatch();
   const cartState = useSelector(state => state.cart);
 
   const clickHandler = () => {
@@ -49,11 +47,14 @@ const Search = () => {
                 
               </Link>
             </div>
+            <Link to='/Likes'>
+            <i className="fa-solid fa-heart fa-2x"></i>
+            </Link>
           </div>
         </div>
       </section>
     </>
-  )
+      )
 }
 
 export default Search
