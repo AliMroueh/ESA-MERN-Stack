@@ -62,11 +62,12 @@ export default function AdminProducts() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>NAME</th>
+              <th>Name</th>
+              <th>Brand</th>
               <th>Category</th>
               <th>Price</th>
               <th>Count In Stock</th>
-              <th>Rating</th>
+              <th>Description</th>
               <th>Action</th>
 
             </tr>
@@ -77,6 +78,7 @@ export default function AdminProducts() {
                 <td>{row._id}</td>
                 <td>{row.name}</td>
                 <td>{row.brand}</td>
+                <td>{row.category}</td>
                 <td>{row.price}</td>
                 <td>{row.description}</td>
                 <td>{row.countInStock}</td>
