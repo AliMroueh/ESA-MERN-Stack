@@ -38,33 +38,50 @@ const io = new Server(server, {
 
 
 io.on('connection', (socket) => {
+
+  console.log('User connected');
+
+  socket.on('join room', (roomId) => {
+    socket.join(roomId);
+
     // console.log('User connected');
-  
+
     socket.on('join room', (roomId) => {
       socket.join(roomId);
     });
-  
+
     socket.on('chat message', (msg) => {
       // Send the message to all sockets in the same room as the sender
       io.to(msg.roomId).emit('chat message', msg);
     });
-  
+
     socket.on('disconnect', () => {
       console.log('User disconnected');
     });
+
   });
-  
-  
-  
-  
-  
-  
-  // Listen for messages from the terminal
-  process.stdin.on('data',(data)=>{
-  const message=data.toString().trim();
-  io.emit('chat message',{ sender: "Server", message });
-  
+
+  socket.on('chat message', (msg) => {
+    // Send the message to all sockets in the same room as the sender
+    io.to(msg.roomId).emit('chat message', msg);
   });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
+
+
+
+
+
+
+// Listen for messages from the terminal
+process.stdin.on('data', (data) => {
+  const message = data.toString().trim();
+  io.emit('chat message', { sender: "Server", message });
+
+});
 
 
 
@@ -83,23 +100,23 @@ applyPassportStrategy(passport);
 
 
 mongoose.set('strictQuery', true)
-// mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
 
-// mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
-// mongodb://localhost/smile 
-//mongodb+srv://souzan12:123@cluster0.kdwqtkg.mongodb.net/smile?retryWrites=true&w=majority
-// mongoose.connect('mongodb://localhost/smile',{
-//     useNewUrlParser: true, 
-//     useUnifiedTopology: true
-// })
+  // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
+  // mongodb://localhost/smile 
+  //mongodb+srv://souzan12:123@cluster0.kdwqtkg.mongodb.net/smile?retryWrites=true&w=majority
+  // mongoose.connect('mongodb://localhost/smile',{
+  //     useNewUrlParser: true, 
+  //     useUnifiedTopology: true
+  // })
 
 
-mongoose.connect('mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  // mongoose.connect('mongodb://localhost/smile', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
-    .then(db => console.log('DB is connected'))
-    .catch(err => console.log(err));
+  .then(db => console.log('DB is connected'))
+  .catch(err => console.log(err));
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
@@ -128,16 +145,16 @@ app.use('/api/visa', visaRouter);
 // })
 
 app.get('/', (req, res) => {
-    res.send('Server is ready');
+  res.send('Server is ready');
 });
 
 // this middleware is an error catcher.So, when an error appear in the routers that use expressAsyncHandler then the error will be redirected to this function or middleware and then the right error will redirected to the frontend
 app.use((err, req, res, next) => {
-    res.status(500).send({ message: err.message });
+  res.status(500).send({ message: err.message });
 });
 
 const port = process.env.PORT || 5000;
 
 server.listen(5000, () => {
-    console.log(`Serve at http://localhost:${port}`);
+  console.log(`Serve at http://localhost:${port}`);
 })

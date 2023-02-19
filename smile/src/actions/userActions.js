@@ -38,11 +38,11 @@ export const register = (name, email, password) => async (dispatch) => {
         const {data} = await Axios.post('/api/users/register', {name,email, password});
         dispatch({type: USER_REGISTER_SUCCESS, payload: data});
         dispatch({type: USER_SIGNIN_SUCCESS, payload: data});
-        const {_id,isAdmin} = data;
-        localStorage.setItem('userInfo', JSON.stringify({_id,name,email,isAdmin}));
-        localStorage.setItem("token", JSON.stringify(data.token))
-        localStorage.setItem('refToken', JSON.stringify(data.rToken))
-        // localStorage.setItem('userInfo', JSON.stringify(data));
+        // const {_id,isAdmin} = data;
+        // localStorage.setItem('userInfo', JSON.stringify({_id,name,email,isAdmin}));
+        // localStorage.setItem("token", JSON.stringify(data.token))
+        // localStorage.setItem('refToken', JSON.stringify(data.rToken))
+        localStorage.setItem('userInfo', JSON.stringify(data));
     }catch(error){
         dispatch({type: USER_REGISTER_FAIL,
         payload: 
@@ -96,13 +96,13 @@ export const getAllUser = () => async (dispatch, getState) => {
     dispatch({type: USER_GET_REQUEST});
     
     try{
-        // const {userSignin: {userInfo}} = getState();
-        const token = localStorage.getItem("token")
-        && JSON.parse(localStorage.getItem("token"));
+        const {userSignin: {userInfo}} = getState();
+        // const token = localStorage.getItem("token")
+        // && JSON.parse(localStorage.getItem("token"));
         // let token = localStorage.getItem("token");
         const {data} = await axios.get(`/api/users`, {
             headers: { 
-                Authorization: `Bearer ${token}` 
+                Authorization: `Bearer ${userInfo.token}` 
             },
         });
         dispatch({type: USER_GET_SUCCESS, payload: data});
