@@ -14,4 +14,8 @@
  - npm install bcryptjs // function to hash the password 
  - npm install express-async-handler // for error handling
  - npm install jsonwebtoken // for sign in
- - npm install dotenv
+ - npm install 
+- bcryptjs: This module enables storing of passwords as hashed passwords instead of plaintext
+- jsonwebtoken: JSON Web Token is an open industry standard used to share information between two entities, usually a client (like your app's frontend) and a server (your app's backend).
+- passport-jwt: 
+A Passport strategy for authenticating with a JSON Web Token. This module lets you authenticate endpoints using a JSON web token. It is intended to be used to secure RESTful endpoints without sessions.

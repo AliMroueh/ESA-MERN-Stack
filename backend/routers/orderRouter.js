@@ -64,7 +64,14 @@ orderRouter.get(
   passport.authenticate('jwt', { session: false }),
   expressAsyncHandler(async(req, res) => {
     const orders = await Order.find({user : req.user._id});
+    // find({user : req.user._id});
     res.send(orders)
+    // if(orders){
+    //   res.send(orders)
+    // }else{
+    //   res.status(401).send({message: 'There is no orders in database'})
+    // }
+    
 })
 );
 

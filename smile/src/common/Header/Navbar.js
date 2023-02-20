@@ -39,11 +39,13 @@ const Navbar = () => {
               <Link>SignOut</Link>
             </li>
               }
+              {userInfo && 
                <li>
               <Link to={`/Like/${userInfo._id}`}>
               WishList
               </Link>
             </li>
+            }
             </ul>
 
             <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>
