@@ -174,11 +174,11 @@ export const productUpdateAction = (id, info) => async (dispatch, getState) => {
 
 //DELTE
 export const productDeleteAction = (id) => async (dispatch, getState) => {
-    const { userSignin: { token } } = getState();
+    const { userSignin: { userInfo } } = getState();
 
     dispatch({ type: PRODUCT_DELETE_REQUEST })
     try {
-        const { data } = await axios.delete(`/api/products/delete/${id}`, { headers: { Authorization: `Bearer ${token}` }, })
+        const { data } = await axios.delete(`/api/products/delete/${id}`, { headers: { Authorization: `Bearer ${userInfo.token}` }, })
 
         dispatch({
             type: PRODUCT_DELETE_SUCCESS,
