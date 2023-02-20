@@ -83,7 +83,7 @@ export default function AdminEditProduct() {
         console.log(formData);
         // console.log({ name, category, brand, price, countInStock, description })
 
-        dispatch(productUpdate(id, formData))
+        dispatch(productUpdateAction(id, formData))
         if (!loading && error) {
             console.log(error)
         } else if (success) {

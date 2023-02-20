@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { listProducts } from '../actions/productActions';
+import { getAllProductss, listProducts } from '../actions/productActions';
 import { productDeleteAction } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import PayButton from '../components/PayButton';
@@ -10,9 +10,9 @@ export default function AdminProducts() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productList = useSelector((state) => state.productList)
+  const getAllProducts = useSelector((state) => state.getAllProducts)
   // constracture
-  const { loading, error, products } = productList
+  const { loading, error, products } = getAllProducts
 
   const productDelete = useSelector((state) => state.productDelete)
   const { loading: loadingDel, success, error: errorDel } = productDelete;
@@ -22,9 +22,11 @@ export default function AdminProducts() {
 
   useEffect(() => {
 
-    dispatch(listProducts({
-      pageNumber
-    }))
+    // dispatch(listProducts({
+    //   pageNumber
+    // })
+    dispatch(getAllProductss())
+
     // console.log(products)
   }, [dispatch, success])
 
