@@ -82,18 +82,18 @@ applyPassportStrategy(passport);
 mongoose.set('strictQuery', true)
 // mongoose.connect('mongodb+srv://root:m1234@ecommerce.jglr2ap.mongodb.net/ecommerce?retryWrites=true&w=majority',{
 
-  // mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
-  // mongodb://localhost/smile 
-  //mongodb+srv://souzan12:123@cluster0.kdwqtkg.mongodb.net/smile?retryWrites=true&w=majority
-  // mongoose.connect('mongodb://localhost/smile',{
-  //     useNewUrlParser: true, 
-  //     useUnifiedTopology: true
-  // })
+// mongodb+srv://ali:1234@cluster0.3hshine.mongodb.net/smile?retryWrites=true&w=majority
+// mongodb://localhost/smile 
+//mongodb+srv://souzan12:123@cluster0.kdwqtkg.mongodb.net/smile?retryWrites=true&w=majority
+// mongoose.connect('mongodb://localhost/smile',{
+//     useNewUrlParser: true, 
+//     useUnifiedTopology: true
+// })
 
 
-mongoose.connect('mongodb://localhost/smile', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect('mongodb+srv://yasser:database@cluster0.zcaxve0.mongodb.net/allwebsite?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
   .then(db => console.log('DB is connected'))
   .catch(err => console.log(err));
@@ -109,8 +109,6 @@ app.use('/api/stripe', stripeRouter);
 // for visa 
 // start visa code
 
-
-app.use('/api/visa', visaRouter);
 
 
 
